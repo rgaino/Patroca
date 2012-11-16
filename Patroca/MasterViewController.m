@@ -11,6 +11,7 @@
 @implementation MasterViewController
 
 @synthesize featuredLabel, friendsLabel, nearbyLabel;
+@synthesize menuArrowImage;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -34,12 +35,14 @@
         UITapGestureRecognizer *nearbyTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(userTappedOnNearby)];
         [nearbyLabel addGestureRecognizer:nearbyTap];
         
-        
+
     }
     return self;
 }
 
-- (void)viewDidLoad {
+- (void)viewDidAppear:(BOOL)animated {
+    CGRect arrowFrame = menuArrowImage.frame;
+    [menuArrowImage setFrame:CGRectMake(-100, arrowFrame.origin.y, arrowFrame.size.width, arrowFrame.size.height)];
     [self userTappedOnFeatured];
 }
 
@@ -49,19 +52,33 @@
     [featuredLabel setTextColor:labelSelectedColor];
     [friendsLabel setTextColor:labelUnselectedColor];
     [nearbyLabel setTextColor:labelUnselectedColor];
+    [self moveMenuArrowTo:49];
 }
 
 - (void)userTappedOnFriends {
     [featuredLabel setTextColor:labelUnselectedColor];
     [friendsLabel setTextColor:labelSelectedColor];
     [nearbyLabel setTextColor:labelUnselectedColor];
+    [self moveMenuArrowTo:153];
 }
 
 - (void)userTappedOnNearby {
     [featuredLabel setTextColor:labelUnselectedColor];
     [friendsLabel setTextColor:labelUnselectedColor];
     [nearbyLabel setTextColor:labelSelectedColor];
+    [self moveMenuArrowTo:264];
 }
 
+- (void)moveMenuArrowTo:(float)xPosition {
+    
+    [UIView animateWithDuration:1.0f
+            delay:0
+            options:UIViewAnimationOptionCurveEaseInOut
+            animations:^{
+                CGRect arrowFrame = menuArrowImage.frame;
+                [menuArrowImage setFrame:CGRectMake(xPosition, arrowFrame.origin.y, arrowFrame.size.width, arrowFrame.size.height)];
+            } completion:nil
+     ];
+}
 
 @end

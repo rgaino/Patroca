@@ -17,9 +17,11 @@
 @property (weak, nonatomic) IBOutlet UILabel *featuredLabel;
 @property (weak, nonatomic) IBOutlet UILabel *friendsLabel;
 @property (weak, nonatomic) IBOutlet UILabel *nearbyLabel;
+@property (weak, nonatomic) IBOutlet UIImageView *menuArrowImage;
 
 - (void)userTappedOnFeatured;
 - (void)userTappedOnFriends;
 - (void)userTappedOnNearby;
+- (void)moveMenuArrowTo:(float)xPosition;
 
 @end
