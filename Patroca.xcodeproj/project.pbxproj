@@ -102,9 +102,9 @@
 		1939B88D16568C3300435705 /* Patroca */ = {
 			isa = PBXGroup;
 			children = (
-				1939B8B716568F8400435705 /* Images */,
 				1939B8AB16568CC500435705 /* App Delegate */,
 				1939B8AA16568CBB00435705 /* View Controllers */,
+				1939B8B716568F8400435705 /* Images */,
 				1939B88E16568C3300435705 /* Supporting Files */,
 			);
 			path = Patroca;
