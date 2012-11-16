@@ -29,6 +29,8 @@
 		1939B8CF1656915600435705 /* patroca_logo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1939B8C71656915600435705 /* patroca_logo@2x.png */; };
 		1939B8D21656954E00435705 /* background_repeat.png in Resources */ = {isa = PBXBuildFile; fileRef = 1939B8D01656954E00435705 /* background_repeat.png */; };
 		1939B8D31656954E00435705 /* background_repeat@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1939B8D11656954E00435705 /* background_repeat@2x.png */; };
+		1939B8D61656AF1F00435705 /* menu_bar_background.png in Resources */ = {isa = PBXBuildFile; fileRef = 1939B8D41656AF1F00435705 /* menu_bar_background.png */; };
+		1939B8D71656AF1F00435705 /* menu_bar_background@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1939B8D51656AF1F00435705 /* menu_bar_background@2x.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -60,6 +62,8 @@
 		1939B8C71656915600435705 /* patroca_logo@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "patroca_logo@2x.png"; sourceTree = "<group>"; };
 		1939B8D01656954E00435705 /* background_repeat.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = background_repeat.png; sourceTree = "<group>"; };
 		1939B8D11656954E00435705 /* background_repeat@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "background_repeat@2x.png"; sourceTree = "<group>"; };
+		1939B8D41656AF1F00435705 /* menu_bar_background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = menu_bar_background.png; sourceTree = "<group>"; };
+		1939B8D51656AF1F00435705 /* menu_bar_background@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "menu_bar_background@2x.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -176,6 +180,8 @@
 				1939B8C31656915600435705 /* header_background@2x.png */,
 				1939B8C41656915600435705 /* login_with_fb.png */,
 				1939B8C51656915600435705 /* login_with_fb@2x.png */,
+				1939B8D41656AF1F00435705 /* menu_bar_background.png */,
+				1939B8D51656AF1F00435705 /* menu_bar_background@2x.png */,
 				1939B8C61656915600435705 /* patroca_logo.png */,
 				1939B8C71656915600435705 /* patroca_logo@2x.png */,
 			);
@@ -248,6 +254,8 @@
 				1939B8CF1656915600435705 /* patroca_logo@2x.png in Resources */,
 				1939B8D21656954E00435705 /* background_repeat.png in Resources */,
 				1939B8D31656954E00435705 /* background_repeat@2x.png in Resources */,
+				1939B8D61656AF1F00435705 /* menu_bar_background.png in Resources */,
+				1939B8D71656AF1F00435705 /* menu_bar_background@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
