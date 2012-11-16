@@ -8,7 +8,16 @@
 
 #import "BaseViewController.h"
 
-@interface MasterViewController : BaseViewController
+@interface MasterViewController : BaseViewController {
+    
+}
 
+@property (weak, nonatomic) IBOutlet UILabel *featuredLabel;
+@property (weak, nonatomic) IBOutlet UILabel *friendsLabel;
+@property (weak, nonatomic) IBOutlet UILabel *nearbyLabel;
+
+- (void)userTappedOnFeatured:(UIGestureRecognizer*)gestureRecognizer;
+- (void)userTappedOnFriends:(UIGestureRecognizer*)gestureRecognizer;
+- (void)userTappedOnNearby:(UIGestureRecognizer*)gestureRecognizer;
 
 @end
