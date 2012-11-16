@@ -18,6 +18,9 @@
 		1939B89E16568C3300435705 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1939B89D16568C3300435705 /* Default-568h@2x.png */; };
 		1939B8A116568C3300435705 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1939B8A016568C3300435705 /* ViewController.m */; };
 		1939B8A416568C3300435705 /* ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1939B8A216568C3300435705 /* ViewController.xib */; };
+		1939B8AF16568D1200435705 /* BaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1939B8AE16568D1200435705 /* BaseViewController.m */; };
+		1939B8B416568D3500435705 /* MasterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1939B8B216568D3500435705 /* MasterViewController.m */; };
+		1939B8B516568D3500435705 /* MasterViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1939B8B316568D3500435705 /* MasterViewController.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -37,6 +40,11 @@
 		1939B89F16568C3300435705 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
 		1939B8A016568C3300435705 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		1939B8A316568C3300435705 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/ViewController.xib; sourceTree = "<group>"; };
+		1939B8AD16568D1200435705 /* BaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseViewController.h; sourceTree = "<group>"; };
+		1939B8AE16568D1200435705 /* BaseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseViewController.m; sourceTree = "<group>"; };
+		1939B8B116568D3500435705 /* MasterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MasterViewController.h; sourceTree = "<group>"; };
+		1939B8B216568D3500435705 /* MasterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MasterViewController.m; sourceTree = "<group>"; };
+		1939B8B316568D3500435705 /* MasterViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MasterViewController.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -83,8 +91,8 @@
 		1939B88D16568C3300435705 /* Patroca */ = {
 			isa = PBXGroup;
 			children = (
-				1939B89616568C3300435705 /* AppDelegate.h */,
-				1939B89716568C3300435705 /* AppDelegate.m */,
+				1939B8AB16568CC500435705 /* App Delegate */,
+				1939B8AA16568CBB00435705 /* View Controllers */,
 				1939B89F16568C3300435705 /* ViewController.h */,
 				1939B8A016568C3300435705 /* ViewController.m */,
 				1939B8A216568C3300435705 /* ViewController.xib */,
@@ -105,6 +113,43 @@
 				1939B89D16568C3300435705 /* Default-568h@2x.png */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		1939B8AA16568CBB00435705 /* View Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				1939B8B016568D1600435705 /* Base View Controller */,
+				1939B8AC16568CD200435705 /* Master View Controller */,
+			);
+			name = "View Controllers";
+			sourceTree = "<group>";
+		};
+		1939B8AB16568CC500435705 /* App Delegate */ = {
+			isa = PBXGroup;
+			children = (
+				1939B89616568C3300435705 /* AppDelegate.h */,
+				1939B89716568C3300435705 /* AppDelegate.m */,
+			);
+			name = "App Delegate";
+			sourceTree = "<group>";
+		};
+		1939B8AC16568CD200435705 /* Master View Controller */ = {
+			isa = PBXGroup;
+			children = (
+				1939B8B116568D3500435705 /* MasterViewController.h */,
+				1939B8B216568D3500435705 /* MasterViewController.m */,
+				1939B8B316568D3500435705 /* MasterViewController.xib */,
+			);
+			name = "Master View Controller";
+			sourceTree = "<group>";
+		};
+		1939B8B016568D1600435705 /* Base View Controller */ = {
+			isa = PBXGroup;
+			children = (
+				1939B8AD16568D1200435705 /* BaseViewController.h */,
+				1939B8AE16568D1200435705 /* BaseViewController.m */,
+			);
+			name = "Base View Controller";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -163,6 +208,7 @@
 				1939B89C16568C3300435705 /* Default@2x.png in Resources */,
 				1939B89E16568C3300435705 /* Default-568h@2x.png in Resources */,
 				1939B8A416568C3300435705 /* ViewController.xib in Resources */,
+				1939B8B516568D3500435705 /* MasterViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -176,6 +222,8 @@
 				1939B89416568C3300435705 /* main.m in Sources */,
 				1939B89816568C3300435705 /* AppDelegate.m in Sources */,
 				1939B8A116568C3300435705 /* ViewController.m in Sources */,
+				1939B8AF16568D1200435705 /* BaseViewController.m in Sources */,
+				1939B8B416568D3500435705 /* MasterViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
