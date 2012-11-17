@@ -7,13 +7,17 @@
 //
 
 #import "AppDelegate.h"
-
 #import "MasterViewController.h"
+#import <Parse/Parse.h>
 
 @implementation AppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+    [Parse setApplicationId:@"oqM758m32dGwvjzOwwm5SP4yWTBFeteAPfX7U0Sq"
+                  clientKey:@"nuCQvRTW9s4TK9pscWpq0ZVShQKHtUjmwYDJEIcE"];
+
+    
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     // Override point for customization after application launch.
     self.masterViewController = [[MasterViewController alloc] initWithNibName:@"MasterViewController" bundle:nil];

@@ -46,8 +46,6 @@
     [self userTappedOnFeatured];
 }
 
-#pragma mark Tap Events
-
 - (void)userTappedOnFeatured {
     [featuredLabel setTextColor:labelSelectedColor];
     [friendsLabel setTextColor:labelUnselectedColor];
