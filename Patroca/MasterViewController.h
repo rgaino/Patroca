@@ -19,6 +19,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *nearbyLabel;
 @property (weak, nonatomic) IBOutlet UIImageView *menuArrowImage;
 @property (weak, nonatomic) IBOutlet UIView *menuBarView;
+@property (weak, nonatomic) IBOutlet UIWebView *welcomeMessageWebView;
 
 - (void)userTappedOnFeatured;
 - (void)userTappedOnFriends;

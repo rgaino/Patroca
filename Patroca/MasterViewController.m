@@ -35,7 +35,11 @@
         UITapGestureRecognizer *nearbyTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(userTappedOnNearby)];
         [_nearbyLabel addGestureRecognizer:nearbyTap];
         
-
+        
+        _welcomeMessageWebView.opaque = NO;
+        _welcomeMessageWebView.backgroundColor = [UIColor clearColor];NSString *htmlString = @"<body style='background-color: transparent;'><b>Hello.<br/>This is Patroca.<br/></b>Here's a list of items<br/>available for you.<br/></body>";
+        [_welcomeMessageWebView loadHTMLString:htmlString baseURL:nil];
+        
     }
     return self;
 }
