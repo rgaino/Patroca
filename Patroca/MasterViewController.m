@@ -10,8 +10,8 @@
 
 @implementation MasterViewController
 
-@synthesize featuredLabel, friendsLabel, nearbyLabel;
-@synthesize menuArrowImage;
+//@synthesize featuredLabel, friendsLabel, nearbyLabel, menuBarView;
+//@synthesize menuArrowImage;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -27,13 +27,13 @@
         
         //making menu bar labels tappable
         UITapGestureRecognizer *featuredTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(userTappedOnFeatured)];
-        [featuredLabel addGestureRecognizer:featuredTap];
+        [_featuredLabel addGestureRecognizer:featuredTap];
 
         UITapGestureRecognizer *friendsTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(userTappedOnFriends)];
-        [friendsLabel addGestureRecognizer:friendsTap];
+        [_friendsLabel addGestureRecognizer:friendsTap];
 
         UITapGestureRecognizer *nearbyTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(userTappedOnNearby)];
-        [nearbyLabel addGestureRecognizer:nearbyTap];
+        [_nearbyLabel addGestureRecognizer:nearbyTap];
         
 
     }
@@ -41,29 +41,29 @@
 }
 
 - (void)viewDidAppear:(BOOL)animated {
-    CGRect arrowFrame = menuArrowImage.frame;
-    [menuArrowImage setFrame:CGRectMake(-100, arrowFrame.origin.y, arrowFrame.size.width, arrowFrame.size.height)];
+    CGRect arrowFrame = _menuArrowImage.frame;
+    [_menuArrowImage setFrame:CGRectMake(-100, arrowFrame.origin.y, arrowFrame.size.width, arrowFrame.size.height)];
     [self userTappedOnFeatured];
 }
 
 - (void)userTappedOnFeatured {
-    [featuredLabel setTextColor:labelSelectedColor];
-    [friendsLabel setTextColor:labelUnselectedColor];
-    [nearbyLabel setTextColor:labelUnselectedColor];
+    [_featuredLabel setTextColor:labelSelectedColor];
+    [_friendsLabel setTextColor:labelUnselectedColor];
+    [_nearbyLabel setTextColor:labelUnselectedColor];
     [self moveMenuArrowTo:49];
 }
 
 - (void)userTappedOnFriends {
-    [featuredLabel setTextColor:labelUnselectedColor];
-    [friendsLabel setTextColor:labelSelectedColor];
-    [nearbyLabel setTextColor:labelUnselectedColor];
+    [_featuredLabel setTextColor:labelUnselectedColor];
+    [_friendsLabel setTextColor:labelSelectedColor];
+    [_nearbyLabel setTextColor:labelUnselectedColor];
     [self moveMenuArrowTo:153];
 }
 
 - (void)userTappedOnNearby {
-    [featuredLabel setTextColor:labelUnselectedColor];
-    [friendsLabel setTextColor:labelUnselectedColor];
-    [nearbyLabel setTextColor:labelSelectedColor];
+    [_featuredLabel setTextColor:labelUnselectedColor];
+    [_friendsLabel setTextColor:labelUnselectedColor];
+    [_nearbyLabel setTextColor:labelSelectedColor];
     [self moveMenuArrowTo:264];
 }
 
@@ -73,8 +73,8 @@
             delay:0
             options:UIViewAnimationOptionCurveEaseInOut
             animations:^{
-                CGRect arrowFrame = menuArrowImage.frame;
-                [menuArrowImage setFrame:CGRectMake(xPosition, arrowFrame.origin.y, arrowFrame.size.width, arrowFrame.size.height)];
+                CGRect arrowFrame = _menuArrowImage.frame;
+                [_menuArrowImage setFrame:CGRectMake(xPosition, arrowFrame.origin.y, arrowFrame.size.width, arrowFrame.size.height)];
             } completion:nil
      ];
 }
