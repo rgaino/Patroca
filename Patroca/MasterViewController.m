@@ -40,6 +40,8 @@
         _welcomeMessageWebView.backgroundColor = [UIColor clearColor];NSString *htmlString = @"<body style='background-color: transparent;'><b>Hello.<br/>This is Patroca.<br/></b>Here's a list of items<br/>available for you.<br/></body>";
         [_welcomeMessageWebView loadHTMLString:htmlString baseURL:nil];
         
+
+        
     }
     return self;
 }
@@ -48,6 +50,21 @@
     CGRect arrowFrame = _menuArrowImage.frame;
     [_menuArrowImage setFrame:CGRectMake(-100, arrowFrame.origin.y, arrowFrame.size.width, arrowFrame.size.height)];
     [self userTappedOnFeatured];
+    
+    
+    
+    //test code for UIScroll behavior
+    float contentHeight = _welcomeMessageWebView.frame.size.height + _menuBarView.frame.size.height;
+    
+    for(int i=0; i<100; i++) {
+        UIImageView *imageview = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"add_new_item_button.png"]];
+        [imageview setFrame:CGRectMake(10, contentHeight, imageview.frame.size.width, imageview.frame.size.height)];
+        [_contentScrollView addSubview:imageview];
+        contentHeight+=imageview.frame.size.height;
+    }
+    
+    [_contentScrollView setContentSize:CGSizeMake(320, contentHeight)];
+    
 }
 
 - (void)userTappedOnFeatured {
@@ -82,5 +99,26 @@
             } completion:nil
      ];
 }
+
+//#pragma mark UIScrollViewDelegate methods
+
+//- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
+//    
+////    NSLog(@"_menuBarView.frame.origin.y=%.1f and contentOffset.y=%.1f", _menuBarView.frame.origin.y, _contentScrollView.contentOffset.y);
+////    if(_menuBarView.frame.origin.y<0) {
+////        [_menuBarView setFrame:CGRectMake(_menuBarView.frame.origin.x, 0, _menuBarView.frame.size.width, _menuBarView.frame.size.height)];
+////    }
+//    
+//    if(_contentScrollView.contentOffset.y > 101.0) {
+//
+//        [_menuBarView setFrame:CGRectMake(_menuBarView.frame.origin.x,
+//                                          _contentScrollView.contentOffset.y,
+//                                          _menuBarView.frame.size.width, _menuBarView.frame.size.height)];
+//        NSLog(@"_menuBarView.frame.origin.y=%.1f", _menuBarView.frame.origin.y);
+//
+//    }
+//    
+//}
+
 
 @end

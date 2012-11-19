@@ -8,7 +8,7 @@
 
 #import "BaseViewController.h"
 
-@interface MasterViewController : BaseViewController {
+@interface MasterViewController : BaseViewController <UIScrollViewDelegate> {
     
     UIColor *labelSelectedColor;
     UIColor *labelUnselectedColor;
@@ -20,6 +20,7 @@
 @property (weak, nonatomic) IBOutlet UIImageView *menuArrowImage;
 @property (weak, nonatomic) IBOutlet UIView *menuBarView;
 @property (weak, nonatomic) IBOutlet UIWebView *welcomeMessageWebView;
+@property (weak, nonatomic) IBOutlet UIScrollView *contentScrollView;
 
 - (void)userTappedOnFeatured;
 - (void)userTappedOnFriends;
