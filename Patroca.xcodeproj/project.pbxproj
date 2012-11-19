@@ -47,6 +47,8 @@
 		1939B8F316571C3B00435705 /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1939B8F216571C3B00435705 /* Social.framework */; };
 		1939B8F516571C4100435705 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1939B8F416571C4100435705 /* StoreKit.framework */; };
 		1939B8F716571C4E00435705 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1939B8F616571C4E00435705 /* SystemConfiguration.framework */; };
+		1939B8FC165A9B6400435705 /* ItemProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1939B8FA165A9B6400435705 /* ItemProfileViewController.m */; };
+		1939B8FD165A9B6400435705 /* ItemProfileViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1939B8FB165A9B6400435705 /* ItemProfileViewController.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -96,6 +98,9 @@
 		1939B8F216571C3B00435705 /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
 		1939B8F416571C4100435705 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		1939B8F616571C4E00435705 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		1939B8F9165A9B6400435705 /* ItemProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ItemProfileViewController.h; sourceTree = "<group>"; };
+		1939B8FA165A9B6400435705 /* ItemProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ItemProfileViewController.m; sourceTree = "<group>"; };
+		1939B8FB165A9B6400435705 /* ItemProfileViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ItemProfileViewController.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -197,6 +202,7 @@
 			children = (
 				1939B8B016568D1600435705 /* Base View Controller */,
 				1939B8AC16568CD200435705 /* Master View Controller */,
+				1939B8F8165A9B2D00435705 /* Item Profile View Controller */,
 			);
 			name = "View Controllers";
 			sourceTree = "<group>";
@@ -248,6 +254,16 @@
 				1939B8C71656915600435705 /* patroca_logo@2x.png */,
 			);
 			name = Images;
+			sourceTree = "<group>";
+		};
+		1939B8F8165A9B2D00435705 /* Item Profile View Controller */ = {
+			isa = PBXGroup;
+			children = (
+				1939B8F9165A9B6400435705 /* ItemProfileViewController.h */,
+				1939B8FA165A9B6400435705 /* ItemProfileViewController.m */,
+				1939B8FB165A9B6400435705 /* ItemProfileViewController.xib */,
+			);
+			name = "Item Profile View Controller";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -320,6 +336,7 @@
 				1939B8D71656AF1F00435705 /* menu_bar_background@2x.png in Resources */,
 				1939B8DA1656C2E500435705 /* menu_arrow.png in Resources */,
 				1939B8DB1656C2E500435705 /* menu_arrow@2x.png in Resources */,
+				1939B8FD165A9B6400435705 /* ItemProfileViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -334,6 +351,7 @@
 				1939B89816568C3300435705 /* AppDelegate.m in Sources */,
 				1939B8AF16568D1200435705 /* BaseViewController.m in Sources */,
 				1939B8B416568D3500435705 /* MasterViewController.m in Sources */,
+				1939B8FC165A9B6400435705 /* ItemProfileViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
