@@ -7,6 +7,7 @@
 //
 
 #import "MasterViewController.h"
+#import "ItemProfileViewController.h"
 
 @implementation MasterViewController
 
@@ -40,6 +41,7 @@
         _welcomeMessageWebView.backgroundColor = [UIColor clearColor];NSString *htmlString = @"<body style='background-color: transparent;'><b>Hello.<br/>This is Patroca.<br/></b>Here's a list of items<br/>available for you.<br/></body>";
         [_welcomeMessageWebView loadHTMLString:htmlString baseURL:nil];
         
+        itemListYOffsetPosition = 158;
 
         
     }
@@ -50,20 +52,10 @@
     CGRect arrowFrame = _menuArrowImage.frame;
     [_menuArrowImage setFrame:CGRectMake(-100, arrowFrame.origin.y, arrowFrame.size.width, arrowFrame.size.height)];
     [self userTappedOnFeatured];
-    
-    
-    
-    //test code for UIScroll behavior
-    float contentHeight = _welcomeMessageWebView.frame.size.height + _menuBarView.frame.size.height;
-    
-    for(int i=0; i<100; i++) {
-        UIImageView *imageview = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"add_new_item_button.png"]];
-        [imageview setFrame:CGRectMake(10, contentHeight, imageview.frame.size.width, imageview.frame.size.height)];
-        [_contentScrollView addSubview:imageview];
-        contentHeight+=imageview.frame.size.height;
-    }
-    
-    [_contentScrollView setContentSize:CGSizeMake(320, contentHeight)];
+
+//    [self loadFeaturedItems];
+    [self performSelector:@selector(loadFeaturedItems) withObject:nil afterDelay:5.0f];
+
     
 }
 
@@ -98,6 +90,37 @@
                 [_menuArrowImage setFrame:CGRectMake(xPosition, arrowFrame.origin.y, arrowFrame.size.width, arrowFrame.size.height)];
             } completion:nil
      ];
+}
+
+- (void)loadFeaturedItems {
+    
+    float y=itemListYOffsetPosition;
+    int columns = 2;
+    int column = 0;
+    int xSpacing = 5;
+    int ySpacing = 10;
+    
+    float itemsTotalHeight=0;
+    
+    for(int i=0; i<40; i++) {
+        
+        if(column >= columns) { column = 0; }
+        
+        ItemProfileViewController *item = [[ItemProfileViewController alloc] initWithNibName:@"ItemProfileViewController" bundle:nil];
+        float x = (xSpacing * (column+1)) + (item.view.frame.size.width*column);
+        [[item view] setFrame:CGRectMake(x, y, item.view.frame.size.width, item.view.frame.size.height)];
+        [_contentScrollView addSubview:item.view];
+        
+        column++;
+        
+        if(column >= columns) {
+            y+= (item.view.frame.size.height + ySpacing);
+            itemsTotalHeight += (item.view.frame.size.height + ySpacing);
+        }
+    }
+    
+    [_contentScrollView setContentSize:CGSizeMake(_contentScrollView.contentSize.width, (_contentScrollView.contentSize.height+itemsTotalHeight))];
+    NSLog(@"content size is %.2f x %.2f", _contentScrollView.contentSize.width, _contentScrollView.contentSize.height);
 }
 
 //#pragma mark UIScrollViewDelegate methods

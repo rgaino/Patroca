@@ -17,6 +17,17 @@
     [Parse setApplicationId:@"oqM758m32dGwvjzOwwm5SP4yWTBFeteAPfX7U0Sq"
                   clientKey:@"nuCQvRTW9s4TK9pscWpq0ZVShQKHtUjmwYDJEIcE"];
 
+    [PFFacebookUtils initializeWithApplicationId:@"100901256728525"];
+
+    // Check if a user is cached and if user is linked to Facebook
+    if ([PFUser currentUser] && [PFFacebookUtils isLinkedWithUser:[PFUser currentUser]])
+    {
+//        profileHomeViewController = [[ViewProfileViewController alloc] initWithNibName:@"ViewProfileViewController" bundle:nil];
+    } else {
+//        profileHomeViewController = [[LogInViewController alloc] initWithNibName:@"LogInViewController" bundle:nil];
+//        tabBarInitialIndex = 3;
+    }
+    
     
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     // Override point for customization after application launch.

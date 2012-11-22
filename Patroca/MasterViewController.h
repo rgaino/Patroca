@@ -12,6 +12,7 @@
     
     UIColor *labelSelectedColor;
     UIColor *labelUnselectedColor;
+    float itemListYOffsetPosition;
 }
 
 @property (weak, nonatomic) IBOutlet UILabel *featuredLabel;
@@ -26,5 +27,6 @@
 - (void)userTappedOnFriends;
 - (void)userTappedOnNearby;
 - (void)moveMenuArrowTo:(float)xPosition;
+- (void)loadFeaturedItems;
 
 @end
