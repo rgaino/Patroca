@@ -7,7 +7,10 @@
 //
 
 #import "MasterViewController.h"
+#import <Parse/Parse.h>
 #import "ItemProfileViewController.h"
+#import "ItemDataSource.h"
+#import "LogInViewController.h"
 
 @implementation MasterViewController
 
@@ -36,13 +39,7 @@
         UITapGestureRecognizer *nearbyTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(userTappedOnNearby)];
         [_nearbyLabel addGestureRecognizer:nearbyTap];
         
-        
-        _welcomeMessageWebView.opaque = NO;
-        _welcomeMessageWebView.backgroundColor = [UIColor clearColor];NSString *htmlString = @"<body style='background-color: transparent;'><b>Hello.<br/>This is Patroca.<br/></b>Here's a list of items<br/>available for you.<br/></body>";
-        [_welcomeMessageWebView loadHTMLString:htmlString baseURL:nil];
-        
-        itemListYOffsetPosition = 158;
-
+        itemDataSource = [[ItemDataSource alloc] init];
         
     }
     return self;
@@ -51,10 +48,7 @@
 - (void)viewDidAppear:(BOOL)animated {
     CGRect arrowFrame = _menuArrowImage.frame;
     [_menuArrowImage setFrame:CGRectMake(-100, arrowFrame.origin.y, arrowFrame.size.width, arrowFrame.size.height)];
-    [self userTappedOnFeatured];
-
-//    [self loadFeaturedItems];
-    [self performSelector:@selector(loadFeaturedItems) withObject:nil afterDelay:5.0f];
+    [self performSelector:@selector(userTappedOnFeatured) withObject:nil afterDelay:1.0f];
 
     
 }
@@ -64,6 +58,7 @@
     [_friendsLabel setTextColor:labelUnselectedColor];
     [_nearbyLabel setTextColor:labelUnselectedColor];
     [self moveMenuArrowTo:49];
+    [self loadFeaturedItems];
 }
 
 - (void)userTappedOnFriends {
@@ -71,6 +66,7 @@
     [_friendsLabel setTextColor:labelSelectedColor];
     [_nearbyLabel setTextColor:labelUnselectedColor];
     [self moveMenuArrowTo:153];
+    [self loadFriendsItems];
 }
 
 - (void)userTappedOnNearby {
@@ -94,11 +90,11 @@
 
 - (void)loadFeaturedItems {
     
-    float y=itemListYOffsetPosition;
     int columns = 2;
     int column = 0;
     int xSpacing = 5;
     int ySpacing = 10;
+    float y=ySpacing;
     
     float itemsTotalHeight=0;
     
@@ -121,6 +117,25 @@
     
     [_contentScrollView setContentSize:CGSizeMake(_contentScrollView.contentSize.width, (_contentScrollView.contentSize.height+itemsTotalHeight))];
     NSLog(@"content size is %.2f x %.2f", _contentScrollView.contentSize.width, _contentScrollView.contentSize.height);
+}
+
+- (void)loadFriendsItems {
+    
+    // Check if a user is cached and if user is linked to Facebook
+    LogInViewController *logInViewController;
+    if ([PFUser currentUser] && [PFFacebookUtils isLinkedWithUser:[PFUser currentUser]])
+    {
+        [itemDataSource getItemsAndReturnTo:self];
+    } else {
+        logInViewController = [[LogInViewController alloc] initWithNibName:@"LogInViewController" bundle:nil];
+        [self presentViewController:logInViewController animated:YES completion:nil];
+    }
+
+    
+}
+
+- (void)populateWithItems:(NSArray*)items {
+    NSLog(@"received %d items", items.count);
 }
 
 //#pragma mark UIScrollViewDelegate methods

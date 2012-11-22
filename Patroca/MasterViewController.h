@@ -8,11 +8,15 @@
 
 #import "BaseViewController.h"
 
+@class ItemDataSource;
+
 @interface MasterViewController : BaseViewController <UIScrollViewDelegate> {
+    
+    ItemDataSource *itemDataSource;
     
     UIColor *labelSelectedColor;
     UIColor *labelUnselectedColor;
-    float itemListYOffsetPosition;
+    
 }
 
 @property (weak, nonatomic) IBOutlet UILabel *featuredLabel;
@@ -20,7 +24,6 @@
 @property (weak, nonatomic) IBOutlet UILabel *nearbyLabel;
 @property (weak, nonatomic) IBOutlet UIImageView *menuArrowImage;
 @property (weak, nonatomic) IBOutlet UIView *menuBarView;
-@property (weak, nonatomic) IBOutlet UIWebView *welcomeMessageWebView;
 @property (weak, nonatomic) IBOutlet UIScrollView *contentScrollView;
 
 - (void)userTappedOnFeatured;
@@ -28,5 +31,7 @@
 - (void)userTappedOnNearby;
 - (void)moveMenuArrowTo:(float)xPosition;
 - (void)loadFeaturedItems;
+- (void)loadFriendsItems;
+- (void)populateWithItems:(NSArray*)items;
 
 @end

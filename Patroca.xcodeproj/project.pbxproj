@@ -7,6 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1934ACDD165DB93200C8272F /* Item.m in Sources */ = {isa = PBXBuildFile; fileRef = 1934ACDC165DB93200C8272F /* Item.m */; };
+		1934ACE4165DBC9400C8272F /* DatabaseConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 1934ACE3165DBC9400C8272F /* DatabaseConstants.m */; };
+		1934ACE8165DC59600C8272F /* ItemDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 1934ACE7165DC59600C8272F /* ItemDataSource.m */; };
+		1934ACED165E2B1D00C8272F /* LogInViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1934ACEB165E2B1D00C8272F /* LogInViewController.m */; };
+		1934ACEE165E2B1D00C8272F /* LogInViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1934ACEC165E2B1D00C8272F /* LogInViewController.xib */; };
+		1934ACF4165E2B5400C8272F /* ViewProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1934ACF2165E2B5400C8272F /* ViewProfileViewController.m */; };
+		1934ACF5165E2B5400C8272F /* ViewProfileViewController_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1934ACF3165E2B5400C8272F /* ViewProfileViewController_iPhone.xib */; };
+		1934ACFD165E2C6C00C8272F /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 1934ACFC165E2C6C00C8272F /* MBProgressHUD.m */; };
 		1939B88816568C3300435705 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1939B88716568C3300435705 /* UIKit.framework */; };
 		1939B88A16568C3300435705 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1939B88916568C3300435705 /* Foundation.framework */; };
 		1939B88C16568C3300435705 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1939B88B16568C3300435705 /* CoreGraphics.framework */; };
@@ -60,6 +68,20 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		1934ACDB165DB93200C8272F /* Item.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Item.h; sourceTree = "<group>"; };
+		1934ACDC165DB93200C8272F /* Item.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Item.m; sourceTree = "<group>"; };
+		1934ACE2165DBC9400C8272F /* DatabaseConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DatabaseConstants.h; sourceTree = "<group>"; };
+		1934ACE3165DBC9400C8272F /* DatabaseConstants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DatabaseConstants.m; sourceTree = "<group>"; };
+		1934ACE6165DC59600C8272F /* ItemDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ItemDataSource.h; sourceTree = "<group>"; };
+		1934ACE7165DC59600C8272F /* ItemDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ItemDataSource.m; sourceTree = "<group>"; };
+		1934ACEA165E2B1D00C8272F /* LogInViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LogInViewController.h; sourceTree = "<group>"; };
+		1934ACEB165E2B1D00C8272F /* LogInViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LogInViewController.m; sourceTree = "<group>"; };
+		1934ACEC165E2B1D00C8272F /* LogInViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LogInViewController.xib; sourceTree = "<group>"; };
+		1934ACF1165E2B5400C8272F /* ViewProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewProfileViewController.h; sourceTree = "<group>"; };
+		1934ACF2165E2B5400C8272F /* ViewProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewProfileViewController.m; sourceTree = "<group>"; };
+		1934ACF3165E2B5400C8272F /* ViewProfileViewController_iPhone.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ViewProfileViewController_iPhone.xib; sourceTree = "<group>"; };
+		1934ACFB165E2C6C00C8272F /* MBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBProgressHUD.h; sourceTree = "<group>"; };
+		1934ACFC165E2C6C00C8272F /* MBProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBProgressHUD.m; sourceTree = "<group>"; };
 		1939B88316568C3300435705 /* Patroca.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Patroca.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1939B88716568C3300435705 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		1939B88916568C3300435705 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -147,6 +169,80 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1934ACDA165DB91500C8272F /* Item Object */ = {
+			isa = PBXGroup;
+			children = (
+				1934ACDB165DB93200C8272F /* Item.h */,
+				1934ACDC165DB93200C8272F /* Item.m */,
+			);
+			name = "Item Object";
+			sourceTree = "<group>";
+		};
+		1934ACE1165DBC7500C8272F /* Constants */ = {
+			isa = PBXGroup;
+			children = (
+				1934ACE2165DBC9400C8272F /* DatabaseConstants.h */,
+				1934ACE3165DBC9400C8272F /* DatabaseConstants.m */,
+			);
+			name = Constants;
+			sourceTree = "<group>";
+		};
+		1934ACE5165DC57500C8272F /* Item Data Source */ = {
+			isa = PBXGroup;
+			children = (
+				1934ACE6165DC59600C8272F /* ItemDataSource.h */,
+				1934ACE7165DC59600C8272F /* ItemDataSource.m */,
+			);
+			name = "Item Data Source";
+			sourceTree = "<group>";
+		};
+		1934ACE9165E2AAF00C8272F /* Profile */ = {
+			isa = PBXGroup;
+			children = (
+				1939B8B016568D1600435705 /* Base */,
+				1934ACEF165E2B3100C8272F /* Login */,
+				1934ACF0165E2B4900C8272F /* View Profile */,
+			);
+			name = Profile;
+			sourceTree = "<group>";
+		};
+		1934ACEF165E2B3100C8272F /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				1934ACEA165E2B1D00C8272F /* LogInViewController.h */,
+				1934ACEB165E2B1D00C8272F /* LogInViewController.m */,
+				1934ACEC165E2B1D00C8272F /* LogInViewController.xib */,
+			);
+			name = Login;
+			sourceTree = "<group>";
+		};
+		1934ACF0165E2B4900C8272F /* View Profile */ = {
+			isa = PBXGroup;
+			children = (
+				1934ACF1165E2B5400C8272F /* ViewProfileViewController.h */,
+				1934ACF2165E2B5400C8272F /* ViewProfileViewController.m */,
+				1934ACF3165E2B5400C8272F /* ViewProfileViewController_iPhone.xib */,
+			);
+			name = "View Profile";
+			sourceTree = "<group>";
+		};
+		1934ACF6165E2B9300C8272F /* Libs */ = {
+			isa = PBXGroup;
+			children = (
+				1934ACF7165E2BAD00C8272F /* MBProgressHUD */,
+			);
+			name = Libs;
+			sourceTree = "<group>";
+		};
+		1934ACF7165E2BAD00C8272F /* MBProgressHUD */ = {
+			isa = PBXGroup;
+			children = (
+				1934ACFB165E2C6C00C8272F /* MBProgressHUD.h */,
+				1934ACFC165E2C6C00C8272F /* MBProgressHUD.m */,
+			);
+			name = MBProgressHUD;
+			sourceTree = "<group>";
+		};
 		1939B87816568C3300435705 = {
 			isa = PBXGroup;
 			children = (
@@ -191,8 +287,10 @@
 		1939B88D16568C3300435705 /* Patroca */ = {
 			isa = PBXGroup;
 			children = (
+				1939B912165DB47100435705 /* Database Access */,
 				1939B8AB16568CC500435705 /* App Delegate */,
 				1939B8AA16568CBB00435705 /* View Controllers */,
+				1934ACF6165E2B9300C8272F /* Libs */,
 				1939B8B716568F8400435705 /* Images */,
 				1939B88E16568C3300435705 /* Supporting Files */,
 			);
@@ -216,9 +314,9 @@
 		1939B8AA16568CBB00435705 /* View Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				1939B8B016568D1600435705 /* Base View Controller */,
-				1939B8AC16568CD200435705 /* Master View Controller */,
-				1939B8F8165A9B2D00435705 /* Item Profile View Controller */,
+				1934ACE9165E2AAF00C8272F /* Profile */,
+				1939B8AC16568CD200435705 /* Master */,
+				1939B8F8165A9B2D00435705 /* Item Profile */,
 			);
 			name = "View Controllers";
 			sourceTree = "<group>";
@@ -232,23 +330,23 @@
 			name = "App Delegate";
 			sourceTree = "<group>";
 		};
-		1939B8AC16568CD200435705 /* Master View Controller */ = {
+		1939B8AC16568CD200435705 /* Master */ = {
 			isa = PBXGroup;
 			children = (
 				1939B8B116568D3500435705 /* MasterViewController.h */,
 				1939B8B216568D3500435705 /* MasterViewController.m */,
 				1939B8B316568D3500435705 /* MasterViewController.xib */,
 			);
-			name = "Master View Controller";
+			name = Master;
 			sourceTree = "<group>";
 		};
-		1939B8B016568D1600435705 /* Base View Controller */ = {
+		1939B8B016568D1600435705 /* Base */ = {
 			isa = PBXGroup;
 			children = (
 				1939B8AD16568D1200435705 /* BaseViewController.h */,
 				1939B8AE16568D1200435705 /* BaseViewController.m */,
 			);
-			name = "Base View Controller";
+			name = Base;
 			sourceTree = "<group>";
 		};
 		1939B8B716568F8400435705 /* Images */ = {
@@ -280,14 +378,24 @@
 			name = Images;
 			sourceTree = "<group>";
 		};
-		1939B8F8165A9B2D00435705 /* Item Profile View Controller */ = {
+		1939B8F8165A9B2D00435705 /* Item Profile */ = {
 			isa = PBXGroup;
 			children = (
 				1939B8F9165A9B6400435705 /* ItemProfileViewController.h */,
 				1939B8FA165A9B6400435705 /* ItemProfileViewController.m */,
 				1939B8FB165A9B6400435705 /* ItemProfileViewController.xib */,
 			);
-			name = "Item Profile View Controller";
+			name = "Item Profile";
+			sourceTree = "<group>";
+		};
+		1939B912165DB47100435705 /* Database Access */ = {
+			isa = PBXGroup;
+			children = (
+				1934ACE5165DC57500C8272F /* Item Data Source */,
+				1934ACE1165DBC7500C8272F /* Constants */,
+				1934ACDA165DB91500C8272F /* Item Object */,
+			);
+			name = "Database Access";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -369,6 +477,8 @@
 				1939B909165AA0D900435705 /* comments_icon@2x.png in Resources */,
 				1939B90C165AA0E500435705 /* offers_icon.png in Resources */,
 				1939B90D165AA0E500435705 /* offers_icon@2x.png in Resources */,
+				1934ACEE165E2B1D00C8272F /* LogInViewController.xib in Resources */,
+				1934ACF5165E2B5400C8272F /* ViewProfileViewController_iPhone.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -384,6 +494,12 @@
 				1939B8AF16568D1200435705 /* BaseViewController.m in Sources */,
 				1939B8B416568D3500435705 /* MasterViewController.m in Sources */,
 				1939B8FC165A9B6400435705 /* ItemProfileViewController.m in Sources */,
+				1934ACDD165DB93200C8272F /* Item.m in Sources */,
+				1934ACE4165DBC9400C8272F /* DatabaseConstants.m in Sources */,
+				1934ACE8165DC59600C8272F /* ItemDataSource.m in Sources */,
+				1934ACED165E2B1D00C8272F /* LogInViewController.m in Sources */,
+				1934ACF4165E2B5400C8272F /* ViewProfileViewController.m in Sources */,
+				1934ACFD165E2C6C00C8272F /* MBProgressHUD.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -500,6 +616,7 @@
 				1939B8A916568C3300435705 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
