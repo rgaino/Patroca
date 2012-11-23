@@ -75,10 +75,7 @@
 
 
 -(void) userLoggedInSuccessfully {
-        
-    ViewProfileViewController *viewProfileViewController = [[ViewProfileViewController alloc] initWithNibName:@"ViewProfileViewController" bundle:nil];
-    [self.navigationController setViewControllers:[NSArray arrayWithObject:viewProfileViewController] animated:NO];
-
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 - (void)viewDidUnload {

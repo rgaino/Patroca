@@ -128,7 +128,7 @@
         [itemDataSource getItemsAndReturnTo:self];
     } else {
         logInViewController = [[LogInViewController alloc] initWithNibName:@"LogInViewController" bundle:nil];
-        [self presentViewController:logInViewController animated:YES completion:nil];
+        [self.view.window.rootViewController presentViewController:logInViewController animated:YES completion:nil];
     }
 
     
