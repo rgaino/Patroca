@@ -8,7 +8,7 @@
 
 #import "MasterViewController.h"
 #import <Parse/Parse.h>
-#import "ItemProfileViewController.h"
+#import "ItemViewCell.h"
 #import "ItemDataSource.h"
 #import "LogInViewController.h"
 
@@ -48,7 +48,8 @@
 }
 
 - (void)viewDidLoad {
-    [self.contentDisplayCollectionView registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:CELL_REUSE_IDENTIFIER];
+
+    [self.contentDisplayCollectionView registerClass:[ItemViewCell class] forCellWithReuseIdentifier:CELL_REUSE_IDENTIFIER];
 
 }
 
@@ -180,9 +181,20 @@
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)cv cellForItemAtIndexPath:(NSIndexPath *)indexPath {
-    UICollectionViewCell *cell = [cv dequeueReusableCellWithReuseIdentifier:CELL_REUSE_IDENTIFIER forIndexPath:indexPath];
-    cell.backgroundColor = [UIColor whiteColor];
-    return cell;
+
+    ItemViewCell *itemViewCell = (ItemViewCell *)[self.contentDisplayCollectionView dequeueReusableCellWithReuseIdentifier:CELL_REUSE_IDENTIFIER forIndexPath:indexPath];
+    
+//    NSMutableArray *data = [self.dataArray objectAtIndex:indexPath.section];
+//    NSString *cellData = [data objectAtIndex:indexPath.row];
+//    [cell.titleLabel setText:cellData];
+    
+    return itemViewCell;
+    
+    
+    
+//    UICollectionViewCell *cell = [cv dequeueReusableCellWithReuseIdentifier:CELL_REUSE_IDENTIFIER forIndexPath:indexPath];
+//    cell.backgroundColor = [UIColor whiteColor];
+//    return cell;
 }
 // 4
 /*- (UICollectionReusableView *)collectionView:
