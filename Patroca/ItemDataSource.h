@@ -14,6 +14,9 @@
     
 }
 
+@property (readonly) NSArray* items;
+
 - (void)getItemsAndReturnTo:(MasterViewController*)masterViewController;
+
 
 @end

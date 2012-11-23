@@ -10,7 +10,7 @@
 
 @class ItemDataSource;
 
-@interface MasterViewController : BaseViewController <UIScrollViewDelegate> {
+@interface MasterViewController : BaseViewController <UICollectionViewDataSource, UICollectionViewDelegateFlowLayout> {
     
     ItemDataSource *itemDataSource;
     
@@ -24,7 +24,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *nearbyLabel;
 @property (weak, nonatomic) IBOutlet UIImageView *menuArrowImage;
 @property (weak, nonatomic) IBOutlet UIView *menuBarView;
-@property (weak, nonatomic) IBOutlet UIScrollView *contentScrollView;
+@property (weak, nonatomic) IBOutlet UICollectionView *contentDisplayCollectionView;
 
 - (void)userTappedOnFeatured;
 - (void)userTappedOnFriends;
@@ -32,6 +32,6 @@
 - (void)moveMenuArrowTo:(float)xPosition;
 - (void)loadFeaturedItems;
 - (void)loadFriendsItems;
-- (void)populateWithItems:(NSArray*)items;
+- (void)populateCollectionView;
 
 @end

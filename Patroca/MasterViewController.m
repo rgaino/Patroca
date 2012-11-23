@@ -12,6 +12,8 @@
 #import "ItemDataSource.h"
 #import "LogInViewController.h"
 
+#define CELL_REUSE_IDENTIFIER @"Item_Cell"
+
 @implementation MasterViewController
 
 //@synthesize featuredLabel, friendsLabel, nearbyLabel, menuBarView;
@@ -43,6 +45,11 @@
         
     }
     return self;
+}
+
+- (void)viewDidLoad {
+    [self.contentDisplayCollectionView registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:CELL_REUSE_IDENTIFIER];
+
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -90,33 +97,33 @@
 
 - (void)loadFeaturedItems {
     
-    int columns = 2;
-    int column = 0;
-    int xSpacing = 5;
-    int ySpacing = 10;
-    float y=ySpacing;
-    
-    float itemsTotalHeight=0;
-    
-    for(int i=0; i<40; i++) {
-        
-        if(column >= columns) { column = 0; }
-        
-        ItemProfileViewController *item = [[ItemProfileViewController alloc] initWithNibName:@"ItemProfileViewController" bundle:nil];
-        float x = (xSpacing * (column+1)) + (item.view.frame.size.width*column);
-        [[item view] setFrame:CGRectMake(x, y, item.view.frame.size.width, item.view.frame.size.height)];
-        [_contentScrollView addSubview:item.view];
-        
-        column++;
-        
-        if(column >= columns) {
-            y+= (item.view.frame.size.height + ySpacing);
-            itemsTotalHeight += (item.view.frame.size.height + ySpacing);
-        }
-    }
-    
-    [_contentScrollView setContentSize:CGSizeMake(_contentScrollView.contentSize.width, (_contentScrollView.contentSize.height+itemsTotalHeight))];
-    NSLog(@"content size is %.2f x %.2f", _contentScrollView.contentSize.width, _contentScrollView.contentSize.height);
+//    int columns = 2;
+//    int column = 0;
+//    int xSpacing = 5;
+//    int ySpacing = 10;
+//    float y=ySpacing;
+//    
+//    float itemsTotalHeight=0;
+//    
+//    for(int i=0; i<40; i++) {
+//        
+//        if(column >= columns) { column = 0; }
+//        
+//        ItemProfileViewController *item = [[ItemProfileViewController alloc] initWithNibName:@"ItemProfileViewController" bundle:nil];
+//        float x = (xSpacing * (column+1)) + (item.view.frame.size.width*column);
+//        [[item view] setFrame:CGRectMake(x, y, item.view.frame.size.width, item.view.frame.size.height)];
+//        [_contentScrollView addSubview:item.view];
+//        
+//        column++;
+//        
+//        if(column >= columns) {
+//            y+= (item.view.frame.size.height + ySpacing);
+//            itemsTotalHeight += (item.view.frame.size.height + ySpacing);
+//        }
+//    }
+//    
+//    [_contentScrollView setContentSize:CGSizeMake(_contentScrollView.contentSize.width, (_contentScrollView.contentSize.height+itemsTotalHeight))];
+//    NSLog(@"content size is %.2f x %.2f", _contentScrollView.contentSize.width, _contentScrollView.contentSize.height);
 }
 
 - (void)loadFriendsItems {
@@ -134,8 +141,12 @@
     
 }
 
-- (void)populateWithItems:(NSArray*)items {
-    NSLog(@"received %d items", items.count);
+- (void)populateCollectionView {
+    
+    NSLog(@"Populating list with %d items", itemDataSource.items.count);
+
+    [_contentDisplayCollectionView reloadData];
+
 }
 
 //#pragma mark UIScrollViewDelegate methods
@@ -158,5 +169,47 @@
 //    
 //}
 
+#pragma mark - UICollectionView Datasource
+
+- (NSInteger)collectionView:(UICollectionView *)view numberOfItemsInSection:(NSInteger)section {
+    return itemDataSource.items.count;
+}
+
+- (NSInteger)numberOfSectionsInCollectionView: (UICollectionView *)collectionView {
+    return 1;
+}
+
+- (UICollectionViewCell *)collectionView:(UICollectionView *)cv cellForItemAtIndexPath:(NSIndexPath *)indexPath {
+    UICollectionViewCell *cell = [cv dequeueReusableCellWithReuseIdentifier:CELL_REUSE_IDENTIFIER forIndexPath:indexPath];
+    cell.backgroundColor = [UIColor whiteColor];
+    return cell;
+}
+// 4
+/*- (UICollectionReusableView *)collectionView:
+ (UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath
+ {
+ return [[UICollectionReusableView alloc] init];
+ }*/
+
+#pragma mark - UICollectionViewDelegate
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    // TODO: Select Item
+}
+- (void)collectionView:(UICollectionView *)collectionView didDeselectItemAtIndexPath:(NSIndexPath *)indexPath {
+    // TODO: Deselect item
+}
+
+
+#pragma mark – UICollectionViewDelegateFlowLayout
+
+- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
+    return CGSizeMake(147, 205);
+}
+
+- (UIEdgeInsets)collectionView:
+(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout insetForSectionAtIndex:(NSInteger)section {
+    return UIEdgeInsetsMake(5, 10, 5, 10);
+}
 
 @end

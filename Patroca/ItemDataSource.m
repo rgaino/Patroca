@@ -55,13 +55,13 @@
             
             [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
                 if (!error) {
-                    //                    [self loadFetchedItems:objects];
-                    [masterViewController populateWithItems:objects];
+                    _items = [NSArray arrayWithArray:objects];
+                    [masterViewController populateCollectionView];
                 } else {
                     // Log details of the failure
                     NSLog(@"Error: %@ %@", error, [error userInfo]);
+                    _items = [NSArray array];
                     //TODO: show error message
-                    //                    self.itemsArray = [NSArray array];
                 }
             }];
             
