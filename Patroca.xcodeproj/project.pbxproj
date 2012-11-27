@@ -65,6 +65,7 @@
 		1950E4F9165F08A200E98488 /* ItemViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1950E4F8165F08A200E98488 /* ItemViewCell.m */; };
 		1950E4FC165F09B700E98488 /* ViewProfileViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1950E4FB165F09B700E98488 /* ViewProfileViewController.xib */; };
 		1950E4FE165F0BAF00E98488 /* ItemViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1950E4FD165F0BAF00E98488 /* ItemViewCell.xib */; };
+		1950E506165F137900E98488 /* UserCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 1950E505165F137900E98488 /* UserCache.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -139,6 +140,8 @@
 		1950E4F8165F08A200E98488 /* ItemViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ItemViewCell.m; sourceTree = "<group>"; };
 		1950E4FB165F09B700E98488 /* ViewProfileViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ViewProfileViewController.xib; sourceTree = "<group>"; };
 		1950E4FD165F0BAF00E98488 /* ItemViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ItemViewCell.xib; sourceTree = "<group>"; };
+		1950E504165F137900E98488 /* UserCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserCache.h; sourceTree = "<group>"; };
+		1950E505165F137900E98488 /* UserCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserCache.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -391,11 +394,21 @@
 		1939B912165DB47100435705 /* Database Access */ = {
 			isa = PBXGroup;
 			children = (
+				1950E503165F136A00E98488 /* User Cache */,
 				1934ACE5165DC57500C8272F /* Item Data Source */,
 				1934ACE1165DBC7500C8272F /* Constants */,
 				1934ACDA165DB91500C8272F /* Item Object */,
 			);
 			name = "Database Access";
+			sourceTree = "<group>";
+		};
+		1950E503165F136A00E98488 /* User Cache */ = {
+			isa = PBXGroup;
+			children = (
+				1950E504165F137900E98488 /* UserCache.h */,
+				1950E505165F137900E98488 /* UserCache.m */,
+			);
+			name = "User Cache";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -500,6 +513,7 @@
 				1934ACF4165E2B5400C8272F /* ViewProfileViewController.m in Sources */,
 				1934ACFD165E2C6C00C8272F /* MBProgressHUD.m in Sources */,
 				1950E4F9165F08A200E98488 /* ItemViewCell.m in Sources */,
+				1950E506165F137900E98488 /* UserCache.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -570,6 +584,7 @@
 		1939B8A816568C3300435705 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Rafael Gaino (NNNZ3BJYAA)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)\"",
@@ -578,6 +593,7 @@
 				GCC_PREFIX_HEADER = "Patroca/Patroca-Prefix.pch";
 				INFOPLIST_FILE = "Patroca/Patroca-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "CE7A7282-2495-4FDD-A020-117A540EF605";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -585,6 +601,7 @@
 		1939B8A916568C3300435705 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Rafael Gaino";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)\"",
@@ -593,6 +610,7 @@
 				GCC_PREFIX_HEADER = "Patroca/Patroca-Prefix.pch";
 				INFOPLIST_FILE = "Patroca/Patroca-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "75F72972-3312-4188-9152-7D6C324E21CD";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

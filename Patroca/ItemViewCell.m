@@ -7,9 +7,11 @@
 //
 
 #import "ItemViewCell.h"
+#import <Parse/Parse.h>
+#import "DatabaseConstants.h"
+#import "UserCache.h"
 
 @implementation ItemViewCell
-
 
 - (id)initWithFrame:(CGRect)frame {
     
@@ -26,7 +28,18 @@
     }
     
     return self;
+}
+
+- (void)setupCellWithItem:(PFObject*)itemObject {
     
+    [self.itemNameLabel setText:[itemObject objectForKey:DB_FIELD_ITEM_NAME]];
+    
+    PFUser *itemUser = [itemObject objectForKey:DB_FIELD_USER_ID];
+    NSString *userId = [itemUser objectId];
+    
+    PFUser *userObject = [[UserCache getInstance] getCachedUserForId:userId];
+    [self.ownerNameLabel setText:[userObject objectForKey:DB_FIELD_USER_NAME]];
+
 }
 
 

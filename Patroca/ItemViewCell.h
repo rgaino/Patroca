@@ -8,6 +8,13 @@
 
 #import <UIKit/UIKit.h>
 
+@class PFObject;
+
 @interface ItemViewCell : UICollectionViewCell
+
+@property (weak, nonatomic) IBOutlet UILabel *itemNameLabel;
+@property (weak, nonatomic) IBOutlet UILabel *ownerNameLabel;
+
+- (void)setupCellWithItem:(PFObject*)itemObject;
 
 @end

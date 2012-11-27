@@ -8,9 +8,11 @@
 
 #import "MasterViewController.h"
 #import <Parse/Parse.h>
+#import "DatabaseConstants.h"
 #import "ItemViewCell.h"
 #import "ItemDataSource.h"
 #import "LogInViewController.h"
+#import "UserCache.h"
 
 #define CELL_REUSE_IDENTIFIER @"Item_Cell"
 
@@ -98,33 +100,6 @@
 
 - (void)loadFeaturedItems {
     
-//    int columns = 2;
-//    int column = 0;
-//    int xSpacing = 5;
-//    int ySpacing = 10;
-//    float y=ySpacing;
-//    
-//    float itemsTotalHeight=0;
-//    
-//    for(int i=0; i<40; i++) {
-//        
-//        if(column >= columns) { column = 0; }
-//        
-//        ItemProfileViewController *item = [[ItemProfileViewController alloc] initWithNibName:@"ItemProfileViewController" bundle:nil];
-//        float x = (xSpacing * (column+1)) + (item.view.frame.size.width*column);
-//        [[item view] setFrame:CGRectMake(x, y, item.view.frame.size.width, item.view.frame.size.height)];
-//        [_contentScrollView addSubview:item.view];
-//        
-//        column++;
-//        
-//        if(column >= columns) {
-//            y+= (item.view.frame.size.height + ySpacing);
-//            itemsTotalHeight += (item.view.frame.size.height + ySpacing);
-//        }
-//    }
-//    
-//    [_contentScrollView setContentSize:CGSizeMake(_contentScrollView.contentSize.width, (_contentScrollView.contentSize.height+itemsTotalHeight))];
-//    NSLog(@"content size is %.2f x %.2f", _contentScrollView.contentSize.width, _contentScrollView.contentSize.height);
 }
 
 - (void)loadFriendsItems {
@@ -146,29 +121,12 @@
     
     NSLog(@"Populating list with %d items", itemDataSource.items.count);
 
+    [[UserCache getInstance] updateUserNameCacheDictionaryForItems:itemDataSource.items];
+
     [_contentDisplayCollectionView reloadData];
 
 }
 
-//#pragma mark UIScrollViewDelegate methods
-
-//- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
-//    
-////    NSLog(@"_menuBarView.frame.origin.y=%.1f and contentOffset.y=%.1f", _menuBarView.frame.origin.y, _contentScrollView.contentOffset.y);
-////    if(_menuBarView.frame.origin.y<0) {
-////        [_menuBarView setFrame:CGRectMake(_menuBarView.frame.origin.x, 0, _menuBarView.frame.size.width, _menuBarView.frame.size.height)];
-////    }
-//    
-//    if(_contentScrollView.contentOffset.y > 101.0) {
-//
-//        [_menuBarView setFrame:CGRectMake(_menuBarView.frame.origin.x,
-//                                          _contentScrollView.contentOffset.y,
-//                                          _menuBarView.frame.size.width, _menuBarView.frame.size.height)];
-//        NSLog(@"_menuBarView.frame.origin.y=%.1f", _menuBarView.frame.origin.y);
-//
-//    }
-//    
-//}
 
 #pragma mark - UICollectionView Datasource
 
@@ -184,19 +142,12 @@
 
     ItemViewCell *itemViewCell = (ItemViewCell *)[self.contentDisplayCollectionView dequeueReusableCellWithReuseIdentifier:CELL_REUSE_IDENTIFIER forIndexPath:indexPath];
     
-//    NSMutableArray *data = [self.dataArray objectAtIndex:indexPath.section];
-//    NSString *cellData = [data objectAtIndex:indexPath.row];
-//    [cell.titleLabel setText:cellData];
+    PFObject *item = [[itemDataSource items] objectAtIndex:indexPath.row];
+    [itemViewCell setupCellWithItem:item];
     
     return itemViewCell;
-    
-    
-    
-//    UICollectionViewCell *cell = [cv dequeueReusableCellWithReuseIdentifier:CELL_REUSE_IDENTIFIER forIndexPath:indexPath];
-//    cell.backgroundColor = [UIColor whiteColor];
-//    return cell;
 }
-// 4
+
 /*- (UICollectionReusableView *)collectionView:
  (UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath
  {
