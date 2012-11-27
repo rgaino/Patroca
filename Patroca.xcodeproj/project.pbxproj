@@ -64,6 +64,11 @@
 		1939B90D165AA0E500435705 /* offers_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1939B90B165AA0E400435705 /* offers_icon@2x.png */; };
 		1939CA4A1664434E002C21F6 /* ImageIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1939CA491664434E002C21F6 /* ImageIO.framework */; };
 		1939CA4E1664449C002C21F6 /* SDWebImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1939CA4D1664449C002C21F6 /* SDWebImage.framework */; };
+		1939CA5316644A6E002C21F6 /* AddNewItemViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1939CA5116644A6E002C21F6 /* AddNewItemViewController.m */; };
+		1939CA5416644A6E002C21F6 /* AddNewItemViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1939CA5216644A6E002C21F6 /* AddNewItemViewController.xib */; };
+		1939CA5C16644B53002C21F6 /* UIImage+Resize.m in Sources */ = {isa = PBXBuildFile; fileRef = 1939CA5716644B53002C21F6 /* UIImage+Resize.m */; settings = {COMPILER_FLAGS = "-w"; }; };
+		1939CA5D16644B53002C21F6 /* UIImage+Alpha.m in Sources */ = {isa = PBXBuildFile; fileRef = 1939CA5916644B53002C21F6 /* UIImage+Alpha.m */; settings = {COMPILER_FLAGS = "-w"; }; };
+		1939CA5E16644B53002C21F6 /* UIImage+RoundedCorner.m in Sources */ = {isa = PBXBuildFile; fileRef = 1939CA5B16644B53002C21F6 /* UIImage+RoundedCorner.m */; settings = {COMPILER_FLAGS = "-w"; }; };
 		1950E4F9165F08A200E98488 /* ItemViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1950E4F8165F08A200E98488 /* ItemViewCell.m */; };
 		1950E4FC165F09B700E98488 /* ViewProfileViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1950E4FB165F09B700E98488 /* ViewProfileViewController.xib */; };
 		1950E4FE165F0BAF00E98488 /* ItemViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1950E4FD165F0BAF00E98488 /* ItemViewCell.xib */; };
@@ -140,6 +145,15 @@
 		1939B90B165AA0E400435705 /* offers_icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "offers_icon@2x.png"; sourceTree = "<group>"; };
 		1939CA491664434E002C21F6 /* ImageIO.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ImageIO.framework; path = System/Library/Frameworks/ImageIO.framework; sourceTree = SDKROOT; };
 		1939CA4D1664449C002C21F6 /* SDWebImage.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = SDWebImage.framework; sourceTree = "<group>"; };
+		1939CA5016644A6E002C21F6 /* AddNewItemViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddNewItemViewController.h; sourceTree = "<group>"; };
+		1939CA5116644A6E002C21F6 /* AddNewItemViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddNewItemViewController.m; sourceTree = "<group>"; };
+		1939CA5216644A6E002C21F6 /* AddNewItemViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AddNewItemViewController.xib; sourceTree = "<group>"; };
+		1939CA5616644B53002C21F6 /* UIImage+Resize.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Resize.h"; sourceTree = "<group>"; };
+		1939CA5716644B53002C21F6 /* UIImage+Resize.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Resize.m"; sourceTree = "<group>"; };
+		1939CA5816644B53002C21F6 /* UIImage+Alpha.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Alpha.h"; sourceTree = "<group>"; };
+		1939CA5916644B53002C21F6 /* UIImage+Alpha.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Alpha.m"; sourceTree = "<group>"; };
+		1939CA5A16644B53002C21F6 /* UIImage+RoundedCorner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+RoundedCorner.h"; sourceTree = "<group>"; };
+		1939CA5B16644B53002C21F6 /* UIImage+RoundedCorner.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+RoundedCorner.m"; sourceTree = "<group>"; };
 		1950E4F7165F08A200E98488 /* ItemViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ItemViewCell.h; sourceTree = "<group>"; };
 		1950E4F8165F08A200E98488 /* ItemViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ItemViewCell.m; sourceTree = "<group>"; };
 		1950E4FB165F09B700E98488 /* ViewProfileViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ViewProfileViewController.xib; sourceTree = "<group>"; };
@@ -238,6 +252,7 @@
 		1934ACF6165E2B9300C8272F /* Libs */ = {
 			isa = PBXGroup;
 			children = (
+				1939CA5516644B3A002C21F6 /* UIImage Categories */,
 				1939CA2B166442D6002C21F6 /* SDWebImage */,
 				1934ACF7165E2BAD00C8272F /* MBProgressHUD */,
 			);
@@ -256,8 +271,6 @@
 		1939B87816568C3300435705 = {
 			isa = PBXGroup;
 			children = (
-				1939CA4D1664449C002C21F6 /* SDWebImage.framework */,
-				1939CA491664434E002C21F6 /* ImageIO.framework */,
 				1939B88D16568C3300435705 /* Patroca */,
 				1939B88616568C3300435705 /* Frameworks */,
 				1939B88416568C3300435705 /* Products */,
@@ -275,6 +288,8 @@
 		1939B88616568C3300435705 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				1939CA4D1664449C002C21F6 /* SDWebImage.framework */,
+				1939CA491664434E002C21F6 /* ImageIO.framework */,
 				1939B8F616571C4E00435705 /* SystemConfiguration.framework */,
 				1939B8F416571C4100435705 /* StoreKit.framework */,
 				1939B8F216571C3B00435705 /* Social.framework */,
@@ -326,6 +341,7 @@
 		1939B8AA16568CBB00435705 /* View Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				1939CA4F16644A63002C21F6 /* Add New Item */,
 				1934ACE9165E2AAF00C8272F /* Profile */,
 				1939B8AC16568CD200435705 /* Master */,
 				1939B8F8165A9B2D00435705 /* Item Profile */,
@@ -418,6 +434,29 @@
 			name = SDWebImage;
 			sourceTree = "<group>";
 		};
+		1939CA4F16644A63002C21F6 /* Add New Item */ = {
+			isa = PBXGroup;
+			children = (
+				1939CA5016644A6E002C21F6 /* AddNewItemViewController.h */,
+				1939CA5116644A6E002C21F6 /* AddNewItemViewController.m */,
+				1939CA5216644A6E002C21F6 /* AddNewItemViewController.xib */,
+			);
+			name = "Add New Item";
+			sourceTree = "<group>";
+		};
+		1939CA5516644B3A002C21F6 /* UIImage Categories */ = {
+			isa = PBXGroup;
+			children = (
+				1939CA5616644B53002C21F6 /* UIImage+Resize.h */,
+				1939CA5716644B53002C21F6 /* UIImage+Resize.m */,
+				1939CA5816644B53002C21F6 /* UIImage+Alpha.h */,
+				1939CA5916644B53002C21F6 /* UIImage+Alpha.m */,
+				1939CA5A16644B53002C21F6 /* UIImage+RoundedCorner.h */,
+				1939CA5B16644B53002C21F6 /* UIImage+RoundedCorner.m */,
+			);
+			name = "UIImage Categories";
+			sourceTree = "<group>";
+		};
 		1950E503165F136A00E98488 /* User Cache */ = {
 			isa = PBXGroup;
 			children = (
@@ -508,6 +547,7 @@
 				1934ACEE165E2B1D00C8272F /* LogInViewController.xib in Resources */,
 				1950E4FC165F09B700E98488 /* ViewProfileViewController.xib in Resources */,
 				1950E4FE165F0BAF00E98488 /* ItemViewCell.xib in Resources */,
+				1939CA5416644A6E002C21F6 /* AddNewItemViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -530,6 +570,10 @@
 				1934ACFD165E2C6C00C8272F /* MBProgressHUD.m in Sources */,
 				1950E4F9165F08A200E98488 /* ItemViewCell.m in Sources */,
 				1950E506165F137900E98488 /* UserCache.m in Sources */,
+				1939CA5316644A6E002C21F6 /* AddNewItemViewController.m in Sources */,
+				1939CA5C16644B53002C21F6 /* UIImage+Resize.m in Sources */,
+				1939CA5D16644B53002C21F6 /* UIImage+Alpha.m in Sources */,
+				1939CA5E16644B53002C21F6 /* UIImage+RoundedCorner.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -556,7 +600,8 @@
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Rafael Gaino (NNNZ3BJYAA)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Rafael Gaino (NNNZ3BJYAA)";
 				COPY_PHASE_STRIP = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
@@ -571,6 +616,8 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				ONLY_ACTIVE_ARCH = YES;
+				PROVISIONING_PROFILE = "CE7A7282-2495-4FDD-A020-117A540EF605";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "D3B66FA0-BE37-42CD-8C0D-E65FABCCEF17";
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -584,7 +631,8 @@
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				COPY_PHASE_STRIP = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
@@ -600,6 +648,7 @@
 		1939B8A816568C3300435705 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Developer: Rafael Gaino (NNNZ3BJYAA)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Rafael Gaino (NNNZ3BJYAA)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -610,7 +659,8 @@
 				INFOPLIST_FILE = "Patroca/Patroca-Info.plist";
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "CE7A7282-2495-4FDD-A020-117A540EF605";
+				PROVISIONING_PROFILE = "D3B66FA0-BE37-42CD-8C0D-E65FABCCEF17";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "D3B66FA0-BE37-42CD-8C0D-E65FABCCEF17";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -618,7 +668,7 @@
 		1939B8A916568C3300435705 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Rafael Gaino";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)\"",
@@ -628,7 +678,6 @@
 				INFOPLIST_FILE = "Patroca/Patroca-Info.plist";
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "75F72972-3312-4188-9152-7D6C324E21CD";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

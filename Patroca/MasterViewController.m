@@ -13,6 +13,7 @@
 #import "ItemDataSource.h"
 #import "LogInViewController.h"
 #import "UserCache.h"
+#import "AddNewItemViewController.h"
 
 #define CELL_REUSE_IDENTIFIER @"Item_Cell"
 
@@ -59,6 +60,14 @@
     CGRect arrowFrame = _menuArrowImage.frame;
     [_menuArrowImage setFrame:CGRectMake(-100, arrowFrame.origin.y, arrowFrame.size.width, arrowFrame.size.height)];
     [self performSelector:@selector(userTappedOnFeatured) withObject:nil afterDelay:1.0f];
+
+    
+}
+
+- (IBAction)addNewItemButtonPressed:(id)sender {
+    
+    AddNewItemViewController *addNewItemViewController = [[AddNewItemViewController alloc] initWithNibName:@"AddNewItemViewController" bundle:nil];
+    [self.view.window.rootViewController presentViewController:addNewItemViewController animated:YES completion:nil];
 
     
 }

@@ -26,6 +26,7 @@
 @property (weak, nonatomic) IBOutlet UIView *menuBarView;
 @property (weak, nonatomic) IBOutlet UICollectionView *contentDisplayCollectionView;
 
+- (IBAction)addNewItemButtonPressed:(id)sender;
 - (void)userTappedOnFeatured;
 - (void)userTappedOnFriends;
 - (void)userTappedOnNearby;
