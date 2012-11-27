@@ -62,6 +62,8 @@
 		1939B909165AA0D900435705 /* comments_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1939B907165AA0D900435705 /* comments_icon@2x.png */; };
 		1939B90C165AA0E500435705 /* offers_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 1939B90A165AA0E400435705 /* offers_icon.png */; };
 		1939B90D165AA0E500435705 /* offers_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1939B90B165AA0E400435705 /* offers_icon@2x.png */; };
+		1939CA4A1664434E002C21F6 /* ImageIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1939CA491664434E002C21F6 /* ImageIO.framework */; };
+		1939CA4E1664449C002C21F6 /* SDWebImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1939CA4D1664449C002C21F6 /* SDWebImage.framework */; };
 		1950E4F9165F08A200E98488 /* ItemViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1950E4F8165F08A200E98488 /* ItemViewCell.m */; };
 		1950E4FC165F09B700E98488 /* ViewProfileViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1950E4FB165F09B700E98488 /* ViewProfileViewController.xib */; };
 		1950E4FE165F0BAF00E98488 /* ItemViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1950E4FD165F0BAF00E98488 /* ItemViewCell.xib */; };
@@ -136,6 +138,8 @@
 		1939B907165AA0D900435705 /* comments_icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "comments_icon@2x.png"; sourceTree = "<group>"; };
 		1939B90A165AA0E400435705 /* offers_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = offers_icon.png; sourceTree = "<group>"; };
 		1939B90B165AA0E400435705 /* offers_icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "offers_icon@2x.png"; sourceTree = "<group>"; };
+		1939CA491664434E002C21F6 /* ImageIO.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ImageIO.framework; path = System/Library/Frameworks/ImageIO.framework; sourceTree = SDKROOT; };
+		1939CA4D1664449C002C21F6 /* SDWebImage.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = SDWebImage.framework; sourceTree = "<group>"; };
 		1950E4F7165F08A200E98488 /* ItemViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ItemViewCell.h; sourceTree = "<group>"; };
 		1950E4F8165F08A200E98488 /* ItemViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ItemViewCell.m; sourceTree = "<group>"; };
 		1950E4FB165F09B700E98488 /* ViewProfileViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ViewProfileViewController.xib; sourceTree = "<group>"; };
@@ -149,6 +153,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1939CA4A1664434E002C21F6 /* ImageIO.framework in Frameworks */,
 				1939B8F716571C4E00435705 /* SystemConfiguration.framework in Frameworks */,
 				1939B8F516571C4100435705 /* StoreKit.framework in Frameworks */,
 				1939B8F316571C3B00435705 /* Social.framework in Frameworks */,
@@ -166,6 +171,7 @@
 				1939B88816568C3300435705 /* UIKit.framework in Frameworks */,
 				1939B88A16568C3300435705 /* Foundation.framework in Frameworks */,
 				1939B8DD1657011300435705 /* Parse.framework in Frameworks */,
+				1939CA4E1664449C002C21F6 /* SDWebImage.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -232,6 +238,7 @@
 		1934ACF6165E2B9300C8272F /* Libs */ = {
 			isa = PBXGroup;
 			children = (
+				1939CA2B166442D6002C21F6 /* SDWebImage */,
 				1934ACF7165E2BAD00C8272F /* MBProgressHUD */,
 			);
 			name = Libs;
@@ -249,6 +256,8 @@
 		1939B87816568C3300435705 = {
 			isa = PBXGroup;
 			children = (
+				1939CA4D1664449C002C21F6 /* SDWebImage.framework */,
+				1939CA491664434E002C21F6 /* ImageIO.framework */,
 				1939B88D16568C3300435705 /* Patroca */,
 				1939B88616568C3300435705 /* Frameworks */,
 				1939B88416568C3300435705 /* Products */,
@@ -400,6 +409,13 @@
 				1934ACDA165DB91500C8272F /* Item Object */,
 			);
 			name = "Database Access";
+			sourceTree = "<group>";
+		};
+		1939CA2B166442D6002C21F6 /* SDWebImage */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = SDWebImage;
 			sourceTree = "<group>";
 		};
 		1950E503165F136A00E98488 /* User Cache */ = {
@@ -592,6 +608,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Patroca/Patroca-Prefix.pch";
 				INFOPLIST_FILE = "Patroca/Patroca-Info.plist";
+				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "CE7A7282-2495-4FDD-A020-117A540EF605";
 				WRAPPER_EXTENSION = app;
@@ -609,6 +626,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Patroca/Patroca-Prefix.pch";
 				INFOPLIST_FILE = "Patroca/Patroca-Info.plist";
+				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "75F72972-3312-4188-9152-7D6C324E21CD";
 				WRAPPER_EXTENSION = app;

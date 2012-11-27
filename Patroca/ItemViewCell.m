@@ -10,6 +10,7 @@
 #import <Parse/Parse.h>
 #import "DatabaseConstants.h"
 #import "UserCache.h"
+#import <SDWebImage/UIImageView+WebCache.h>
 
 @implementation ItemViewCell
 
@@ -39,6 +40,12 @@
     
     PFUser *userObject = [[UserCache getInstance] getCachedUserForId:userId];
     [self.ownerNameLabel setText:[userObject objectForKey:DB_FIELD_USER_NAME]];
+    
+    
+    PFFile *itemImageFile = [itemObject objectForKey:DB_FIELD_ITEM_MAIN_THUMBNAIL];
+    NSLog(@"%@", [itemImageFile url]);
+    NSURL *itemImageURL = [NSURL URLWithString:[itemImageFile url]];
+    [_itemImageView setImageWithURL:itemImageURL placeholderImage:nil];
 
 }
 

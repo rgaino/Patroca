@@ -14,6 +14,7 @@
 
 @property (weak, nonatomic) IBOutlet UILabel *itemNameLabel;
 @property (weak, nonatomic) IBOutlet UILabel *ownerNameLabel;
+@property (weak, nonatomic) IBOutlet UIImageView *itemImageView;
 
 - (void)setupCellWithItem:(PFObject*)itemObject;
 
