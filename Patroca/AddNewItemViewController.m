@@ -52,7 +52,7 @@
     [self setupCameraOverlayView];
     [self setupImagePicker];
     [self presentCamera];
-    
+
     //initialize a new blank Item object
     currentItem = [PFObject objectWithClassName:DB_TABLE_ITEMS];
     itemThumbnails = [[NSMutableArray alloc] init];
@@ -61,6 +61,7 @@
     xSpacing = 10;
     xPosition = 0 - thumbnailSize;
 }
+
 
 - (void)localizeStrings {
     [itemNameLabel setText:NSLocalizedString(@"Item Name", nil)];
@@ -86,8 +87,13 @@
 }
 
 - (void)presentCamera {
+
+//    UINavigationController *navigationController = (UINavigationController *)self.view.window.rootViewController.presentedViewController;
+//    [navigationController pushViewController:imagePicker animated:YES];
+//    [self.view.window.rootViewController presentViewController:imagePicker animated:YES completion:nil];
+
     
-    [self.view.window.rootViewController presentViewController:imagePicker animated:YES completion:nil];
+    [self presentViewController:imagePicker animated:YES completion:nil];
 
 }
 

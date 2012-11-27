@@ -26,7 +26,7 @@
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        
+                
         //Colors and patterns
         labelSelectedColor = [UIColor colorWithRed:36/255.0 green:190/255.0 blue:212/255.0 alpha:1.0f];
         labelUnselectedColor = [UIColor colorWithRed:204/255.0 green:204/255.0 blue:204/255.0 alpha:1.0f];
@@ -67,9 +67,7 @@
 - (IBAction)addNewItemButtonPressed:(id)sender {
     
     AddNewItemViewController *addNewItemViewController = [[AddNewItemViewController alloc] initWithNibName:@"AddNewItemViewController" bundle:nil];
-    [self.view.window.rootViewController presentViewController:addNewItemViewController animated:YES completion:nil];
-
-    
+    [self.navigationController pushViewController:addNewItemViewController animated:YES];
 }
 
 - (void)userTappedOnFeatured {
@@ -120,7 +118,8 @@
         [itemDataSource getItemsAndReturnTo:self];
     } else {
         logInViewController = [[LogInViewController alloc] initWithNibName:@"LogInViewController" bundle:nil];
-        [self.view.window.rootViewController presentViewController:logInViewController animated:YES completion:nil];
+//        [self.view.window.rootViewController presentViewController:logInViewController animated:YES completion:nil];
+        [self.navigationController pushViewController:logInViewController animated:YES];
     }
 
     
@@ -157,11 +156,6 @@
     return itemViewCell;
 }
 
-/*- (UICollectionReusableView *)collectionView:
- (UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath
- {
- return [[UICollectionReusableView alloc] init];
- }*/
 
 #pragma mark - UICollectionViewDelegate
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath

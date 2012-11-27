@@ -50,7 +50,7 @@
                                      @"user_about_me",
                                      @"user_relationships",
                                      @"user_location",
-                                     @"offline_access",
+//                                     @"offline_access",
                                      @"email",
                                      nil];
     
@@ -75,7 +75,7 @@
 
 
 -(void) userLoggedInSuccessfully {
-    [self dismissViewControllerAnimated:YES completion:nil];
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 - (void)viewDidUnload {
