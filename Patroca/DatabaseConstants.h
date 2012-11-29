@@ -16,6 +16,7 @@ extern NSString* const DB_TABLE_USERS;
 extern NSString* const DB_FIELD_USER_NAME;
 extern NSString* const DB_FIELD_USER_ID;
 extern NSString* const DB_FIELD_USER_FACEBOOK_ID;
+extern NSString* const FB_PROFILE_PICTURE_URL;
 
 //Item table
 extern NSString* const DB_TABLE_ITEMS;

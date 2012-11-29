@@ -20,7 +20,7 @@ NSString* const DB_TABLE_USERS = @"User";
 NSString* const DB_FIELD_USER_NAME = @"name";
 NSString* const DB_FIELD_USER_ID = @"user_id";
 NSString* const DB_FIELD_USER_FACEBOOK_ID = @"user_facebook_id";
-
+NSString* const FB_PROFILE_PICTURE_URL = @"https://graph.facebook.com/%@/picture?type=square";
 
 //Item table
 NSString* const DB_TABLE_ITEMS = @"Item";

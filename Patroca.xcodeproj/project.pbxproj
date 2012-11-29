@@ -74,6 +74,7 @@
 		1950E4FE165F0BAF00E98488 /* ItemViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1950E4FD165F0BAF00E98488 /* ItemViewCell.xib */; };
 		1950E506165F137900E98488 /* UserCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 1950E505165F137900E98488 /* UserCache.m */; };
 		198662521666DFD8003C19EE /* item_hi_res.png in Resources */ = {isa = PBXBuildFile; fileRef = 198662511666DFD8003C19EE /* item_hi_res.png */; };
+		1986625516670397003C19EE /* sample_avatar.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 1986625416670397003C19EE /* sample_avatar.jpeg */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -162,6 +163,7 @@
 		1950E504165F137900E98488 /* UserCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserCache.h; sourceTree = "<group>"; };
 		1950E505165F137900E98488 /* UserCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserCache.m; sourceTree = "<group>"; };
 		198662511666DFD8003C19EE /* item_hi_res.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = item_hi_res.png; sourceTree = "<group>"; };
+		1986625416670397003C19EE /* sample_avatar.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = sample_avatar.jpeg; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -382,6 +384,7 @@
 		1939B8B716568F8400435705 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				1986625416670397003C19EE /* sample_avatar.jpeg */,
 				198662511666DFD8003C19EE /* item_hi_res.png */,
 				1939B8C01656915600435705 /* add_new_item_button.png */,
 				1939B8C11656915600435705 /* add_new_item_button@2x.png */,
@@ -552,6 +555,7 @@
 				1950E4FE165F0BAF00E98488 /* ItemViewCell.xib in Resources */,
 				1939CA5416644A6E002C21F6 /* AddNewItemViewController.xib in Resources */,
 				198662521666DFD8003C19EE /* item_hi_res.png in Resources */,
+				1986625516670397003C19EE /* sample_avatar.jpeg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -620,8 +624,8 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				ONLY_ACTIVE_ARCH = YES;
-				PROVISIONING_PROFILE = "CE7A7282-2495-4FDD-A020-117A540EF605";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "D3B66FA0-BE37-42CD-8C0D-E65FABCCEF17";
+				PROVISIONING_PROFILE = "09D7597C-04B9-4931-82A2-A36781588486";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "09D7597C-04B9-4931-82A2-A36781588486";
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -635,8 +639,8 @@
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Rafael Gaino";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Rafael Gaino";
 				COPY_PHASE_STRIP = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
@@ -644,6 +648,8 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				PROVISIONING_PROFILE = "CEF30A51-8590-433F-AB0E-B00F67476F9E";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "CEF30A51-8590-433F-AB0E-B00F67476F9E";
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};
@@ -663,8 +669,8 @@
 				INFOPLIST_FILE = "Patroca/Patroca-Info.plist";
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "D3B66FA0-BE37-42CD-8C0D-E65FABCCEF17";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "D3B66FA0-BE37-42CD-8C0D-E65FABCCEF17";
+				PROVISIONING_PROFILE = "09D7597C-04B9-4931-82A2-A36781588486";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "09D7597C-04B9-4931-82A2-A36781588486";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -672,7 +678,8 @@
 		1939B8A916568C3300435705 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Rafael Gaino";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Rafael Gaino";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)\"",
@@ -682,6 +689,8 @@
 				INFOPLIST_FILE = "Patroca/Patroca-Info.plist";
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "CEF30A51-8590-433F-AB0E-B00F67476F9E";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "CEF30A51-8590-433F-AB0E-B00F67476F9E";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
