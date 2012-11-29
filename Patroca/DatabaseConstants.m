@@ -25,7 +25,7 @@ NSString* const DB_FIELD_USER_FACEBOOK_ID = @"user_facebook_id";
 //Item table
 NSString* const DB_TABLE_ITEMS = @"Item";
 NSString* const DB_FIELD_ITEM_NAME = @"item_name";
-NSString* const DB_FIELD_ITEM_MAIN_THUMBNAIL = @"item_main_thumbnail";
+NSString* const DB_FIELD_ITEM_MAIN_IMAGE = @"item_main_image";
 NSString* const DB_FIELD_ITEM_LOCATION = @"item_location";
 
 

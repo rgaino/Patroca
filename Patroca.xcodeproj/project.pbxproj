@@ -73,6 +73,7 @@
 		1950E4FC165F09B700E98488 /* ViewProfileViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1950E4FB165F09B700E98488 /* ViewProfileViewController.xib */; };
 		1950E4FE165F0BAF00E98488 /* ItemViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1950E4FD165F0BAF00E98488 /* ItemViewCell.xib */; };
 		1950E506165F137900E98488 /* UserCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 1950E505165F137900E98488 /* UserCache.m */; };
+		198662521666DFD8003C19EE /* item_hi_res.png in Resources */ = {isa = PBXBuildFile; fileRef = 198662511666DFD8003C19EE /* item_hi_res.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -160,6 +161,7 @@
 		1950E4FD165F0BAF00E98488 /* ItemViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ItemViewCell.xib; sourceTree = "<group>"; };
 		1950E504165F137900E98488 /* UserCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserCache.h; sourceTree = "<group>"; };
 		1950E505165F137900E98488 /* UserCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserCache.m; sourceTree = "<group>"; };
+		198662511666DFD8003C19EE /* item_hi_res.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = item_hi_res.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -380,6 +382,7 @@
 		1939B8B716568F8400435705 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				198662511666DFD8003C19EE /* item_hi_res.png */,
 				1939B8C01656915600435705 /* add_new_item_button.png */,
 				1939B8C11656915600435705 /* add_new_item_button@2x.png */,
 				1939B8D01656954E00435705 /* background_repeat.png */,
@@ -548,6 +551,7 @@
 				1950E4FC165F09B700E98488 /* ViewProfileViewController.xib in Resources */,
 				1950E4FE165F0BAF00E98488 /* ItemViewCell.xib in Resources */,
 				1939CA5416644A6E002C21F6 /* AddNewItemViewController.xib in Resources */,
+				198662521666DFD8003C19EE /* item_hi_res.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

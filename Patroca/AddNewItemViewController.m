@@ -12,8 +12,9 @@
 #import "UIImage+Resize.h"
 #import "DatabaseConstants.h"
 
-#define thumbnailSize 65
+#define thumbnailSize 50
 #define fullImageSize 500
+#define imageCornerRadius 0
 #define thumbnailsAnimationSpeed 0.25f
 
 @interface AddNewItemViewController ()
@@ -87,14 +88,8 @@
 }
 
 - (void)presentCamera {
-
-//    UINavigationController *navigationController = (UINavigationController *)self.view.window.rootViewController.presentedViewController;
-//    [navigationController pushViewController:imagePicker animated:YES];
-//    [self.view.window.rootViewController presentViewController:imagePicker animated:YES completion:nil];
-
     
     [self presentViewController:imagePicker animated:YES completion:nil];
-
 }
 
 - (IBAction)doneButtonPressed:(id)sender {
@@ -141,7 +136,7 @@
     CGSize fullImageNewSize = CGSizeMake(imageWidth/ratio, imageHeight/ratio);
         
     UIImage *fullSize = [picture resizedImage:fullImageNewSize interpolationQuality:kCGInterpolationHigh];
-    UIImage *thumbnail = [picture thumbnailImage:thumbnailSize transparentBorder:0 cornerRadius:10 interpolationQuality:kCGInterpolationHigh];
+    UIImage *thumbnail = [picture thumbnailImage:thumbnailSize transparentBorder:0 cornerRadius:imageCornerRadius interpolationQuality:kCGInterpolationHigh];
     
     [itemThumbnails addObject:thumbnail];
     [itemImages addObject:fullSize];
@@ -212,8 +207,8 @@
         [itemImagesObject setObject:imageFile forKey:DB_FIELD_ITEM_IMAGE];
         [itemImagesObject save];
         
-        if( [currentItem objectForKey:DB_FIELD_ITEM_MAIN_THUMBNAIL] == nil) {
-            [currentItem setObject:thumbnailImageFile forKey:DB_FIELD_ITEM_MAIN_THUMBNAIL];
+        if( [currentItem objectForKey:DB_FIELD_ITEM_MAIN_IMAGE] == nil) {
+            [currentItem setObject:imageFile forKey:DB_FIELD_ITEM_MAIN_IMAGE];
         }
         
         NSLog(@"Images saved!");

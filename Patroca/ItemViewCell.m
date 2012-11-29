@@ -42,7 +42,7 @@
     [self.ownerNameLabel setText:[userObject objectForKey:DB_FIELD_USER_NAME]];
     
     
-    PFFile *itemImageFile = [itemObject objectForKey:DB_FIELD_ITEM_MAIN_THUMBNAIL];
+    PFFile *itemImageFile = [itemObject objectForKey:DB_FIELD_ITEM_MAIN_IMAGE];
     NSLog(@"%@", [itemImageFile url]);
     NSURL *itemImageURL = [NSURL URLWithString:[itemImageFile url]];
     [_itemImageView setImageWithURL:itemImageURL placeholderImage:nil];
