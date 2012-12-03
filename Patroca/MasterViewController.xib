@@ -169,7 +169,7 @@
 						<int key="NSvFlags">274</int>
 						<string key="NSFrameSize">{320, 58}</string>
 						<reference key="NSSuperview" ref="191373211"/>
-						<reference key="NSNextKeyView" ref="407773982"/>
+						<reference key="NSNextKeyView" ref="214357567"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<int key="IBUIContentMode">9</int>
 						<bool key="IBUIUserInteractionEnabled">NO</bool>
@@ -254,6 +254,21 @@
 						</object>
 						<reference key="IBUIFontDescription" ref="554825227"/>
 						<reference key="IBUIFont" ref="362665149"/>
+					</object>
+					<object class="IBUIImageView" id="214357567">
+						<reference key="NSNextResponder" ref="191373211"/>
+						<int key="NSvFlags">274</int>
+						<string key="NSFrameSize">{82, 44}</string>
+						<reference key="NSSuperview" ref="191373211"/>
+						<reference key="NSNextKeyView" ref="407773982"/>
+						<string key="NSReuseIdentifierKey">_NS:9</string>
+						<int key="IBUIContentMode">9</int>
+						<bool key="IBUIUserInteractionEnabled">NO</bool>
+						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
+						<object class="NSCustomResource" key="IBUIImage">
+							<string key="NSClassName">NSImage</string>
+							<string key="NSResourceName">mask_fb_avatar.png</string>
+						</object>
 					</object>
 					<object class="IBUICollectionView" id="1002195558">
 						<reference key="NSNextResponder" ref="191373211"/>
@@ -370,6 +385,14 @@
 					<int key="connectionID">621</int>
 				</object>
 				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">loginProfileButton</string>
+						<reference key="source" ref="372490531"/>
+						<reference key="destination" ref="407773982"/>
+					</object>
+					<int key="connectionID">625</int>
+				</object>
+				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchEventConnection" key="connection">
 						<string key="label">addNewItemButtonPressed:</string>
 						<reference key="source" ref="863516859"/>
@@ -377,6 +400,15 @@
 						<int key="IBEventType">7</int>
 					</object>
 					<int key="connectionID">622</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchEventConnection" key="connection">
+						<string key="label">loginProfileButtonPressed:</string>
+						<reference key="source" ref="407773982"/>
+						<reference key="destination" ref="372490531"/>
+						<int key="IBEventType">7</int>
+					</object>
+					<int key="connectionID">626</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchOutletConnection" key="connection">
@@ -567,6 +599,38 @@
 								<float key="scoringTypeFloat">29</float>
 								<int key="contentType">3</int>
 							</object>
+							<object class="IBNSLayoutConstraint" id="372630849">
+								<reference key="firstItem" ref="214357567"/>
+								<int key="firstAttribute">3</int>
+								<int key="relation">0</int>
+								<reference key="secondItem" ref="191373211"/>
+								<int key="secondAttribute">3</int>
+								<float key="multiplier">1</float>
+								<object class="IBLayoutConstant" key="constant">
+									<double key="value">0.0</double>
+								</object>
+								<float key="priority">1000</float>
+								<reference key="containingView" ref="191373211"/>
+								<int key="scoringType">8</int>
+								<float key="scoringTypeFloat">29</float>
+								<int key="contentType">3</int>
+							</object>
+							<object class="IBNSLayoutConstraint" id="775618400">
+								<reference key="firstItem" ref="214357567"/>
+								<int key="firstAttribute">5</int>
+								<int key="relation">0</int>
+								<reference key="secondItem" ref="191373211"/>
+								<int key="secondAttribute">5</int>
+								<float key="multiplier">1</float>
+								<object class="IBLayoutConstant" key="constant">
+									<double key="value">0.0</double>
+								</object>
+								<float key="priority">1000</float>
+								<reference key="containingView" ref="191373211"/>
+								<int key="scoringType">8</int>
+								<float key="scoringTypeFloat">29</float>
+								<int key="contentType">3</int>
+							</object>
 							<object class="IBNSLayoutConstraint" id="117390029">
 								<reference key="firstItem" ref="407773982"/>
 								<int key="firstAttribute">5</int>
@@ -637,6 +701,7 @@
 							<reference ref="407773982"/>
 							<reference ref="975079530"/>
 							<reference ref="1002195558"/>
+							<reference ref="214357567"/>
 						</array>
 						<reference key="parent" ref="0"/>
 					</object>
@@ -1203,6 +1268,22 @@
 						<reference key="object" ref="826803800"/>
 						<reference key="parent" ref="1002195558"/>
 					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">627</int>
+						<reference key="object" ref="214357567"/>
+						<array class="NSMutableArray" key="children"/>
+						<reference key="parent" ref="191373211"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">629</int>
+						<reference key="object" ref="775618400"/>
+						<reference key="parent" ref="191373211"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">633</int>
+						<reference key="object" ref="372630849"/>
+						<reference key="parent" ref="191373211"/>
+					</object>
 				</array>
 			</object>
 			<dictionary class="NSMutableDictionary" key="flattenedProperties">
@@ -1211,11 +1292,13 @@
 				<string key="-2.CustomClassName">UIResponder</string>
 				<string key="-2.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<string key="1.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
-				<array key="1.IBViewMetadataConstraints">
+				<array class="NSMutableArray" key="1.IBViewMetadataConstraints">
 					<reference ref="123262911"/>
 					<reference ref="817039332"/>
 					<reference ref="790591162"/>
 					<reference ref="117390029"/>
+					<reference ref="775618400"/>
+					<reference ref="372630849"/>
 					<reference ref="781261480"/>
 					<reference ref="437087038"/>
 					<reference ref="313410486"/>
@@ -1308,6 +1391,10 @@
 				<string key="617.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<string key="623.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<string key="624.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
+				<string key="627.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
+				<boolean value="NO" key="627.IBViewMetadataTranslatesAutoresizingMaskIntoConstraints"/>
+				<string key="629.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
+				<string key="633.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<string key="75.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<boolean value="NO" key="75.IBViewMetadataTranslatesAutoresizingMaskIntoConstraints"/>
 				<string key="90.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
@@ -1318,7 +1405,7 @@
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">624</int>
+			<int key="maxID">634</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes"/>
 		<int key="IBDocument.localizationMode">0</int>
@@ -1329,6 +1416,7 @@
 			<string key="add_new_item_button.png">{51, 45}</string>
 			<string key="header_background.png">{320, 58}</string>
 			<string key="login_with_fb.png">{51, 45}</string>
+			<string key="mask_fb_avatar.png">{82, 44}</string>
 			<string key="menu_arrow.png">{10, 5}</string>
 			<string key="menu_bar_background.png">{320, 57}</string>
 			<string key="patroca_logo.png">{122, 22}</string>

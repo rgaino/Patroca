@@ -75,6 +75,8 @@
 		1950E506165F137900E98488 /* UserCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 1950E505165F137900E98488 /* UserCache.m */; };
 		198662521666DFD8003C19EE /* item_hi_res.png in Resources */ = {isa = PBXBuildFile; fileRef = 198662511666DFD8003C19EE /* item_hi_res.png */; };
 		1986625516670397003C19EE /* sample_avatar.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 1986625416670397003C19EE /* sample_avatar.jpeg */; };
+		19BF9D1A166C393E00F813B6 /* mask_fb_avatar.png in Resources */ = {isa = PBXBuildFile; fileRef = 19BF9D18166C393E00F813B6 /* mask_fb_avatar.png */; };
+		19BF9D1B166C393E00F813B6 /* mask_fb_avatar@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 19BF9D19166C393E00F813B6 /* mask_fb_avatar@2x.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -164,6 +166,8 @@
 		1950E505165F137900E98488 /* UserCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserCache.m; sourceTree = "<group>"; };
 		198662511666DFD8003C19EE /* item_hi_res.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = item_hi_res.png; sourceTree = "<group>"; };
 		1986625416670397003C19EE /* sample_avatar.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = sample_avatar.jpeg; sourceTree = "<group>"; };
+		19BF9D18166C393E00F813B6 /* mask_fb_avatar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = mask_fb_avatar.png; sourceTree = "<group>"; };
+		19BF9D19166C393E00F813B6 /* mask_fb_avatar@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "mask_fb_avatar@2x.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -396,6 +400,8 @@
 				1939B8C31656915600435705 /* header_background@2x.png */,
 				1939B8C41656915600435705 /* login_with_fb.png */,
 				1939B8C51656915600435705 /* login_with_fb@2x.png */,
+				19BF9D18166C393E00F813B6 /* mask_fb_avatar.png */,
+				19BF9D19166C393E00F813B6 /* mask_fb_avatar@2x.png */,
 				1939B8D81656C2E500435705 /* menu_arrow.png */,
 				1939B8D91656C2E500435705 /* menu_arrow@2x.png */,
 				1939B8D41656AF1F00435705 /* menu_bar_background.png */,
@@ -556,6 +562,8 @@
 				1939CA5416644A6E002C21F6 /* AddNewItemViewController.xib in Resources */,
 				198662521666DFD8003C19EE /* item_hi_res.png in Resources */,
 				1986625516670397003C19EE /* sample_avatar.jpeg in Resources */,
+				19BF9D1A166C393E00F813B6 /* mask_fb_avatar.png in Resources */,
+				19BF9D1B166C393E00F813B6 /* mask_fb_avatar@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -669,8 +677,8 @@
 				INFOPLIST_FILE = "Patroca/Patroca-Info.plist";
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "09D7597C-04B9-4931-82A2-A36781588486";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "09D7597C-04B9-4931-82A2-A36781588486";
+				PROVISIONING_PROFILE = "3D06702F-D707-4DE2-B134-B1A6D5CE28AB";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "3D06702F-D707-4DE2-B134-B1A6D5CE28AB";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -689,8 +697,8 @@
 				INFOPLIST_FILE = "Patroca/Patroca-Info.plist";
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "CEF30A51-8590-433F-AB0E-B00F67476F9E";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "CEF30A51-8590-433F-AB0E-B00F67476F9E";
+				PROVISIONING_PROFILE = "3D2C735F-1948-4DD1-862D-B632CEDB9B3D";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "3D2C735F-1948-4DD1-862D-B632CEDB9B3D";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

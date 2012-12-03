@@ -12,8 +12,10 @@
 #import "ItemViewCell.h"
 #import "ItemDataSource.h"
 #import "LogInViewController.h"
+#import "ViewProfileViewController.h"
 #import "UserCache.h"
 #import "AddNewItemViewController.h"
+#import <SDWebImage/UIImageView+WebCache.h>
 
 #define CELL_REUSE_IDENTIFIER @"Item_Cell"
 
@@ -61,7 +63,12 @@
     [_menuArrowImage setFrame:CGRectMake(-100, arrowFrame.origin.y, arrowFrame.size.width, arrowFrame.size.height)];
     [self performSelector:@selector(userTappedOnFeatured) withObject:nil afterDelay:1.0f];
 
-    
+
+    //see if user is already logged in on Facebook and display the profile picture
+    if ([PFUser currentUser] && [PFFacebookUtils isLinkedWithUser:[PFUser currentUser]]) {
+        [self userLoggedInSuccessfully];
+    }
+
 }
 
 - (IBAction)addNewItemButtonPressed:(id)sender {
@@ -112,13 +119,11 @@
 - (void)loadFriendsItems {
     
     // Check if a user is cached and if user is linked to Facebook
-    LogInViewController *logInViewController;
     if ([PFUser currentUser] && [PFFacebookUtils isLinkedWithUser:[PFUser currentUser]])
     {
         [itemDataSource getItemsAndReturnTo:self];
     } else {
-        logInViewController = [[LogInViewController alloc] initWithNibName:@"LogInViewController" bundle:nil];
-//        [self.view.window.rootViewController presentViewController:logInViewController animated:YES completion:nil];
+        LogInViewController *logInViewController = [[LogInViewController alloc] initWithNibName:@"LogInViewController" bundle:nil];
         [self.navigationController pushViewController:logInViewController animated:YES];
     }
 
@@ -135,6 +140,52 @@
 
 }
 
+- (IBAction)loginProfileButtonPressed:(id)sender {
+
+    if ([PFUser currentUser] && [PFFacebookUtils isLinkedWithUser:[PFUser currentUser]]) {
+        ViewProfileViewController *viewProfileViewController = [[ViewProfileViewController alloc] initWithNibName:@"ViewProfileViewController" bundle:nil];
+        [self.navigationController pushViewController:viewProfileViewController animated:YES];
+    } else {
+//        LogInViewController *logInViewController = [[LogInViewController alloc] initWithNibName:@"LogInViewController" bundle:nil];
+//        [self.navigationController pushViewController:logInViewController animated:YES];
+
+    
+        // The permissions requested from the user
+        NSArray *permissionsArray = [NSArray arrayWithObjects:
+                                     @"user_about_me",
+                                     @"user_relationships",
+                                     @"user_location",
+                                     //                                     @"offline_access",
+                                     @"email",
+                                     nil];
+        
+        // Log in
+        [PFFacebookUtils logInWithPermissions:permissionsArray
+                                        block:^(PFUser *user, NSError *error) {
+                                            if (!user) {
+                                                if (!error) { // The user cancelled the login
+                                                    NSLog(@"Uh oh. The user cancelled the Facebook login.");
+                                                } else { // An error occurred
+                                                    NSLog(@"Uh oh. An error occurred: %@", error);
+                                                }
+                                            } else if (user.isNew) { // Success - a new user was created
+                                                NSLog(@"User with facebook signed up and logged in!");
+                                                [self userLoggedInSuccessfully];
+                                            } else { // Success - an existing user logged in
+                                                NSLog(@"User with facebook logged in!");
+                                                [self userLoggedInSuccessfully];
+                                            }
+                                        }];
+    
+    
+    }
+}
+
+-(void) userLoggedInSuccessfully {
+
+    NSURL *profilePictureURL = [NSURL URLWithString:[NSString stringWithFormat:@"https://graph.facebook.com/%@/picture?type=large", [[PFUser currentUser] objectForKey:DB_FIELD_USER_FACEBOOK_ID]]];
+    [_loginProfileButton.imageView setImageWithURL:profilePictureURL placeholderImage:nil];
+}
 
 #pragma mark - UICollectionView Datasource
 
