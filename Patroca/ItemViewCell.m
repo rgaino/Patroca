@@ -45,7 +45,7 @@
     PFFile *itemImageFile = [itemObject objectForKey:DB_FIELD_ITEM_MAIN_IMAGE];
     NSLog(@"%@", [itemImageFile url]);
     NSURL *itemImageURL = [NSURL URLWithString:[itemImageFile url]];
-    [_itemImageView setImageWithURL:itemImageURL];
+    [_itemImageView setImageWithURL:itemImageURL placeholderImage:[UIImage imageNamed:@"placeholder.png"]];
     
     NSString *facebookProfilePicString = [NSString stringWithFormat:FB_PROFILE_PICTURE_URL, [userObject objectForKey:DB_FIELD_USER_FACEBOOK_ID]];
     NSLog(@"%@", facebookProfilePicString);
