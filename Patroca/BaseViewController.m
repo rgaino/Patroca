@@ -14,11 +14,8 @@
 
 @implementation BaseViewController
 
-//only portrait mode supported
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
-{
-    return NO;
-}
+
+
 
 #pragma mark -
 #pragma mark MBProgressHUDDelegate methods
