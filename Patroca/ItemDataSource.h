@@ -7,16 +7,22 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <CoreLocation/CoreLocation.h>
 
 @class MasterViewController;
+@class PFGeoPoint;
 
-@interface ItemDataSource : NSObject {
+@interface ItemDataSource : NSObject <CLLocationManagerDelegate> {
     
+    CLLocationManager *locationManager;
+    PFGeoPoint *myLocationPoint;
 }
 
 @property (readonly) NSArray* items;
+@property (readwrite) MasterViewController *masterViewController;
 
-- (void)getItemsAndReturnTo:(MasterViewController*)masterViewController;
+- (void)getFriendsItemsAndReturn;
+- (void)getNearbyItemsAndReturn;
 
 
 @end

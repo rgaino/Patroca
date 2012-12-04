@@ -10,6 +10,8 @@
 
 //Generic ID (each table has its own with the same name)
 extern NSString* const DB_FIELD_ID;
+extern NSString* const DB_FIELD_CREATED_AT;
+extern NSString* const DB_FIELD_UPDATED_AT;
 
 //User table
 extern NSString* const DB_TABLE_USERS;

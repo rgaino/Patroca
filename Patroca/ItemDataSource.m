@@ -13,15 +13,11 @@
 
 @implementation ItemDataSource
 
-- (void)getItemsAndReturnTo:(MasterViewController*)masterViewController {
-    
-    //    NSArray *friendsItems = [[NSMutableArray alloc] init];
-    //    return friendsItems;
+- (void)getFriendsItemsAndReturn {
     
     if([PFUser currentUser] == nil) {
         NSLog(@"Can't get current user");
         //TODO: show a nice error message
-        //        return friendsItems;
     }
     
     
@@ -53,10 +49,12 @@
             [query whereKey:DB_FIELD_USER_ID notEqualTo:[PFUser currentUser]];
             [query whereKey:DB_FIELD_USER_ID containedIn:friendUsers];
             
+            [query orderByDescending:DB_FIELD_UPDATED_AT];
+            
             [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
                 if (!error) {
                     _items = [NSArray arrayWithArray:objects];
-                    [masterViewController populateCollectionView];
+                    [_masterViewController populateCollectionView];
                 } else {
                     // Log details of the failure
                     NSLog(@"Error: %@ %@", error, [error userInfo]);
@@ -67,8 +65,50 @@
             
         }
     }];
-    
 }
 
+- (void)getNearbyItemsAndReturn {
+
+    if(locationManager == nil) {
+        locationManager = [[CLLocationManager alloc] init];
+        [locationManager setDelegate:self];
+        [locationManager setDistanceFilter:kCLDistanceFilterNone];
+        [locationManager setDesiredAccuracy:kCLLocationAccuracyBest];
+    }
+    
+    if(myLocationPoint == nil) {
+        [locationManager startUpdatingLocation];
+        return;
+    }
+
+    
+    PFQuery *query = [PFQuery queryWithClassName:DB_TABLE_ITEMS];
+    [query whereKey:DB_FIELD_ITEM_LOCATION nearGeoPoint:myLocationPoint];
+    if([PFUser currentUser] != nil) {
+        [query whereKey:DB_FIELD_USER_ID notEqualTo:[PFUser currentUser]];
+    }
+
+    [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+        if (!error) {
+            myLocationPoint = nil;
+            NSLog(@"%@", objects);
+            _items = [NSArray arrayWithArray:objects];
+            [_masterViewController populateCollectionView];
+        } else {
+            // Log details of the failure
+            NSLog(@"Error: %@ %@", error, [error userInfo]);
+            _items = [NSArray array];
+        }
+    }];
+}
+
+- (void)locationManager:(CLLocationManager *)manager didUpdateToLocation:(CLLocation *)newLocation fromLocation:(CLLocation *)oldLocation {
+    
+    NSLog(@"Location updated to is %f %f", newLocation.coordinate.latitude, newLocation.coordinate.longitude);
+    
+    myLocationPoint = [PFGeoPoint geoPointWithLatitude:newLocation.coordinate.latitude longitude:newLocation.coordinate.longitude];
+    [locationManager stopUpdatingLocation];
+    [self getNearbyItemsAndReturn];
+}
 
 @end

@@ -36,6 +36,7 @@
 - (void)moveMenuArrowTo:(float)xPosition;
 - (void)loadFeaturedItems;
 - (void)loadFriendsItems;
+- (void)loadNearbyItems;
 - (void)populateCollectionView;
 -(void) userLoggedInSuccessfully;
 

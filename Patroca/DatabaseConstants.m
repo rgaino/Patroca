@@ -13,7 +13,8 @@
 
 //Generic ID (each table has its own with the same name)
 NSString* const DB_FIELD_ID = @"objectId";
-
+NSString* const DB_FIELD_CREATED_AT = @"createdAt";
+NSString* const DB_FIELD_UPDATED_AT = @"updatedAt";
 
 //User table
 NSString* const DB_TABLE_USERS = @"User";

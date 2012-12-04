@@ -47,6 +47,7 @@
         [_nearbyLabel addGestureRecognizer:nearbyTap];
         
         itemDataSource = [[ItemDataSource alloc] init];
+        [itemDataSource setMasterViewController:self];
         
     }
     return self;
@@ -98,6 +99,7 @@
     [_friendsLabel setTextColor:labelUnselectedColor];
     [_nearbyLabel setTextColor:labelSelectedColor];
     [self moveMenuArrowTo:264];
+    [self loadNearbyItems];
 }
 
 - (void)moveMenuArrowTo:(float)xPosition {
@@ -121,13 +123,16 @@
     // Check if a user is cached and if user is linked to Facebook
     if ([PFUser currentUser] && [PFFacebookUtils isLinkedWithUser:[PFUser currentUser]])
     {
-        [itemDataSource getItemsAndReturnTo:self];
+        [itemDataSource getFriendsItemsAndReturn];
     } else {
         LogInViewController *logInViewController = [[LogInViewController alloc] initWithNibName:@"LogInViewController" bundle:nil];
         [self.navigationController pushViewController:logInViewController animated:YES];
     }
+}
 
+- (void)loadNearbyItems {
     
+    [itemDataSource getNearbyItemsAndReturn];
 }
 
 - (void)populateCollectionView {
