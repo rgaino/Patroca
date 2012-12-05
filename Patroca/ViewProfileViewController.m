@@ -29,7 +29,6 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         self.title = NSLocalizedString(@"Profile", nil);
-        self.tabBarItem.image = [UIImage imageNamed:@"first"];
     }
     return self;
 }
@@ -44,7 +43,7 @@
 	[HUD setDimBackground:YES];
 	[HUD setLabelText: NSLocalizedString(@"Logging in...", nil)];
     [HUD setDelegate:self];
-    [self.navigationController.view addSubview:HUD];
+    [self.view addSubview:HUD];
     [HUD show:YES];
     [self logWithFacebook];
 }
@@ -80,7 +79,7 @@
  
     //read Facebook profile information
     NSDictionary *userData = (NSDictionary *)result;
-//    NSLog(@"userData received is:\n%@", userData);
+    NSLog(@"userData received is:\n%@", userData);
     
     //Making sure we don't use nulls but blank strings instead
     NSString *facebookId = ([userData objectForKey:@"id"] == nil ? @"" : [userData objectForKey:@"id"]);
@@ -98,7 +97,7 @@
     [currentUser setObject:facebookId forKey:DB_FIELD_USER_FACEBOOK_ID];
     [currentUser setEmail:email];
     [currentUser setObject:name forKey:DB_FIELD_USER_NAME];
-    [currentUser save];
+    [currentUser saveInBackground];
      
 
     //pull profile picture (type=normal means 100px wide)
