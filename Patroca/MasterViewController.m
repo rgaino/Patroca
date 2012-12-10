@@ -68,8 +68,10 @@
     //see if user is already logged in on Facebook and display the profile picture
     if ([PFUser currentUser] && [PFFacebookUtils isLinkedWithUser:[PFUser currentUser]]) {
         [self userLoggedInSuccessfully];
+    }else {
+        
+        [_loginProfileButton setImage:[UIImage imageNamed:@"login_with_fb.png"] forState:UIControlStateNormal];
     }
-
 }
 
 - (IBAction)addNewItemButtonPressed:(id)sender {

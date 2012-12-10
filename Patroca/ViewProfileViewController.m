@@ -111,7 +111,6 @@
 - (IBAction)logoutButtonPressed:(id)sender {
     
     [PFUser logOut];
-    LogInViewController *loginViewController = [[LogInViewController alloc] initWithNibName:@"LogInViewController" bundle:nil];
     [self.navigationController popViewControllerAnimated:YES];
 
 }
