@@ -112,7 +112,7 @@
     
     [PFUser logOut];
     LogInViewController *loginViewController = [[LogInViewController alloc] initWithNibName:@"LogInViewController" bundle:nil];
-    [self.navigationController setViewControllers:[NSArray arrayWithObject:loginViewController] animated:NO];
+    [self.navigationController popViewControllerAnimated:YES];
 
 }
 

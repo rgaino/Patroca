@@ -88,14 +88,12 @@ static UserCache *_userCacheInstance = nil;
     PFQuery *userNameQuery = [PFUser query];
     [userNameQuery whereKey:DB_FIELD_ID containedIn:userIds];
     
-    NSArray *userNameResults = [userNameQuery findObjects];
-    
-    //update cache dictionary
-    for(PFUser *userObject in userNameResults) {
-        [userNameCacheDictionary setObject:userObject forKey:[userObject objectId]];
-    }
-    
-    
+    [userNameQuery findObjectsInBackgroundWithBlock:^(NSArray *userNameResults, NSError *error) {
+        //update cache dictionary
+        for(PFUser *userObject in userNameResults) {
+            [userNameCacheDictionary setObject:userObject forKey:[userObject objectId]];
+        }
+    }];
 }
 
 

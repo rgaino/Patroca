@@ -43,25 +43,27 @@
             
             // findObjects will return a list of PFUsers that are friends
             // with the current user
-            NSArray *friendUsers = [friendQuery findObjects];
-            
-            PFQuery *query = [PFQuery queryWithClassName:DB_TABLE_ITEMS];
-            [query whereKey:DB_FIELD_USER_ID notEqualTo:[PFUser currentUser]];
-            [query whereKey:DB_FIELD_USER_ID containedIn:friendUsers];
-            
-            [query orderByDescending:DB_FIELD_UPDATED_AT];
-            
-            [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
-                if (!error) {
-                    _items = [NSArray arrayWithArray:objects];
-                    [_masterViewController populateCollectionView];
-                } else {
-                    // Log details of the failure
-                    NSLog(@"Error: %@ %@", error, [error userInfo]);
-                    _items = [NSArray array];
-                    //TODO: show error message
-                }
+            [friendQuery findObjectsInBackgroundWithBlock:^(NSArray *friendUsers, NSError *error) {
+                PFQuery *query = [PFQuery queryWithClassName:DB_TABLE_ITEMS];
+                [query whereKey:DB_FIELD_USER_ID notEqualTo:[PFUser currentUser]];
+                [query whereKey:DB_FIELD_USER_ID containedIn:friendUsers];
+                
+                [query orderByDescending:DB_FIELD_UPDATED_AT];
+                
+                [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+                    if (!error) {
+                        _items = [NSArray arrayWithArray:objects];
+                        [_masterViewController populateCollectionView];
+                    } else {
+                        // Log details of the failure
+                        NSLog(@"Error: %@ %@", error, [error userInfo]);
+                        _items = [NSArray array];
+                        //TODO: show error message
+                    }
+                }];
+
             }];
+            
             
         }
     }];
@@ -91,7 +93,6 @@
     [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
         if (!error) {
             myLocationPoint = nil;
-            NSLog(@"%@", objects);
             _items = [NSArray arrayWithArray:objects];
             [_masterViewController populateCollectionView];
         } else {

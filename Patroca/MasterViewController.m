@@ -189,7 +189,11 @@
 -(void) userLoggedInSuccessfully {
 
     NSURL *profilePictureURL = [NSURL URLWithString:[NSString stringWithFormat:@"https://graph.facebook.com/%@/picture?type=square", [[PFUser currentUser] objectForKey:DB_FIELD_USER_FACEBOOK_ID]]];
-    [_loginProfileButton.imageView setImageWithURL:profilePictureURL placeholderImage:nil];
+    [_loginProfileButton.imageView setImageWithURL:profilePictureURL placeholderImage:nil success:^(UIImage *image, BOOL cached) {
+        [_loginProfileButton setImage:_loginProfileButton.imageView.image forState:UIControlStateNormal];
+    } failure:^(NSError *error) {
+        
+    }];
 }
 
 #pragma mark - UICollectionView Datasource
