@@ -21,8 +21,6 @@
 
 @implementation MasterViewController
 
-//@synthesize featuredLabel, friendsLabel, nearbyLabel, menuBarView;
-//@synthesize menuArrowImage;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
