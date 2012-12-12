@@ -25,10 +25,7 @@
 @property (weak, nonatomic) IBOutlet UIImageView *menuArrowImage;
 @property (weak, nonatomic) IBOutlet UIView *menuBarView;
 @property (weak, nonatomic) IBOutlet UICollectionView *contentDisplayCollectionView;
-@property (weak, nonatomic) IBOutlet UIButton *loginProfileButton;
 
-- (IBAction)addNewItemButtonPressed:(id)sender;
-- (IBAction)loginProfileButtonPressed:(id)sender;
 
 - (void)userTappedOnFeatured;
 - (void)userTappedOnFriends;
@@ -38,6 +35,5 @@
 - (void)loadFriendsItems;
 - (void)loadNearbyItems;
 - (void)populateCollectionView;
--(void) userLoggedInSuccessfully;
 
 @end

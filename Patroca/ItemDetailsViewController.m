@@ -19,7 +19,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    NSLog(@"%@", _itemObject);
+    [self setupHeaderWithBackButton:YES];
 }
 
 

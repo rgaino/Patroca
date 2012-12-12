@@ -10,8 +10,16 @@
 #import "MBProgressHUD.h"
 
 @interface BaseViewController : UIViewController <MBProgressHUDDelegate> {
-
+    
     MBProgressHUD *HUD;
 }
+
+@property (weak, nonatomic) IBOutlet UIButton *loginProfileButton;
+
+- (void)setupHeaderWithBackButton:(BOOL)hasBackButton;
+- (void)userLoggedInSuccessfully;
+- (void)addNewItemButtonPressed;
+- (void)loginProfileButtonPressed;
+- (void)backButtonPressed;
 
 @end
