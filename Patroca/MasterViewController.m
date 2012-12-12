@@ -15,6 +15,7 @@
 #import "ViewProfileViewController.h"
 #import "UserCache.h"
 #import "AddNewItemViewController.h"
+#import "ItemDetailsViewController.h"
 #import <SDWebImage/UIImageView+WebCache.h>
 
 #define CELL_REUSE_IDENTIFIER @"Item_Cell"
@@ -220,7 +221,12 @@
 #pragma mark - UICollectionViewDelegate
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    // TODO: Select Item
+    PFObject *item = [[itemDataSource items] objectAtIndex:indexPath.row];
+    
+    ItemDetailsViewController *itemDetailsViewController = [[ItemDetailsViewController alloc] initWithNibName:@"ItemDetailsViewController" bundle:nil];
+    [itemDetailsViewController setItemObject:item];
+    [self.navigationController pushViewController:itemDetailsViewController animated:YES];
+    
 }
 - (void)collectionView:(UICollectionView *)collectionView didDeselectItemAtIndexPath:(NSIndexPath *)indexPath {
     // TODO: Deselect item

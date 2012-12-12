@@ -7,7 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "BaseViewController.h"
 
-@interface ItemDetailsViewController : UIViewController
+@class PFObject;
+
+@interface ItemDetailsViewController : BaseViewController {
+
+}
+
+@property (nonatomic, readwrite) PFObject *itemObject;
 
 @end

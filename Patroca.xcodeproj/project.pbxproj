@@ -247,7 +247,6 @@
 		1934ACE9165E2AAF00C8272F /* Profile */ = {
 			isa = PBXGroup;
 			children = (
-				1939B8B016568D1600435705 /* Base */,
 				1934ACEF165E2B3100C8272F /* Login */,
 				1934ACF0165E2B4900C8272F /* View Profile */,
 			);
@@ -339,8 +338,8 @@
 		1939B88D16568C3300435705 /* Patroca */ = {
 			isa = PBXGroup;
 			children = (
-				1939B912165DB47100435705 /* Database Access */,
 				1939B8AB16568CC500435705 /* App Delegate */,
+				1939B912165DB47100435705 /* Database Access */,
 				1939B8AA16568CBB00435705 /* View Controllers */,
 				1934ACF6165E2B9300C8272F /* Libs */,
 				1939B8B716568F8400435705 /* Images */,
@@ -366,6 +365,7 @@
 		1939B8AA16568CBB00435705 /* View Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				1939B8B016568D1600435705 /* Base View Controller */,
 				1939CA4F16644A63002C21F6 /* Add New Item */,
 				1934ACE9165E2AAF00C8272F /* Profile */,
 				1939B8AC16568CD200435705 /* Master */,
@@ -394,13 +394,13 @@
 			name = Master;
 			sourceTree = "<group>";
 		};
-		1939B8B016568D1600435705 /* Base */ = {
+		1939B8B016568D1600435705 /* Base View Controller */ = {
 			isa = PBXGroup;
 			children = (
 				1939B8AD16568D1200435705 /* BaseViewController.h */,
 				1939B8AE16568D1200435705 /* BaseViewController.m */,
 			);
-			name = Base;
+			name = "Base View Controller";
 			sourceTree = "<group>";
 		};
 		1939B8B716568F8400435705 /* Images */ = {
