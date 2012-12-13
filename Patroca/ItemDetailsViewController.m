@@ -23,6 +23,7 @@
     [super viewDidLoad];
     [self setupHeaderWithBackButton:YES];
     [self setupItemImagesScrollView];
+    [_itemTitleLabel setText:[_itemObject objectForKey:DB_FIELD_ITEM_NAME]];
 }
 
 - (void)setupItemImagesScrollView {
