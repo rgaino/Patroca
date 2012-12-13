@@ -11,13 +11,14 @@
 
 @class PFObject;
 
-@interface ItemDetailsViewController : BaseViewController {
+@interface ItemDetailsViewController : BaseViewController <UIScrollViewDelegate> {
 
 }
 
 @property (nonatomic, readwrite) PFObject *itemObject;
 @property (weak, nonatomic) IBOutlet UIScrollView *itemImagesScrollView;
 @property (weak, nonatomic) IBOutlet UILabel *itemTitleLabel;
+@property (weak, nonatomic) IBOutlet UIPageControl *imagesPageControl;
 
 - (void)setupItemImagesScrollView;
 

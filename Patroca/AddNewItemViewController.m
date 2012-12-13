@@ -13,7 +13,7 @@
 #import "DatabaseConstants.h"
 
 #define thumbnailSize 50
-#define fullImageSize 500
+#define fullImageSize 640
 #define imageCornerRadius 0
 #define thumbnailsAnimationSpeed 0.25f
 

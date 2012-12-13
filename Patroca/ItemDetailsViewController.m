@@ -32,7 +32,11 @@
     [itemImagesQuery whereKey:DB_FIELD_ITEM_ID equalTo:_itemObject];
     [itemImagesQuery findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
         
+        [_imagesPageControl setNumberOfPages:[objects count]];
+        [_imagesPageControl setCurrentPage:0];
+        
         float xPosition = 0;
+        
         //load all item images into the image caroussel
         for(PFObject *item in objects) {
         
@@ -50,6 +54,13 @@
         [_itemImagesScrollView setContentSize:CGSizeMake(xPosition, 480)];
     }];
     
+}
+
+- (void)scrollViewDidScroll:(UIScrollView *)sender {
+    // Update the page when more than 50% of the previous/next page is visible
+    CGFloat pageWidth = _itemImagesScrollView.frame.size.width;
+    int page = floor((_itemImagesScrollView.contentOffset.x - pageWidth / 2) / pageWidth) + 1;
+    [_imagesPageControl setCurrentPage:page];
 }
 
 @end
