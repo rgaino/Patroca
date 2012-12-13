@@ -16,5 +16,8 @@
 }
 
 @property (nonatomic, readwrite) PFObject *itemObject;
+@property (weak, nonatomic) IBOutlet UIScrollView *itemImagesScrollView;
+
+- (void)setupItemImagesScrollView;
 
 @end
