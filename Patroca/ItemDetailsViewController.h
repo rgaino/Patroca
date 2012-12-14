@@ -23,5 +23,6 @@
 
 - (void)setupItemImagesScrollView;
 - (void)adjustPageControl;
+- (void)animateImagesScrollViewIn;
 
 @end

@@ -24,10 +24,29 @@
 
     UIColor *backgroundPattern = [UIColor colorWithPatternImage:[UIImage imageNamed:@"background_repeat.png"]];
     [[self view] setBackgroundColor:backgroundPattern];
-
+    
     [self setupHeaderWithBackButton:YES];
     [self setupItemImagesScrollView];
     [_itemTitleLabel setText:[_itemObject objectForKey:DB_FIELD_ITEM_NAME]];
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+    [self animateImagesScrollViewIn];
+}
+
+- (void)animateImagesScrollViewIn {
+    
+    [UIView beginAnimations:@"scrollViewIn" context:nil];
+    [UIView setAnimationDuration:1.0];
+    [UIView setAnimationCurve:UIViewAnimationCurveEaseOut];
+
+    CGRect scrollFrame = _itemImagesScrollView.frame;
+    scrollFrame.origin.x -= 500;
+    [_itemImagesScrollView setFrame:scrollFrame];
+
+    [UIView commitAnimations];
+
+    
 }
 
 
