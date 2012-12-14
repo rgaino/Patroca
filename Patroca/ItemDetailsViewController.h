@@ -13,6 +13,7 @@
 
 @interface ItemDetailsViewController : BaseViewController <UIScrollViewDelegate> {
 
+    int numberOfImages;
 }
 
 @property (nonatomic, readwrite) PFObject *itemObject;
@@ -21,5 +22,6 @@
 @property (weak, nonatomic) IBOutlet UIPageControl *imagesPageControl;
 
 - (void)setupItemImagesScrollView;
+- (void)adjustPageControl;
 
 @end

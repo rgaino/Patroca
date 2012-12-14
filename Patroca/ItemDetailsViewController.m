@@ -21,20 +21,27 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+
+    UIColor *backgroundPattern = [UIColor colorWithPatternImage:[UIImage imageNamed:@"background_repeat.png"]];
+    [[self view] setBackgroundColor:backgroundPattern];
+
     [self setupHeaderWithBackButton:YES];
     [self setupItemImagesScrollView];
     [_itemTitleLabel setText:[_itemObject objectForKey:DB_FIELD_ITEM_NAME]];
 }
 
+
 - (void)setupItemImagesScrollView {
     
     PFQuery *itemImagesQuery = [PFQuery queryWithClassName:DB_TABLE_ITEM_IMAGES];
     [itemImagesQuery whereKey:DB_FIELD_ITEM_ID equalTo:_itemObject];
+    
     [itemImagesQuery findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
         
         [_imagesPageControl setNumberOfPages:[objects count]];
         [_imagesPageControl setCurrentPage:0];
-        
+        numberOfImages = [objects count];
+
         float xPosition = 0;
         
         //load all item images into the image caroussel
@@ -52,11 +59,39 @@
             xPosition += itemImageView.frame.size.width;
          }
         [_itemImagesScrollView setContentSize:CGSizeMake(xPosition, 480)];
+        
+         [self performSelector:@selector(adjustPageControl) withObject:nil afterDelay:1.0f];
+
     }];
-    
 }
 
+- (void)adjustPageControl {
+    
+//    //this method is a workaround for a bug where the PageControl's frame would not change unless we wait a second after the view loads completely
+//    
+//    float pageControlWidth = _imagesPageControl.frame.size.width;
+//    float pageControlNewWidth = 16 * numberOfImages;
+//    float pageControlNewX = _imagesPageControl.frame.origin.x + (pageControlWidth-pageControlNewWidth);
+//    [_imagesPageControl setFrame:CGRectMake(pageControlNewX, _imagesPageControl.frame.origin.y,
+//                                            pageControlNewWidth, _imagesPageControl.frame.size.height)];
+//    
+//    float xPosition = 307;
+//    for(int i=1; i<=numberOfImages; i++) {
+//        UIImageView *circleShadeImageView = [[UIImageView alloc] initWithFrame:CGRectMake(xPosition, 158, 8, 8)];
+//        [circleShadeImageView setImage:[UIImage imageNamed:@"circle_shade.png"]];
+//        [self.view addSubview:circleShadeImageView];
+//        
+//        xPosition-=16;
+//    }
+//
+//    [self.view bringSubviewToFront:_imagesPageControl];
+//    
+//    [_imagesPageControl setHidden:NO];
+}
+
+
 - (void)scrollViewDidScroll:(UIScrollView *)sender {
+
     // Update the page when more than 50% of the previous/next page is visible
     CGFloat pageWidth = _itemImagesScrollView.frame.size.width;
     int page = floor((_itemImagesScrollView.contentOffset.x - pageWidth / 2) / pageWidth) + 1;
