@@ -36,12 +36,17 @@
 
 - (void)animateImagesScrollViewIn {
     
+    CGRect scrollFrame = _itemImagesScrollView.frame;
+    scrollFrame.origin.x = 500;
+    [_itemImagesScrollView setFrame:scrollFrame];
+    [_itemImagesScrollView setHidden:NO];
+
     [UIView beginAnimations:@"scrollViewIn" context:nil];
-    [UIView setAnimationDuration:1.0];
+    [UIView setAnimationDuration:0.5];
     [UIView setAnimationCurve:UIViewAnimationCurveEaseOut];
 
-    CGRect scrollFrame = _itemImagesScrollView.frame;
-    scrollFrame.origin.x -= 500;
+    scrollFrame = _itemImagesScrollView.frame;
+    scrollFrame.origin.x = 0;
     [_itemImagesScrollView setFrame:scrollFrame];
 
     [UIView commitAnimations];
