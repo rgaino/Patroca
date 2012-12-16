@@ -20,6 +20,8 @@
 @property (weak, nonatomic) IBOutlet UIScrollView *itemImagesScrollView;
 @property (weak, nonatomic) IBOutlet UILabel *itemTitleLabel;
 @property (weak, nonatomic) IBOutlet UIPageControl *imagesPageControl;
+@property (weak, nonatomic) IBOutlet UILabel *ownerNameLabel;
+@property (weak, nonatomic) IBOutlet UIImageView *ownerProfilePic;
 
 - (void)setupItemImagesScrollView;
 - (void)adjustPageControl;

@@ -10,6 +10,7 @@
 #import <Parse/Parse.h>
 #import "DatabaseConstants.h"
 #import <SDWebImage/UIImageView+WebCache.h>
+#import "UserCache.h"
 
 @interface ItemDetailsViewController ()
 
@@ -27,7 +28,19 @@
     
     [self setupHeaderWithBackButton:YES];
     [self setupItemImagesScrollView];
+    
     [_itemTitleLabel setText:[_itemObject objectForKey:DB_FIELD_ITEM_NAME]];
+
+    PFUser *itemUser = [_itemObject objectForKey:DB_FIELD_USER_ID];
+    NSString *userId = [itemUser objectId];
+    
+    PFUser *userObject = [[UserCache getInstance] getCachedUserForId:userId];
+    [self.ownerNameLabel setText:[userObject objectForKey:DB_FIELD_USER_NAME]];
+    
+    NSString *facebookProfilePicString = [NSString stringWithFormat:FB_PROFILE_PICTURE_URL, [userObject objectForKey:DB_FIELD_USER_FACEBOOK_ID]];
+    NSURL *facebookProfilePicURL = [NSURL URLWithString:facebookProfilePicString];
+    [_ownerProfilePic setImageWithURL:facebookProfilePicURL];
+
 }
 
 - (void)viewDidAppear:(BOOL)animated {
