@@ -49,9 +49,10 @@
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<bool key="IBUIClipsSubviews">YES</bool>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
+						<bool key="IBUIDirectionalLockEnabled">YES</bool>
+						<bool key="IBUIBounces">NO</bool>
 						<bool key="IBUIAlwaysBounceHorizontal">YES</bool>
 						<bool key="IBUIPagingEnabled">YES</bool>
-						<bool key="IBUIShowsHorizontalScrollIndicator">NO</bool>
 						<bool key="IBUIShowsVerticalScrollIndicator">NO</bool>
 						<double key="IBUIScrollIndicatorInsets.top">0.0</double>
 						<double key="IBUIScrollIndicatorInsets.bottom">4</double>
@@ -167,7 +168,6 @@
 						<string key="NSFrame">{{235, 143}, {85, 36}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<bool key="IBUIOpaque">NO</bool>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
