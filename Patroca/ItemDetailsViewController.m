@@ -11,6 +11,7 @@
 #import "DatabaseConstants.h"
 #import <SDWebImage/UIImageView+WebCache.h>
 #import "UserCache.h"
+#import "UILabel+UILabel_Resize.h"
 
 @interface ItemDetailsViewController ()
 
@@ -40,11 +41,39 @@
     NSString *facebookProfilePicString = [NSString stringWithFormat:FB_PROFILE_PICTURE_URL, [userObject objectForKey:DB_FIELD_USER_FACEBOOK_ID]];
     NSURL *facebookProfilePicURL = [NSURL URLWithString:facebookProfilePicString];
     [_ownerProfilePic setImageWithURL:facebookProfilePicURL];
+    
 
 }
 
 - (void)viewDidAppear:(BOOL)animated {
     [self animateImagesScrollViewIn];
+}
+
+- (void)viewDidLayoutSubviews {
+    [self setupWholeScreenScrollView];
+}
+
+- (void)setupWholeScreenScrollView {
+    
+    float contentHeight = _itemImagesScrollView.frame.size.height;
+    
+    UILabel *itemDescriptionLabel = [[UILabel alloc] initWithFrame:CGRectMake(15,515, 290, 15)];
+    [itemDescriptionLabel setText:[_itemObject objectForKey:DB_FIELD_ITEM_DESCRIPTION]];
+    [itemDescriptionLabel setFont:[UIFont systemFontOfSize:14]];
+    [itemDescriptionLabel setBackgroundColor:[UIColor clearColor]];
+    [itemDescriptionLabel setLineBreakMode:NSLineBreakByWordWrapping];
+    [itemDescriptionLabel setNumberOfLines:0];
+    [itemDescriptionLabel setMinimumScaleFactor:0.6f];
+    [itemDescriptionLabel setAdjustsFontSizeToFitWidth:NO];
+    [itemDescriptionLabel setAdjustsLetterSpacingToFitWidth:NO];
+    [itemDescriptionLabel setTextColor:[UIColor colorWithRed:60/255.0 green:60/255.0 blue:60/255.0 alpha:1.0f]];
+    [itemDescriptionLabel adjustHeight];
+    [_wholeScreenScrollView addSubview:itemDescriptionLabel];
+    
+    contentHeight += (itemDescriptionLabel.frame.origin.y - _wholeScreenScrollView.frame.size.height);
+    contentHeight += itemDescriptionLabel.frame.size.height;
+    
+    [_wholeScreenScrollView setContentSize:CGSizeMake(320,contentHeight)];
 }
 
 - (void)animateImagesScrollViewIn {

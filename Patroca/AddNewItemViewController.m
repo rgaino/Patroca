@@ -61,6 +61,11 @@
     
     xSpacing = 10;
     xPosition = 0 - thumbnailSize;
+
+    
+    [_itemDescriptionTextView.layer setBorderWidth:5.0f];
+    [_itemDescriptionTextView.layer setBorderColor:[[UIColor grayColor] CGColor]];
+
 }
 
 
@@ -184,6 +189,7 @@
     //save item details
     NSLog(@"Saving Item...");
     [currentItem setObject:[itemNameTextField text] forKey:DB_FIELD_ITEM_NAME];
+    [currentItem setObject:[_itemDescriptionTextView text] forKey:DB_FIELD_ITEM_DESCRIPTION];
     [currentItem setObject:[PFUser currentUser] forKey:DB_FIELD_USER_ID];
     [currentItem setObject:itemLocationPoint forKey:DB_FIELD_ITEM_LOCATION];
 

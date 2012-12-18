@@ -22,9 +22,11 @@
 @property (weak, nonatomic) IBOutlet UIPageControl *imagesPageControl;
 @property (weak, nonatomic) IBOutlet UILabel *ownerNameLabel;
 @property (weak, nonatomic) IBOutlet UIImageView *ownerProfilePic;
+@property (weak, nonatomic) IBOutlet UIScrollView *wholeScreenScrollView;
 
 - (void)setupItemImagesScrollView;
 - (void)adjustPageControl;
 - (void)animateImagesScrollViewIn;
+- (void)setupWholeScreenScrollView;
 
 @end

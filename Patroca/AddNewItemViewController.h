@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "BaseViewController.h"
 #import <CoreLocation/CoreLocation.h>
+#import <QuartzCore/QuartzCore.h>
 
 @class PFObject;
 @class PFGeoPoint;
@@ -40,6 +41,7 @@
 @property (weak, nonatomic) IBOutlet UIView *picturesTakenView;
 @property (strong, nonatomic) IBOutlet UIView *cameraOverlayView;
 @property (weak, nonatomic) IBOutlet UIButton *doneTakingPicturesButton;
+@property (weak, nonatomic) IBOutlet UITextView *itemDescriptionTextView;
 
 - (IBAction)doneButtonPressed:(id)sender;
 - (IBAction)takePictureButtonPressed:(id)sender;

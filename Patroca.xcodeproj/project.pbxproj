@@ -86,6 +86,7 @@
 		1986625516670397003C19EE /* sample_avatar.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 1986625416670397003C19EE /* sample_avatar.jpeg */; };
 		1998A313167E119000E82B2F /* make_offer_button.png in Resources */ = {isa = PBXBuildFile; fileRef = 1998A311167E119000E82B2F /* make_offer_button.png */; };
 		1998A314167E119000E82B2F /* make_offer_button@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1998A312167E119000E82B2F /* make_offer_button@2x.png */; };
+		19BAB21716801043005688DE /* UILabel+UILabel_Resize.m in Sources */ = {isa = PBXBuildFile; fileRef = 19BAB21616801043005688DE /* UILabel+UILabel_Resize.m */; };
 		19BF9D1A166C393E00F813B6 /* mask_fb_avatar.png in Resources */ = {isa = PBXBuildFile; fileRef = 19BF9D18166C393E00F813B6 /* mask_fb_avatar.png */; };
 		19BF9D1B166C393E00F813B6 /* mask_fb_avatar@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 19BF9D19166C393E00F813B6 /* mask_fb_avatar@2x.png */; };
 		19BF9D1E166C40B600F813B6 /* placeholder.png in Resources */ = {isa = PBXBuildFile; fileRef = 19BF9D1C166C40B600F813B6 /* placeholder.png */; };
@@ -195,6 +196,8 @@
 		1986625416670397003C19EE /* sample_avatar.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = sample_avatar.jpeg; sourceTree = "<group>"; };
 		1998A311167E119000E82B2F /* make_offer_button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = make_offer_button.png; sourceTree = "<group>"; };
 		1998A312167E119000E82B2F /* make_offer_button@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "make_offer_button@2x.png"; sourceTree = "<group>"; };
+		19BAB21516801043005688DE /* UILabel+UILabel_Resize.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UILabel+UILabel_Resize.h"; sourceTree = "<group>"; };
+		19BAB21616801043005688DE /* UILabel+UILabel_Resize.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UILabel+UILabel_Resize.m"; sourceTree = "<group>"; };
 		19BF9D18166C393E00F813B6 /* mask_fb_avatar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = mask_fb_avatar.png; sourceTree = "<group>"; };
 		19BF9D19166C393E00F813B6 /* mask_fb_avatar@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "mask_fb_avatar@2x.png"; sourceTree = "<group>"; };
 		19BF9D1C166C40B600F813B6 /* placeholder.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = placeholder.png; sourceTree = "<group>"; };
@@ -516,6 +519,8 @@
 				1939CA5916644B53002C21F6 /* UIImage+Alpha.m */,
 				1939CA5A16644B53002C21F6 /* UIImage+RoundedCorner.h */,
 				1939CA5B16644B53002C21F6 /* UIImage+RoundedCorner.m */,
+				19BAB21516801043005688DE /* UILabel+UILabel_Resize.h */,
+				19BAB21616801043005688DE /* UILabel+UILabel_Resize.m */,
 			);
 			name = "UIImage Categories";
 			sourceTree = "<group>";
@@ -668,6 +673,7 @@
 				1939CA5D16644B53002C21F6 /* UIImage+Alpha.m in Sources */,
 				1939CA5E16644B53002C21F6 /* UIImage+RoundedCorner.m in Sources */,
 				195B30281676B74F00F80073 /* ItemDetailsViewController.m in Sources */,
+				19BAB21716801043005688DE /* UILabel+UILabel_Resize.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
