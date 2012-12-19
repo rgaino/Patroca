@@ -14,6 +14,7 @@
 @interface ItemDetailsViewController : BaseViewController <UIScrollViewDelegate> {
 
     int numberOfImages;
+    UIActivityIndicatorView *loadingCommentsActivityIndicator;
 }
 
 @property (nonatomic, readwrite) PFObject *itemObject;
@@ -28,5 +29,6 @@
 - (void)adjustPageControl;
 - (void)animateImagesScrollViewIn;
 - (void)setupWholeScreenScrollView;
+- (void)showItemComments:(NSArray*)commentObjects;
 
 @end

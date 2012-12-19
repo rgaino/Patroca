@@ -73,7 +73,46 @@
     contentHeight += (itemDescriptionLabel.frame.origin.y - _wholeScreenScrollView.frame.size.height);
     contentHeight += itemDescriptionLabel.frame.size.height;
     
+    loadingCommentsActivityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
+    [loadingCommentsActivityIndicator setFrame:CGRectMake(142, contentHeight-37, 37, 37)];
+    [loadingCommentsActivityIndicator setHidesWhenStopped:YES];
+    [loadingCommentsActivityIndicator startAnimating];
+    [_wholeScreenScrollView addSubview:loadingCommentsActivityIndicator];
+    contentHeight += loadingCommentsActivityIndicator.frame.size.height;
+    
+    PFQuery *commentsQuery = [PFQuery queryWithClassName:DB_TABLE_ITEM_COMMENTS];
+    [commentsQuery whereKey:DB_FIELD_ITEM_ID equalTo:_itemObject];
+    [commentsQuery findObjectsInBackgroundWithBlock:^(NSArray *commentObjects, NSError *error) {
+        
+        if(!error) {  //TODO: error handling
+            [self showItemComments:commentObjects];
+        }
+    }];
+    
     [_wholeScreenScrollView setContentSize:CGSizeMake(320,contentHeight)];
+}
+
+- (void)showItemComments:(NSArray*)commentObjects {
+    
+    float labelY = 72;
+    
+    //242w x 61h
+    for(PFObject *commentObject in commentObjects) {
+        NSLog(@"%@", commentObject);
+        UILabel *commentLabel = [[UILabel alloc] initWithFrame:CGRectMake(14, labelY, 242, 61)];
+        [commentLabel setText:[commentObject objectForKey:DB_FIELD_ITEM_COMMENT_TEXT]];\
+        [commentLabel setTextColor:[UIColor colorWithRed:204/255 green:204/255 blue:204/255 alpha:1.0f]];
+        [commentLabel setFont:[UIFont systemFontOfSize:14]];
+        [commentLabel setBackgroundColor:[UIColor clearColor]];
+        [commentLabel setLineBreakMode:NSLineBreakByWordWrapping];
+        [commentLabel setNumberOfLines:0];
+        [commentLabel setMinimumScaleFactor:0.6f];
+        [commentLabel setAdjustsFontSizeToFitWidth:NO];
+        [commentLabel setAdjustsLetterSpacingToFitWidth:NO];
+
+    }
+    
+    [loadingCommentsActivityIndicator stopAnimating];
 }
 
 - (void)animateImagesScrollViewIn {
