@@ -52,10 +52,6 @@
 		1939B8F316571C3B00435705 /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1939B8F216571C3B00435705 /* Social.framework */; };
 		1939B8F516571C4100435705 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1939B8F416571C4100435705 /* StoreKit.framework */; };
 		1939B8F716571C4E00435705 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1939B8F616571C4E00435705 /* SystemConfiguration.framework */; };
-		1939B902165A9D7100435705 /* sample_avatar.png in Resources */ = {isa = PBXBuildFile; fileRef = 1939B8FE165A9D7100435705 /* sample_avatar.png */; };
-		1939B903165A9D7100435705 /* sample_avatar@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1939B8FF165A9D7100435705 /* sample_avatar@2x.png */; };
-		1939B904165A9D7100435705 /* sample_item.png in Resources */ = {isa = PBXBuildFile; fileRef = 1939B900165A9D7100435705 /* sample_item.png */; };
-		1939B905165A9D7100435705 /* sample_item@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1939B901165A9D7100435705 /* sample_item@2x.png */; };
 		1939B908165AA0D900435705 /* comments_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 1939B906165AA0D900435705 /* comments_icon.png */; };
 		1939B909165AA0D900435705 /* comments_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1939B907165AA0D900435705 /* comments_icon@2x.png */; };
 		1939CA4A1664434E002C21F6 /* ImageIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1939CA491664434E002C21F6 /* ImageIO.framework */; };
@@ -157,10 +153,6 @@
 		1939B8F216571C3B00435705 /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
 		1939B8F416571C4100435705 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		1939B8F616571C4E00435705 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
-		1939B8FE165A9D7100435705 /* sample_avatar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = sample_avatar.png; sourceTree = "<group>"; };
-		1939B8FF165A9D7100435705 /* sample_avatar@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "sample_avatar@2x.png"; sourceTree = "<group>"; };
-		1939B900165A9D7100435705 /* sample_item.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = sample_item.png; sourceTree = "<group>"; };
-		1939B901165A9D7100435705 /* sample_item@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "sample_item@2x.png"; sourceTree = "<group>"; };
 		1939B906165AA0D900435705 /* comments_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = comments_icon.png; sourceTree = "<group>"; };
 		1939B907165AA0D900435705 /* comments_icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "comments_icon@2x.png"; sourceTree = "<group>"; };
 		1939CA491664434E002C21F6 /* ImageIO.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ImageIO.framework; path = System/Library/Frameworks/ImageIO.framework; sourceTree = SDKROOT; };
@@ -470,10 +462,6 @@
 				1939B8C71656915600435705 /* patroca_logo@2x.png */,
 				19BF9D1C166C40B600F813B6 /* placeholder.png */,
 				19BF9D1D166C40B600F813B6 /* placeholder@2x.png */,
-				1939B8FE165A9D7100435705 /* sample_avatar.png */,
-				1939B8FF165A9D7100435705 /* sample_avatar@2x.png */,
-				1939B900165A9D7100435705 /* sample_item.png */,
-				1939B901165A9D7100435705 /* sample_item@2x.png */,
 			);
 			name = Images;
 			sourceTree = "<group>";
@@ -618,10 +606,6 @@
 				1939B8D71656AF1F00435705 /* menu_bar_background@2x.png in Resources */,
 				1939B8DA1656C2E500435705 /* menu_arrow.png in Resources */,
 				1939B8DB1656C2E500435705 /* menu_arrow@2x.png in Resources */,
-				1939B902165A9D7100435705 /* sample_avatar.png in Resources */,
-				1939B903165A9D7100435705 /* sample_avatar@2x.png in Resources */,
-				1939B904165A9D7100435705 /* sample_item.png in Resources */,
-				1939B905165A9D7100435705 /* sample_item@2x.png in Resources */,
 				1939B908165AA0D900435705 /* comments_icon.png in Resources */,
 				1939B909165AA0D900435705 /* comments_icon@2x.png in Resources */,
 				1934ACEE165E2B1D00C8272F /* LogInViewController.xib in Resources */,

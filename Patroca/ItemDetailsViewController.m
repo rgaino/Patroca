@@ -95,34 +95,74 @@
 
 - (void)showItemComments:(NSArray*)commentObjects {
     
-    float labelY = 72;
+    float commentsViewFinalHeight = 75; //the minimum size before the comments are loaded
     
+    //building the header images and title for commentsView
     UIImageView *commentsHeaderImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"comments_header.png"]];
     [commentsHeaderImageView setFrame:CGRectMake(0, commentsViewYPosition+70, 320, 44)];
+    
+    UILabel *commentsViewTitleLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, commentsHeaderImageView.frame.origin.y + 52, 320, 20)];
+    [commentsViewTitleLabel setTextAlignment:NSTextAlignmentCenter];
+    [commentsViewTitleLabel setBackgroundColor:[UIColor clearColor]];
+    [commentsViewTitleLabel setTextColor:[UIColor colorWithRed:205/255.f green:220/255.f blue:40/255.f alpha:1.0f]];
+    [commentsViewTitleLabel setText:@"Troca-ideia"];
 
     commentsView = [[UIView alloc] init];
-    [commentsView setFrame:CGRectMake(0, commentsHeaderImageView.frame.origin.y + 18, _itemImagesScrollView.frame.size.width, 500)];
     [commentsView setBackgroundColor:[UIColor colorWithRed:0 green:0 blue:0 alpha:0.7f]];
     
+    //building every comment into a UIView and adding to commentsView
+    float commentViewYPosition = 55;
     
-    //242w x 61h
     for(PFObject *commentObject in commentObjects) {
-        NSLog(@"%@", commentObject);
-        UILabel *commentLabel = [[UILabel alloc] initWithFrame:CGRectMake(14, labelY, 242, 61)];
-        [commentLabel setText:[commentObject objectForKey:DB_FIELD_ITEM_COMMENT_TEXT]];\
-        [commentLabel setTextColor:[UIColor colorWithRed:204/255 green:204/255 blue:204/255 alpha:1.0f]];
-        [commentLabel setFont:[UIFont systemFontOfSize:14]];
-        [commentLabel setBackgroundColor:[UIColor clearColor]];
+        
+        UIView *singleCommentView = [[UIView alloc] initWithFrame:CGRectMake(0, commentViewYPosition, 320, 80)];
+        [singleCommentView setBackgroundColor:[UIColor colorWithRed:1.f green:1.f blue:0 alpha:0.2f]];
+        commentViewYPosition += singleCommentView.frame.size.height;
+        
+        //The comment text UILabel
+        UILabel *commentLabel = [[UILabel alloc] initWithFrame:CGRectMake(14, 0, 242, 61)];
+        [commentLabel setText:[commentObject objectForKey:DB_FIELD_ITEM_COMMENT_TEXT]];
+//        [commentLabel setBackgroundColor:[UIColor clearColor]];
+        [commentLabel setBackgroundColor:[UIColor colorWithRed:1.f green:0 blue:0 alpha:0.2f]];
+        [commentLabel setTextColor:[UIColor colorWithRed:204/255.f green:204/255.f blue:204/255.f alpha:1.0f]];
+        [commentLabel setFont:[UIFont systemFontOfSize:12]];
         [commentLabel setLineBreakMode:NSLineBreakByWordWrapping];
         [commentLabel setNumberOfLines:0];
         [commentLabel setMinimumScaleFactor:0.6f];
         [commentLabel setAdjustsFontSizeToFitWidth:NO];
         [commentLabel setAdjustsLetterSpacingToFitWidth:NO];
+        [singleCommentView addSubview:commentLabel];
+        
+        //The commenter profile picture and white border around
+        UIView *profilePictureWhiteBorder = [[UIView alloc] initWithFrame:CGRectMake(272, 21, 34, 34)];
+        [profilePictureWhiteBorder setBackgroundColor:[UIColor whiteColor]];
+        [singleCommentView addSubview:profilePictureWhiteBorder];
+        
 
+
+        PFUser *commentUser = [commentObject objectForKey:DB_FIELD_USER_ID];
+        NSString *userId = [commentUser objectId];
+        PFUser *userObject = [[UserCache getInstance] getCachedUserForId:userId];
+        UIImageView *profilePictureImageView = [[UIImageView alloc] initWithFrame:CGRectMake(274, 23, 30, 30)];
+
+        NSString *profilePicString = [NSString stringWithFormat:FB_PROFILE_PICTURE_URL, [userObject objectForKey:DB_FIELD_USER_FACEBOOK_ID]];
+        NSURL *profilePicURL = [NSURL URLWithString:profilePicString];
+        [profilePictureImageView setImageWithURL:profilePicURL];
+        [singleCommentView addSubview:profilePictureImageView];
+        
+        
+        [commentsView addSubview:singleCommentView];
+        
+        
+        
     }
+    commentsViewFinalHeight += commentViewYPosition;
+    [commentsView setFrame:CGRectMake(0, commentsHeaderImageView.frame.origin.y + 18, _wholeScreenScrollView.frame.size.width, commentsViewFinalHeight)];
+
     
     [loadingCommentsActivityIndicator stopAnimating];
     [_wholeScreenScrollView addSubview:commentsView];
+    [_wholeScreenScrollView addSubview:commentsViewTitleLabel];
     [_wholeScreenScrollView addSubview:commentsHeaderImageView];
     [_wholeScreenScrollView setContentSize:CGSizeMake(320, contentHeightWithoutCommentsView+commentsView.frame.size.height)];
 }
