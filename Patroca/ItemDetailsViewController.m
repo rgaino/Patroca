@@ -12,6 +12,7 @@
 #import <SDWebImage/UIImageView+WebCache.h>
 #import "UserCache.h"
 #import "UILabel+UILabel_Resize.h"
+#import "NSDate+NSDate_Formatter.h"
 
 @interface ItemDetailsViewController ()
 
@@ -116,14 +117,14 @@
     for(PFObject *commentObject in commentObjects) {
         
         UIView *singleCommentView = [[UIView alloc] initWithFrame:CGRectMake(0, commentViewYPosition, 320, 80)];
-        [singleCommentView setBackgroundColor:[UIColor colorWithRed:1.f green:1.f blue:0 alpha:0.2f]];
+//        [singleCommentView setBackgroundColor:[UIColor colorWithRed:1.f green:1.f blue:0 alpha:0.2f]];
         commentViewYPosition += singleCommentView.frame.size.height;
         
         //The comment text UILabel
         UILabel *commentLabel = [[UILabel alloc] initWithFrame:CGRectMake(14, 0, 242, 61)];
         [commentLabel setText:[commentObject objectForKey:DB_FIELD_ITEM_COMMENT_TEXT]];
-//        [commentLabel setBackgroundColor:[UIColor clearColor]];
-        [commentLabel setBackgroundColor:[UIColor colorWithRed:1.f green:0 blue:0 alpha:0.2f]];
+        [commentLabel setBackgroundColor:[UIColor clearColor]];
+//        [commentLabel setBackgroundColor:[UIColor colorWithRed:1.f green:0 blue:0 alpha:0.2f]];
         [commentLabel setTextColor:[UIColor colorWithRed:204/255.f green:204/255.f blue:204/255.f alpha:1.0f]];
         [commentLabel setFont:[UIFont systemFontOfSize:12]];
         [commentLabel setLineBreakMode:NSLineBreakByWordWrapping];
@@ -133,13 +134,42 @@
         [commentLabel setAdjustsLetterSpacingToFitWidth:NO];
         [singleCommentView addSubview:commentLabel];
         
+        
+        //The divider lines, vertical and horizontal
+        UIImageView *bottomLineImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"comment_bottom_line.png"]];
+        [bottomLineImageView setFrame:CGRectMake(88, 78, bottomLineImageView.frame.size.width, bottomLineImageView.frame.size.height)];
+        [singleCommentView addSubview:bottomLineImageView];
+        
+        UIImageView *verticalLineImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"comment_divider_line.png"]];
+        [verticalLineImageView setFrame:CGRectMake(262, 11, verticalLineImageView.frame.size.width, verticalLineImageView.frame.size.height)];
+        [singleCommentView addSubview:verticalLineImageView];
+        
+        //the clock icon
+        UIImageView *clockIconImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"clock_icon"]];
+        [clockIconImageView setFrame:CGRectMake(14, 74, clockIconImageView.frame.size.width, clockIconImageView.frame.size.height)];
+        [singleCommentView addSubview:clockIconImageView];
+
+        //The timestamp text label
+        UILabel *timeStampLabel = [[UILabel alloc] initWithFrame:CGRectMake(28, 75, 56, 8)];
+        [timeStampLabel setText:[commentObject.createdAt prettyDateDiffFormat]];
+        [timeStampLabel setBackgroundColor:[UIColor clearColor]];
+        [timeStampLabel setTextColor:[UIColor colorWithRed:205/255.f green:220/255.f blue:40/255.f alpha:1.0f]];
+        [timeStampLabel setFont:[UIFont systemFontOfSize:8]];
+        [timeStampLabel setLineBreakMode:NSLineBreakByWordWrapping];
+        [timeStampLabel setNumberOfLines:1];
+        [timeStampLabel setMinimumScaleFactor:0.6f];
+        [timeStampLabel setAdjustsFontSizeToFitWidth:YES];
+        [timeStampLabel setAdjustsLetterSpacingToFitWidth:NO];
+        [singleCommentView addSubview:timeStampLabel];
+
+        
+        
+        
         //The commenter profile picture and white border around
         UIView *profilePictureWhiteBorder = [[UIView alloc] initWithFrame:CGRectMake(272, 21, 34, 34)];
         [profilePictureWhiteBorder setBackgroundColor:[UIColor whiteColor]];
         [singleCommentView addSubview:profilePictureWhiteBorder];
         
-
-
         PFUser *commentUser = [commentObject objectForKey:DB_FIELD_USER_ID];
         NSString *userId = [commentUser objectId];
         PFUser *userObject = [[UserCache getInstance] getCachedUserForId:userId];
