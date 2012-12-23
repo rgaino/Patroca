@@ -35,7 +35,6 @@ NSString* const DB_FIELD_ITEM_LOCATION = @"item_location";
 NSString* const DB_TABLE_ITEM_IMAGES = @"Item_Images";
 NSString* const DB_FIELD_ITEM_ID = @"item_id";
 NSString* const DB_FIELD_ITEM_IMAGE = @"full_image";
-NSString* const DB_FIELD_ITEM_THUMBNAIL = @"thumbnail";
 
 
 //Item_Comments table

@@ -31,7 +31,6 @@ extern NSString* const DB_FIELD_ITEM_LOCATION;
 extern NSString* const DB_TABLE_ITEM_IMAGES;
 extern NSString* const DB_FIELD_ITEM_ID;
 extern NSString* const DB_FIELD_ITEM_IMAGE;
-extern NSString* const DB_FIELD_ITEM_THUMBNAIL;
 
 //Item_Comments table
 extern NSString* const DB_TABLE_ITEM_COMMENTS;

@@ -6,6 +6,7 @@
 //  Copyright (c) 2012 Punk Opera. All rights reserved.
 //
 
+#import <UIKit/UIKit.h>
 #import "AddNewItemViewController.h"
 #import <Parse/Parse.h>
 #import "MBProgressHUD.h"
@@ -199,17 +200,19 @@
         NSLog(@"Saving image %d of %d...", i+1, [itemThumbnails count]);
         [HUD setLabelText:[NSString stringWithFormat:NSLocalizedString(@"Saving image %d of %d...", nil), i+1, [itemThumbnails count]]];
 
-        UIImage *thumbnailImage = [itemThumbnails objectAtIndex:i];
-        NSData *thumbnailData = UIImagePNGRepresentation(thumbnailImage);
-        PFFile *thumbnailImageFile = [PFFile fileWithName:@"thumbnail.png" data:thumbnailData];
+//        UIImage *thumbnailImage = [itemThumbnails objectAtIndex:i];
+////        NSData *thumbnailData = UIImagePNGRepresentation(thumbnailImage);
+//        NSData *thumbnailData = UIImageJPEGRepresentation(thumbnailImage, 0.5f);
+//        PFFile *thumbnailImageFile = [PFFile fileWithName:@"thumbnail.png" data:thumbnailData];
         
         UIImage *fullImage = [itemImages objectAtIndex:i];
-        NSData *imageData = UIImagePNGRepresentation(fullImage);
+//        NSData *imageData = UIImagePNGRepresentation(fullImage);
+        NSData *imageData = UIImageJPEGRepresentation(fullImage, 0.5f);
         PFFile *imageFile = [PFFile fileWithName:@"image.png" data:imageData];
         
         PFObject *itemImagesObject = [PFObject objectWithClassName:DB_TABLE_ITEM_IMAGES];
         [itemImagesObject setObject:currentItem forKey:DB_FIELD_ITEM_ID];
-        [itemImagesObject setObject:thumbnailImageFile forKey:DB_FIELD_ITEM_THUMBNAIL];
+//        [itemImagesObject setObject:thumbnailImageFile forKey:DB_FIELD_ITEM_THUMBNAIL];
         [itemImagesObject setObject:imageFile forKey:DB_FIELD_ITEM_IMAGE];
         [itemImagesObject save];
         
