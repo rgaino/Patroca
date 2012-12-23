@@ -15,6 +15,9 @@
 
     int numberOfImages;
     UIActivityIndicatorView *loadingCommentsActivityIndicator;
+    UIView *commentsView;
+    float commentsViewYPosition;
+    float contentHeightWithoutCommentsView;
 }
 
 @property (nonatomic, readwrite) PFObject *itemObject;

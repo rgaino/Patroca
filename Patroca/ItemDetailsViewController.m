@@ -55,7 +55,7 @@
 
 - (void)setupWholeScreenScrollView {
     
-    float contentHeight = _itemImagesScrollView.frame.size.height;
+    contentHeightWithoutCommentsView = _itemImagesScrollView.frame.size.height;
     
     UILabel *itemDescriptionLabel = [[UILabel alloc] initWithFrame:CGRectMake(15,515, 290, 15)];
     [itemDescriptionLabel setText:[_itemObject objectForKey:DB_FIELD_ITEM_DESCRIPTION]];
@@ -70,15 +70,16 @@
     [itemDescriptionLabel adjustHeight];
     [_wholeScreenScrollView addSubview:itemDescriptionLabel];
     
-    contentHeight += (itemDescriptionLabel.frame.origin.y - _wholeScreenScrollView.frame.size.height);
-    contentHeight += itemDescriptionLabel.frame.size.height;
+    contentHeightWithoutCommentsView += (itemDescriptionLabel.frame.origin.y - _wholeScreenScrollView.frame.size.height);
+    contentHeightWithoutCommentsView += itemDescriptionLabel.frame.size.height;
     
     loadingCommentsActivityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
-    [loadingCommentsActivityIndicator setFrame:CGRectMake(142, contentHeight-37, 37, 37)];
+    [loadingCommentsActivityIndicator setFrame:CGRectMake(142, contentHeightWithoutCommentsView-37, 37, 37)];
     [loadingCommentsActivityIndicator setHidesWhenStopped:YES];
     [loadingCommentsActivityIndicator startAnimating];
+    commentsViewYPosition = loadingCommentsActivityIndicator.frame.origin.y;
     [_wholeScreenScrollView addSubview:loadingCommentsActivityIndicator];
-    contentHeight += loadingCommentsActivityIndicator.frame.size.height;
+    contentHeightWithoutCommentsView += loadingCommentsActivityIndicator.frame.size.height;
     
     PFQuery *commentsQuery = [PFQuery queryWithClassName:DB_TABLE_ITEM_COMMENTS];
     [commentsQuery whereKey:DB_FIELD_ITEM_ID equalTo:_itemObject];
@@ -89,12 +90,20 @@
         }
     }];
     
-    [_wholeScreenScrollView setContentSize:CGSizeMake(320,contentHeight)];
+    [_wholeScreenScrollView setContentSize:CGSizeMake(320, contentHeightWithoutCommentsView)];
 }
 
 - (void)showItemComments:(NSArray*)commentObjects {
     
     float labelY = 72;
+    
+    UIImageView *commentsHeaderImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"comments_header.png"]];
+    [commentsHeaderImageView setFrame:CGRectMake(0, commentsViewYPosition+70, 320, 44)];
+
+    commentsView = [[UIView alloc] init];
+    [commentsView setFrame:CGRectMake(0, commentsHeaderImageView.frame.origin.y + 18, _itemImagesScrollView.frame.size.width, 500)];
+    [commentsView setBackgroundColor:[UIColor colorWithRed:0 green:0 blue:0 alpha:0.7f]];
+    
     
     //242w x 61h
     for(PFObject *commentObject in commentObjects) {
@@ -113,6 +122,9 @@
     }
     
     [loadingCommentsActivityIndicator stopAnimating];
+    [_wholeScreenScrollView addSubview:commentsView];
+    [_wholeScreenScrollView addSubview:commentsHeaderImageView];
+    [_wholeScreenScrollView setContentSize:CGSizeMake(320, contentHeightWithoutCommentsView+commentsView.frame.size.height)];
 }
 
 - (void)animateImagesScrollViewIn {
