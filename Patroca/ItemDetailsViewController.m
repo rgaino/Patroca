@@ -43,7 +43,30 @@
     NSURL *facebookProfilePicURL = [NSURL URLWithString:facebookProfilePicString];
     [_ownerProfilePic setImageWithURL:facebookProfilePicURL];
     
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardDidShow:) name:UIKeyboardDidShowNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardDidHide:) name:UIKeyboardDidHideNotification object:nil];
+}
 
+- (void)keyboardDidShow:(NSNotification*)notification {
+    
+    NSDictionary* keyboardInfo = [notification userInfo];
+    NSValue* keyboardFrameBegin = [keyboardInfo valueForKey:UIKeyboardFrameBeginUserInfoKey];
+    CGRect keyboardFrameBeginRect = [keyboardFrameBegin CGRectValue];
+    
+    CGRect scrollViewFrame = _wholeScreenScrollView.frame;
+    
+    [_wholeScreenScrollView setFrame:CGRectMake(scrollViewFrame.origin.x, scrollViewFrame.origin.y, scrollViewFrame.size.width, scrollViewFrame.size.height - keyboardFrameBeginRect.size.height)];
+}
+
+- (void)keyboardDidHide:(NSNotification*)notification {
+
+    NSDictionary* keyboardInfo = [notification userInfo];
+    NSValue* keyboardFrameBegin = [keyboardInfo valueForKey:UIKeyboardFrameBeginUserInfoKey];
+    CGRect keyboardFrameBeginRect = [keyboardFrameBegin CGRectValue];
+    
+    CGRect scrollViewFrame = _wholeScreenScrollView.frame;
+    
+    [_wholeScreenScrollView setFrame:CGRectMake(scrollViewFrame.origin.x, scrollViewFrame.origin.y, scrollViewFrame.size.width, scrollViewFrame.size.height + keyboardFrameBeginRect.size.height)];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -117,14 +140,12 @@
     for(PFObject *commentObject in commentObjects) {
         
         UIView *singleCommentView = [[UIView alloc] initWithFrame:CGRectMake(0, commentViewYPosition, 320, 80)];
-//        [singleCommentView setBackgroundColor:[UIColor colorWithRed:1.f green:1.f blue:0 alpha:0.2f]];
         commentViewYPosition += singleCommentView.frame.size.height;
         
         //The comment text UILabel
         UILabel *commentLabel = [[UILabel alloc] initWithFrame:CGRectMake(14, 0, 242, 61)];
         [commentLabel setText:[commentObject objectForKey:DB_FIELD_ITEM_COMMENT_TEXT]];
         [commentLabel setBackgroundColor:[UIColor clearColor]];
-//        [commentLabel setBackgroundColor:[UIColor colorWithRed:1.f green:0 blue:0 alpha:0.2f]];
         [commentLabel setTextColor:[UIColor colorWithRed:204/255.f green:204/255.f blue:204/255.f alpha:1.0f]];
         [commentLabel setFont:[UIFont systemFontOfSize:12]];
         [commentLabel setLineBreakMode:NSLineBreakByWordWrapping];
@@ -145,7 +166,7 @@
         [singleCommentView addSubview:verticalLineImageView];
         
         //the clock icon
-        UIImageView *clockIconImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"clock_icon"]];
+        UIImageView *clockIconImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"clock_icon.png"]];
         [clockIconImageView setFrame:CGRectMake(14, 74, clockIconImageView.frame.size.width, clockIconImageView.frame.size.height)];
         [singleCommentView addSubview:clockIconImageView];
 
@@ -161,9 +182,6 @@
         [timeStampLabel setAdjustsFontSizeToFitWidth:YES];
         [timeStampLabel setAdjustsLetterSpacingToFitWidth:NO];
         [singleCommentView addSubview:timeStampLabel];
-
-        
-        
         
         //The commenter profile picture and white border around
         UIView *profilePictureWhiteBorder = [[UIView alloc] initWithFrame:CGRectMake(272, 21, 34, 34)];
@@ -179,14 +197,36 @@
         NSURL *profilePicURL = [NSURL URLWithString:profilePicString];
         [profilePictureImageView setImageWithURL:profilePicURL];
         [singleCommentView addSubview:profilePictureImageView];
-        
+
         
         [commentsView addSubview:singleCommentView];
-        
-        
-        
     }
-    commentsViewFinalHeight += commentViewYPosition;
+    commentsViewFinalHeight += commentViewYPosition - 30;
+    
+    //The new comment text area (image on the BG and text area with no borders in front
+    UIImageView *newCommentBackgroundImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"comment_text_area.png"]];
+    [newCommentBackgroundImageView setFrame:CGRectMake(14, commentsViewFinalHeight, newCommentBackgroundImageView.frame.size.width, newCommentBackgroundImageView.frame.size.height)];
+    [commentsView addSubview:newCommentBackgroundImageView];
+    commentsViewFinalHeight += newCommentBackgroundImageView.frame.size.height;
+
+    newCommentTextView = [[UITextView alloc] initWithFrame:CGRectMake(48, newCommentBackgroundImageView.frame.origin.y+14, 241, 76)];
+    [newCommentTextView setEditable:YES];
+    [newCommentTextView setBackgroundColor:[UIColor clearColor]];
+    [newCommentTextView setTextColor:[UIColor colorWithRed:102/255.f green:102/255.f blue:102/255.f alpha:1.0f]];
+    [newCommentTextView setDelegate:self];
+    
+    UIButton *sendCommentButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    [sendCommentButton setFrame:CGRectMake(217, newCommentBackgroundImageView.frame.origin.y + newCommentBackgroundImageView.frame.size.height-22, 103, 45)];
+    [sendCommentButton setImage:[UIImage imageNamed:@"send_comment_button.png"] forState:UIControlStateNormal];
+    commentsViewFinalHeight += 22; //half the button's height
+    [sendCommentButton addTarget:self action:@selector(sendCommentButtonPressed) forControlEvents:UIControlEventTouchUpInside];
+
+    [commentsView addSubview:newCommentBackgroundImageView];
+    [commentsView addSubview:newCommentTextView];
+    [commentsView addSubview:sendCommentButton];
+    
+    
+    commentsViewFinalHeight += 20; //some spacing at the end so it's not too tight
     [commentsView setFrame:CGRectMake(0, commentsHeaderImageView.frame.origin.y + 18, _wholeScreenScrollView.frame.size.width, commentsViewFinalHeight)];
 
     
@@ -274,6 +314,19 @@
 //    [self.view bringSubviewToFront:_imagesPageControl];
 //    
 //    [_imagesPageControl setHidden:NO];
+}
+
+- (void)sendCommentButtonPressed {
+    [newCommentTextView resignFirstResponder];
+}
+
+#pragma mark DELEGATES
+
+- (void)textViewDidBeginEditing:(UITextView *)textView {
+    
+}
+
+- (void)textViewDidEndEditing:(UITextView *)textView {
 }
 
 

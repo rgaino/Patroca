@@ -11,13 +11,14 @@
 
 @class PFObject;
 
-@interface ItemDetailsViewController : BaseViewController <UIScrollViewDelegate> {
+@interface ItemDetailsViewController : BaseViewController <UIScrollViewDelegate, UITextViewDelegate> {
 
     int numberOfImages;
     UIActivityIndicatorView *loadingCommentsActivityIndicator;
     UIView *commentsView;
     float commentsViewYPosition;
     float contentHeightWithoutCommentsView;
+    UITextView *newCommentTextView;
 }
 
 @property (nonatomic, readwrite) PFObject *itemObject;
@@ -33,5 +34,8 @@
 - (void)animateImagesScrollViewIn;
 - (void)setupWholeScreenScrollView;
 - (void)showItemComments:(NSArray*)commentObjects;
+- (void)sendCommentButtonPressed;
+- (void)keyboardDidShow:(NSNotification*)notification;
+- (void)keyboardDidHide:(NSNotification*)notification;
 
 @end

@@ -2,21 +2,6 @@
 <Bucket
    type = "1"
    version = "1.0">
-   <FileBreakpoints>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "Patroca/ItemDetailsViewController.m"
-         timestampString = "377979287.579857"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "178"
-         endingLineNumber = "178"
-         landmarkName = "-showItemComments:"
-         landmarkType = "5">
-      </FileBreakpoint>
-   </FileBreakpoints>
    <SymbolicBreakpoints>
       <SymbolicBreakpoint
          shouldBeEnabled = "No"
