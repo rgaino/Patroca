@@ -13,6 +13,7 @@
 #import "UserCache.h"
 #import "UILabel+UILabel_Resize.h"
 #import "NSDate+NSDate_Formatter.h"
+#import "UILabel+Extensions.h"
 
 @interface ItemDetailsViewController ()
 
@@ -56,6 +57,14 @@
     CGRect scrollViewFrame = _wholeScreenScrollView.frame;
     
     [_wholeScreenScrollView setFrame:CGRectMake(scrollViewFrame.origin.x, scrollViewFrame.origin.y, scrollViewFrame.size.width, scrollViewFrame.size.height - keyboardFrameBeginRect.size.height)];
+
+    [self scrollWholeScreenToBottom];
+}
+
+- (void)scrollWholeScreenToBottom {
+
+    CGPoint bottomOffset = CGPointMake(0, _wholeScreenScrollView.contentSize.height - _wholeScreenScrollView.frame.size.height);
+    [_wholeScreenScrollView setContentOffset:bottomOffset animated:NO];
 }
 
 - (void)keyboardDidHide:(NSNotification*)notification {
@@ -107,17 +116,27 @@
     
     PFQuery *commentsQuery = [PFQuery queryWithClassName:DB_TABLE_ITEM_COMMENTS];
     [commentsQuery whereKey:DB_FIELD_ITEM_ID equalTo:_itemObject];
-    [commentsQuery findObjectsInBackgroundWithBlock:^(NSArray *commentObjects, NSError *error) {
+    [commentsQuery addAscendingOrder:DB_FIELD_CREATED_AT];
+    [commentsQuery findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
         
         if(!error) {  //TODO: error handling
-            [self showItemComments:commentObjects];
+            commentObjects = [NSMutableArray arrayWithArray:objects];
+            [self showItemComments];
         }
     }];
     
     [_wholeScreenScrollView setContentSize:CGSizeMake(320, contentHeightWithoutCommentsView)];
 }
 
-- (void)showItemComments:(NSArray*)commentObjects {
+- (void)showItemComments {
+    
+    if(commentsView) {
+        [commentsView removeFromSuperview];
+        commentsView = nil;
+    }
+    commentsView = [[UIView alloc] init];
+    [commentsView setBackgroundColor:[UIColor colorWithRed:0 green:0 blue:0 alpha:0.7f]];
+
     
     float commentsViewFinalHeight = 75; //the minimum size before the comments are loaded
     
@@ -131,8 +150,6 @@
     [commentsViewTitleLabel setTextColor:[UIColor colorWithRed:205/255.f green:220/255.f blue:40/255.f alpha:1.0f]];
     [commentsViewTitleLabel setText:@"Troca-ideia"];
 
-    commentsView = [[UIView alloc] init];
-    [commentsView setBackgroundColor:[UIColor colorWithRed:0 green:0 blue:0 alpha:0.7f]];
     
     //building every comment into a UIView and adding to commentsView
     float commentViewYPosition = 55;
@@ -143,16 +160,14 @@
         commentViewYPosition += singleCommentView.frame.size.height;
         
         //The comment text UILabel
-        UILabel *commentLabel = [[UILabel alloc] initWithFrame:CGRectMake(14, 0, 242, 61)];
+        UILabel *commentLabel = [[UILabel alloc] initWithFrame:CGRectMake(14, 8, 242, 61)];
         [commentLabel setText:[commentObject objectForKey:DB_FIELD_ITEM_COMMENT_TEXT]];
         [commentLabel setBackgroundColor:[UIColor clearColor]];
         [commentLabel setTextColor:[UIColor colorWithRed:204/255.f green:204/255.f blue:204/255.f alpha:1.0f]];
         [commentLabel setFont:[UIFont systemFontOfSize:12]];
-        [commentLabel setLineBreakMode:NSLineBreakByWordWrapping];
         [commentLabel setNumberOfLines:0];
-        [commentLabel setMinimumScaleFactor:0.6f];
-        [commentLabel setAdjustsFontSizeToFitWidth:NO];
-        [commentLabel setAdjustsLetterSpacingToFitWidth:NO];
+        [commentLabel setLineBreakMode:NSLineBreakByWordWrapping];
+        [commentLabel autoShrinkWithMultipleLinesConstraindToSize];
         [singleCommentView addSubview:commentLabel];
         
         
@@ -317,7 +332,29 @@
 }
 
 - (void)sendCommentButtonPressed {
+    
     [newCommentTextView resignFirstResponder];
+    
+//    HUD = [[MBProgressHUD alloc] initWithView:self.navigationController.view];
+//	[HUD setDimBackground:YES];
+//	[HUD setLabelText: NSLocalizedString(@"Saving", nil)];
+//    [HUD setDelegate:self];
+//    [self.navigationController.view addSubview:HUD];
+//    [HUD show:YES];
+    
+    PFObject *newItemComment = [PFObject objectWithClassName:DB_TABLE_ITEM_COMMENTS];
+    [newItemComment setObject:[newCommentTextView text] forKey:DB_FIELD_ITEM_COMMENT_TEXT];
+    [newItemComment setObject:_itemObject forKey:DB_FIELD_ITEM_ID];
+    [newItemComment setObject:[PFUser currentUser] forKey:DB_FIELD_USER_ID];
+    
+    [commentObjects addObject:newItemComment];
+    [newItemComment saveEventually];
+    [self showItemComments];
+    
+//    [newItemComment saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+//        [HUD hide:YES];
+//        [self.navigationController popViewControllerAnimated:YES];
+//    }];
 }
 
 #pragma mark DELEGATES

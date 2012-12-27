@@ -15,6 +15,7 @@
 
     int numberOfImages;
     UIActivityIndicatorView *loadingCommentsActivityIndicator;
+    NSMutableArray *commentObjects;
     UIView *commentsView;
     float commentsViewYPosition;
     float contentHeightWithoutCommentsView;
@@ -33,9 +34,10 @@
 - (void)adjustPageControl;
 - (void)animateImagesScrollViewIn;
 - (void)setupWholeScreenScrollView;
-- (void)showItemComments:(NSArray*)commentObjects;
+- (void)showItemComments;
 - (void)sendCommentButtonPressed;
 - (void)keyboardDidShow:(NSNotification*)notification;
 - (void)keyboardDidHide:(NSNotification*)notification;
+- (void)scrollWholeScreenToBottom;
 
 @end

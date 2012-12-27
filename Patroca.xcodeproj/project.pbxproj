@@ -78,6 +78,7 @@
 		195B30451679611000F80073 /* location_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 195B30431679611000F80073 /* location_icon@2x.png */; };
 		195B30481679617A00F80073 /* circle_shade.png in Resources */ = {isa = PBXBuildFile; fileRef = 195B30461679617A00F80073 /* circle_shade.png */; };
 		195B30491679617A00F80073 /* circle_shade@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 195B30471679617A00F80073 /* circle_shade@2x.png */; };
+		196E43B6168BC2BE009608E4 /* UILabel+Extensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 196E43B5168BC2BE009608E4 /* UILabel+Extensions.m */; };
 		198662521666DFD8003C19EE /* item_hi_res.png in Resources */ = {isa = PBXBuildFile; fileRef = 198662511666DFD8003C19EE /* item_hi_res.png */; };
 		1986625516670397003C19EE /* sample_avatar.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 1986625416670397003C19EE /* sample_avatar.jpeg */; };
 		198A3CE71687756F0016F45C /* clock_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 198A3CE51687756F0016F45C /* clock_icon.png */; };
@@ -197,6 +198,8 @@
 		195B30431679611000F80073 /* location_icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "location_icon@2x.png"; sourceTree = "<group>"; };
 		195B30461679617A00F80073 /* circle_shade.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = circle_shade.png; sourceTree = "<group>"; };
 		195B30471679617A00F80073 /* circle_shade@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "circle_shade@2x.png"; sourceTree = "<group>"; };
+		196E43B4168BC2BE009608E4 /* UILabel+Extensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UILabel+Extensions.h"; sourceTree = "<group>"; };
+		196E43B5168BC2BE009608E4 /* UILabel+Extensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UILabel+Extensions.m"; sourceTree = "<group>"; };
 		198662511666DFD8003C19EE /* item_hi_res.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = item_hi_res.png; sourceTree = "<group>"; };
 		1986625416670397003C19EE /* sample_avatar.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = sample_avatar.jpeg; sourceTree = "<group>"; };
 		198A3CE51687756F0016F45C /* clock_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = clock_icon.png; sourceTree = "<group>"; };
@@ -316,7 +319,8 @@
 		1934ACF6165E2B9300C8272F /* Libs */ = {
 			isa = PBXGroup;
 			children = (
-				198A3CF516877C490016F45C /* NSDate Category */,
+				196E43B2168BC295009608E4 /* UILabel Categories */,
+				198A3CF516877C490016F45C /* NSDate Categories */,
 				1939CA5516644B3A002C21F6 /* UIImage Categories */,
 				1939CA2B166442D6002C21F6 /* SDWebImage */,
 				1934ACF7165E2BAD00C8272F /* MBProgressHUD */,
@@ -572,13 +576,22 @@
 			name = "Item Details";
 			sourceTree = "<group>";
 		};
-		198A3CF516877C490016F45C /* NSDate Category */ = {
+		196E43B2168BC295009608E4 /* UILabel Categories */ = {
+			isa = PBXGroup;
+			children = (
+				196E43B4168BC2BE009608E4 /* UILabel+Extensions.h */,
+				196E43B5168BC2BE009608E4 /* UILabel+Extensions.m */,
+			);
+			name = "UILabel Categories";
+			sourceTree = "<group>";
+		};
+		198A3CF516877C490016F45C /* NSDate Categories */ = {
 			isa = PBXGroup;
 			children = (
 				198A3CF216877C380016F45C /* NSDate+NSDate_Formatter.h */,
 				198A3CF316877C380016F45C /* NSDate+NSDate_Formatter.m */,
 			);
-			name = "NSDate Category";
+			name = "NSDate Categories";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -720,6 +733,7 @@
 				195B30281676B74F00F80073 /* ItemDetailsViewController.m in Sources */,
 				19BAB21716801043005688DE /* UILabel+UILabel_Resize.m in Sources */,
 				198A3CF416877C380016F45C /* NSDate+NSDate_Formatter.m in Sources */,
+				196E43B6168BC2BE009608E4 /* UILabel+Extensions.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
