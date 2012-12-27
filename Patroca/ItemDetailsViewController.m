@@ -187,7 +187,7 @@
 
         //The timestamp text label
         UILabel *timeStampLabel = [[UILabel alloc] initWithFrame:CGRectMake(28, 75, 56, 8)];
-        [timeStampLabel setText:[commentObject.createdAt prettyDateDiffFormat]];
+        [timeStampLabel setText:(commentObject.createdAt!=nil?[commentObject.createdAt prettyDateDiffFormat]:[[NSDate date] prettyDateDiffFormat])]; //commentObject.createdAt can be nil if the object was just created but not saved on the server, so just show the current timestamp
         [timeStampLabel setBackgroundColor:[UIColor clearColor]];
         [timeStampLabel setTextColor:[UIColor colorWithRed:205/255.f green:220/255.f blue:40/255.f alpha:1.0f]];
         [timeStampLabel setFont:[UIFont systemFontOfSize:8]];
@@ -335,13 +335,6 @@
     
     [newCommentTextView resignFirstResponder];
     
-//    HUD = [[MBProgressHUD alloc] initWithView:self.navigationController.view];
-//	[HUD setDimBackground:YES];
-//	[HUD setLabelText: NSLocalizedString(@"Saving", nil)];
-//    [HUD setDelegate:self];
-//    [self.navigationController.view addSubview:HUD];
-//    [HUD show:YES];
-    
     PFObject *newItemComment = [PFObject objectWithClassName:DB_TABLE_ITEM_COMMENTS];
     [newItemComment setObject:[newCommentTextView text] forKey:DB_FIELD_ITEM_COMMENT_TEXT];
     [newItemComment setObject:_itemObject forKey:DB_FIELD_ITEM_ID];
@@ -350,11 +343,6 @@
     [commentObjects addObject:newItemComment];
     [newItemComment saveEventually];
     [self showItemComments];
-    
-//    [newItemComment saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
-//        [HUD hide:YES];
-//        [self.navigationController popViewControllerAnimated:YES];
-//    }];
 }
 
 #pragma mark DELEGATES

@@ -12,6 +12,8 @@
 
 - (NSString*)prettyDateDiffFormat {
     
+//    if(self)
+    
     NSDate *todayDate = [NSDate date];
     double timeInterval = [self timeIntervalSinceDate:todayDate] * -1;
         
