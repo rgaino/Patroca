@@ -24,7 +24,7 @@
     
     UIView *headerView = [[UIView alloc] init];
     [headerView setBackgroundColor:[UIColor whiteColor]];
-    [headerView setFrame:CGRectMake(0, 0, 320, 58)];
+    [headerView setFrame:CGRectMake(0, 0, 320, 44)];
     
 
     
@@ -39,7 +39,7 @@
     } else {
         //the Login/Profile button
         _loginProfileButton = [UIButton buttonWithType:UIButtonTypeCustom];
-        [_loginProfileButton setFrame:CGRectMake(0, 0, 51, 45)];
+        [_loginProfileButton setFrame:CGRectMake(0, 0, 51, 44)];
         
         //see if user is already logged in on Facebook and display the profile picture
         if ([PFUser currentUser] && [PFFacebookUtils isLinkedWithUser:[PFUser currentUser]]) {
@@ -68,7 +68,7 @@
     
     //the Add Item button
     UIButton *addNewItemButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    [addNewItemButton setFrame:CGRectMake(270, 0, 51, 45)];
+    [addNewItemButton setFrame:CGRectMake(270, 0, 51, 44)];
     [addNewItemButton setImage:[UIImage imageNamed:@"add_new_item_button"] forState:UIControlStateNormal];
     [addNewItemButton addTarget:self action:@selector(addNewItemButtonPressed) forControlEvents:UIControlEventTouchUpInside];
     [headerView addSubview:addNewItemButton];
