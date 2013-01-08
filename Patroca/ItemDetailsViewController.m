@@ -29,7 +29,7 @@
     UIColor *backgroundPattern = [UIColor colorWithPatternImage:[UIImage imageNamed:@"background_repeat.png"]];
     [[self view] setBackgroundColor:backgroundPattern];
     
-    [self setupHeaderWithBackButton:YES];
+    [self setupHeaderWithBackButton:YES doneButton:NO addItemButton:YES];
     [self setupItemImagesScrollView];
     
     [_itemTitleLabel setText:[_itemObject objectForKey:DB_FIELD_ITEM_NAME]];

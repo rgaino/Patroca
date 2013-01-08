@@ -35,7 +35,6 @@
 
 }
 
-@property (weak, nonatomic) IBOutlet UILabel *itemNameLabel;
 @property (weak, nonatomic) IBOutlet UIButton *doneButton;
 @property (weak, nonatomic) IBOutlet UITextField *itemNameTextField;
 @property (weak, nonatomic) IBOutlet UIView *picturesTakenView;
@@ -43,7 +42,6 @@
 @property (weak, nonatomic) IBOutlet UIButton *doneTakingPicturesButton;
 @property (weak, nonatomic) IBOutlet UITextView *itemDescriptionTextView;
 
-- (IBAction)doneButtonPressed:(id)sender;
 - (IBAction)takePictureButtonPressed:(id)sender;
 - (IBAction)doneTakingPicturesButtonPressed:(id)sender;
 

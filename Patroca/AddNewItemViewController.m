@@ -23,12 +23,6 @@
 @end
 
 @implementation AddNewItemViewController
-@synthesize itemNameLabel;
-@synthesize doneButton;
-@synthesize itemNameTextField;
-@synthesize picturesTakenView;
-@synthesize cameraOverlayView;
-@synthesize doneTakingPicturesButton;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -42,7 +36,9 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    [itemNameTextField setDelegate:self];
+    [self setupHeaderWithBackButton:YES doneButton:YES addItemButton:NO];
+
+    [_itemNameTextField setDelegate:self];
 
     locationManager = [[CLLocationManager alloc] init];
     [locationManager setDelegate:self];
@@ -64,20 +60,17 @@
     xPosition = 0 - thumbnailSize;
 
     
-    [_itemDescriptionTextView.layer setBorderWidth:5.0f];
-    [_itemDescriptionTextView.layer setBorderColor:[[UIColor grayColor] CGColor]];
-
+    [_itemDescriptionTextView.layer setCornerRadius:10.0f];
 }
 
 
 - (void)localizeStrings {
-    [itemNameLabel setText:NSLocalizedString(@"Item Name", nil)];
-    [doneButton setTitle:NSLocalizedString(@"Done", nil) forState:UIControlStateNormal];
-    [doneTakingPicturesButton setTitle:NSLocalizedString(@"Done", nil) forState:UIControlStateNormal];
+    [_doneButton setTitle:NSLocalizedString(@"Done", nil) forState:UIControlStateNormal];
+    [_doneTakingPicturesButton setTitle:NSLocalizedString(@"Done", nil) forState:UIControlStateNormal];
 }
 
 - (void)setupCameraOverlayView {
-    [cameraOverlayView setBackgroundColor:[UIColor clearColor]];
+    [_cameraOverlayView setBackgroundColor:[UIColor clearColor]];
 }
 
 - (void)setupImagePicker {
@@ -87,7 +80,7 @@
 	imagePicker.delegate = self;
 	[imagePicker setAllowsEditing:NO];
 	[imagePicker setShowsCameraControls:NO];
-	[imagePicker setCameraOverlayView:cameraOverlayView];
+	[imagePicker setCameraOverlayView:_cameraOverlayView];
 	[imagePicker setCameraCaptureMode:UIImagePickerControllerCameraCaptureModePhoto];
 	[imagePicker setMediaTypes:[UIImagePickerController availableMediaTypesForSourceType:[imagePicker sourceType]]];
 	[imagePicker setCameraFlashMode:UIImagePickerControllerCameraFlashModeOff];
@@ -98,7 +91,7 @@
     [self presentViewController:imagePicker animated:YES completion:nil];
 }
 
-- (IBAction)doneButtonPressed:(id)sender {
+- (IBAction)doneButtonPressed {
 
     //dismiss keyboard
     [self.view endEditing:YES];
@@ -149,13 +142,13 @@
 
 
     //is the new thumbnail out of bounds on the thumbnail list?
-    if( (xPosition + xSpacing + thumbnailSize + thumbnailSize) > cameraOverlayView.frame.size.width ) {
+    if( (xPosition + xSpacing + thumbnailSize + thumbnailSize) > _cameraOverlayView.frame.size.width ) {
 
         //New image would be out of bounds, so move each thumbnail to the left
         [UIView beginAnimations:@"Move Out Thumbnails" context:nil];
         [UIView setAnimationDuration:thumbnailsAnimationSpeed];
         
-        for(UIView *imageView in picturesTakenView.subviews) {
+        for(UIView *imageView in _picturesTakenView.subviews) {
             if( [imageView isKindOfClass:[UIImageView class]] ) {
 
                 float newX = imageView.frame.origin.x - (xSpacing + imageView.frame.size.width);
@@ -173,14 +166,14 @@
     
     //Create the new thumbnail
     UIImageView *thumbnailImageView = [[UIImageView alloc] initWithImage:thumbnail];
-    float yPosition = (10+picturesTakenView.frame.size.height); //image starts off screen then animates up
+    float yPosition = (10+_picturesTakenView.frame.size.height); //image starts off screen then animates up
     [thumbnailImageView setFrame:CGRectMake(xPosition, yPosition, thumbnailImageView.frame.size.width, thumbnailImageView.frame.size.height)];
-    [picturesTakenView addSubview:thumbnailImageView];
+    [_picturesTakenView addSubview:thumbnailImageView];
 
     //Animate thumbnail up
     [UIView beginAnimations:@"Show New Thumbnail" context:nil];
     [UIView setAnimationDuration:thumbnailsAnimationSpeed];
-    thumbnailImageView.transform = CGAffineTransformMakeTranslation(0, -picturesTakenView.frame.size.height);
+    thumbnailImageView.transform = CGAffineTransformMakeTranslation(0, -_picturesTakenView.frame.size.height);
     [UIView commitAnimations];
 }
 
@@ -189,7 +182,7 @@
     
     //save item details
     NSLog(@"Saving Item...");
-    [currentItem setObject:[itemNameTextField text] forKey:DB_FIELD_ITEM_NAME];
+    [currentItem setObject:[_itemNameTextField text] forKey:DB_FIELD_ITEM_NAME];
     [currentItem setObject:[_itemDescriptionTextView text] forKey:DB_FIELD_ITEM_DESCRIPTION];
     [currentItem setObject:[PFUser currentUser] forKey:DB_FIELD_USER_ID];
     [currentItem setObject:itemLocationPoint forKey:DB_FIELD_ITEM_LOCATION];
@@ -243,7 +236,6 @@
 }
 
 - (void)viewDidUnload {
-    [self setItemNameLabel:nil];
     [self setDoneButton:nil];
     [self setItemNameTextField:nil];
     [self setPicturesTakenView:nil];

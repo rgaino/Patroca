@@ -20,7 +20,7 @@
 @implementation BaseViewController
 
 
-- (void)setupHeaderWithBackButton:(BOOL)hasBackButton {
+- (void)setupHeaderWithBackButton:(BOOL)hasBackButton doneButton:(BOOL)hasDoneButton addItemButton:(BOOL)hasAddItemButton {
     
     UIView *headerView = [[UIView alloc] init];
     [headerView setBackgroundColor:[UIColor whiteColor]];
@@ -56,28 +56,42 @@
     //the Avatar mask image
     UIImageView *avatarMaskImageView = [[UIImageView alloc] init];
     [avatarMaskImageView setFrame:CGRectMake(0, 0, 82, 44)];
-    [avatarMaskImageView setImage:[UIImage imageNamed:@"mask_fb_avatar"]];
+    [avatarMaskImageView setImage:[UIImage imageNamed:@"mask_fb_avatar.png"]];
     [headerView addSubview:avatarMaskImageView];
 
     //the logo
     UIImageView *logoImageView = [[UIImageView alloc] init];
     [logoImageView setFrame:CGRectMake(99, 12, 122, 22)];
-    [logoImageView setImage:[UIImage imageNamed:@"patroca_logo"]];
+    [logoImageView setImage:[UIImage imageNamed:@"patroca_logo.png"]];
     [headerView addSubview:logoImageView];
     
     
-    //the Add Item button
-    UIButton *addNewItemButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    [addNewItemButton setFrame:CGRectMake(270, 0, 51, 44)];
-    [addNewItemButton setImage:[UIImage imageNamed:@"add_new_item_button"] forState:UIControlStateNormal];
-    [addNewItemButton addTarget:self action:@selector(addNewItemButtonPressed) forControlEvents:UIControlEventTouchUpInside];
-    [headerView addSubview:addNewItemButton];
-    
+    if(hasAddItemButton) {
+        //the Add Item button
+        UIButton *addNewItemButton = [UIButton buttonWithType:UIButtonTypeCustom];
+        [addNewItemButton setFrame:CGRectMake(270, 0, 51, 44)];
+        [addNewItemButton setImage:[UIImage imageNamed:@"add_new_item_button.png"] forState:UIControlStateNormal];
+        [addNewItemButton addTarget:self action:@selector(addNewItemButtonPressed) forControlEvents:UIControlEventTouchUpInside];
+        [headerView addSubview:addNewItemButton];
+    } else if (hasDoneButton) {
+        //the Done button
+        UIButton *doneButton = [UIButton buttonWithType:UIButtonTypeCustom];
+        [doneButton setFrame:CGRectMake(270, 0, 51, 44)];
+        [doneButton setImage:[UIImage imageNamed:@"done_button.png"] forState:UIControlStateNormal];
+        [doneButton addTarget:self action:@selector(doneButtonPressed) forControlEvents:UIControlEventTouchUpInside];
+        [headerView addSubview:doneButton];
+    }
 
     [self.view insertSubview:headerView atIndex:0];
 }
 
 - (void)backButtonPressed {
+    [self.navigationController popViewControllerAnimated:YES];
+}
+
+- (void)doneButtonPressed {
+    //this method should always be overwritten.
+    //Default behavior is to simply pop the viewcontroller (calling [super doneButtonPressed] is acceptable
     [self.navigationController popViewControllerAnimated:YES];
 }
 

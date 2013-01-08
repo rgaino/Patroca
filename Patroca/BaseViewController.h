@@ -16,10 +16,11 @@
 
 @property (weak, nonatomic) IBOutlet UIButton *loginProfileButton;
 
-- (void)setupHeaderWithBackButton:(BOOL)hasBackButton;
+- (void)setupHeaderWithBackButton:(BOOL)hasBackButton doneButton:(BOOL)hasDoneButton addItemButton:(BOOL)hasAddItemButton;
 - (void)userLoggedInSuccessfully;
 - (void)addNewItemButtonPressed;
 - (void)loginProfileButtonPressed;
 - (void)backButtonPressed;
+- (void)doneButtonPressed;
 
 @end

@@ -56,7 +56,7 @@
 
     [self.contentDisplayCollectionView registerClass:[ItemViewCell class] forCellWithReuseIdentifier:CELL_REUSE_IDENTIFIER];
 
-    [self setupHeaderWithBackButton:NO];
+    [self setupHeaderWithBackButton:NO doneButton:NO addItemButton:YES];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
