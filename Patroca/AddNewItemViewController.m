@@ -91,7 +91,7 @@
     [self presentViewController:imagePicker animated:YES completion:nil];
 }
 
-- (IBAction)doneButtonPressed {
+- (void)doneButtonPressed {
 
     //dismiss keyboard
     [self.view endEditing:YES];
