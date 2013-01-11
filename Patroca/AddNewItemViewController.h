@@ -44,6 +44,7 @@
 
 - (IBAction)takePictureButtonPressed:(id)sender;
 - (IBAction)doneTakingPicturesButtonPressed:(id)sender;
+- (IBAction)backButtonPressed:(id)sender;
 
 - (void)saveItem;
 - (void)setupCameraOverlayView;

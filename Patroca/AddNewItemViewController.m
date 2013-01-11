@@ -13,10 +13,12 @@
 #import "UIImage+Resize.h"
 #import "DatabaseConstants.h"
 
-#define thumbnailSize 50
+#define thumbnailSize 53
 #define fullImageSize 640
+#define croppedSquareImageSize 596
 #define imageCornerRadius 0
 #define thumbnailsAnimationSpeed 0.25f
+#define maxPictures 4
 
 @interface AddNewItemViewController ()
 
@@ -28,7 +30,6 @@
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        self.title = NSLocalizedString(@"Add New Item", nil);
     }
     return self;
 }
@@ -56,8 +57,8 @@
     itemThumbnails = [[NSMutableArray alloc] init];
     itemImages = [[NSMutableArray alloc] init];
     
-    xSpacing = 10;
-    xPosition = 0 - thumbnailSize;
+    xSpacing = 24;
+    xPosition = 18;
 
     
     [_itemDescriptionTextView.layer setCornerRadius:10.0f];
@@ -118,6 +119,11 @@
     [locationManager startUpdatingLocation];
 }
 
+- (IBAction)backButtonPressed:(id)sender {
+	[self dismissViewControllerAnimated:NO completion:nil];
+    [super backButtonPressed];
+}
+
 
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
 	
@@ -128,46 +134,56 @@
 
 - (void)savePicture:(UIImage *)picture {
 
+
     float imageWidth = picture.size.width;
     float imageHeight = picture.size.height;
     
     float ratio = imageWidth/fullImageSize;
     CGSize fullImageNewSize = CGSizeMake(imageWidth/ratio, imageHeight/ratio);
         
-    UIImage *fullSize = [picture resizedImage:fullImageNewSize interpolationQuality:kCGInterpolationHigh];
-    UIImage *thumbnail = [picture thumbnailImage:thumbnailSize transparentBorder:0 cornerRadius:imageCornerRadius interpolationQuality:kCGInterpolationHigh];
+    UIImage *resizedImage = [picture resizedImage:fullImageNewSize interpolationQuality:kCGInterpolationHigh];
+    
+    CGRect cropSquare = CGRectMake(fullImageSize - croppedSquareImageSize, fullImageSize - croppedSquareImageSize, croppedSquareImageSize, croppedSquareImageSize);
+    UIImage *croppedSquareImage = [resizedImage croppedImage:cropSquare];
+
+    UIImage *thumbnail = [croppedSquareImage thumbnailImage:thumbnailSize transparentBorder:0 cornerRadius:imageCornerRadius interpolationQuality:kCGInterpolationHigh];
     
     [itemThumbnails addObject:thumbnail];
-    [itemImages addObject:fullSize];
+    [itemImages addObject:croppedSquareImage];
 
-
-    //is the new thumbnail out of bounds on the thumbnail list?
-    if( (xPosition + xSpacing + thumbnailSize + thumbnailSize) > _cameraOverlayView.frame.size.width ) {
-
-        //New image would be out of bounds, so move each thumbnail to the left
-        [UIView beginAnimations:@"Move Out Thumbnails" context:nil];
-        [UIView setAnimationDuration:thumbnailsAnimationSpeed];
-        
-        for(UIView *imageView in _picturesTakenView.subviews) {
-            if( [imageView isKindOfClass:[UIImageView class]] ) {
-
-                float newX = imageView.frame.origin.x - (xSpacing + imageView.frame.size.width);
-                [imageView setFrame:CGRectMake(newX, imageView.frame.origin.y, imageView.frame.size.width, imageView.frame.size.height)];
-            }
-        }
-        
-        
-        [UIView commitAnimations];
-        
-    } else {
-        
-        xPosition +=  (xSpacing + thumbnailSize);
-    }
+    float thumbnailXPosition = xPosition + (xSpacing * (itemThumbnails.count-1) + (thumbnailSize * (itemThumbnails.count-1)) );
     
-    //Create the new thumbnail
+    
+    
+    
+    
+//    //is the new thumbnail out of bounds on the thumbnail list?
+//    if( (xPosition + xSpacing + thumbnailSize + thumbnailSize) > _cameraOverlayView.frame.size.width ) {
+//
+//        //New image would be out of bounds, so move each thumbnail to the left
+//        [UIView beginAnimations:@"Move Out Thumbnails" context:nil];
+//        [UIView setAnimationDuration:thumbnailsAnimationSpeed];
+//        
+//        for(UIView *imageView in _picturesTakenView.subviews) {
+//            if( [imageView isKindOfClass:[UIImageView class]] ) {
+//
+//                float newX = imageView.frame.origin.x - (xSpacing + imageView.frame.size.width);
+//                [imageView setFrame:CGRectMake(newX, imageView.frame.origin.y, imageView.frame.size.width, imageView.frame.size.height)];
+//            }
+//        }
+//        
+//        
+//        [UIView commitAnimations];
+//        
+//    } else {
+//        
+//        xPosition +=  (xSpacing + thumbnailSize);
+//    }
+    
+    //Create the new thumbnail imageView
     UIImageView *thumbnailImageView = [[UIImageView alloc] initWithImage:thumbnail];
-    float yPosition = (10+_picturesTakenView.frame.size.height); //image starts off screen then animates up
-    [thumbnailImageView setFrame:CGRectMake(xPosition, yPosition, thumbnailImageView.frame.size.width, thumbnailImageView.frame.size.height)];
+    float yPosition = _picturesTakenView.frame.size.height; //image starts off screen then animates up
+    [thumbnailImageView setFrame:CGRectMake(thumbnailXPosition, yPosition, thumbnailImageView.frame.size.width, thumbnailImageView.frame.size.height)];
     [_picturesTakenView addSubview:thumbnailImageView];
 
     //Animate thumbnail up
