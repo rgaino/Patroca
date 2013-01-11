@@ -88,9 +88,8 @@
 
 - (void)setupWholeScreenScrollView {
     
-    contentHeightWithoutCommentsView = _itemImagesScrollView.frame.size.height;
     
-    UILabel *itemDescriptionLabel = [[UILabel alloc] initWithFrame:CGRectMake(15,515, 290, 15)];
+    UILabel *itemDescriptionLabel = [[UILabel alloc] initWithFrame:CGRectMake(15, 355, 290, 15)];
     [itemDescriptionLabel setText:[_itemObject objectForKey:DB_FIELD_ITEM_DESCRIPTION]];
     [itemDescriptionLabel setFont:[UIFont systemFontOfSize:14]];
     [itemDescriptionLabel setBackgroundColor:[UIColor clearColor]];
@@ -103,8 +102,7 @@
     [itemDescriptionLabel adjustHeight];
     [_wholeScreenScrollView addSubview:itemDescriptionLabel];
     
-    contentHeightWithoutCommentsView += (itemDescriptionLabel.frame.origin.y - _wholeScreenScrollView.frame.size.height);
-    contentHeightWithoutCommentsView += itemDescriptionLabel.frame.size.height;
+    contentHeightWithoutCommentsView = itemDescriptionLabel.frame.origin.y + itemDescriptionLabel.frame.size.height;
     
     loadingCommentsActivityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
     [loadingCommentsActivityIndicator setFrame:CGRectMake(142, contentHeightWithoutCommentsView-50, 37, 37)];
@@ -306,8 +304,6 @@
     
     [itemImagesQuery findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
         
-        [_imagesPageControl setNumberOfPages:[objects count]];
-        [_imagesPageControl setCurrentPage:0];
         numberOfImages = [objects count];
 
         float xPosition = 0;
@@ -319,43 +315,17 @@
             NSString *imageURL = [imageFile url];
 
             UIImageView *itemImageView = [[UIImageView alloc] init];
-            [itemImageView setFrame:CGRectMake(xPosition, 0, 320, 480)];
+            [itemImageView setFrame:CGRectMake(xPosition, 0, 320, 320)];
             [itemImageView setImageWithURL:[NSURL URLWithString:imageURL] placeholderImage:[UIImage imageNamed:@"placeholder.png"]];
             
             [_itemImagesScrollView addSubview:itemImageView];
             
             xPosition += itemImageView.frame.size.width;
          }
-        [_itemImagesScrollView setContentSize:CGSizeMake(xPosition, 480)];
-        
-         [self performSelector:@selector(adjustPageControl) withObject:nil afterDelay:1.0f];
-
+        [_itemImagesScrollView setContentSize:CGSizeMake(xPosition, 320)];
     }];
 }
 
-- (void)adjustPageControl {
-    
-//    //this method is a workaround for a bug where the PageControl's frame would not change unless we wait a second after the view loads completely
-//    
-//    float pageControlWidth = _imagesPageControl.frame.size.width;
-//    float pageControlNewWidth = 16 * numberOfImages;
-//    float pageControlNewX = _imagesPageControl.frame.origin.x + (pageControlWidth-pageControlNewWidth);
-//    [_imagesPageControl setFrame:CGRectMake(pageControlNewX, _imagesPageControl.frame.origin.y,
-//                                            pageControlNewWidth, _imagesPageControl.frame.size.height)];
-//    
-//    float xPosition = 307;
-//    for(int i=1; i<=numberOfImages; i++) {
-//        UIImageView *circleShadeImageView = [[UIImageView alloc] initWithFrame:CGRectMake(xPosition, 158, 8, 8)];
-//        [circleShadeImageView setImage:[UIImage imageNamed:@"circle_shade.png"]];
-//        [self.view addSubview:circleShadeImageView];
-//        
-//        xPosition-=16;
-//    }
-//
-//    [self.view bringSubviewToFront:_imagesPageControl];
-//    
-//    [_imagesPageControl setHidden:NO];
-}
 
 - (void)sendCommentButtonPressed {
     
@@ -374,22 +344,6 @@
 - (void)recommendThisItem {}
 - (void)reportThisItem {}
 
-#pragma mark DELEGATES
 
-- (void)textViewDidBeginEditing:(UITextView *)textView {
-    
-}
-
-- (void)textViewDidEndEditing:(UITextView *)textView {
-}
-
-
-- (void)scrollViewDidScroll:(UIScrollView *)sender {
-
-    // Update the page when more than 50% of the previous/next page is visible
-    CGFloat pageWidth = _itemImagesScrollView.frame.size.width;
-    int page = floor((_itemImagesScrollView.contentOffset.x - pageWidth / 2) / pageWidth) + 1;
-    [_imagesPageControl setCurrentPage:page];
-}
 
 @end
