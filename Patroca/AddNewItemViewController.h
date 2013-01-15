@@ -41,10 +41,13 @@
 @property (strong, nonatomic) IBOutlet UIView *cameraOverlayView;
 @property (weak, nonatomic) IBOutlet UIButton *doneTakingPicturesButton;
 @property (weak, nonatomic) IBOutlet UITextView *itemDescriptionTextView;
+@property (weak, nonatomic) IBOutlet UIButton *flashButton;
 
 - (IBAction)takePictureButtonPressed:(id)sender;
 - (IBAction)doneTakingPicturesButtonPressed:(id)sender;
 - (IBAction)backButtonPressed:(id)sender;
+- (IBAction)flashButtonPressed:(id)sender;
+
 
 - (void)saveItem;
 - (void)setupCameraOverlayView;

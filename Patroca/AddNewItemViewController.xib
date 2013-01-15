@@ -258,7 +258,7 @@
 								<reference key="IBUINormalTitleShadowColor" ref="657919625"/>
 								<object class="NSCustomResource" key="IBUINormalImage">
 									<string key="NSClassName">NSImage</string>
-									<string key="NSResourceName">flash_button_auto.png</string>
+									<string key="NSResourceName">flash_button_off.png</string>
 								</object>
 								<reference key="IBUIFontDescription" ref="615425418"/>
 								<reference key="IBUIFont" ref="669114029"/>
@@ -444,6 +444,14 @@
 					<int key="connectionID">21</int>
 				</object>
 				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">flashButton</string>
+						<reference key="source" ref="372490531"/>
+						<reference key="destination" ref="943415395"/>
+					</object>
+					<int key="connectionID">42</int>
+				</object>
+				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchEventConnection" key="connection">
 						<string key="label">takePictureButtonPressed:</string>
 						<reference key="source" ref="670862178"/>
@@ -478,6 +486,15 @@
 						<int key="IBEventType">7</int>
 					</object>
 					<int key="connectionID">33</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchEventConnection" key="connection">
+						<string key="label">flashButtonPressed:</string>
+						<reference key="source" ref="943415395"/>
+						<reference key="destination" ref="372490531"/>
+						<int key="IBEventType">7</int>
+					</object>
+					<int key="connectionID">41</int>
 				</object>
 			</array>
 			<object class="IBMutableOrderedSet" key="objectRecords">
@@ -649,7 +666,7 @@
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">39</int>
+			<int key="maxID">42</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -659,6 +676,7 @@
 					<dictionary class="NSMutableDictionary" key="actions">
 						<string key="backButtonPressed:">id</string>
 						<string key="doneTakingPicturesButtonPressed:">id</string>
+						<string key="flashButtonPressed:">id</string>
 						<string key="takePictureButtonPressed:">id</string>
 					</dictionary>
 					<dictionary class="NSMutableDictionary" key="actionInfosByName">
@@ -670,6 +688,10 @@
 							<string key="name">doneTakingPicturesButtonPressed:</string>
 							<string key="candidateClassName">id</string>
 						</object>
+						<object class="IBActionInfo" key="flashButtonPressed:">
+							<string key="name">flashButtonPressed:</string>
+							<string key="candidateClassName">id</string>
+						</object>
 						<object class="IBActionInfo" key="takePictureButtonPressed:">
 							<string key="name">takePictureButtonPressed:</string>
 							<string key="candidateClassName">id</string>
@@ -679,6 +701,7 @@
 						<string key="cameraOverlayView">UIView</string>
 						<string key="doneButton">UIButton</string>
 						<string key="doneTakingPicturesButton">UIButton</string>
+						<string key="flashButton">UIButton</string>
 						<string key="itemDescriptionTextView">UITextView</string>
 						<string key="itemNameTextField">UITextField</string>
 						<string key="picturesTakenView">UIView</string>
@@ -694,6 +717,10 @@
 						</object>
 						<object class="IBToOneOutletInfo" key="doneTakingPicturesButton">
 							<string key="name">doneTakingPicturesButton</string>
+							<string key="candidateClassName">UIButton</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="flashButton">
+							<string key="name">flashButton</string>
 							<string key="candidateClassName">UIButton</string>
 						</object>
 						<object class="IBToOneOutletInfo" key="itemDescriptionTextView">
@@ -743,7 +770,7 @@
 			<string key="back_button.png">{51, 45}</string>
 			<string key="camera_background.png">{321, 548}</string>
 			<string key="done_button.png">{51, 45}</string>
-			<string key="flash_button_auto.png">{60, 44}</string>
+			<string key="flash_button_off.png">{60, 44}</string>
 			<string key="gallery_button.png">{60, 45}</string>
 			<string key="picture_camera_thumbnail.png">{53, 53}</string>
 			<string key="shutter_button.png">{100, 45}</string>

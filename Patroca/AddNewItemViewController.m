@@ -72,6 +72,8 @@
 
 - (void)setupCameraOverlayView {
     [_cameraOverlayView setBackgroundColor:[UIColor clearColor]];
+    [_flashButton setHidden:![UIImagePickerController isFlashAvailableForCameraDevice:UIImagePickerControllerCameraDeviceRear]];
+
 }
 
 - (void)setupImagePicker {
@@ -122,6 +124,22 @@
 - (IBAction)backButtonPressed:(id)sender {
 	[self dismissViewControllerAnimated:NO completion:nil];
     [super backButtonPressed];
+}
+
+- (IBAction)flashButtonPressed:(id)sender {
+    
+	if( [imagePicker cameraFlashMode] == UIImagePickerControllerCameraFlashModeOff ) {
+		[_flashButton setImage:[UIImage imageNamed:@"flash_button_auto.png"] forState:UIControlStateNormal];
+		[imagePicker setCameraFlashMode:UIImagePickerControllerCameraFlashModeAuto];
+	}
+	else if( [imagePicker cameraFlashMode] == UIImagePickerControllerCameraFlashModeAuto ) {
+		[_flashButton setImage:[UIImage imageNamed:@"flash_button_on.png"] forState:UIControlStateNormal];
+		[imagePicker setCameraFlashMode:UIImagePickerControllerCameraFlashModeOn];
+	}
+	else if( [imagePicker cameraFlashMode] == UIImagePickerControllerCameraFlashModeOn ) {
+		[_flashButton setImage:[UIImage imageNamed:@"flash_button_off.png"] forState:UIControlStateNormal];
+		[imagePicker setCameraFlashMode:UIImagePickerControllerCameraFlashModeOff];
+	}
 }
 
 
