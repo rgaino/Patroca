@@ -29,6 +29,7 @@
     float thumbnailSize;
     
  	UIImagePickerController *imagePicker;
+    UIImagePickerController *galleryImagePicker;
                                                               
     CLLocationManager *locationManager;
     PFGeoPoint *itemLocationPoint;
@@ -47,6 +48,7 @@
 - (IBAction)doneTakingPicturesButtonPressed:(id)sender;
 - (IBAction)backButtonPressed:(id)sender;
 - (IBAction)flashButtonPressed:(id)sender;
+- (IBAction)galleryButtonPressed:(id)sender;
 
 
 - (void)saveItem;

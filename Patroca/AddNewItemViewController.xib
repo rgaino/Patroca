@@ -265,7 +265,7 @@
 							</object>
 							<object class="IBUIButton" id="1070282116">
 								<reference key="NSNextResponder" ref="857930868"/>
-								<int key="NSvFlags">292</int>
+								<int key="NSvFlags">-2147483356</int>
 								<string key="NSFrame">{{209, 31}, {60, 45}}</string>
 								<reference key="NSSuperview" ref="857930868"/>
 								<reference key="NSWindow"/>
@@ -496,6 +496,15 @@
 					</object>
 					<int key="connectionID">41</int>
 				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchEventConnection" key="connection">
+						<string key="label">galleryButtonPressed:</string>
+						<reference key="source" ref="1070282116"/>
+						<reference key="destination" ref="372490531"/>
+						<int key="IBEventType">7</int>
+					</object>
+					<int key="connectionID">43</int>
+				</object>
 			</array>
 			<object class="IBMutableOrderedSet" key="objectRecords">
 				<array key="orderedObjects">
@@ -666,7 +675,7 @@
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">42</int>
+			<int key="maxID">43</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -677,6 +686,7 @@
 						<string key="backButtonPressed:">id</string>
 						<string key="doneTakingPicturesButtonPressed:">id</string>
 						<string key="flashButtonPressed:">id</string>
+						<string key="galleryButtonPressed:">id</string>
 						<string key="takePictureButtonPressed:">id</string>
 					</dictionary>
 					<dictionary class="NSMutableDictionary" key="actionInfosByName">
@@ -690,6 +700,10 @@
 						</object>
 						<object class="IBActionInfo" key="flashButtonPressed:">
 							<string key="name">flashButtonPressed:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBActionInfo" key="galleryButtonPressed:">
+							<string key="name">galleryButtonPressed:</string>
 							<string key="candidateClassName">id</string>
 						</object>
 						<object class="IBActionInfo" key="takePictureButtonPressed:">

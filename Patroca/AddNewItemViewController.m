@@ -12,6 +12,7 @@
 #import "MBProgressHUD.h"
 #import "UIImage+Resize.h"
 #import "DatabaseConstants.h"
+#import <MobileCoreServices/UTCoreTypes.h>
 
 #define thumbnailSize 53
 #define fullImageSize 640
@@ -45,6 +46,8 @@
     [locationManager setDelegate:self];
     [locationManager setDistanceFilter:kCLDistanceFilterNone];
     [locationManager setDesiredAccuracy:kCLLocationAccuracyBest];
+    
+    galleryImagePicker = nil;
     
     //setup the views
     [self localizeStrings];
@@ -142,9 +145,33 @@
 	}
 }
 
+- (IBAction)galleryButtonPressed:(id)sender {
+
+    galleryImagePicker = [[UIImagePickerController alloc] init];
+	[galleryImagePicker setSourceType:UIImagePickerControllerSourceTypePhotoLibrary];
+	[galleryImagePicker setDelegate:self];
+	[galleryImagePicker setAllowsEditing:NO];
+    [galleryImagePicker setMediaTypes:[NSArray arrayWithObject:(NSString *)kUTTypeImage]];
+    [self presentViewController:galleryImagePicker animated:YES completion:nil];
+
+    
+    
+//	[galleryImagePicker setMediaTypes:[UIImagePickerController availableMediaTypesForSourceType:[imagePicker sourceType]]];
+    
+//    if([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypePhotoLibrary]) {
+//        [imagePicker setSourceType:UIImagePickerControllerSourceTypePhotoLibrary];
+//    }
+}
+
 
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
 	
+    if( galleryImagePicker!=nil ) {
+        [self dismissViewControllerAnimated:NO completion:nil];
+        galleryImagePicker = nil;
+    }
+
+    
 	UIImage *picture = [info objectForKey:UIImagePickerControllerOriginalImage];
     [self savePicture:picture];
 	return;
