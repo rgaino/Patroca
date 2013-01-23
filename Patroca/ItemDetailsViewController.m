@@ -238,35 +238,7 @@
     [commentsView addSubview:newCommentTextView];
     [commentsView addSubview:sendCommentButton];
     
-    
-    //The "recommend" label and button and the "report"  button
-    commentsViewFinalHeight+=10;
-    UILabel *recommendLabel = [[UILabel alloc] initWithFrame:CGRectMake(newCommentBackgroundImageView.frame.origin.x, commentsViewFinalHeight, 165,40)];
-    [recommendLabel setText:@"Achou que isso tem tudo a ver com alguém?"];
-    [recommendLabel setNumberOfLines:2];
-    [recommendLabel setFont:[UIFont boldSystemFontOfSize:14]];
-    [recommendLabel setTextColor:[UIColor colorWithRed:36/255.f green:190/255.f blue:202/255.f alpha:1.0f]];
-    [recommendLabel setBackgroundColor:[UIColor clearColor]];
-    commentsViewFinalHeight+=recommendLabel.frame.size.height;
-    
-    commentsViewFinalHeight+=10;
-    UIButton *recommendButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    [recommendButton setFrame:CGRectMake(newCommentBackgroundImageView.frame.origin.x, commentsViewFinalHeight, 104, 28)];
-    [recommendButton setImage:[UIImage imageNamed:@"recommend_item_button.png"] forState:UIControlStateNormal];
-    [recommendButton addTarget:self action:@selector(recommendThisItem) forControlEvents:UIControlEventTouchUpInside];
-    commentsViewFinalHeight+=10;
-
-    UIButton *reportButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    [reportButton setFrame:CGRectMake(0, commentsViewFinalHeight, 320, 46)];
-    [reportButton setImage:[UIImage imageNamed:@"report_this_item.png"] forState:UIControlStateNormal];
-    [reportButton addTarget:self action:@selector(reportThisItem) forControlEvents:UIControlEventTouchUpInside];
-    commentsViewFinalHeight+=reportButton.frame.size.height;
-
-    
-    [commentsView addSubview:reportButton];
-    [commentsView addSubview:recommendLabel];
-    [commentsView addSubview:recommendButton];
-    
+    commentsViewFinalHeight+=92; //some additional space at the bottom to make room for the footer
     
     //finalize it
     [commentsView setFrame:CGRectMake(0, commentsHeaderImageView.frame.origin.y + 18, _wholeScreenScrollView.frame.size.width, commentsViewFinalHeight)];
@@ -341,8 +313,9 @@
     [self showItemComments];
 }
 
-- (void)recommendThisItem {}
-- (void)reportThisItem {}
+- (IBAction)recommendThisItem:(id)sender {}
+- (IBAction)reportThisItem:(id)sender {}
+
 
 
 

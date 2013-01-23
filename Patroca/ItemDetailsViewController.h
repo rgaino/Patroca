@@ -37,7 +37,7 @@
 - (void)keyboardDidShow:(NSNotification*)notification;
 - (void)keyboardDidHide:(NSNotification*)notification;
 - (void)scrollWholeScreenToBottom;
-- (void)recommendThisItem;
-- (void)reportThisItem;
+- (IBAction)recommendThisItem:(id)sender;
+- (IBAction)reportThisItem:(id)sender;
 
 @end
