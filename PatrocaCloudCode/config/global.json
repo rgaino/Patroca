@@ -1,0 +1,11 @@
+{
+    "applications": {
+        "Patroca": {
+            "applicationId": "oqM758m32dGwvjzOwwm5SP4yWTBFeteAPfX7U0Sq", 
+            "masterKey": "UXESGjS2w0FoKd0mj0EdiNR1ruHSCYSAUDFAjWHY"
+        }, 
+        "_default": {
+            "link": "Patroca"
+        }
+    }
+}
