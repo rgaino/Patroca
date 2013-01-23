@@ -38,6 +38,9 @@
 {
     [super viewDidLoad];
     [self localizeStrings];
+    
+    [self setupHeaderWithBackButton:YES doneButton:NO addItemButton:NO];
+
 
     HUD = [[MBProgressHUD alloc] initWithView:self.navigationController.view];
 	[HUD setDimBackground:YES];
