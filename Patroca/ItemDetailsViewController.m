@@ -105,7 +105,7 @@
     contentHeightWithoutCommentsView = itemDescriptionLabel.frame.origin.y + itemDescriptionLabel.frame.size.height;
     
     loadingCommentsActivityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
-    [loadingCommentsActivityIndicator setFrame:CGRectMake(142, contentHeightWithoutCommentsView-50, 37, 37)];
+    [loadingCommentsActivityIndicator setFrame:CGRectMake(142, contentHeightWithoutCommentsView+5, 37, 37)];
     [loadingCommentsActivityIndicator setHidesWhenStopped:YES];
     [loadingCommentsActivityIndicator startAnimating];
     commentsViewYPosition = loadingCommentsActivityIndicator.frame.origin.y;
@@ -140,7 +140,7 @@
     
     //building the header images and title for commentsView
     UIImageView *commentsHeaderImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"comments_header.png"]];
-    [commentsHeaderImageView setFrame:CGRectMake(0, commentsViewYPosition+70, 320, 44)];
+    [commentsHeaderImageView setFrame:CGRectMake(0, commentsViewYPosition+30, 320, 44)];
     
     UILabel *commentsViewTitleLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, commentsHeaderImageView.frame.origin.y + 52, 320, 20)];
     [commentsViewTitleLabel setTextAlignment:NSTextAlignmentCenter];
