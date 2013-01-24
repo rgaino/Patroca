@@ -198,33 +198,6 @@
 
     float thumbnailXPosition = xPosition + (xSpacing * (itemThumbnails.count-1) + (thumbnailSize * (itemThumbnails.count-1)) );
     
-    
-    
-    
-    
-//    //is the new thumbnail out of bounds on the thumbnail list?
-//    if( (xPosition + xSpacing + thumbnailSize + thumbnailSize) > _cameraOverlayView.frame.size.width ) {
-//
-//        //New image would be out of bounds, so move each thumbnail to the left
-//        [UIView beginAnimations:@"Move Out Thumbnails" context:nil];
-//        [UIView setAnimationDuration:thumbnailsAnimationSpeed];
-//        
-//        for(UIView *imageView in _picturesTakenView.subviews) {
-//            if( [imageView isKindOfClass:[UIImageView class]] ) {
-//
-//                float newX = imageView.frame.origin.x - (xSpacing + imageView.frame.size.width);
-//                [imageView setFrame:CGRectMake(newX, imageView.frame.origin.y, imageView.frame.size.width, imageView.frame.size.height)];
-//            }
-//        }
-//        
-//        
-//        [UIView commitAnimations];
-//        
-//    } else {
-//        
-//        xPosition +=  (xSpacing + thumbnailSize);
-//    }
-    
     //Create the new thumbnail imageView
     UIImageView *thumbnailImageView = [[UIImageView alloc] initWithImage:thumbnail];
     float yPosition = _picturesTakenView.frame.size.height; //image starts off screen then animates up
@@ -236,6 +209,11 @@
     [UIView setAnimationDuration:thumbnailsAnimationSpeed];
     thumbnailImageView.transform = CGAffineTransformMakeTranslation(0, -_picturesTakenView.frame.size.height);
     [UIView commitAnimations];
+    
+    if( itemImages.count >= maxPictures ) {
+//        [self doneTakingPicturesButtonPressed:nil];
+        [self performSelector:@selector(doneTakingPicturesButtonPressed:) withObject:nil afterDelay:thumbnailsAnimationSpeed];
+    }
 }
 
 
@@ -255,7 +233,7 @@
         [HUD setLabelText:[NSString stringWithFormat:NSLocalizedString(@"Saving image %d of %d...", nil), i+1, [itemThumbnails count]]];
         
         UIImage *fullImage = [itemImages objectAtIndex:i];
-        NSData *imageData = UIImageJPEGRepresentation(fullImage, 0.5f);
+        NSData *imageData = UIImageJPEGRepresentation(fullImage, 0.3f);
         PFFile *imageFile = [PFFile fileWithName:@"image.png" data:imageData];
         
         PFObject *itemImagesObject = [PFObject objectWithClassName:DB_TABLE_ITEM_IMAGES];
