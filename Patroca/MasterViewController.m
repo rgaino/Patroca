@@ -54,8 +54,8 @@
 
 - (void)viewDidLoad {
 
+    totalCommentsForItemsDictionary = [[NSMutableDictionary alloc] init];
     [self.contentDisplayCollectionView registerClass:[ItemViewCell class] forCellWithReuseIdentifier:CELL_REUSE_IDENTIFIER];
-
     [self setupHeaderWithBackButton:NO doneButton:NO addItemButton:YES];
 }
 
@@ -127,11 +127,39 @@
 - (void)populateCollectionView {
     
     NSLog(@"Populating list with %d items", itemDataSource.items.count);
-
     [[UserCache getInstance] updateUserNameCacheDictionaryForItems:itemDataSource.items];
-
     [_contentDisplayCollectionView reloadData];
 
+}
+
+- (void)populateTotalLikesWithDictionary:(NSDictionary*)tempTotalCommentsForItemsDictionary {
+    
+    //updating the dictionary with items and their total comments...
+    NSArray *itemIDs = [tempTotalCommentsForItemsDictionary objectForKey:@"item_ids"];
+    NSArray *itemTotalComments = [tempTotalCommentsForItemsDictionary objectForKey:@"item_comments"];
+    for(int i=0; i<itemIDs.count; i++) {
+        [totalCommentsForItemsDictionary setObject:[itemTotalComments objectAtIndex:i] forKey:[itemIDs objectAtIndex:i]];
+    }
+    
+    //...then update all visible cells
+    for(ItemViewCell *itemViewCell in [_contentDisplayCollectionView visibleCells]) {
+        [self updateTotalLikesForItemViewCell:itemViewCell];
+    }
+}
+
+- (void)updateTotalLikesForItemViewCell:(ItemViewCell*)itemViewCell {
+    
+    //lookup item on totalCommentsForItemsDictionary and update its cell
+    PFObject *cellItemObject = [itemViewCell cellItemObject];
+    NSString *itemId = [cellItemObject objectId];
+    
+    int totalComments = 0;
+    
+    NSString *totalCommentsString = [totalCommentsForItemsDictionary objectForKey:itemId];
+    if(totalCommentsString != nil) {
+        totalComments = [totalCommentsString intValue];
+    }
+    [itemViewCell updateTotalComments:totalComments];
 }
 
 
@@ -152,6 +180,8 @@
     
     PFObject *item = [[itemDataSource items] objectAtIndex:indexPath.row];
     [itemViewCell setupCellWithItem:item];
+    
+    [self updateTotalLikesForItemViewCell:itemViewCell];
     
     return itemViewCell;
 }

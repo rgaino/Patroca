@@ -9,10 +9,12 @@
 #import "BaseViewController.h"
 
 @class ItemDataSource;
+@class ItemViewCell;
 
 @interface MasterViewController : BaseViewController <UICollectionViewDataSource, UICollectionViewDelegateFlowLayout> {
     
     ItemDataSource *itemDataSource;
+    NSMutableDictionary *totalCommentsForItemsDictionary;
     
     UIColor *labelSelectedColor;
     UIColor *labelUnselectedColor;
@@ -35,5 +37,7 @@
 - (void)loadFriendsItems;
 - (void)loadNearbyItems;
 - (void)populateCollectionView;
+- (void)populateTotalLikesWithDictionary:(NSDictionary*)tempTotalCommentsForItemsDictionary;
+- (void)updateTotalLikesForItemViewCell:(ItemViewCell*)itemViewCell;
 
 @end

@@ -33,6 +33,8 @@
 
 - (void)setupCellWithItem:(PFObject*)itemObject {
     
+    [self setCellItemObject:itemObject];
+    
     [self.itemNameLabel setText:[itemObject objectForKey:DB_FIELD_ITEM_NAME]];
     
     PFUser *itemUser = [itemObject objectForKey:DB_FIELD_USER_ID];
@@ -52,5 +54,8 @@
 
 }
 
+- (void)updateTotalComments:(int)totalComments {
+    [_totalCommentsLabel setText:[NSString stringWithFormat:@"%d", totalComments]];
+}
 
 @end
