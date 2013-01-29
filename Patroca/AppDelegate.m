@@ -20,6 +20,10 @@
     [PFFacebookUtils initializeWithApplicationId:@"100901256728525"];
 
     
+    // Register for push notifications
+    [application registerForRemoteNotificationTypes:
+     UIRemoteNotificationTypeBadge |
+     UIRemoteNotificationTypeAlert ];
     
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     // Override point for customization after application launch.
@@ -36,10 +40,26 @@
     return YES;
 }
 
+- (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)newDeviceToken
+{
+    [PFPush storeDeviceToken:newDeviceToken]; // Send parse the device token
+    // Subscribe this user to the broadcast channel, ""
+    [[PFInstallation currentInstallation] addUniqueObject:@"" forKey:@"channels"];
+    [[PFInstallation currentInstallation] saveEventually];
+}
+
+#pragma mark Push Notification methods
+
+- (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo {
+    [PFPush handlePush:userInfo];
+}
+
 - (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation {
     
     return [PFFacebookUtils handleOpenURL:url];
 }
+
+#pragma mark Unused signatured methods
 
 - (void)applicationWillResignActive:(UIApplication *)application
 {
