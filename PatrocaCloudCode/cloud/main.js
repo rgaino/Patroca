@@ -1,9 +1,6 @@
 Parse.Cloud.define("totalCommentsForItems", function(request, response) {
 
-	console.log("BEGIN ---------");
-
 	var _ = require("underscore");
-
 	var query = new Parse.Query("Item_Comments");
 
 	var pointers = _.map(request.params.item_ids_array, function(item_id) {
@@ -17,8 +14,6 @@ Parse.Cloud.define("totalCommentsForItems", function(request, response) {
 	query.find({
 		success: function(results) {
 		  
-		  	// console.log(results);
-
 			var returnData = {item_ids: [], item_comments: []};
 
 			for (var i = 0; i < results.length; ++i) {
@@ -31,10 +26,8 @@ Parse.Cloud.define("totalCommentsForItems", function(request, response) {
 				returnData.item_comments[returnData.item_ids.indexOf(item_id)] += 1;
 			}
 
-			// console.log(returnData);
-
 			response.success(returnData);
-			},
+		},
 		error: function() {
 		  response.error("Lookup failed");
 		}
