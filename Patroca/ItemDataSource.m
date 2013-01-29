@@ -55,21 +55,9 @@
                         
                         _items = [NSArray arrayWithArray:objects];
                         [_masterViewController populateCollectionView];
-
-                        //calling CloudCode function to get a count of comments for each item
-                        NSMutableArray *ids = [[NSMutableArray alloc] init];
-                        for(PFObject *oneItem in objects) {
-                            [ids addObject:oneItem.objectId];
-                        }
-                        NSDictionary *params = [NSDictionary dictionaryWithObject:ids forKey:@"item_ids_array"];
-
-                        [PFCloud callFunctionInBackground:@"totalCommentsForItems" withParameters:params block:^(id object, NSError *error) {
-                            
-                            NSDictionary *totalCommentsForItemsDictionary = (NSDictionary*) object;
-                            [_masterViewController populateTotalLikesWithDictionary:totalCommentsForItemsDictionary];
-                            
-                        }];
                         
+                        [self getTotalCommentsForItems:objects];
+
                     } else {
                         // Log details of the failure
                         NSLog(@"Error: %@ %@", error, [error userInfo]);
@@ -109,13 +97,34 @@
     [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
         if (!error) {
             myLocationPoint = nil;
+
             _items = [NSArray arrayWithArray:objects];
             [_masterViewController populateCollectionView];
+            
+            [self getTotalCommentsForItems:objects];
+
         } else {
             // Log details of the failure
             NSLog(@"Error: %@ %@", error, [error userInfo]);
             _items = [NSArray array];
         }
+    }];
+}
+
+- (void)getTotalCommentsForItems:(NSArray*)objects {
+    
+    //calling CloudCode function to get a count of comments for each item
+    NSMutableArray *ids = [[NSMutableArray alloc] init];
+    for(PFObject *oneItem in objects) {
+        [ids addObject:oneItem.objectId];
+    }
+    NSDictionary *params = [NSDictionary dictionaryWithObject:ids forKey:@"item_ids_array"];
+    
+    [PFCloud callFunctionInBackground:@"totalCommentsForItems" withParameters:params block:^(id object, NSError *error) {
+        
+        NSDictionary *totalCommentsForItemsDictionary = (NSDictionary*) object;
+        [_masterViewController populateTotalLikesWithDictionary:totalCommentsForItemsDictionary];
+        
     }];
 }
 

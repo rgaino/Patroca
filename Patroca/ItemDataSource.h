@@ -23,6 +23,6 @@
 
 - (void)getFriendsItemsAndReturn;
 - (void)getNearbyItemsAndReturn;
-
+- (void)getTotalCommentsForItems:(NSArray*)objects;
 
 @end
