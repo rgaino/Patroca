@@ -303,13 +303,18 @@
     
     [newCommentTextView resignFirstResponder];
     
+    //save the comment
     PFObject *newItemComment = [PFObject objectWithClassName:DB_TABLE_ITEM_COMMENTS];
     [newItemComment setObject:[newCommentTextView text] forKey:DB_FIELD_ITEM_COMMENT_TEXT];
     [newItemComment setObject:_itemObject forKey:DB_FIELD_ITEM_ID];
     [newItemComment setObject:[PFUser currentUser] forKey:DB_FIELD_USER_ID];
-    
     [commentObjects addObject:newItemComment];
     [newItemComment saveEventually];
+    
+    //subscribe the user for push notifications on this item
+    NSString *subscribeChannel = [NSString stringWithFormat:NOTIFICATIONS_COMMENTS_ON_ITEM, _itemObject.objectId];
+    [PFPush subscribeToChannelInBackground:subscribeChannel];
+    
     [self showItemComments];
 }
 
