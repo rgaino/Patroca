@@ -251,6 +251,11 @@
     [currentItem save];
     NSLog(@"Item saved!");
 
+    //subscribe the user for push notifications on this item
+    NSString *subscribeChannel = [NSString stringWithFormat:NOTIFICATIONS_COMMENTS_ON_ITEM, currentItem.objectId];
+    [PFPush subscribeToChannelInBackground:subscribeChannel];
+    
+
     HUD.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"37x-Checkmark.png"]];
 	HUD.mode = MBProgressHUDModeCustomView;
 	HUD.labelText = NSLocalizedString(@"Saved!", nil);
