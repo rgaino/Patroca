@@ -45,5 +45,8 @@ NSString* const DB_FIELD_ITEM_COMMENT_TEXT = @"comment_text";
 //Item_Likes table
 NSString* const DB_TABLE_ITEM_LIKES = @"Item_Likes";
 
+//Push Notifications channel names
+NSString* const NOTIFICATIONS_COMMENTS_ON_ITEM = @"comments_on_item_%@";
+
 
 @end

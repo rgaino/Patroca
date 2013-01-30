@@ -25,6 +25,10 @@
      UIRemoteNotificationTypeBadge |
      UIRemoteNotificationTypeAlert ];
     
+    // Obtain the installation object for the current device
+    PFInstallation *myInstallation = [PFInstallation currentInstallation];
+    [myInstallation saveInBackground];
+    
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     // Override point for customization after application launch.
     

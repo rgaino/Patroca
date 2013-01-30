@@ -40,6 +40,8 @@ extern NSString* const DB_FIELD_ITEM_COMMENT_TEXT;
 //Item_Likes table
 extern NSString* const DB_TABLE_ITEM_LIKES;
 
+//Push Notifications channel names
+extern NSString* const NOTIFICATIONS_COMMENTS_ON_ITEM;
 
 @interface DatabaseConstants : NSObject {
 
