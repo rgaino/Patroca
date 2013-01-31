@@ -55,9 +55,16 @@ Parse.Cloud.afterSave("Item_Comments", function(request) {
 		success: function(user) {
 			var commenterName = user.get("name");
 			var message = "Novo comentário de " + commenterName;
+
 			//send Push notification
+			var pushQuery = new Parse.Query(Parse.Installation);
+			pushQuery.equalTo('channels', subscribeChannel); 
+			pushQuery.notEqualTo('user_id', user.id); //excludes the user who wrote the comment
+
+
 			Parse.Push.send({
-			  channels: [ subscribeChannel ],
+			  // channels: [ subscribeChannel ],
+			  where: pushQuery,
 			  data: {
 			    alert: message
 			  }

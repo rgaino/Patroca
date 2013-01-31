@@ -103,6 +103,10 @@
     } failure:^(NSError *error) {
         
     }];
+    
+    PFInstallation *myInstallation = [PFInstallation currentInstallation];
+    [myInstallation setObject:[PFUser currentUser] forKey:DB_FIELD_USER_ID];
+    [myInstallation saveEventually];
 }
 
 - (void)loginProfileButtonPressed {
