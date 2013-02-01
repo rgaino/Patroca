@@ -75,6 +75,12 @@
 
 
 -(void) userLoggedInSuccessfully {
+    //call the userLoggedInSuccessfully method on the Master VC
+    NSArray *viewControllers = self.navigationController.viewControllers;
+    BaseViewController *rootViewController = (BaseViewController*)[viewControllers objectAtIndex:0];
+    [rootViewController userLoggedInSuccessfully];
+    
+    //pop out
     [self.navigationController popViewControllerAnimated:YES];
 }
 

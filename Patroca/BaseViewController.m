@@ -97,11 +97,12 @@
 
 -(void) userLoggedInSuccessfully {
     
+    [_loginProfileButton setImage:[UIImage imageNamed:@"add_new_item_button.png"] forState:UIControlStateNormal];
     NSURL *profilePictureURL = [NSURL URLWithString:[NSString stringWithFormat:@"https://graph.facebook.com/%@/picture?type=square", [[PFUser currentUser] objectForKey:DB_FIELD_USER_FACEBOOK_ID]]];
     [_loginProfileButton.imageView setImageWithURL:profilePictureURL placeholderImage:nil success:^(UIImage *image, BOOL cached) {
         [_loginProfileButton setImage:_loginProfileButton.imageView.image forState:UIControlStateNormal];
     } failure:^(NSError *error) {
-        
+        NSLog(@"");
     }];
     
     PFInstallation *myInstallation = [PFInstallation currentInstallation];
