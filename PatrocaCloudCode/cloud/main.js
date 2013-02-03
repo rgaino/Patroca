@@ -44,8 +44,9 @@ Sends a notification to users subscribed to this item's comments
 */
 Parse.Cloud.afterSave("Item_Comments", function(request) {
 
+	var item_id = request.object.get("item_id").id;
 	var commenterId = request.object.get("user_id").id;
-	var subscribeChannel = "comments_on_item_" + request.object.get("item_id").id;
+	var subscribeChannel = "comments_on_item_" + item_id;
 	console.log("Sending push notification for users subscribed to this item's comments (" + subscribeChannel + "), except the comment's author (" + commenterId + ")");
 
 	var User = Parse.Object.extend("User");
@@ -55,8 +56,6 @@ Parse.Cloud.afterSave("Item_Comments", function(request) {
 		success: function(user) {
 			var commenterName = user.get("name");
 			var message = "Novo comentário de " + commenterName;
-
-
 
 			//send Push notification
 			var pushQuery = new Parse.Query(Parse.Installation);
@@ -69,7 +68,8 @@ Parse.Cloud.afterSave("Item_Comments", function(request) {
 			Parse.Push.send({
 			  where: pushQuery,
 			  data: {
-			    alert: message
+			    alert: message,
+			    item_id: item_id
 			  }
 			}, {
 			  success: function() {
