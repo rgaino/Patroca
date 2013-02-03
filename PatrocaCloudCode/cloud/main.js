@@ -46,6 +46,7 @@ Parse.Cloud.afterSave("Item_Comments", function(request) {
 
 	var item_id = request.object.get("item_id").id;
 	var commenterId = request.object.get("user_id").id;
+	var comment_text = request.object.get("comment_text");
 	var subscribeChannel = "comments_on_item_" + item_id;
 	console.log("Sending push notification for users subscribed to this item's comments (" + subscribeChannel + "), except the comment's author (" + commenterId + ")");
 
@@ -69,7 +70,9 @@ Parse.Cloud.afterSave("Item_Comments", function(request) {
 			  where: pushQuery,
 			  data: {
 			    alert: message,
-			    item_id: item_id
+			    item_id: item_id,
+			    commenter_name: commenterName,
+			    comment_text: comment_text
 			  }
 			}, {
 			  success: function() {
