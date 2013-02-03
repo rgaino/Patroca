@@ -119,6 +119,8 @@
 		19BF9D23166C426D00F813B6 /* item_title_mask@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 19BF9D21166C426D00F813B6 /* item_title_mask@2x.png */; };
 		19BF9D29166D8C6400F813B6 /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 19BF9D28166D8C6400F813B6 /* icon.png */; };
 		19BF9D2C166D8C6700F813B6 /* icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 19BF9D2B166D8C6700F813B6 /* icon@2x.png */; };
+		19D910BE16BF0DF900129E22 /* MPNotificationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 19D910BD16BF0DF900129E22 /* MPNotificationView.m */; };
+		19D910C116BF0E0900129E22 /* OBGradientView.m in Sources */ = {isa = PBXBuildFile; fileRef = 19D910C016BF0E0900129E22 /* OBGradientView.m */; };
 		19DCB424168756D9009FF503 /* comments_header.png in Resources */ = {isa = PBXBuildFile; fileRef = 19DCB422168756D9009FF503 /* comments_header.png */; };
 		19DCB425168756D9009FF503 /* comments_header@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 19DCB423168756D9009FF503 /* comments_header@2x.png */; };
 		19E5F947169CF037006718F7 /* picture_camera_thumbnail.png in Resources */ = {isa = PBXBuildFile; fileRef = 19E5F945169CF037006718F7 /* picture_camera_thumbnail.png */; };
@@ -261,6 +263,10 @@
 		19BF9D21166C426D00F813B6 /* item_title_mask@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "item_title_mask@2x.png"; sourceTree = "<group>"; };
 		19BF9D28166D8C6400F813B6 /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = icon.png; path = ../icon.png; sourceTree = "<group>"; };
 		19BF9D2B166D8C6700F813B6 /* icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "icon@2x.png"; path = "../icon@2x.png"; sourceTree = "<group>"; };
+		19D910BC16BF0DF900129E22 /* MPNotificationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MPNotificationView.h; sourceTree = "<group>"; };
+		19D910BD16BF0DF900129E22 /* MPNotificationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MPNotificationView.m; sourceTree = "<group>"; };
+		19D910BF16BF0E0900129E22 /* OBGradientView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OBGradientView.h; sourceTree = "<group>"; };
+		19D910C016BF0E0900129E22 /* OBGradientView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OBGradientView.m; sourceTree = "<group>"; };
 		19DCB422168756D9009FF503 /* comments_header.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = comments_header.png; sourceTree = "<group>"; };
 		19DCB423168756D9009FF503 /* comments_header@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "comments_header@2x.png"; sourceTree = "<group>"; };
 		19E5F945169CF037006718F7 /* picture_camera_thumbnail.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = picture_camera_thumbnail.png; sourceTree = "<group>"; };
@@ -357,6 +363,7 @@
 		1934ACF6165E2B9300C8272F /* Libs */ = {
 			isa = PBXGroup;
 			children = (
+				19D910BB16BF0DEF00129E22 /* MPNotificationView */,
 				196E43B2168BC295009608E4 /* UILabel Categories */,
 				198A3CF516877C490016F45C /* NSDate Categories */,
 				1939CA5516644B3A002C21F6 /* UIImage Categories */,
@@ -421,9 +428,7 @@
 		1939B88D16568C3300435705 /* Patroca */ = {
 			isa = PBXGroup;
 			children = (
-				1939B8AB16568CC500435705 /* App Delegate */,
-				1939B912165DB47100435705 /* Database Access */,
-				1939B8AA16568CBB00435705 /* View Controllers */,
+				19D910C216BF0ED100129E22 /* Classes */,
 				1934ACF6165E2B9300C8272F /* Libs */,
 				1939B8B716568F8400435705 /* Images */,
 				1939B88E16568C3300435705 /* Supporting Files */,
@@ -651,6 +656,27 @@
 			name = "NSDate Categories";
 			sourceTree = "<group>";
 		};
+		19D910BB16BF0DEF00129E22 /* MPNotificationView */ = {
+			isa = PBXGroup;
+			children = (
+				19D910BC16BF0DF900129E22 /* MPNotificationView.h */,
+				19D910BD16BF0DF900129E22 /* MPNotificationView.m */,
+				19D910BF16BF0E0900129E22 /* OBGradientView.h */,
+				19D910C016BF0E0900129E22 /* OBGradientView.m */,
+			);
+			name = MPNotificationView;
+			sourceTree = "<group>";
+		};
+		19D910C216BF0ED100129E22 /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				1939B8AB16568CC500435705 /* App Delegate */,
+				1939B912165DB47100435705 /* Database Access */,
+				1939B8AA16568CBB00435705 /* View Controllers */,
+			);
+			name = Classes;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -810,6 +836,8 @@
 				19BAB21716801043005688DE /* UILabel+UILabel_Resize.m in Sources */,
 				198A3CF416877C380016F45C /* NSDate+NSDate_Formatter.m in Sources */,
 				196E43B6168BC2BE009608E4 /* UILabel+Extensions.m in Sources */,
+				19D910BE16BF0DF900129E22 /* MPNotificationView.m in Sources */,
+				19D910C116BF0E0900129E22 /* OBGradientView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -11,6 +11,7 @@
 #import <Parse/Parse.h>
 #import "DatabaseConstants.h"
 #import "ItemDetailsViewController.h"
+#import "MPNotificationView.h"
 
 @implementation AppDelegate
 
@@ -63,16 +64,38 @@
 #pragma mark Push Notification methods
 
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo {
-    //    [PFPush handlePush:userInfo];- (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo {
     
-    if ( application.applicationState == UIApplicationStateActive ) {
-        // app was already in the foreground
-        
+    //if item_id comes in, show that item's page
+    NSString *itemId = [userInfo objectForKey:@"item_id"];
+    
+    if( itemId != NULL)
+    {
+        //item notification (new comment, or something else in the future)
+        NSString *commenterName = [userInfo objectForKey:@"commenter_name"];
+        NSString *commentText =  [userInfo objectForKey:@"comment_text"];
+
+        if ( application.applicationState == UIApplicationStateActive ) {
+            // app was already in the foreground
+            
+            NSLog(@"Processing remote notification in foreground with userInfo: %@", userInfo);
+            
+            [MPNotificationView notifyWithText:commenterName detail:commentText image:[UIImage imageNamed:@"icon.png"] duration:3.0f andTouchBlock:^(MPNotificationView *notificationView) {
+                PFQuery *queryItem = [PFQuery queryWithClassName:DB_TABLE_ITEMS];
+                PFObject *item = [queryItem getObjectWithId:itemId];
+                
+                ItemDetailsViewController *itemDetailsViewController = [[ItemDetailsViewController alloc] initWithNibName:@"ItemDetailsViewController" bundle:nil];
+                [itemDetailsViewController setItemObject:item];
+                
+                UINavigationController *navigationController = (UINavigationController*)self.window.rootViewController;
+                [navigationController pushViewController:itemDetailsViewController animated:YES];
+            }];
+        }
+        else {
+            // app was just brought from background to foreground
+            [self processRemoteNotification:userInfo];
+        }
     }
-    else {
-        // app was just brought from background to foreground
-        [self processRemoteNotification:userInfo];
-    }
+    
 }
 
 - (void)processRemoteNotification:(NSDictionary*)userInfo {
@@ -81,8 +104,6 @@
     
     //if item_id comes in, show that item's page
     NSString *itemId = [userInfo objectForKey:@"item_id"];
-    NSLog(@"itemId: %@", itemId);
-
     
     if( itemId != NULL)
     {
