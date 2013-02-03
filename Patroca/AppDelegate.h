@@ -13,7 +13,8 @@
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
-
 @property (strong, nonatomic) MasterViewController *masterViewController;
+
+- (void)processRemoteNotification:(NSDictionary*)userInfo;
 
 @end

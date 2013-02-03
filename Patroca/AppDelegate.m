@@ -9,6 +9,8 @@
 #import "AppDelegate.h"
 #import "MasterViewController.h"
 #import <Parse/Parse.h>
+#import "DatabaseConstants.h"
+#import "ItemDetailsViewController.h"
 
 @implementation AppDelegate
 
@@ -30,17 +32,23 @@
     [myInstallation saveInBackground];
     
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-    // Override point for customization after application launch.
     
     MasterViewController *masterViewController = [[MasterViewController alloc] initWithNibName:@"MasterViewController" bundle:nil];
     UINavigationController *navigationController  = [[UINavigationController alloc] initWithRootViewController:masterViewController];
-
-    
-//    self.masterViewController = [[MasterViewController alloc] initWithNibName:@"MasterViewController" bundle:nil];
-//    self.window.rootViewController = self.masterViewController;
     [navigationController setNavigationBarHidden:YES];
     self.window.rootViewController = navigationController;
     [self.window makeKeyAndVisible];
+    
+    
+    
+    //handling startup when launched from remote notification
+    NSDictionary* userInfo = [launchOptions objectForKey:UIApplicationLaunchOptionsRemoteNotificationKey];
+    if (userInfo) {
+        [self processRemoteNotification:userInfo];
+    }
+    
+    
+    
     return YES;
 }
 
@@ -55,8 +63,42 @@
 #pragma mark Push Notification methods
 
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo {
-    [PFPush handlePush:userInfo];
+    //    [PFPush handlePush:userInfo];- (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo {
+    
+    if ( application.applicationState == UIApplicationStateActive ) {
+        // app was already in the foreground
+        
+    }
+    else {
+        // app was just brought from background to foreground
+        [self processRemoteNotification:userInfo];
+    }
 }
+
+- (void)processRemoteNotification:(NSDictionary*)userInfo {
+    
+    NSLog(@"Processing remote notification with userInfo: %@", userInfo);
+    
+    //if item_id comes in, show that item's page
+    NSString *itemId = [userInfo objectForKey:@"item_id"];
+    NSLog(@"itemId: %@", itemId);
+
+    
+    if( itemId != NULL)
+    {
+        //item notification (new comment, or something else in the future)
+        
+        PFQuery *queryItem = [PFQuery queryWithClassName:DB_TABLE_ITEMS];
+        PFObject *item = [queryItem getObjectWithId:itemId];
+        
+        ItemDetailsViewController *itemDetailsViewController = [[ItemDetailsViewController alloc] initWithNibName:@"ItemDetailsViewController" bundle:nil];
+        [itemDetailsViewController setItemObject:item];
+        
+        UINavigationController *navigationController = (UINavigationController*)self.window.rootViewController;
+        [navigationController pushViewController:itemDetailsViewController animated:YES];
+    }
+}
+
 
 - (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation {
     
