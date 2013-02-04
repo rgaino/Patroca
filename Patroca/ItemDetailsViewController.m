@@ -57,7 +57,6 @@
     CGRect scrollViewFrame = _wholeScreenScrollView.frame;
     
     [_wholeScreenScrollView setFrame:CGRectMake(scrollViewFrame.origin.x, scrollViewFrame.origin.y, scrollViewFrame.size.width, scrollViewFrame.size.height - keyboardFrameBeginRect.size.height)];
-
     [self scrollWholeScreenToBottom];
 }
 
@@ -228,10 +227,11 @@
     [newCommentTextView setTextColor:[UIColor colorWithRed:102/255.f green:102/255.f blue:102/255.f alpha:1.0f]];
     [newCommentTextView setDelegate:self];
     
-    UIButton *sendCommentButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    sendCommentButton = [UIButton buttonWithType:UIButtonTypeCustom];
     [sendCommentButton setFrame:CGRectMake(217, newCommentBackgroundImageView.frame.origin.y + newCommentBackgroundImageView.frame.size.height-22, 103, 45)];
     [sendCommentButton setImage:[UIImage imageNamed:@"send_comment_button.png"] forState:UIControlStateNormal];
     commentsViewFinalHeight += 22; //half the button's height
+    [sendCommentButton setEnabled:NO];
     [sendCommentButton addTarget:self action:@selector(sendCommentButtonPressed) forControlEvents:UIControlEventTouchUpInside];
 
     [commentsView addSubview:newCommentBackgroundImageView];
@@ -297,6 +297,16 @@
         [_itemImagesScrollView setContentSize:CGSizeMake(xPosition, 320)];
     }];
 }
+
+- (void)textViewDidChange:(UITextView *)textView {
+    if( newCommentTextView.text.length >0 ) {
+        [sendCommentButton setEnabled:YES];
+    } else {
+        [sendCommentButton setEnabled:NO];
+    }
+}
+
+
 
 
 - (void)sendCommentButtonPressed {

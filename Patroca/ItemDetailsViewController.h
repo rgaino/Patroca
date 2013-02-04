@@ -20,6 +20,7 @@
     float commentsViewYPosition;
     float contentHeightWithoutCommentsView;
     UITextView *newCommentTextView;
+    UIButton *sendCommentButton;
 }
 
 @property (nonatomic, readwrite) PFObject *itemObject;
