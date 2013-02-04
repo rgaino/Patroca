@@ -30,6 +30,8 @@
 @property (weak, nonatomic) IBOutlet UIImageView *ownerProfilePic;
 @property (weak, nonatomic) IBOutlet UIScrollView *wholeScreenScrollView;
 
+- (IBAction)recommendThisItem:(id)sender;
+- (IBAction)reportThisItem:(id)sender;
 - (void)setupItemImagesScrollView;
 - (void)animateImagesScrollViewIn;
 - (void)setupWholeScreenScrollView;
@@ -38,7 +40,6 @@
 - (void)keyboardDidShow:(NSNotification*)notification;
 - (void)keyboardDidHide:(NSNotification*)notification;
 - (void)scrollWholeScreenToBottom;
-- (IBAction)recommendThisItem:(id)sender;
-- (IBAction)reportThisItem:(id)sender;
+- (void)tapDetected;
 
 @end

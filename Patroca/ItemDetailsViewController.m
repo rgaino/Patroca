@@ -46,6 +46,12 @@
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardDidShow:) name:UIKeyboardDidShowNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardDidHide:) name:UIKeyboardDidHideNotification object:nil];
+
+    //detect taps to dismiss keyboard
+    UITapGestureRecognizer *tapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapDetected)];
+    tapRecognizer.numberOfTapsRequired = 1;
+    tapRecognizer.numberOfTouchesRequired = 1;
+    [self.view addGestureRecognizer:tapRecognizer];
 }
 
 - (void)keyboardDidShow:(NSNotification*)notification {
@@ -306,7 +312,12 @@
     }
 }
 
-
+- (void)tapDetected {
+    //dismiss keyboard on tap outside of the text area
+    if([newCommentTextView isFirstResponder]) {
+        [newCommentTextView resignFirstResponder];
+    }
+}
 
 
 - (void)sendCommentButtonPressed {
