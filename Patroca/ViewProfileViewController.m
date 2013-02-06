@@ -57,7 +57,6 @@
  
     //read Facebook profile information
     NSDictionary *userData = (NSDictionary *)result;
-    NSLog(@"userData received is:\n%@", userData);
     
     //Making sure we don't use nulls but blank strings instead
     NSString *facebookId = ([userData objectForKey:@"id"] == nil ? @"" : [userData objectForKey:@"id"]);
