@@ -81,6 +81,10 @@
         [doneButton addTarget:self action:@selector(doneButtonPressed) forControlEvents:UIControlEventTouchUpInside];
         [headerView addSubview:doneButton];
     }
+    
+    UIImageView *headerShadeImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"header_shade.png"]];
+    [headerShadeImageView setFrame:CGRectMake(0, 45, headerShadeImageView.image.size.width, headerShadeImageView.image.size.height)];
+    [headerView addSubview:headerShadeImageView];
 
     [self.view insertSubview:headerView atIndex:0];
 }
