@@ -32,9 +32,6 @@
         labelSelectedColor = [UIColor colorWithRed:36/255.0 green:190/255.0 blue:212/255.0 alpha:1.0f];
         labelUnselectedColor = [UIColor colorWithRed:204/255.0 green:204/255.0 blue:204/255.0 alpha:1.0f];
 
-        UIColor *backgroundPattern = [UIColor colorWithPatternImage:[UIImage imageNamed:@"background_repeat.png"]];
-        [[self view] setBackgroundColor:backgroundPattern];
-        
         //making menu bar labels tappable
         UITapGestureRecognizer *featuredTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(userTappedOnFeatured)];
         [_featuredLabel addGestureRecognizer:featuredTap];
@@ -57,6 +54,8 @@
     totalCommentsForItemsDictionary = [[NSMutableDictionary alloc] init];
     [self.contentDisplayCollectionView registerClass:[ItemViewCell class] forCellWithReuseIdentifier:CELL_REUSE_IDENTIFIER];
     [self setupHeaderWithBackButton:NO doneButton:NO addItemButton:YES];
+    
+    [super viewDidLoad];
 }
 
 - (void)viewDidAppear:(BOOL)animated {

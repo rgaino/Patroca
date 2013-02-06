@@ -19,6 +19,13 @@
 
 @implementation BaseViewController
 
+- (void)viewDidLoad {
+    
+    UIColor *backgroundPattern = [UIColor colorWithPatternImage:[UIImage imageNamed:@"background_repeat.png"]];
+    [[self view] setBackgroundColor:backgroundPattern];
+    
+    [super viewDidLoad];
+}
 
 - (void)setupHeaderWithBackButton:(BOOL)hasBackButton doneButton:(BOOL)hasDoneButton addItemButton:(BOOL)hasAddItemButton {
     
