@@ -28,7 +28,7 @@
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        self.title = NSLocalizedString(@"Profile", nil);
+
     }
     return self;
 }
@@ -39,12 +39,12 @@
     [super viewDidLoad];
     [self localizeStrings];
     
-    [self setupHeaderWithBackButton:YES doneButton:NO addItemButton:NO];
+    [self setupHeaderWithBackButton:YES doneButton:NO addItemButton:YES];
 
 
     HUD = [[MBProgressHUD alloc] initWithView:self.navigationController.view];
 	[HUD setDimBackground:YES];
-	[HUD setLabelText: NSLocalizedString(@"Logging in...", nil)];
+//	[HUD setLabelText: NSLocalizedString(@"Logging in...", nil)];
     [HUD setDelegate:self];
     [self.view addSubview:HUD];
     [HUD show:YES];
