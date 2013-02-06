@@ -10,13 +10,7 @@
 #import <Parse/Parse.h>
 #import "LogInViewController.h"
 #import "DatabaseConstants.h"
-#import "MBProgressHUD.h"
-
-@interface ViewProfileViewController () {
-    MBProgressHUD *HUD;
-}
-
-@end
+#import <SDWebImage/UIImageView+WebCache.h>
 
 @implementation ViewProfileViewController
 @synthesize profileImageView;
@@ -24,30 +18,12 @@
 @synthesize locationLabel;
 @synthesize logoutButton;
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-
-    }
-    return self;
-}
-
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    [self localizeStrings];
     
     [self setupHeaderWithBackButton:YES doneButton:NO addItemButton:YES];
-
-
-    HUD = [[MBProgressHUD alloc] initWithView:self.navigationController.view];
-	[HUD setDimBackground:YES];
-//	[HUD setLabelText: NSLocalizedString(@"Logging in...", nil)];
-    [HUD setDelegate:self];
-    [self.view addSubview:HUD];
-    [HUD show:YES];
     [self logWithFacebook];
 }
 
@@ -61,22 +37,21 @@
                                           NSError *error) {
         if (!error) {
             NSLog(@"Logged in to Facebook with success");
-            [self facebookLoggedInWithResult:result];
+            dispatch_async(dispatch_get_main_queue(), ^{
+                // This block will be executed asynchronously on the main thread.
+                //because UI elements must be updated on the main thread
+                [self facebookLoggedInWithResult:result];
+                [self loadFriendsProfilePictures];
+            });
             
         } else {
             //TODO: error handling
             NSLog(@"Failed to login to Facebook with error: %@", [error localizedDescription]);
         }
-        
-        [HUD hide:YES];
-        
+     
     }];
 }
 
-- (void)localizeStrings {
-    
-    [logoutButton setTitle:NSLocalizedString(@"Logout", nil) forState:UIControlStateNormal];
-}
 
 - (void)facebookLoggedInWithResult:(id)result {
  
@@ -105,10 +80,7 @@
 
     //pull profile picture (type=normal means 100px wide)
     NSURL *profilePictureURL = [NSURL URLWithString:[NSString stringWithFormat:@"https://graph.facebook.com/%@/picture?type=normal", facebookId]];
-    NSData * imageData = [NSData dataWithContentsOfURL:profilePictureURL];
-    UIImage * image = [UIImage imageWithData:imageData];
-    [profileImageView setImage:image];
-    
+    [profileImageView setImageWithURL:profilePictureURL];
 }
 
 - (IBAction)logoutButtonPressed:(id)sender {
@@ -118,7 +90,54 @@
 
 }
 
+- (void)loadFriendsProfilePictures {
 
+    // Issue a Facebook Graph API request to get your user's friend list
+    PF_FBRequest *request = [PF_FBRequest requestForMyFriends];
+    [request startWithCompletionHandler:^(PF_FBRequestConnection *connection,
+                                          id result,
+                                          NSError *error) {
+
+        if (!error) {
+            
+            // result will contain an array with your user's friends in the "data" key
+            NSArray *friendObjects = [result objectForKey:@"data"];
+            NSMutableArray *friendIds = [NSMutableArray arrayWithCapacity:friendObjects.count];
+            // Create a list of friends' Facebook IDs
+            for (NSDictionary *friendObject in friendObjects) {
+                [friendIds addObject:[friendObject objectForKey:@"id"]];
+            }
+            
+            //generate 10 random unique numbers between 0 and how many friends there are
+            int numberOfFriends = 10;
+            NSMutableArray *randomFriendIds = [NSMutableArray arrayWithCapacity:numberOfFriends];
+            
+            int randomId = arc4random_uniform(friendObjects.count);
+            [randomFriendIds addObject:[NSNumber numberWithInteger:randomId]];
+            
+            for(int i=1; i<numberOfFriends; i++) {
+                while( [randomFriendIds indexOfObject:[NSNumber numberWithInteger:randomId]] != NSNotFound) {
+                    randomId = arc4random_uniform(friendObjects.count);
+                }
+                [randomFriendIds addObject:[NSNumber numberWithInteger:randomId]];
+            }
+            
+            //now having the 10 random friend IDs, load their profile pics async
+            xProfileImageView = 0;
+            sizeProfileImageView = 40;
+            
+            for(NSNumber *randomFriendId in randomFriendIds) {
+                //load friends' profile pics
+                NSURL *profilePictureURL = [NSURL URLWithString:[NSString stringWithFormat:@"https://graph.facebook.com/%@/picture?type=square", [friendIds objectAtIndex:randomFriendId.integerValue]]];
+                UIImageView *profilePictureImageView = [[UIImageView alloc] initWithFrame:CGRectMake(xProfileImageView, 0, sizeProfileImageView, sizeProfileImageView)];
+                [profilePictureImageView setImageWithURL:profilePictureURL];
+                [_friendsPicturesView addSubview:profilePictureImageView];
+
+                 xProfileImageView+=sizeProfileImageView;
+            }
+        }
+    }];
+}
 
 
 - (void)viewDidUnload {

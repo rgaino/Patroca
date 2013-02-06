@@ -12,6 +12,9 @@
 
 @interface ViewProfileViewController : BaseViewController <PF_FBRequestDelegate, NSURLConnectionDelegate> {
 
+    float xProfileImageView;
+    float sizeProfileImageView;
+
 }
 
 @property (weak, nonatomic) IBOutlet UIImageView *profileImageView;
@@ -24,5 +27,6 @@
 
 - (void)logWithFacebook;
 - (void)facebookLoggedInWithResult:(id)result;
+- (void)loadFriendsProfilePictures;
 
 @end
