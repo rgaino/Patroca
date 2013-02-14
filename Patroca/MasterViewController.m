@@ -18,7 +18,7 @@
 #import "ItemDetailsViewController.h"
 #import <SDWebImage/UIImageView+WebCache.h>
 
-#define CELL_REUSE_IDENTIFIER @"Item_Cell"
+#define CELL_REUSE_IDENTIFIER @"Item_Cell_Master"
 
 @implementation MasterViewController
 
@@ -43,7 +43,7 @@
         [_nearbyLabel addGestureRecognizer:nearbyTap];
         
         itemDataSource = [[ItemDataSource alloc] init];
-        [itemDataSource setMasterViewController:self];
+        [itemDataSource setDelegate:self];
         
     }
     return self;
@@ -122,6 +122,8 @@
     
     [itemDataSource getNearbyItemsAndReturn];
 }
+
+#pragma mark ItemDataSourceDelegate
 
 - (void)populateCollectionView {
     

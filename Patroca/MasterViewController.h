@@ -7,11 +7,12 @@
 //
 
 #import "BaseViewController.h"
+#import "ItemDataSourceDelegate.h"
 
 @class ItemDataSource;
 @class ItemViewCell;
 
-@interface MasterViewController : BaseViewController <UICollectionViewDataSource, UICollectionViewDelegateFlowLayout> {
+@interface MasterViewController : BaseViewController <UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemDataSourceDelegate> {
     
     ItemDataSource *itemDataSource;
     NSMutableDictionary *totalCommentsForItemsDictionary;
@@ -36,8 +37,5 @@
 - (void)loadFeaturedItems;
 - (void)loadFriendsItems;
 - (void)loadNearbyItems;
-- (void)populateCollectionView;
-- (void)populateTotalLikesWithDictionary:(NSDictionary*)tempTotalCommentsForItemsDictionary;
-- (void)updateTotalLikesForItemViewCell:(ItemViewCell*)itemViewCell;
 
 @end

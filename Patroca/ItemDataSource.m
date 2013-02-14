@@ -54,7 +54,7 @@
                     if (!error) {
                         
                         _items = [NSArray arrayWithArray:objects];
-                        [_masterViewController populateCollectionView];
+                        [_delegate populateCollectionView];
                         
                         [self getTotalCommentsForItems:objects];
 
@@ -99,7 +99,7 @@
             myLocationPoint = nil;
 
             _items = [NSArray arrayWithArray:objects];
-            [_masterViewController populateCollectionView];
+            [_delegate populateCollectionView];
             
             [self getTotalCommentsForItems:objects];
 
@@ -110,6 +110,37 @@
         }
     }];
 }
+
+
+- (void)getSelfItemsAndReturn {
+    
+    if([PFUser currentUser] == nil) {
+        NSLog(@"Can't get current user");
+        //TODO: show a nice error message
+    }
+    
+    PFQuery *query = [PFQuery queryWithClassName:DB_TABLE_ITEMS];
+    [query whereKey:DB_FIELD_USER_ID equalTo:[PFUser currentUser]];
+    
+    [query orderByDescending:DB_FIELD_UPDATED_AT];
+    
+    [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+        if (!error) {
+            
+            _items = [NSArray arrayWithArray:objects];
+            [_delegate populateCollectionView];
+            
+            [self getTotalCommentsForItems:objects];
+            
+        } else {
+            // Log details of the failure
+            NSLog(@"Error: %@ %@", error, [error userInfo]);
+            _items = [NSArray array];
+            //TODO: show error message
+        }
+    }];
+}
+
 
 - (void)getTotalCommentsForItems:(NSArray*)objects {
     
@@ -123,7 +154,7 @@
     [PFCloud callFunctionInBackground:@"totalCommentsForItems" withParameters:params block:^(id object, NSError *error) {
         
         NSDictionary *totalCommentsForItemsDictionary = (NSDictionary*) object;
-        [_masterViewController populateTotalLikesWithDictionary:totalCommentsForItemsDictionary];
+        [_delegate populateTotalLikesWithDictionary:totalCommentsForItemsDictionary];
         
     }];
 }

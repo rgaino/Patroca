@@ -9,24 +9,24 @@
 #import <UIKit/UIKit.h>
 #import "BaseViewController.h"
 #import <Parse/Parse.h>
+#import "ItemDataSourceDelegate.h"
 
-@interface ViewProfileViewController : BaseViewController <PF_FBRequestDelegate, NSURLConnectionDelegate> {
+@class ItemDataSource;
 
-    float xProfileImageView;
-    float sizeProfileImageView;
+@interface ViewProfileViewController : BaseViewController <PF_FBRequestDelegate, ItemDataSourceDelegate,
+                                                            UICollectionViewDataSource, UICollectionViewDelegateFlowLayout> {
+
+    ItemDataSource *itemDataSource;
+    NSDictionary *userData;
+    NSMutableDictionary *totalCommentsForItemsDictionary;
 
 }
 
-@property (weak, nonatomic) IBOutlet UIImageView *profileImageView;
-@property (weak, nonatomic) IBOutlet UILabel *nameLabel;
-@property (weak, nonatomic) IBOutlet UILabel *locationLabel;
-@property (weak, nonatomic) IBOutlet UIButton *logoutButton;
-@property (weak, nonatomic) IBOutlet UIView *friendsPicturesView;
+@property (weak, nonatomic) IBOutlet UICollectionView *contentDisplayCollectionView;
 
 - (IBAction)logoutButtonPressed:(id)sender;
 
 - (void)logWithFacebook;
 - (void)facebookLoggedInWithResult:(id)result;
-- (void)loadFriendsProfilePictures;
 
 @end

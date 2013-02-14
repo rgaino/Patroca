@@ -11,13 +11,28 @@
 #import "LogInViewController.h"
 #import "DatabaseConstants.h"
 #import <SDWebImage/UIImageView+WebCache.h>
+#import "ItemDataSource.h"
+#import "ItemViewCell.h"
+#import "UserCache.h"
+#import "ItemDetailsViewController.h"
+#import "ProfileHeaderViewCell.h"
+
+#define CELL_REUSE_IDENTIFIER @"Item_Cell_Profile"
+#define HEADER_CELL_REUSE_IDENTIFIER @"Header_Cell_Profile"
 
 @implementation ViewProfileViewController
-@synthesize profileImageView;
-@synthesize nameLabel;
-@synthesize locationLabel;
-@synthesize logoutButton;
 
+
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
+{
+    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+    if (self) {
+        
+        itemDataSource = [[ItemDataSource alloc] init];
+        [itemDataSource setDelegate:self];
+    }
+    return self;
+}
 
 - (void)viewDidLoad
 {
@@ -25,6 +40,12 @@
     
     [self setupHeaderWithBackButton:YES doneButton:NO addItemButton:YES];
     [self logWithFacebook];
+
+    totalCommentsForItemsDictionary = [[NSMutableDictionary alloc] init];
+    [_contentDisplayCollectionView registerClass:[ItemViewCell class] forCellWithReuseIdentifier:CELL_REUSE_IDENTIFIER];
+    [_contentDisplayCollectionView registerClass:[ProfileHeaderViewCell class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:HEADER_CELL_REUSE_IDENTIFIER];
+
+    userData = nil;
 }
 
 - (void)logWithFacebook {
@@ -41,7 +62,6 @@
                 // This block will be executed asynchronously on the main thread.
                 //because UI elements must be updated on the main thread
                 [self facebookLoggedInWithResult:result];
-                [self loadFriendsProfilePictures];
             });
             
         } else {
@@ -56,94 +76,126 @@
 - (void)facebookLoggedInWithResult:(id)result {
  
     //read Facebook profile information
-    NSDictionary *userData = (NSDictionary *)result;
-    
-    //Making sure we don't use nulls but blank strings instead
-    NSString *facebookId = ([userData objectForKey:@"id"] == nil ? @"" : [userData objectForKey:@"id"]);
-    NSString *name       = ([userData objectForKey:@"name"] == nil ? @"" : [userData objectForKey:@"name"]);
-    NSString *email      = ([userData objectForKey:@"email"] == nil ? @"" : [userData objectForKey:@"email"]);
-    NSString *location   = ([[userData objectForKey:@"location"] objectForKey:@"name"]==nil ? @"" : [[userData objectForKey:@"location"] objectForKey:@"name"]);
-    
-
-    //display basic info on screen
-    [nameLabel setText: name];
-    [locationLabel setText:location];
-
-    //store info on Parse User table
-    PFUser *currentUser = [PFUser currentUser];
-    [currentUser setObject:facebookId forKey:DB_FIELD_USER_FACEBOOK_ID];
-    [currentUser setEmail:email];
-    [currentUser setObject:name forKey:DB_FIELD_USER_NAME];
-    [currentUser saveInBackground];
-     
-
-    //pull profile picture (type=normal means 100px wide)
-    NSURL *profilePictureURL = [NSURL URLWithString:[NSString stringWithFormat:@"https://graph.facebook.com/%@/picture?type=normal", facebookId]];
-    [profileImageView setImageWithURL:profilePictureURL];
+    userData = (NSDictionary *)result;
+    [itemDataSource getSelfItemsAndReturn];
 }
 
 - (IBAction)logoutButtonPressed:(id)sender {
     
     [PFUser logOut];
     [self.navigationController popViewControllerAnimated:YES];
-
 }
 
-- (void)loadFriendsProfilePictures {
 
-    // Issue a Facebook Graph API request to get your user's friend list
-    PF_FBRequest *request = [PF_FBRequest requestForMyFriends];
-    [request startWithCompletionHandler:^(PF_FBRequestConnection *connection,
-                                          id result,
-                                          NSError *error) {
 
-        if (!error) {
-            
-            // result will contain an array with your user's friends in the "data" key
-            NSArray *friendObjects = [result objectForKey:@"data"];
-            NSMutableArray *friendIds = [NSMutableArray arrayWithCapacity:friendObjects.count];
-            // Create a list of friends' Facebook IDs
-            for (NSDictionary *friendObject in friendObjects) {
-                [friendIds addObject:[friendObject objectForKey:@"id"]];
-            }
-            
-            //generate 10 random unique numbers between 0 and how many friends there are
-            int numberOfFriends = 10;
-            NSMutableArray *randomFriendIds = [NSMutableArray arrayWithCapacity:numberOfFriends];
-            
-            int randomId = arc4random_uniform(friendObjects.count);
-            [randomFriendIds addObject:[NSNumber numberWithInteger:randomId]];
-            
-            for(int i=1; i<numberOfFriends; i++) {
-                while( [randomFriendIds indexOfObject:[NSNumber numberWithInteger:randomId]] != NSNotFound) {
-                    randomId = arc4random_uniform(friendObjects.count);
-                }
-                [randomFriendIds addObject:[NSNumber numberWithInteger:randomId]];
-            }
-            
-            //now having the 10 random friend IDs, load their profile pics async
-            xProfileImageView = 0;
-            sizeProfileImageView = 40;
-            
-            for(NSNumber *randomFriendId in randomFriendIds) {
-                //load friends' profile pics
-                NSURL *profilePictureURL = [NSURL URLWithString:[NSString stringWithFormat:@"https://graph.facebook.com/%@/picture?type=square", [friendIds objectAtIndex:randomFriendId.integerValue]]];
-                UIImageView *profilePictureImageView = [[UIImageView alloc] initWithFrame:CGRectMake(xProfileImageView, 0, sizeProfileImageView, sizeProfileImageView)];
-                [profilePictureImageView setImageWithURL:profilePictureURL];
-                [_friendsPicturesView addSubview:profilePictureImageView];
+#pragma mark ItemDataSourceDelegate
 
-                 xProfileImageView+=sizeProfileImageView;
-            }
-        }
-    }];
+- (void)populateCollectionView {
+    
+    NSLog(@"Populating list with %d items", itemDataSource.items.count);
+    [[UserCache getInstance] updateUserNameCacheDictionaryForItems:itemDataSource.items];
+    [_contentDisplayCollectionView reloadData];
 }
 
+- (void)populateTotalLikesWithDictionary:(NSDictionary*)tempTotalCommentsForItemsDictionary {
+    
+    //updating the dictionary with items and their total comments...
+    NSArray *itemIDs = [tempTotalCommentsForItemsDictionary objectForKey:@"item_ids"];
+    NSArray *itemTotalComments = [tempTotalCommentsForItemsDictionary objectForKey:@"item_comments"];
+    for(int i=0; i<itemIDs.count; i++) {
+        [totalCommentsForItemsDictionary setObject:[itemTotalComments objectAtIndex:i] forKey:[itemIDs objectAtIndex:i]];
+    }
+    
+    //...then update all visible cells
+    for(ItemViewCell *itemViewCell in [_contentDisplayCollectionView visibleCells]) {
+        [self updateTotalLikesForItemViewCell:itemViewCell];
+    }
+}
+
+- (void)updateTotalLikesForItemViewCell:(ItemViewCell*)itemViewCell {
+    
+    //lookup item on totalCommentsForItemsDictionary and update its cell
+    PFObject *cellItemObject = [itemViewCell cellItemObject];
+    NSString *itemId = [cellItemObject objectId];
+    
+    int totalComments = 0;
+    
+    NSString *totalCommentsString = [totalCommentsForItemsDictionary objectForKey:itemId];
+    if(totalCommentsString != nil) {
+        totalComments = [totalCommentsString intValue];
+    }
+    [itemViewCell updateTotalComments:totalComments];
+}
+
+#pragma mark - UICollectionView Datasource
+
+- (NSInteger)collectionView:(UICollectionView *)view numberOfItemsInSection:(NSInteger)section {
+    return itemDataSource.items.count;
+}
+
+- (NSInteger)numberOfSectionsInCollectionView: (UICollectionView *)collectionView {
+    return 1;
+}
+
+- (UICollectionViewCell *)collectionView:(UICollectionView *)cv cellForItemAtIndexPath:(NSIndexPath *)indexPath {
+    
+    ItemViewCell *itemViewCell = (ItemViewCell *)[self.contentDisplayCollectionView dequeueReusableCellWithReuseIdentifier:CELL_REUSE_IDENTIFIER forIndexPath:indexPath];
+    
+    PFObject *item = [[itemDataSource items] objectAtIndex:indexPath.row];
+    [itemViewCell setupCellWithItem:item];
+    
+    [self updateTotalLikesForItemViewCell:itemViewCell];
+    
+    return itemViewCell;
+}
+
+- (UICollectionReusableView *)collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath
+{
+    if(userData == nil) {
+        //don't display the header until we have user data information from Facebook
+        return nil;
+    }
+    
+    ProfileHeaderViewCell *profileHeaderViewCell = [collectionView dequeueReusableSupplementaryViewOfKind:
+                                         UICollectionElementKindSectionHeader withReuseIdentifier:HEADER_CELL_REUSE_IDENTIFIER forIndexPath:indexPath];
+
+    [profileHeaderViewCell setupProfileHeaderViewCellWithUserData:userData];
+    return profileHeaderViewCell;
+}
+
+#pragma mark - UICollectionViewDelegate
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    PFObject *item = [[itemDataSource items] objectAtIndex:indexPath.row];
+    
+    ItemDetailsViewController *itemDetailsViewController = [[ItemDetailsViewController alloc] initWithNibName:@"ItemDetailsViewController" bundle:nil];
+    [itemDetailsViewController setItemObject:item];
+    [self.navigationController pushViewController:itemDetailsViewController animated:YES];
+    
+}
+- (void)collectionView:(UICollectionView *)collectionView didDeselectItemAtIndexPath:(NSIndexPath *)indexPath {
+    // TODO: Deselect item
+}
+
+
+#pragma mark – UICollectionViewDelegateFlowLayout
+
+- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
+    return CGSizeMake(147, 162);
+}
+
+- (UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout insetForSectionAtIndex:(NSInteger)section {
+    return UIEdgeInsetsMake(5, 0, 5, 0);
+}
+
+//header size
+- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout referenceSizeForHeaderInSection:(NSInteger)section {
+    return CGSizeMake(320, 360);
+}
+
+#pragma mark Memory Management
 
 - (void)viewDidUnload {
-    [self setProfileImageView:nil];
-    [self setNameLabel:nil];
-    [self setLocationLabel:nil];
-    [self setLogoutButton:nil];
     [super viewDidUnload];
 }
 

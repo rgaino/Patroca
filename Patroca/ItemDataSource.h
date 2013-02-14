@@ -8,8 +8,9 @@
 
 #import <Foundation/Foundation.h>
 #import <CoreLocation/CoreLocation.h>
+#import "ItemDataSourceDelegate.h"
 
-@class MasterViewController;
+@class BaseViewController;
 @class PFGeoPoint;
 
 @interface ItemDataSource : NSObject <CLLocationManagerDelegate> {
@@ -19,10 +20,11 @@
 }
 
 @property (readonly) NSArray* items;
-@property (readwrite) MasterViewController *masterViewController;
+@property (readwrite) NSObject<ItemDataSourceDelegate> *delegate;
 
 - (void)getFriendsItemsAndReturn;
 - (void)getNearbyItemsAndReturn;
+- (void)getSelfItemsAndReturn;
 - (void)getTotalCommentsForItems:(NSArray*)objects;
 
 @end
