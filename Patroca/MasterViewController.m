@@ -198,9 +198,6 @@
     [self.navigationController pushViewController:itemDetailsViewController animated:YES];
     
 }
-- (void)collectionView:(UICollectionView *)collectionView didDeselectItemAtIndexPath:(NSIndexPath *)indexPath {
-    // TODO: Deselect item
-}
 
 
 #pragma mark – UICollectionViewDelegateFlowLayout
