@@ -29,11 +29,9 @@
 
 - (void)setupHeaderWithBackButton:(BOOL)hasBackButton doneButton:(BOOL)hasDoneButton addItemButton:(BOOL)hasAddItemButton {
     
-    UIView *headerView = [[UIView alloc] init];
+    headerView = [[UIView alloc] init];
     [headerView setBackgroundColor:[UIColor whiteColor]];
     [headerView setFrame:CGRectMake(0, 0, 320, 44)];
-    
-
     
     if(hasBackButton) {
         
@@ -90,11 +88,13 @@
     }
     
     UIImageView *headerShadeImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"header_shade.png"]];
-    [headerShadeImageView setFrame:CGRectMake(0, 45, headerShadeImageView.image.size.width, headerShadeImageView.image.size.height)];
+    [headerShadeImageView setFrame:CGRectMake(0, 44, headerShadeImageView.image.size.width, headerShadeImageView.image.size.height)];
     [headerView addSubview:headerShadeImageView];
 
-    [self.view insertSubview:headerView atIndex:0];
+    [self.view insertSubview:headerView atIndex:999];
 }
+
+
 
 - (void)backButtonPressed {
     [self.navigationController popViewControllerAnimated:YES];

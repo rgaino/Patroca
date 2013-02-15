@@ -12,6 +12,7 @@
 @interface BaseViewController : UIViewController <MBProgressHUDDelegate> {
     
     MBProgressHUD *HUD;
+    UIView *headerView;
 }
 
 @property (weak, nonatomic) IBOutlet UIButton *loginProfileButton;

@@ -62,8 +62,7 @@
     CGRect arrowFrame = _menuArrowImage.frame;
     [_menuArrowImage setFrame:CGRectMake(-100, arrowFrame.origin.y, arrowFrame.size.width, arrowFrame.size.height)];
     [self performSelector:@selector(userTappedOnFriends) withObject:nil afterDelay:1.0f];
-
-
+    [super viewDidAppear:animated];
 }
 
 - (void)userTappedOnFeatured {
