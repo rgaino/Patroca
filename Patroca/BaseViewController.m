@@ -124,8 +124,11 @@
 - (void)loginProfileButtonPressed {
 
     if ([PFUser currentUser] && [PFFacebookUtils isLinkedWithUser:[PFUser currentUser]]) {
+        
         ViewProfileViewController *viewProfileViewController = [[ViewProfileViewController alloc] initWithNibName:@"ViewProfileViewController" bundle:nil];
+        [viewProfileViewController setupViewWithUserID:[[PFUser currentUser] objectId] ];
         [self.navigationController pushViewController:viewProfileViewController animated:YES];
+        
     } else {
         //        LogInViewController *logInViewController = [[LogInViewController alloc] initWithNibName:@"LogInViewController" bundle:nil];
         //        [self.navigationController pushViewController:logInViewController animated:YES];

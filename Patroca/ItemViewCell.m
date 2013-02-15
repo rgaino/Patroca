@@ -11,6 +11,7 @@
 #import "DatabaseConstants.h"
 #import "UserCache.h"
 #import <SDWebImage/UIImageView+WebCache.h>
+#import "ViewProfileViewController.h"
 
 @implementation ItemViewCell
 
@@ -57,5 +58,7 @@
 - (void)updateTotalComments:(int)totalComments {
     [_totalCommentsLabel setText:[NSString stringWithFormat:@"%d", totalComments]];
 }
+
+
 
 @end

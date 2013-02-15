@@ -14,6 +14,7 @@
 #import "UILabel+UILabel_Resize.h"
 #import "NSDate+NSDate_Formatter.h"
 #import "UILabel+Extensions.h"
+#import "ViewProfileViewController.h"
 
 @interface ItemDetailsViewController ()
 
@@ -49,6 +50,7 @@
     tapRecognizer.numberOfTapsRequired = 1;
     tapRecognizer.numberOfTouchesRequired = 1;
     [self.view addGestureRecognizer:tapRecognizer];
+    
 }
 
 - (void)keyboardDidShow:(NSNotification*)notification {
@@ -334,6 +336,13 @@
     [PFPush subscribeToChannelInBackground:subscribeChannel];
     
     [self showItemComments];
+}
+
+- (IBAction)userTappedOnProfile:(id)sender {
+    
+    ViewProfileViewController *viewProfileViewController = [[ViewProfileViewController alloc] initWithNibName:@"ViewProfileViewController" bundle:nil];
+    [viewProfileViewController setupViewWithUserID:[[_itemObject objectForKey:DB_FIELD_USER_ID] objectId] ];
+    [self.navigationController pushViewController:viewProfileViewController animated:YES];
 }
 
 - (IBAction)recommendThisItem:(id)sender {}

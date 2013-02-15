@@ -17,8 +17,8 @@
 #import "ItemDetailsViewController.h"
 #import "ProfileHeaderViewCell.h"
 
-#define CELL_REUSE_IDENTIFIER @"Item_Cell_Profile"
-#define HEADER_CELL_REUSE_IDENTIFIER @"Header_Cell_Profile"
+#define CELL_REUSE_IDENTIFIER @"Item_Profile_Cell"
+#define HEADER_CELL_REUSE_IDENTIFIER @"Header_Profile_Cell"
 
 @implementation ViewProfileViewController
 
@@ -39,20 +39,29 @@
     [super viewDidLoad];
     
     [self setupHeaderWithBackButton:YES doneButton:NO addItemButton:YES];
-    [self logWithFacebook];
 
     totalCommentsForItemsDictionary = [[NSMutableDictionary alloc] init];
     [_contentDisplayCollectionView registerClass:[ItemViewCell class] forCellWithReuseIdentifier:CELL_REUSE_IDENTIFIER];
     [_contentDisplayCollectionView registerClass:[ProfileHeaderViewCell class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:HEADER_CELL_REUSE_IDENTIFIER];
-
+    
     userData = nil;
 }
 
-- (void)logWithFacebook {
+
+- (void)setupViewWithUserID:(NSString*)profileUserID {
     
-    NSLog(@"Logging in to Facebook");
+
+    PFUser *userObject = [[UserCache getInstance] getCachedUserForId:profileUserID];
+    [self readUserDataFromFacebookForUser:userObject];
     
-    PF_FBRequest *request = [PF_FBRequest requestForGraphPath:@"me/?fields=name,location,picture,email"];
+
+}
+
+- (void)readUserDataFromFacebookForUser:(PFObject*)userObject {
+    
+    NSString *userFacebookID = [userObject objectForKey:DB_FIELD_USER_FACEBOOK_ID];
+    NSString *facebookGraphPath = [NSString stringWithFormat:@"%@/?fields=name,location,picture,email", userFacebookID];
+    PF_FBRequest *request = [PF_FBRequest requestForGraphPath:facebookGraphPath];
     [request startWithCompletionHandler:^(PF_FBRequestConnection *connection,
                                           id result,
                                           NSError *error) {
@@ -138,7 +147,7 @@
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)cv cellForItemAtIndexPath:(NSIndexPath *)indexPath {
-    
+
     ItemViewCell *itemViewCell = (ItemViewCell *)[self.contentDisplayCollectionView dequeueReusableCellWithReuseIdentifier:CELL_REUSE_IDENTIFIER forIndexPath:indexPath];
     
     PFObject *item = [[itemDataSource items] objectAtIndex:indexPath.row];
@@ -155,7 +164,7 @@
         //don't display the header until we have user data information from Facebook
         return nil;
     }
-    
+
     ProfileHeaderViewCell *profileHeaderViewCell = [collectionView dequeueReusableSupplementaryViewOfKind:
                                          UICollectionElementKindSectionHeader withReuseIdentifier:HEADER_CELL_REUSE_IDENTIFIER forIndexPath:indexPath];
 

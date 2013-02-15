@@ -41,5 +41,6 @@
 - (void)keyboardDidHide:(NSNotification*)notification;
 - (void)scrollWholeScreenToBottom;
 - (void)tapDetected;
+- (IBAction)userTappedOnProfile:(id)sender;
 
 @end

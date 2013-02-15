@@ -8,10 +8,11 @@
 
 #import <UIKit/UIKit.h>
 #import "BaseViewController.h"
-#import <Parse/Parse.h>
 #import "ItemDataSourceDelegate.h"
+#import <Parse/Parse.h>
 
 @class ItemDataSource;
+@class PFObject;
 
 @interface ViewProfileViewController : BaseViewController <PF_FBRequestDelegate, ItemDataSourceDelegate,
                                                             UICollectionViewDataSource, UICollectionViewDelegateFlowLayout> {
@@ -19,14 +20,13 @@
     ItemDataSource *itemDataSource;
     NSDictionary *userData;
     NSMutableDictionary *totalCommentsForItemsDictionary;
-
 }
 
 @property (weak, nonatomic) IBOutlet UICollectionView *contentDisplayCollectionView;
 
 - (IBAction)logoutButtonPressed:(id)sender;
-
-- (void)logWithFacebook;
+- (void)setupViewWithUserID:(NSString*)profileUserID;
+- (void)readUserDataFromFacebookForUser:(PFObject*)userObject;
 - (void)facebookLoggedInWithResult:(id)result;
 
 @end
