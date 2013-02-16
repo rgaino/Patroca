@@ -112,15 +112,15 @@
 }
 
 
-- (void)getSelfItemsAndReturn {
+- (void)getItemsAndReturnForUser:(PFObject*)userObject; {
     
-    if([PFUser currentUser] == nil) {
+    if(userObject == nil) {
         NSLog(@"Can't get current user");
         //TODO: show a nice error message
     }
     
     PFQuery *query = [PFQuery queryWithClassName:DB_TABLE_ITEMS];
-    [query whereKey:DB_FIELD_USER_ID equalTo:[PFUser currentUser]];
+    [query whereKey:DB_FIELD_USER_ID equalTo:userObject];
     
     [query orderByDescending:DB_FIELD_UPDATED_AT];
     

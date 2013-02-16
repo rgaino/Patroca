@@ -12,6 +12,7 @@
 
 @class BaseViewController;
 @class PFGeoPoint;
+@class PFObject;
 
 @interface ItemDataSource : NSObject <CLLocationManagerDelegate> {
     
@@ -24,7 +25,7 @@
 
 - (void)getFriendsItemsAndReturn;
 - (void)getNearbyItemsAndReturn;
-- (void)getSelfItemsAndReturn;
+- (void)getItemsAndReturnForUser:(PFObject*)userObject;
 - (void)getTotalCommentsForItems:(NSArray*)objects;
 
 @end

@@ -17,6 +17,7 @@
 @interface ViewProfileViewController : BaseViewController <PF_FBRequestDelegate, ItemDataSourceDelegate,
                                                             UICollectionViewDataSource, UICollectionViewDelegateFlowLayout> {
 
+    PFUser *userObject;
     ItemDataSource *itemDataSource;
     NSDictionary *userData;
     NSMutableDictionary *totalCommentsForItemsDictionary;
@@ -25,7 +26,7 @@
 @property (weak, nonatomic) IBOutlet UICollectionView *contentDisplayCollectionView;
 
 - (void)setupViewWithUserID:(NSString*)profileUserID;
-- (void)readUserDataFromFacebookForUser:(PFObject*)userObject;
+- (void)readUserDataFromFacebook;
 - (void)facebookLoggedInWithResult:(id)result;
 
 @end

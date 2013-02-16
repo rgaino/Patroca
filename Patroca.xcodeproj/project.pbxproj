@@ -446,6 +446,7 @@
 		1939B88616568C3300435705 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				19A9DFEB16CFACE3005ED23F /* TestFlightSDK1.1 */,
 				1939CA4D1664449C002C21F6 /* SDWebImage.framework */,
 				1939CA491664434E002C21F6 /* ImageIO.framework */,
 				1939B8F616571C4E00435705 /* SystemConfiguration.framework */,
@@ -472,7 +473,6 @@
 		1939B88D16568C3300435705 /* Patroca */ = {
 			isa = PBXGroup;
 			children = (
-				19A9DFEB16CFACE3005ED23F /* TestFlightSDK1.1 */,
 				19D910C216BF0ED100129E22 /* Classes */,
 				1934ACF6165E2B9300C8272F /* Libs */,
 				1939B8B716568F8400435705 /* Images */,
@@ -738,7 +738,8 @@
 				19A9DFEE16CFACE3005ED23F /* release_notes.md */,
 				19A9DFEF16CFACE3005ED23F /* TestFlight.h */,
 			);
-			path = TestFlightSDK1.1;
+			name = TestFlightSDK1.1;
+			path = Patroca/TestFlightSDK1.1;
 			sourceTree = "<group>";
 		};
 		19D910BB16BF0DEF00129E22 /* MPNotificationView */ = {

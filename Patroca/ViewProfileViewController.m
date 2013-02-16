@@ -51,13 +51,13 @@
 - (void)setupViewWithUserID:(NSString*)profileUserID {
     
 
-    PFUser *userObject = [[UserCache getInstance] getCachedUserForId:profileUserID];
-    [self readUserDataFromFacebookForUser:userObject];
+    userObject = [[UserCache getInstance] getCachedUserForId:profileUserID];
+    [self readUserDataFromFacebook];
     
 
 }
 
-- (void)readUserDataFromFacebookForUser:(PFObject*)userObject {
+- (void)readUserDataFromFacebook {
     
     NSString *userFacebookID = [userObject objectForKey:DB_FIELD_USER_FACEBOOK_ID];
     NSString *facebookGraphPath = [NSString stringWithFormat:@"%@/?fields=name,location,picture,email", userFacebookID];
@@ -86,7 +86,7 @@
  
     //read Facebook profile information
     userData = (NSDictionary *)result;
-    [itemDataSource getSelfItemsAndReturn];
+    [itemDataSource getItemsAndReturnForUser:userObject];
 }
 
 
