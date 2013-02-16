@@ -10,6 +10,8 @@
 #import <Parse/Parse.h>
 #import "DatabaseConstants.h"
 #import <SDWebImage/UIImageView+WebCache.h>
+#import "AppDelegate.h"
+#import "UIUnderlinedButton.h"
 
 @implementation ProfileHeaderViewCell
 
@@ -45,7 +47,19 @@
     NSURL *profilePictureURL = [NSURL URLWithString:[NSString stringWithFormat:@"https://graph.facebook.com/%@/picture?width=170&height=200", facebookId]];
     [_profileImageView setImageWithURL:profilePictureURL];
     
-    [self loadFriendsProfilePictures];
+    
+    //is this the logged user?
+    NSString *loggedUserFacebookID = [[PFUser currentUser] objectForKey:DB_FIELD_USER_FACEBOOK_ID];
+    if( [facebookId isEqualToString:loggedUserFacebookID] ) {
+        //show friends picture and leave all elements as default
+        [self loadFriendsProfilePictures];
+    } else {
+        //displaying someone else's profile, so format screen accordingly
+        [_logoutButton setHidden:YES];
+        [_shareOnFacebookButton setHidden:NO];
+        [_moreFriendsMoreStuffLabel setHidden:YES];
+        [_tellYourFriendsButton setHidden:YES];
+    }
 }
 
 - (void)loadFriendsProfilePictures {
@@ -97,5 +111,17 @@
     }];
 }
 
+- (IBAction)logoutButtonPressed:(id)sender {
+    
+    [PFUser logOut];
+    AppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
+    [appDelegate.window.rootViewController.navigationController popToRootViewControllerAnimated:YES];
+}
+
+- (IBAction)shareOnFacebookButtonPressed:(id)sender {
+}
+
+- (IBAction)tellYourFriendsButtonPressed:(id)sender {
+}
 
 @end

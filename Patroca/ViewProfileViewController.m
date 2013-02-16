@@ -89,11 +89,7 @@
     [itemDataSource getSelfItemsAndReturn];
 }
 
-- (IBAction)logoutButtonPressed:(id)sender {
-    
-    [PFUser logOut];
-    [self.navigationController popViewControllerAnimated:YES];
-}
+
 
 
 

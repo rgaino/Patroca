@@ -24,7 +24,6 @@
 
 @property (weak, nonatomic) IBOutlet UICollectionView *contentDisplayCollectionView;
 
-- (IBAction)logoutButtonPressed:(id)sender;
 - (void)setupViewWithUserID:(NSString*)profileUserID;
 - (void)readUserDataFromFacebookForUser:(PFObject*)userObject;
 - (void)facebookLoggedInWithResult:(id)result;
