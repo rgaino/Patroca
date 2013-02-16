@@ -34,22 +34,13 @@
     //Making sure we don't use nulls but blank strings instead
     NSString *facebookId = ([userData objectForKey:@"id"] == nil ? @"" : [userData objectForKey:@"id"]);
     NSString *name       = ([userData objectForKey:@"name"] == nil ? @"" : [userData objectForKey:@"name"]);
-    NSString *email      = ([userData objectForKey:@"email"] == nil ? @"" : [userData objectForKey:@"email"]);
     NSString *location   = ([[userData objectForKey:@"location"] objectForKey:@"name"]==nil ? @"" : [[userData objectForKey:@"location"] objectForKey:@"name"]);
     
     
     //display basic info on screen
     [_nameLabel setText: name];
     [_locationLabel setText:location];
-    
-    //store info on Parse User table
-    PFUser *currentUser = [PFUser currentUser];
-    [currentUser setObject:facebookId forKey:DB_FIELD_USER_FACEBOOK_ID];
-    [currentUser setEmail:email];
-    [currentUser setObject:name forKey:DB_FIELD_USER_NAME];
-    [currentUser saveInBackground];
-    
-    
+
     //pull profile picture (type=normal means 100px wide)
     NSURL *profilePictureURL = [NSURL URLWithString:[NSString stringWithFormat:@"https://graph.facebook.com/%@/picture?type=normal", facebookId]];
     [_profileImageView setImageWithURL:profilePictureURL];
