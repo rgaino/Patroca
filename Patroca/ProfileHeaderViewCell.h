@@ -26,6 +26,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *shareOnFacebookButton;
 @property (weak, nonatomic) IBOutlet UILabel *moreFriendsMoreStuffLabel;
 @property (weak, nonatomic) IBOutlet UIButton *tellYourFriendsButton;
+@property (strong, nonatomic) UIViewController *parentViewController;
 
 - (void)setupProfileHeaderViewCellWithUserData:(NSDictionary*)userData;
 - (void)loadFriendsProfilePictures;

@@ -114,8 +114,7 @@
 - (IBAction)logoutButtonPressed:(id)sender {
     
     [PFUser logOut];
-    AppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
-    [appDelegate.window.rootViewController.navigationController popToRootViewControllerAnimated:YES];
+    [_parentViewController.navigationController popViewControllerAnimated:YES];
 }
 
 - (IBAction)shareOnFacebookButtonPressed:(id)sender {
