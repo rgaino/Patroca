@@ -12,11 +12,14 @@
 #import "DatabaseConstants.h"
 #import "ItemDetailsViewController.h"
 #import "MPNotificationView.h"
+#import "TestFlight.h"
 
 @implementation AppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+    [TestFlight takeOff:@"a943cfdec0ba874821ba2c51515c2935_ODgyMTY4MjAxMy0wMi0xNCAxOTo0NDowOS4wMjQ2NjQ"];
+
     [Parse setApplicationId:@"oqM758m32dGwvjzOwwm5SP4yWTBFeteAPfX7U0Sq"
                   clientKey:@"nuCQvRTW9s4TK9pscWpq0ZVShQKHtUjmwYDJEIcE"];
 

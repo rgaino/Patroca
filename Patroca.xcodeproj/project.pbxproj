@@ -117,6 +117,10 @@
 		198B5BDA16CDA0AA00DC2ED2 /* ProfileHeaderViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 198B5BD916CDA0AA00DC2ED2 /* ProfileHeaderViewCell.xib */; };
 		198B5BDD16CDC11A00DC2ED2 /* facebook_profile_button.png in Resources */ = {isa = PBXBuildFile; fileRef = 198B5BDB16CDC11A00DC2ED2 /* facebook_profile_button.png */; };
 		198B5BDE16CDC11A00DC2ED2 /* facebook_profile_button@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 198B5BDC16CDC11A00DC2ED2 /* facebook_profile_button@2x.png */; };
+		19A9DFF016CFACE3005ED23F /* libTestFlight.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 19A9DFEC16CFACE3005ED23F /* libTestFlight.a */; };
+		19A9DFF116CFACE3005ED23F /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 19A9DFED16CFACE3005ED23F /* README.md */; };
+		19A9DFF216CFACE3005ED23F /* release_notes.md in Resources */ = {isa = PBXBuildFile; fileRef = 19A9DFEE16CFACE3005ED23F /* release_notes.md */; };
+		19A9DFF416CFAD36005ED23F /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 19A9DFF316CFAD36005ED23F /* libz.dylib */; };
 		19B01D1016AF5A8800587505 /* make_offer_button.png in Resources */ = {isa = PBXBuildFile; fileRef = 19B01D0E16AF5A8800587505 /* make_offer_button.png */; };
 		19B01D1116AF5A8800587505 /* make_offer_button@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 19B01D0F16AF5A8800587505 /* make_offer_button@2x.png */; };
 		19B01D1416AF5D8400587505 /* recommend_item_button.png in Resources */ = {isa = PBXBuildFile; fileRef = 19B01D1216AF5D8400587505 /* recommend_item_button.png */; };
@@ -276,6 +280,11 @@
 		198B5BD916CDA0AA00DC2ED2 /* ProfileHeaderViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ProfileHeaderViewCell.xib; sourceTree = "<group>"; };
 		198B5BDB16CDC11A00DC2ED2 /* facebook_profile_button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = facebook_profile_button.png; sourceTree = "<group>"; };
 		198B5BDC16CDC11A00DC2ED2 /* facebook_profile_button@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "facebook_profile_button@2x.png"; sourceTree = "<group>"; };
+		19A9DFEC16CFACE3005ED23F /* libTestFlight.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libTestFlight.a; sourceTree = "<group>"; };
+		19A9DFED16CFACE3005ED23F /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.md; sourceTree = "<group>"; };
+		19A9DFEE16CFACE3005ED23F /* release_notes.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = release_notes.md; sourceTree = "<group>"; };
+		19A9DFEF16CFACE3005ED23F /* TestFlight.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestFlight.h; sourceTree = "<group>"; };
+		19A9DFF316CFAD36005ED23F /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
 		19B01D0E16AF5A8800587505 /* make_offer_button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = make_offer_button.png; sourceTree = "<group>"; };
 		19B01D0F16AF5A8800587505 /* make_offer_button@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "make_offer_button@2x.png"; sourceTree = "<group>"; };
 		19B01D1216AF5D8400587505 /* recommend_item_button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = recommend_item_button.png; sourceTree = "<group>"; };
@@ -308,6 +317,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				19A9DFF416CFAD36005ED23F /* libz.dylib in Frameworks */,
 				1939B8ED16571C2700435705 /* MobileCoreServices.framework in Frameworks */,
 				1939CA4A1664434E002C21F6 /* ImageIO.framework in Frameworks */,
 				1939B8F716571C4E00435705 /* SystemConfiguration.framework in Frameworks */,
@@ -327,6 +337,7 @@
 				1939B88A16568C3300435705 /* Foundation.framework in Frameworks */,
 				1939B8DD1657011300435705 /* Parse.framework in Frameworks */,
 				1939CA4E1664449C002C21F6 /* SDWebImage.framework in Frameworks */,
+				19A9DFF016CFACE3005ED23F /* libTestFlight.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -417,6 +428,7 @@
 		1939B87816568C3300435705 = {
 			isa = PBXGroup;
 			children = (
+				19A9DFF316CFAD36005ED23F /* libz.dylib */,
 				1939B88D16568C3300435705 /* Patroca */,
 				1939B88616568C3300435705 /* Frameworks */,
 				1939B88416568C3300435705 /* Products */,
@@ -460,6 +472,7 @@
 		1939B88D16568C3300435705 /* Patroca */ = {
 			isa = PBXGroup;
 			children = (
+				19A9DFEB16CFACE3005ED23F /* TestFlightSDK1.1 */,
 				19D910C216BF0ED100129E22 /* Classes */,
 				1934ACF6165E2B9300C8272F /* Libs */,
 				1939B8B716568F8400435705 /* Images */,
@@ -717,6 +730,17 @@
 			name = "Profile Header";
 			sourceTree = "<group>";
 		};
+		19A9DFEB16CFACE3005ED23F /* TestFlightSDK1.1 */ = {
+			isa = PBXGroup;
+			children = (
+				19A9DFEC16CFACE3005ED23F /* libTestFlight.a */,
+				19A9DFED16CFACE3005ED23F /* README.md */,
+				19A9DFEE16CFACE3005ED23F /* release_notes.md */,
+				19A9DFEF16CFACE3005ED23F /* TestFlight.h */,
+			);
+			path = TestFlightSDK1.1;
+			sourceTree = "<group>";
+		};
 		19D910BB16BF0DEF00129E22 /* MPNotificationView */ = {
 			isa = PBXGroup;
 			children = (
@@ -878,6 +902,8 @@
 				198B5BDA16CDA0AA00DC2ED2 /* ProfileHeaderViewCell.xib in Resources */,
 				198B5BDD16CDC11A00DC2ED2 /* facebook_profile_button.png in Resources */,
 				198B5BDE16CDC11A00DC2ED2 /* facebook_profile_button@2x.png in Resources */,
+				19A9DFF116CFACE3005ED23F /* README.md in Resources */,
+				19A9DFF216CFACE3005ED23F /* release_notes.md in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -957,6 +983,7 @@
 				PROVISIONING_PROFILE = "424F2EF8-B233-4EF4-9171-639B9ADC956C";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "424F2EF8-B233-4EF4-9171-639B9ADC956C";
 				SDKROOT = iphoneos;
+				STRIP_INSTALLED_PRODUCT = NO;
 			};
 			name = Debug;
 		};
@@ -971,7 +998,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Rafael Gaino";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Rafael Gaino";
-				COPY_PHASE_STRIP = YES;
+				COPY_PHASE_STRIP = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
@@ -981,6 +1008,7 @@
 				PROVISIONING_PROFILE = "F816A82E-BAAE-4024-8287-693EE16DF727";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "F816A82E-BAAE-4024-8287-693EE16DF727";
 				SDKROOT = iphoneos;
+				STRIP_INSTALLED_PRODUCT = NO;
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
@@ -997,6 +1025,10 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Patroca/Patroca-Prefix.pch";
 				INFOPLIST_FILE = "Patroca/Patroca-Info.plist";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/Patroca/TestFlightSDK1.1\"",
+				);
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "424F2EF8-B233-4EF4-9171-639B9ADC956C";
@@ -1017,6 +1049,10 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Patroca/Patroca-Prefix.pch";
 				INFOPLIST_FILE = "Patroca/Patroca-Info.plist";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/Patroca/TestFlightSDK1.1\"",
+				);
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "F816A82E-BAAE-4024-8287-693EE16DF727";
