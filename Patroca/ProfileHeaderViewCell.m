@@ -42,7 +42,7 @@
     [_locationLabel setText:location];
 
     //pull profile picture (type=normal means 100px wide)
-    NSURL *profilePictureURL = [NSURL URLWithString:[NSString stringWithFormat:@"https://graph.facebook.com/%@/picture?type=normal", facebookId]];
+    NSURL *profilePictureURL = [NSURL URLWithString:[NSString stringWithFormat:@"https://graph.facebook.com/%@/picture?width=170&height=200", facebookId]];
     [_profileImageView setImageWithURL:profilePictureURL];
     
     [self loadFriendsProfilePictures];
