@@ -18,11 +18,11 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+    //Initialize TestFlight
     [TestFlight takeOff:@"a943cfdec0ba874821ba2c51515c2935_ODgyMTY4MjAxMy0wMi0xNCAxOTo0NDowOS4wMjQ2NjQ"];
 
-    [Parse setApplicationId:@"oqM758m32dGwvjzOwwm5SP4yWTBFeteAPfX7U0Sq"
-                  clientKey:@"nuCQvRTW9s4TK9pscWpq0ZVShQKHtUjmwYDJEIcE"];
-
+    //Initialize Parse
+    [Parse setApplicationId:@"oqM758m32dGwvjzOwwm5SP4yWTBFeteAPfX7U0Sq" clientKey:@"nuCQvRTW9s4TK9pscWpq0ZVShQKHtUjmwYDJEIcE"];
     [PFFacebookUtils initializeWithApplicationId:@"100901256728525"];
 
     
@@ -58,10 +58,15 @@
 
 - (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)newDeviceToken
 {
+    //logging for bug tracking according to https://www.parse.com/questions/pfinstallation-resets-channels-on-new-app-update#answer-both-approaches-should-not-reset-the-channels-column-installing-an
+    TFLog(@"Entering didRegisterForRemoteNotificationsWithDeviceToken with PFInstallation objectID is %@", [[PFInstallation currentInstallation] objectId]);
+    
     [PFPush storeDeviceToken:newDeviceToken]; // Send parse the device token
     // Subscribe this user to the broadcast channel, ""
     [[PFInstallation currentInstallation] addUniqueObject:@"" forKey:@"channels"];
-    [[PFInstallation currentInstallation] saveEventually];
+    [[PFInstallation currentInstallation] save];
+
+    TFLog(@"Leaving didRegisterForRemoteNotificationsWithDeviceToken with PFInstallation objectID is %@", [[PFInstallation currentInstallation] objectId]);
 }
 
 #pragma mark Push Notification methods
