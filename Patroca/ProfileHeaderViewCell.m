@@ -36,7 +36,7 @@
     //Making sure we don't use nulls but blank strings instead
     NSString *facebookId = ([userData objectForKey:@"id"] == nil ? @"" : [userData objectForKey:@"id"]);
     NSString *name       = ([userData objectForKey:@"name"] == nil ? @"" : [userData objectForKey:@"name"]);
-    NSString *location   = ([[userData objectForKey:@"location"] objectForKey:@"name"]==nil ? @"" : [[userData objectForKey:@"location"] objectForKey:@"name"]);
+    NSString *location   = ([[userData objectForKey:@"location"] objectForKey:@"name"]==nil ? @"?" : [[userData objectForKey:@"location"] objectForKey:@"name"]);
     
     
     //display basic info on screen
@@ -47,6 +47,23 @@
     NSURL *profilePictureURL = [NSURL URLWithString:[NSString stringWithFormat:@"https://graph.facebook.com/%@/picture?width=170&height=200", facebookId]];
     [_profileImageView setImageWithURL:profilePictureURL];
     
+    
+    //center together the location icon and location label
+    dispatch_async(dispatch_get_main_queue(), ^{
+        // This block will be executed asynchronously on the main thread.
+        //because UI elements must be updated on the main thread
+        CGFloat spacing = 10.0f;
+        CGFloat locationTextWidth = [[_locationLabel text] sizeWithFont:[_locationLabel font]].width;
+        CGFloat locationIconWidth = _locationIconImageView.frame.size.width;
+        CGFloat totalWidth = locationTextWidth + spacing + locationIconWidth;
+
+        CGFloat locationIconX = (320/2 - totalWidth/2);
+        [_locationIconImageView setFrame:CGRectMake(locationIconX, _locationIconImageView.frame.origin.y, _locationIconImageView.frame.size.width, _locationIconImageView.frame.size.height)];
+        
+        CGFloat locationTextX = locationIconX + locationIconWidth + spacing;
+        [_locationLabel setFrame:CGRectMake(locationTextX, _locationLabel.frame.origin.y, locationTextWidth, _locationLabel.frame.size.height)];
+    });
+
     
     //is this the logged user?
     NSString *loggedUserFacebookID = [[PFUser currentUser] objectForKey:DB_FIELD_USER_FACEBOOK_ID];
