@@ -8,7 +8,6 @@
 
 #import "ViewProfileViewController.h"
 #import <Parse/Parse.h>
-#import "LogInViewController.h"
 #import "DatabaseConstants.h"
 #import <SDWebImage/UIImageView+WebCache.h>
 #import "ItemDataSource.h"

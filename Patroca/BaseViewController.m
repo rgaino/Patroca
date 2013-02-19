@@ -108,16 +108,47 @@
 
 -(void) userLoggedInSuccessfully {
     
-    NSURL *profilePictureURL = [NSURL URLWithString:[NSString stringWithFormat:@"https://graph.facebook.com/%@/picture?type=square", [[PFUser currentUser] objectForKey:DB_FIELD_USER_FACEBOOK_ID]]];
-    [_loginProfileButton.imageView setImageWithURL:profilePictureURL placeholderImage:nil success:^(UIImage *image, BOOL cached) {
-        [_loginProfileButton setImage:_loginProfileButton.imageView.image forState:UIControlStateNormal];
-    } failure:^(NSError *error) {
-        NSLog(@"");
+    
+    // Create request for user's Facebook data
+    NSString *requestPath = @"me/?fields=name,email";
+    
+    // Send request to Facebook
+    PF_FBRequest *request = [PF_FBRequest requestForGraphPath:requestPath];
+    [request startWithCompletionHandler:^(PF_FBRequestConnection *connection, id result, NSError *error) {
+        if (!error) {
+            
+            NSDictionary *userData = (NSDictionary *)result; // The result is a dictionary
+            NSString *facebookId = userData[@"id"];
+            NSString *name = userData[@"name"];
+            NSString *email      = ([userData objectForKey:@"email"] == nil ? @"" : [userData objectForKey:@"email"]);
+            
+            //store info on Parse User table
+            PFUser *currentUser = [PFUser currentUser];
+            [currentUser setObject:facebookId forKey:DB_FIELD_USER_FACEBOOK_ID];
+            [currentUser setObject:name forKey:DB_FIELD_USER_NAME];
+            [currentUser setEmail:email];
+            [currentUser saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+                
+                NSURL *profilePictureURL = [NSURL URLWithString:[NSString stringWithFormat:@"https://graph.facebook.com/%@/picture?type=square", [[PFUser currentUser] objectForKey:DB_FIELD_USER_FACEBOOK_ID]]];
+                [_loginProfileButton.imageView setImageWithURL:profilePictureURL placeholderImage:nil success:^(UIImage *image, BOOL cached) {
+                    [_loginProfileButton setImage:_loginProfileButton.imageView.image forState:UIControlStateNormal];
+                } failure:^(NSError *error) {
+                    NSLog(@"");
+                }];
+                
+                PFInstallation *myInstallation = [PFInstallation currentInstallation];
+                [myInstallation setObject:[PFUser currentUser] forKey:DB_FIELD_USER_ID];
+                [myInstallation saveEventually];
+            }];
+
+        } else {
+            NSLog(@"Error: %@ %@", error, [error userInfo]);
+        }
     }];
     
-    PFInstallation *myInstallation = [PFInstallation currentInstallation];
-    [myInstallation setObject:[PFUser currentUser] forKey:DB_FIELD_USER_ID];
-    [myInstallation saveEventually];
+    
+    
+
 }
 
 - (void)loginProfileButtonPressed {
@@ -129,9 +160,8 @@
         [self.navigationController pushViewController:viewProfileViewController animated:YES];
         
     } else {
-        //        LogInViewController *logInViewController = [[LogInViewController alloc] initWithNibName:@"LogInViewController" bundle:nil];
-        //        [self.navigationController pushViewController:logInViewController animated:YES];
         
+        //First time user (on this device at least) so log in
         
         // The permissions requested from the user
         NSArray *permissionsArray = [NSArray arrayWithObjects:

@@ -11,7 +11,6 @@
 #import "DatabaseConstants.h"
 #import "ItemViewCell.h"
 #import "ItemDataSource.h"
-#import "LogInViewController.h"
 #import "ViewProfileViewController.h"
 #import "UserCache.h"
 #import "AddNewItemViewController.h"
