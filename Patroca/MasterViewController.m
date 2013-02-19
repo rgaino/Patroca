@@ -112,8 +112,8 @@
     {
         [itemDataSource getFriendsItemsAndReturn];
     } else {
-        LogInViewController *logInViewController = [[LogInViewController alloc] initWithNibName:@"LogInViewController" bundle:nil];
-        [self.navigationController pushViewController:logInViewController animated:YES];
+        
+        [self userTappedOnNearby];
     }
 }
 

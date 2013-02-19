@@ -428,7 +428,6 @@
 		1939B87816568C3300435705 = {
 			isa = PBXGroup;
 			children = (
-				19A9DFF316CFAD36005ED23F /* libz.dylib */,
 				1939B88D16568C3300435705 /* Patroca */,
 				1939B88616568C3300435705 /* Frameworks */,
 				1939B88416568C3300435705 /* Products */,
@@ -455,6 +454,7 @@
 				1939B8F016571C3400435705 /* Security.framework */,
 				1939B8EE16571C2F00435705 /* QuartzCore.framework */,
 				1939B8EC16571C2700435705 /* MobileCoreServices.framework */,
+				19A9DFF316CFAD36005ED23F /* libz.dylib */,
 				1939B8EA1657018500435705 /* libz.1.1.3.dylib */,
 				1939B8E81657017700435705 /* libsqlite3.dylib */,
 				1939B8E01657016D00435705 /* Accounts.framework */,
