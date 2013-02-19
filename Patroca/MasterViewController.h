@@ -22,20 +22,20 @@
     
 }
 
-@property (weak, nonatomic) IBOutlet UILabel *featuredLabel;
-@property (weak, nonatomic) IBOutlet UILabel *friendsLabel;
-@property (weak, nonatomic) IBOutlet UILabel *nearbyLabel;
 @property (weak, nonatomic) IBOutlet UIImageView *menuArrowImage;
 @property (weak, nonatomic) IBOutlet UIView *menuBarView;
 @property (weak, nonatomic) IBOutlet UICollectionView *contentDisplayCollectionView;
+@property (weak, nonatomic) IBOutlet UIButton *featuredButton;
+@property (weak, nonatomic) IBOutlet UIButton *friendsButton;
+@property (weak, nonatomic) IBOutlet UIButton *nearbyButton;
 
 
-- (void)userTappedOnFeatured;
-- (void)userTappedOnFriends;
-- (void)userTappedOnNearby;
 - (void)moveMenuArrowTo:(float)xPosition;
 - (void)loadFeaturedItems;
 - (void)loadFriendsItems;
 - (void)loadNearbyItems;
+- (IBAction)friendsButtonPressed:(id)sender;
+- (IBAction)featuredButtonPressed:(id)sender;
+- (IBAction)nearbyButtonPressed:(id)sender;
 
 @end

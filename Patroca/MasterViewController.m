@@ -31,16 +31,6 @@
         //Colors and patterns
         labelSelectedColor = [UIColor colorWithRed:36/255.0 green:190/255.0 blue:212/255.0 alpha:1.0f];
         labelUnselectedColor = [UIColor colorWithRed:204/255.0 green:204/255.0 blue:204/255.0 alpha:1.0f];
-
-        //making menu bar labels tappable
-        UITapGestureRecognizer *featuredTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(userTappedOnFeatured)];
-        [_featuredLabel addGestureRecognizer:featuredTap];
-
-        UITapGestureRecognizer *friendsTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(userTappedOnFriends)];
-        [_friendsLabel addGestureRecognizer:friendsTap];
-
-        UITapGestureRecognizer *nearbyTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(userTappedOnNearby)];
-        [_nearbyLabel addGestureRecognizer:nearbyTap];
         
         itemDataSource = [[ItemDataSource alloc] init];
         [itemDataSource setDelegate:self];
@@ -61,30 +51,31 @@
 - (void)viewDidAppear:(BOOL)animated {
     CGRect arrowFrame = _menuArrowImage.frame;
     [_menuArrowImage setFrame:CGRectMake(-100, arrowFrame.origin.y, arrowFrame.size.width, arrowFrame.size.height)];
-    [self performSelector:@selector(userTappedOnFriends) withObject:nil afterDelay:1.0f];
+    [self performSelector:@selector(friendsButtonPressed:) withObject:nil afterDelay:1.0f];
     [super viewDidAppear:animated];
 }
 
-- (void)userTappedOnFeatured {
-    [_featuredLabel setTextColor:labelSelectedColor];
-    [_friendsLabel setTextColor:labelUnselectedColor];
-    [_nearbyLabel setTextColor:labelUnselectedColor];
+
+- (IBAction)featuredButtonPressed:(id)sender {
+    [_featuredButton setTitleColor:labelSelectedColor forState:UIControlStateNormal];
+    [_friendsButton setTitleColor:labelUnselectedColor forState:UIControlStateNormal];
+    [_nearbyButton setTitleColor:labelUnselectedColor forState:UIControlStateNormal];
     [self moveMenuArrowTo:49];
     [self loadFeaturedItems];
 }
 
-- (void)userTappedOnFriends {
-    [_featuredLabel setTextColor:labelUnselectedColor];
-    [_friendsLabel setTextColor:labelSelectedColor];
-    [_nearbyLabel setTextColor:labelUnselectedColor];
+- (IBAction)friendsButtonPressed:(id)sender {
+    [_featuredButton setTitleColor:labelUnselectedColor forState:UIControlStateNormal];
+    [_friendsButton setTitleColor:labelSelectedColor forState:UIControlStateNormal];
+    [_nearbyButton setTitleColor:labelUnselectedColor forState:UIControlStateNormal];
     [self moveMenuArrowTo:153];
     [self loadFriendsItems];
 }
 
-- (void)userTappedOnNearby {
-    [_featuredLabel setTextColor:labelUnselectedColor];
-    [_friendsLabel setTextColor:labelUnselectedColor];
-    [_nearbyLabel setTextColor:labelSelectedColor];
+- (IBAction)nearbyButtonPressed:(id)sender {
+    [_featuredButton setTitleColor:labelUnselectedColor forState:UIControlStateNormal];
+    [_friendsButton setTitleColor:labelUnselectedColor forState:UIControlStateNormal];
+    [_nearbyButton setTitleColor:labelSelectedColor forState:UIControlStateNormal];
     [self moveMenuArrowTo:264];
     [self loadNearbyItems];
 }
@@ -113,7 +104,7 @@
         [itemDataSource getFriendsItemsAndReturn];
     } else {
         
-        [self userTappedOnNearby];
+        [self nearbyButtonPressed:nil];
     }
 }
 
@@ -121,6 +112,7 @@
     
     [itemDataSource getNearbyItemsAndReturn];
 }
+
 
 #pragma mark ItemDataSourceDelegate
 
