@@ -233,7 +233,7 @@
         [HUD setLabelText:[NSString stringWithFormat:NSLocalizedString(@"Saving image %d of %d...", nil), i+1, [itemThumbnails count]]];
         
         UIImage *fullImage = [itemImages objectAtIndex:i];
-        NSData *imageData = UIImageJPEGRepresentation(fullImage, 0.4f);
+        NSData *imageData = UIImageJPEGRepresentation(fullImage, 0.6f);
         PFFile *imageFile = [PFFile fileWithName:@"image.png" data:imageData];
         
         PFObject *itemImagesObject = [PFObject objectWithClassName:DB_TABLE_ITEM_IMAGES];
