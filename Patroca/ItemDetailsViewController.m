@@ -225,28 +225,32 @@
     }
     commentsViewFinalHeight += commentViewYPosition - 45;
     
-    //The new comment text area (image on the BG and text area with no borders in front
-    UIImageView *newCommentBackgroundImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"comment_text_area.png"]];
-    [newCommentBackgroundImageView setFrame:CGRectMake(14, commentsViewFinalHeight, newCommentBackgroundImageView.frame.size.width, newCommentBackgroundImageView.frame.size.height)];
-    [commentsView addSubview:newCommentBackgroundImageView];
-    commentsViewFinalHeight += newCommentBackgroundImageView.frame.size.height;
-
-    newCommentTextView = [[UITextView alloc] initWithFrame:CGRectMake(48, newCommentBackgroundImageView.frame.origin.y+14, 241, 76)];
-    [newCommentTextView setEditable:YES];
-    [newCommentTextView setBackgroundColor:[UIColor clearColor]];
-    [newCommentTextView setTextColor:[UIColor colorWithRed:102/255.f green:102/255.f blue:102/255.f alpha:1.0f]];
-    [newCommentTextView setDelegate:self];
+    //show Write Comment section only if user is logged in
+    if ([PFUser currentUser] && [PFFacebookUtils isLinkedWithUser:[PFUser currentUser]]) {
     
-    sendCommentButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    [sendCommentButton setFrame:CGRectMake(217, newCommentBackgroundImageView.frame.origin.y + newCommentBackgroundImageView.frame.size.height-22, 103, 45)];
-    [sendCommentButton setImage:[UIImage imageNamed:@"send_comment_button.png"] forState:UIControlStateNormal];
-    commentsViewFinalHeight += 22; //half the button's height
-    [sendCommentButton setEnabled:NO];
-    [sendCommentButton addTarget:self action:@selector(sendCommentButtonPressed) forControlEvents:UIControlEventTouchUpInside];
+        //The new comment text area (image on the BG and text area with no borders in front
+        UIImageView *newCommentBackgroundImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"comment_text_area.png"]];
+        [newCommentBackgroundImageView setFrame:CGRectMake(14, commentsViewFinalHeight, newCommentBackgroundImageView.frame.size.width, newCommentBackgroundImageView.frame.size.height)];
+        [commentsView addSubview:newCommentBackgroundImageView];
+        commentsViewFinalHeight += newCommentBackgroundImageView.frame.size.height;
 
-    [commentsView addSubview:newCommentBackgroundImageView];
-    [commentsView addSubview:newCommentTextView];
-    [commentsView addSubview:sendCommentButton];
+        newCommentTextView = [[UITextView alloc] initWithFrame:CGRectMake(48, newCommentBackgroundImageView.frame.origin.y+14, 241, 76)];
+        [newCommentTextView setEditable:YES];
+        [newCommentTextView setBackgroundColor:[UIColor clearColor]];
+        [newCommentTextView setTextColor:[UIColor colorWithRed:102/255.f green:102/255.f blue:102/255.f alpha:1.0f]];
+        [newCommentTextView setDelegate:self];
+        
+        sendCommentButton = [UIButton buttonWithType:UIButtonTypeCustom];
+        [sendCommentButton setFrame:CGRectMake(217, newCommentBackgroundImageView.frame.origin.y + newCommentBackgroundImageView.frame.size.height-22, 103, 45)];
+        [sendCommentButton setImage:[UIImage imageNamed:@"send_comment_button.png"] forState:UIControlStateNormal];
+        commentsViewFinalHeight += 22; //half the button's height
+        [sendCommentButton setEnabled:NO];
+        [sendCommentButton addTarget:self action:@selector(sendCommentButtonPressed) forControlEvents:UIControlEventTouchUpInside];
+
+        [commentsView addSubview:newCommentBackgroundImageView];
+        [commentsView addSubview:newCommentTextView];
+        [commentsView addSubview:sendCommentButton];
+    }
     
     commentsViewFinalHeight+=92; //some additional space at the bottom to make room for the footer
     
