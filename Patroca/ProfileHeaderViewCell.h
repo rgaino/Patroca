@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 
 @class UIUnderlinedButton;
+@class PFUser;
 
 @interface ProfileHeaderViewCell : UICollectionViewCell {
     
@@ -28,8 +29,10 @@
 @property (weak, nonatomic) IBOutlet UIButton *tellYourFriendsButton;
 @property (weak, nonatomic) IBOutlet UIImageView *locationIconImageView;
 @property (strong, nonatomic) UIViewController *parentViewController;
+@property (weak, nonatomic) IBOutlet UILabel *totalOffersLabel;
+@property (weak, nonatomic) IBOutlet UILabel *totalCommentsLabel;
 
-- (void)setupProfileHeaderViewCellWithUserData:(NSDictionary*)userData;
+- (void)setupProfileHeaderViewCellWithUser:(PFUser*)user UserData:(NSDictionary*)userData;
 - (void)loadFriendsProfilePictures;
 - (IBAction)logoutButtonPressed:(id)sender;
 - (IBAction)shareOnFacebookButtonPressed:(id)sender;

@@ -31,7 +31,7 @@
     return self;
 }
 
-- (void)setupProfileHeaderViewCellWithUserData:(NSDictionary*)userData {
+- (void)setupProfileHeaderViewCellWithUser:(PFUser*)user UserData:(NSDictionary*)userData {
     
     //Making sure we don't use nulls but blank strings instead
     NSString *facebookId = ([userData objectForKey:@"id"] == nil ? @"" : [userData objectForKey:@"id"]);
@@ -63,6 +63,18 @@
         CGFloat locationTextX = locationIconX + locationIconWidth + spacing;
         [_locationLabel setFrame:CGRectMake(locationTextX, _locationLabel.frame.origin.y, locationTextWidth, _locationLabel.frame.size.height)];
     });
+
+    //Query for how many comments this user has ever made
+    PFQuery *totalCommentsQuery = [PFQuery queryWithClassName:DB_TABLE_ITEM_COMMENTS];
+    [totalCommentsQuery whereKey:DB_FIELD_USER_ID equalTo:user];
+    [totalCommentsQuery findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+        if(!error) {
+            NSUInteger totalComments = [objects count];
+            [_totalCommentsLabel setText: [NSString stringWithFormat: @"%d", totalComments] ];
+        } else {
+            NSLog(@"Error: %@ %@", error, [error userInfo]);
+        }
+    }];
 
     
     //is this the logged user?

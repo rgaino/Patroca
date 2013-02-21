@@ -163,7 +163,7 @@
     ProfileHeaderViewCell *profileHeaderViewCell = [collectionView dequeueReusableSupplementaryViewOfKind:
                                          UICollectionElementKindSectionHeader withReuseIdentifier:HEADER_CELL_REUSE_IDENTIFIER forIndexPath:indexPath];
 
-    [profileHeaderViewCell setupProfileHeaderViewCellWithUserData:userData];
+    [profileHeaderViewCell setupProfileHeaderViewCellWithUser:userObject UserData:userData];
     [profileHeaderViewCell setParentViewController:self];
     return profileHeaderViewCell;
 }
