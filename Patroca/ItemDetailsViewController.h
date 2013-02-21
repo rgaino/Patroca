@@ -29,6 +29,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *ownerNameLabel;
 @property (weak, nonatomic) IBOutlet UIImageView *ownerProfilePic;
 @property (weak, nonatomic) IBOutlet UIScrollView *wholeScreenScrollView;
+@property (weak, nonatomic) IBOutlet UIButton *makeOfferButton;
 
 - (IBAction)recommendThisItem:(id)sender;
 - (IBAction)reportThisItem:(id)sender;

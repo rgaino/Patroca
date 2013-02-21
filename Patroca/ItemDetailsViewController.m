@@ -38,6 +38,11 @@
     PFUser *userObject = [[UserCache getInstance] getCachedUserForId:userId];
     [self.ownerNameLabel setText:[userObject objectForKey:DB_FIELD_USER_NAME]];
     
+    if( [[userObject objectId] isEqualToString:[[PFUser currentUser] objectId]]) {
+        //owner of this item is the current user, so hide the Make Offer button
+        [_makeOfferButton setHidden:YES];
+    }
+    
     NSString *facebookProfilePicString = [NSString stringWithFormat:FB_PROFILE_PICTURE_URL, [userObject objectForKey:DB_FIELD_USER_FACEBOOK_ID]];
     NSURL *facebookProfilePicURL = [NSURL URLWithString:facebookProfilePicString];
     [_ownerProfilePic setImageWithURL:facebookProfilePicURL];
@@ -50,7 +55,7 @@
     tapRecognizer.numberOfTapsRequired = 1;
     tapRecognizer.numberOfTouchesRequired = 1;
     [self.view addGestureRecognizer:tapRecognizer];
-    
+
 }
 
 - (void)keyboardDidShow:(NSNotification*)notification {
