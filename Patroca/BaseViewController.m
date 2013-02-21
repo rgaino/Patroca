@@ -27,6 +27,16 @@
     [super viewDidLoad];
 }
 
+- (void)viewDidAppear:(BOOL)animated {
+
+    //hide profile picture if user logged out
+    if (![PFUser currentUser] || ![PFFacebookUtils isLinkedWithUser:[PFUser currentUser]]) {
+        [_loginProfileButton setImage:[UIImage imageNamed:@"login_with_fb.png"] forState:UIControlStateNormal];
+    }
+
+    [super viewDidAppear:animated];
+}
+
 - (void)setupHeaderWithBackButton:(BOOL)hasBackButton doneButton:(BOOL)hasDoneButton addItemButton:(BOOL)hasAddItemButton {
     
     headerView = [[UIView alloc] init];
