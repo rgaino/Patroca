@@ -55,8 +55,8 @@ Parse.Cloud.afterSave("Item_Comments", function(request) {
 
 	queryUser.get(commenterId, {
 		success: function(user) {
-			var commenterName = user.get("name");
-			var message = "Novo comentário de " + commenterName;
+			var commenter_name = user.get("name");
+			var message = commenter_name + ": " + comment_text;
 
 			//send Push notification
 			var pushQuery = new Parse.Query(Parse.Installation);
@@ -71,7 +71,7 @@ Parse.Cloud.afterSave("Item_Comments", function(request) {
 			  data: {
 			    alert: message,
 			    item_id: item_id,
-			    commenter_name: commenterName,
+			    commenter_name: commenter_name,
 			    comment_text: comment_text
 			  }
 			}, {
