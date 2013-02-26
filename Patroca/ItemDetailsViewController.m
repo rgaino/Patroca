@@ -349,6 +349,7 @@
 
 - (IBAction)userTappedOnProfile:(id)sender {
     
+    [_wholeScreenScrollView setContentOffset:CGPointZero animated:YES];
     ViewProfileViewController *viewProfileViewController = [[ViewProfileViewController alloc] initWithNibName:@"ViewProfileViewController" bundle:nil];
     [viewProfileViewController setupViewWithUserID:[[_itemObject objectForKey:DB_FIELD_USER_ID] objectId] ];
     [self.navigationController pushViewController:viewProfileViewController animated:YES];
