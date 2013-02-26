@@ -41,29 +41,35 @@
     
     //display basic info on screen
     [_nameLabel setText: name];
-    [_locationLabel setText:location];
 
     //pull profile picture (type=normal means 100px wide)
     NSURL *profilePictureURL = [NSURL URLWithString:[NSString stringWithFormat:@"https://graph.facebook.com/%@/picture?width=170&height=200", facebookId]];
     [_profileImageView setImageWithURL:profilePictureURL];
     
+
+    //create the location icon and label
+    UIImageView *locationIconImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"icon_location.png"]];
+
+    UILabel *locationLabel = [[UILabel alloc] init];
+    [locationLabel setText:location];
+    [locationLabel setFont:[UIFont systemFontOfSize:14]];
+
+    CGFloat spacing = 10.0f;
+    CGFloat locationTextWidth = [[locationLabel text] sizeWithFont:[locationLabel font]].width;
+    CGFloat locationIconWidth = locationIconImageView.frame.size.width;
+    CGFloat totalWidth = locationTextWidth + spacing + locationIconWidth;
+    CGFloat locationIconX = (320/2 - totalWidth/2);
+    CGFloat locationTextX = locationIconX + locationIconWidth + spacing;
+
+    [locationLabel setFrame:CGRectMake(locationTextX, 123, locationTextWidth, 21)];
+    [locationLabel setTextColor:[UIColor colorWithRed:153/255.0f green:153/255.0f blue:153/255.0f alpha:1.0f]];
+    [locationLabel setBackgroundColor:[UIColor clearColor]];
+    [self addSubview:locationLabel];
     
-    //center together the location icon and location label
-    dispatch_async(dispatch_get_main_queue(), ^{
-        // This block will be executed asynchronously on the main thread.
-        //because UI elements must be updated on the main thread
-        CGFloat spacing = 10.0f;
-        CGFloat locationTextWidth = [[_locationLabel text] sizeWithFont:[_locationLabel font]].width;
-        CGFloat locationIconWidth = _locationIconImageView.frame.size.width;
-        CGFloat totalWidth = locationTextWidth + spacing + locationIconWidth;
+    [locationIconImageView setFrame:CGRectMake(locationIconX, 128, locationIconImageView.frame.size.width, locationIconImageView.frame.size.height)];
+    [self addSubview:locationIconImageView];
 
-        CGFloat locationIconX = (320/2 - totalWidth/2);
-        [_locationIconImageView setFrame:CGRectMake(locationIconX, _locationIconImageView.frame.origin.y, _locationIconImageView.frame.size.width, _locationIconImageView.frame.size.height)];
-        
-        CGFloat locationTextX = locationIconX + locationIconWidth + spacing;
-        [_locationLabel setFrame:CGRectMake(locationTextX, _locationLabel.frame.origin.y, locationTextWidth, _locationLabel.frame.size.height)];
-    });
-
+    
     //Query for how many comments this user has ever made
     PFQuery *totalCommentsQuery = [PFQuery queryWithClassName:DB_TABLE_ITEM_COMMENTS];
     [totalCommentsQuery whereKey:DB_FIELD_USER_ID equalTo:user];
