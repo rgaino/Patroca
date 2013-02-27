@@ -331,7 +331,10 @@
         
         UIImageView *profilePictureImageView = [[UIImageView alloc] initWithFrame:CGRectMake(274, 23, 30, 30)];
         
-        NSString *profilePicString = [NSString stringWithFormat:FB_PROFILE_PICTURE_URL, [userObject objectForKey:DB_FIELD_USER_FACEBOOK_ID]];
+        PFUser *commentUser = [commentObject objectForKey:DB_FIELD_USER_ID];
+        NSString *userId = [commentUser objectId];
+        PFUser *commenterUserObject = [[UserCache getInstance] getCachedUserForId:userId];
+        NSString *profilePicString = [NSString stringWithFormat:FB_PROFILE_PICTURE_URL, [commenterUserObject objectForKey:DB_FIELD_USER_FACEBOOK_ID]];
         NSURL *profilePicURL = [NSURL URLWithString:profilePicString];
         [profilePictureImageView setImageWithURL:profilePicURL];
         [singleCommentView addSubview:profilePictureImageView];
