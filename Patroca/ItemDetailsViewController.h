@@ -13,23 +13,22 @@
 
 @interface ItemDetailsViewController : BaseViewController <UIScrollViewDelegate, UITextViewDelegate> {
 
-    int numberOfImages;
-    UIActivityIndicatorView *loadingCommentsActivityIndicator;
-    NSMutableArray *commentObjects;
-    UIView *commentsView;
-    float commentsViewYPosition;
-    float contentHeightWithoutCommentsView;
+    UIScrollView *wholeScreenScrollView;
+    UIScrollView *itemImagesScrollView;
     UITextView *newCommentTextView;
     UIButton *sendCommentButton;
+    UIActivityIndicatorView *loadingCommentsActivityIndicator;
+    UIView *commentsView;
+    
+    int numberOfImages;
+    NSMutableArray *commentObjects;
+    float commentsViewYPosition;
+    float contentHeightWithoutCommentsView;
 }
 
 @property (nonatomic, readwrite) PFObject *itemObject;
-@property (weak, nonatomic) IBOutlet UIScrollView *itemImagesScrollView;
-@property (weak, nonatomic) IBOutlet UILabel *itemTitleLabel;
-@property (weak, nonatomic) IBOutlet UILabel *ownerNameLabel;
-@property (weak, nonatomic) IBOutlet UIImageView *ownerProfilePic;
-@property (weak, nonatomic) IBOutlet UIScrollView *wholeScreenScrollView;
 @property (weak, nonatomic) IBOutlet UIButton *makeOfferButton;
+@property (weak, nonatomic) IBOutlet UIView *footerView;
 
 - (IBAction)recommendThisItem:(id)sender;
 - (IBAction)reportThisItem:(id)sender;

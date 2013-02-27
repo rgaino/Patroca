@@ -16,10 +16,6 @@
 #import "UILabel+Extensions.h"
 #import "ViewProfileViewController.h"
 
-@interface ItemDetailsViewController ()
-
-@end
-
 @implementation ItemDetailsViewController
 
 
@@ -28,24 +24,11 @@
     [super viewDidLoad];
 
     [self setupHeaderWithBackButton:YES doneButton:NO addItemButton:YES];
-    [self setupItemImagesScrollView];
-    
-    [_itemTitleLabel setText:[_itemObject objectForKey:DB_FIELD_ITEM_NAME]];
+    [self setupWholeScreenScrollView];
 
-    PFUser *itemUser = [_itemObject objectForKey:DB_FIELD_USER_ID];
-    NSString *userId = [itemUser objectId];
+    [self setupItemImagesScrollView];
+
     
-    PFUser *userObject = [[UserCache getInstance] getCachedUserForId:userId];
-    [self.ownerNameLabel setText:[userObject objectForKey:DB_FIELD_USER_NAME]];
-    
-    if( [[userObject objectId] isEqualToString:[[PFUser currentUser] objectId]]) {
-        //owner of this item is the current user, so hide the Make Offer button
-        [_makeOfferButton setHidden:YES];
-    }
-    
-    NSString *facebookProfilePicString = [NSString stringWithFormat:FB_PROFILE_PICTURE_URL, [userObject objectForKey:DB_FIELD_USER_FACEBOOK_ID]];
-    NSURL *facebookProfilePicURL = [NSURL URLWithString:facebookProfilePicString];
-    [_ownerProfilePic setImageWithURL:facebookProfilePicURL];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardDidShow:) name:UIKeyboardDidShowNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardDidHide:) name:UIKeyboardDidHideNotification object:nil];
@@ -64,16 +47,10 @@
     NSValue* keyboardFrameBegin = [keyboardInfo valueForKey:UIKeyboardFrameBeginUserInfoKey];
     CGRect keyboardFrameBeginRect = [keyboardFrameBegin CGRectValue];
     
-    CGRect scrollViewFrame = _wholeScreenScrollView.frame;
+    CGRect scrollViewFrame = wholeScreenScrollView.frame;
     
-    [_wholeScreenScrollView setFrame:CGRectMake(scrollViewFrame.origin.x, scrollViewFrame.origin.y, scrollViewFrame.size.width, scrollViewFrame.size.height - keyboardFrameBeginRect.size.height)];
+    [wholeScreenScrollView setFrame:CGRectMake(scrollViewFrame.origin.x, scrollViewFrame.origin.y, scrollViewFrame.size.width, scrollViewFrame.size.height - keyboardFrameBeginRect.size.height)];
     [self scrollWholeScreenToBottom];
-}
-
-- (void)scrollWholeScreenToBottom {
-
-    CGPoint bottomOffset = CGPointMake(0, _wholeScreenScrollView.contentSize.height - _wholeScreenScrollView.frame.size.height);
-    [_wholeScreenScrollView setContentOffset:bottomOffset animated:NO];
 }
 
 - (void)keyboardDidHide:(NSNotification*)notification {
@@ -82,21 +59,88 @@
     NSValue* keyboardFrameBegin = [keyboardInfo valueForKey:UIKeyboardFrameBeginUserInfoKey];
     CGRect keyboardFrameBeginRect = [keyboardFrameBegin CGRectValue];
     
-    CGRect scrollViewFrame = _wholeScreenScrollView.frame;
+    CGRect scrollViewFrame = wholeScreenScrollView.frame;
     
-    [_wholeScreenScrollView setFrame:CGRectMake(scrollViewFrame.origin.x, scrollViewFrame.origin.y, scrollViewFrame.size.width, scrollViewFrame.size.height + keyboardFrameBeginRect.size.height)];
+    [wholeScreenScrollView setFrame:CGRectMake(scrollViewFrame.origin.x, scrollViewFrame.origin.y, scrollViewFrame.size.width, scrollViewFrame.size.height + keyboardFrameBeginRect.size.height)];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
     [self animateImagesScrollViewIn];
+    [super viewDidAppear:animated];
 }
 
-- (void)viewDidLayoutSubviews {
-    [self setupWholeScreenScrollView];
-}
+
 
 - (void)setupWholeScreenScrollView {
     
+    wholeScreenScrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 44, 320, self.view.frame.size.height - 44 - 45)]; //44 is the header, 45 is the footer
+    [self.view addSubview:wholeScreenScrollView];
+    
+    //Item images scroll view
+    itemImagesScrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, 320, 320)];
+    [itemImagesScrollView setAlwaysBounceVertical:NO];
+    [itemImagesScrollView setHidden:YES];
+    [itemImagesScrollView setPagingEnabled:YES];
+    [itemImagesScrollView setDirectionalLockEnabled:YES];
+    [wholeScreenScrollView addSubview:itemImagesScrollView];
+    
+    
+    //Title view 75% opaque) and item title label
+    UIView *titleBackgroundView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, 65)];    
+    UILabel *itemTitleLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, 5, 300, 55)];
+    [titleBackgroundView setBackgroundColor:[UIColor colorWithRed:0 green:0 blue:0 alpha:0.7f]];
+    [itemTitleLabel setText:[_itemObject objectForKey:DB_FIELD_ITEM_NAME]];
+    [itemTitleLabel setBackgroundColor:[UIColor clearColor]];
+    [itemTitleLabel setTextColor:[UIColor whiteColor]];
+    [itemTitleLabel setFont:[UIFont systemFontOfSize:18]];
+    [itemTitleLabel setNumberOfLines:0];
+    [itemTitleLabel setAdjustsLetterSpacingToFitWidth:YES];
+    [itemTitleLabel setAdjustsFontSizeToFitWidth:YES];
+    [itemTitleLabel setMinimumScaleFactor:0.6f];
+    
+    [titleBackgroundView addSubview:itemTitleLabel];
+    [wholeScreenScrollView addSubview:titleBackgroundView];
+    
+    
+    //Owner name
+    UILabel *ownerNameLabel = [[UILabel alloc] initWithFrame:CGRectMake(46, 324, 270, 20)];
+    [ownerNameLabel setBackgroundColor:[UIColor clearColor]];
+    [ownerNameLabel setTextColor:[UIColor colorWithRed:102/255.0f green:102/255.0f blue:102/255.0f alpha:1.0f]];
+    [ownerNameLabel setFont:[UIFont systemFontOfSize:10.0f]];
+    [wholeScreenScrollView addSubview:ownerNameLabel];
+    
+    //Owner profile pic white background
+    UIView *ownerProfilePicBackgroundView = [[UIView alloc] initWithFrame:CGRectMake(6, 305, 34, 34)];
+    [ownerProfilePicBackgroundView setBackgroundColor:[UIColor whiteColor]];
+    [wholeScreenScrollView addSubview:ownerProfilePicBackgroundView];
+
+    //Owner profile pic
+    UIImageView *ownerProfilePic = [[UIImageView alloc] initWithFrame:CGRectMake(8, 307, 30, 30)];
+    [ownerProfilePic setContentMode:UIViewContentModeScaleAspectFit];
+    [wholeScreenScrollView addSubview:ownerProfilePic];
+    
+    //An invisible button over the profiile pic and name, so it's tappable without hacks
+    UIButton *profileInvisibleButton = [UIButton buttonWithType:UIButtonTypeCustom];;
+    [profileInvisibleButton setFrame:CGRectMake(0, 307, 320, 37)];
+    [profileInvisibleButton addTarget:self action:@selector(userTappedOnProfile:) forControlEvents:UIControlEventTouchUpInside];
+    [wholeScreenScrollView addSubview:profileInvisibleButton];
+    
+    //Owner's profiel pic from Facebook
+    PFUser *itemUser = [_itemObject objectForKey:DB_FIELD_USER_ID];
+    NSString *userId = [itemUser objectId];
+    
+    PFUser *userObject = [[UserCache getInstance] getCachedUserForId:userId];
+    [ownerNameLabel setText:[userObject objectForKey:DB_FIELD_USER_NAME]];
+    
+    if( [[userObject objectId] isEqualToString:[[PFUser currentUser] objectId]]) {
+        //owner of this item is the current user, so hide the Make Offer button
+        [_makeOfferButton setHidden:YES];
+    }
+    
+    NSString *facebookProfilePicString = [NSString stringWithFormat:FB_PROFILE_PICTURE_URL, [userObject objectForKey:DB_FIELD_USER_FACEBOOK_ID]];
+    NSURL *facebookProfilePicURL = [NSURL URLWithString:facebookProfilePicString];
+    [ownerProfilePic setImageWithURL:facebookProfilePicURL];
+
     
     UILabel *itemDescriptionLabel = [[UILabel alloc] initWithFrame:CGRectMake(15, 355, 290, 15)];
     [itemDescriptionLabel setText:[_itemObject objectForKey:DB_FIELD_ITEM_DESCRIPTION]];
@@ -109,7 +153,7 @@
     [itemDescriptionLabel setAdjustsLetterSpacingToFitWidth:NO];
     [itemDescriptionLabel setTextColor:[UIColor colorWithRed:60/255.0 green:60/255.0 blue:60/255.0 alpha:1.0f]];
     [itemDescriptionLabel adjustHeight];
-    [_wholeScreenScrollView addSubview:itemDescriptionLabel];
+    [wholeScreenScrollView addSubview:itemDescriptionLabel];
     
     contentHeightWithoutCommentsView = itemDescriptionLabel.frame.origin.y + itemDescriptionLabel.frame.size.height;
     
@@ -118,7 +162,7 @@
     [loadingCommentsActivityIndicator setHidesWhenStopped:YES];
     [loadingCommentsActivityIndicator startAnimating];
     commentsViewYPosition = loadingCommentsActivityIndicator.frame.origin.y;
-    [_wholeScreenScrollView addSubview:loadingCommentsActivityIndicator];
+    [wholeScreenScrollView addSubview:loadingCommentsActivityIndicator];
     contentHeightWithoutCommentsView += loadingCommentsActivityIndicator.frame.size.height;
     
     PFQuery *commentsQuery = [PFQuery queryWithClassName:DB_TABLE_ITEM_COMMENTS];
@@ -132,7 +176,7 @@
         }
     }];
     
-    [_wholeScreenScrollView setContentSize:CGSizeMake(320, contentHeightWithoutCommentsView)];
+    [wholeScreenScrollView setContentSize:CGSizeMake(320, contentHeightWithoutCommentsView)];
 }
 
 - (void)showItemComments {
@@ -255,29 +299,29 @@
     commentsViewFinalHeight+=92; //some additional space at the bottom to make room for the footer
     
     //finalize it
-    [commentsView setFrame:CGRectMake(0, commentsHeaderImageView.frame.origin.y + 18, _wholeScreenScrollView.frame.size.width, commentsViewFinalHeight)];
+    [commentsView setFrame:CGRectMake(0, commentsHeaderImageView.frame.origin.y + 18, wholeScreenScrollView.frame.size.width, commentsViewFinalHeight)];
     
     [loadingCommentsActivityIndicator stopAnimating];
-    [_wholeScreenScrollView addSubview:commentsView];
-    [_wholeScreenScrollView addSubview:commentsHeaderImageView];
-    [_wholeScreenScrollView addSubview:commentsViewTitleLabel];
-    [_wholeScreenScrollView setContentSize:CGSizeMake(320, contentHeightWithoutCommentsView+commentsViewFinalHeight)];
+    [wholeScreenScrollView addSubview:commentsView];
+    [wholeScreenScrollView addSubview:commentsHeaderImageView];
+    [wholeScreenScrollView addSubview:commentsViewTitleLabel];
+    [wholeScreenScrollView setContentSize:CGSizeMake(320, contentHeightWithoutCommentsView+commentsViewFinalHeight)];
 }
 
 - (void)animateImagesScrollViewIn {
     
-    CGRect scrollFrame = _itemImagesScrollView.frame;
+    CGRect scrollFrame = itemImagesScrollView.frame;
     scrollFrame.origin.x = 500;
-    [_itemImagesScrollView setFrame:scrollFrame];
-    [_itemImagesScrollView setHidden:NO];
+    [itemImagesScrollView setFrame:scrollFrame];
+    [itemImagesScrollView setHidden:NO];
 
     [UIView beginAnimations:@"scrollViewIn" context:nil];
     [UIView setAnimationDuration:0.5];
     [UIView setAnimationCurve:UIViewAnimationCurveEaseOut];
 
-    scrollFrame = _itemImagesScrollView.frame;
+    scrollFrame = itemImagesScrollView.frame;
     scrollFrame.origin.x = 0;
-    [_itemImagesScrollView setFrame:scrollFrame];
+    [itemImagesScrollView setFrame:scrollFrame];
 
     [UIView commitAnimations];
 }
@@ -304,11 +348,11 @@
             [itemImageView setFrame:CGRectMake(xPosition, 0, 320, 320)];
             [itemImageView setImageWithURL:[NSURL URLWithString:imageURL] placeholderImage:[UIImage imageNamed:@"placeholder.png"]];
             
-            [_itemImagesScrollView addSubview:itemImageView];
+            [itemImagesScrollView addSubview:itemImageView];
             
             xPosition += itemImageView.frame.size.width;
          }
-        [_itemImagesScrollView setContentSize:CGSizeMake(xPosition, 320)];
+        [itemImagesScrollView setContentSize:CGSizeMake(xPosition, 320)];
     }];
 }
 
@@ -349,10 +393,15 @@
 
 - (IBAction)userTappedOnProfile:(id)sender {
     
-    [_wholeScreenScrollView setContentOffset:CGPointZero animated:YES];
     ViewProfileViewController *viewProfileViewController = [[ViewProfileViewController alloc] initWithNibName:@"ViewProfileViewController" bundle:nil];
     [viewProfileViewController setupViewWithUserID:[[_itemObject objectForKey:DB_FIELD_USER_ID] objectId] ];
     [self.navigationController pushViewController:viewProfileViewController animated:YES];
+}
+
+- (void)scrollWholeScreenToBottom {
+    
+    CGPoint bottomOffset = CGPointMake(0, wholeScreenScrollView.contentSize.height - wholeScreenScrollView.frame.size.height);
+    [wholeScreenScrollView setContentOffset:bottomOffset animated:NO];
 }
 
 - (IBAction)recommendThisItem:(id)sender {}
