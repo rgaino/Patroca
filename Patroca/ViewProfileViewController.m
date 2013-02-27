@@ -49,11 +49,8 @@
 
 - (void)setupViewWithUserID:(NSString*)profileUserID {
     
-
     userObject = [[UserCache getInstance] getCachedUserForId:profileUserID];
     [self readUserDataFromFacebook];
-    
-
 }
 
 - (void)readUserDataFromFacebook {
