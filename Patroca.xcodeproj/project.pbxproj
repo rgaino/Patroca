@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		19094CBC16DD8AEC0069F90E /* MPNotificationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 19094CB916DD8AEC0069F90E /* MPNotificationView.m */; };
+		19094CBD16DD8AEC0069F90E /* OBGradientView.m in Sources */ = {isa = PBXBuildFile; fileRef = 19094CBB16DD8AEC0069F90E /* OBGradientView.m */; };
 		1934ACDD165DB93200C8272F /* Item.m in Sources */ = {isa = PBXBuildFile; fileRef = 1934ACDC165DB93200C8272F /* Item.m */; };
 		1934ACE4165DBC9400C8272F /* DatabaseConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 1934ACE3165DBC9400C8272F /* DatabaseConstants.m */; };
 		1934ACE8165DC59600C8272F /* ItemDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 1934ACE7165DC59600C8272F /* ItemDataSource.m */; };
@@ -134,8 +136,6 @@
 		19BF9D23166C426D00F813B6 /* item_title_mask@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 19BF9D21166C426D00F813B6 /* item_title_mask@2x.png */; };
 		19BF9D29166D8C6400F813B6 /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 19BF9D28166D8C6400F813B6 /* icon.png */; };
 		19BF9D2C166D8C6700F813B6 /* icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 19BF9D2B166D8C6700F813B6 /* icon@2x.png */; };
-		19D910BE16BF0DF900129E22 /* MPNotificationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 19D910BD16BF0DF900129E22 /* MPNotificationView.m */; };
-		19D910C116BF0E0900129E22 /* OBGradientView.m in Sources */ = {isa = PBXBuildFile; fileRef = 19D910C016BF0E0900129E22 /* OBGradientView.m */; };
 		19DCB424168756D9009FF503 /* comments_header.png in Resources */ = {isa = PBXBuildFile; fileRef = 19DCB422168756D9009FF503 /* comments_header.png */; };
 		19DCB425168756D9009FF503 /* comments_header@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 19DCB423168756D9009FF503 /* comments_header@2x.png */; };
 		19E5F947169CF037006718F7 /* picture_camera_thumbnail.png in Resources */ = {isa = PBXBuildFile; fileRef = 19E5F945169CF037006718F7 /* picture_camera_thumbnail.png */; };
@@ -144,6 +144,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		19094CB816DD8AEC0069F90E /* MPNotificationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MPNotificationView.h; sourceTree = "<group>"; };
+		19094CB916DD8AEC0069F90E /* MPNotificationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MPNotificationView.m; sourceTree = "<group>"; };
+		19094CBA16DD8AEC0069F90E /* OBGradientView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OBGradientView.h; sourceTree = "<group>"; };
+		19094CBB16DD8AEC0069F90E /* OBGradientView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OBGradientView.m; sourceTree = "<group>"; };
 		1926372D16C328A1004C1C06 /* ItemDataSourceDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ItemDataSourceDelegate.h; sourceTree = "<group>"; };
 		1934ACDB165DB93200C8272F /* Item.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Item.h; sourceTree = "<group>"; };
 		1934ACDC165DB93200C8272F /* Item.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Item.m; sourceTree = "<group>"; };
@@ -296,10 +300,6 @@
 		19BF9D21166C426D00F813B6 /* item_title_mask@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "item_title_mask@2x.png"; sourceTree = "<group>"; };
 		19BF9D28166D8C6400F813B6 /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = icon.png; path = ../icon.png; sourceTree = "<group>"; };
 		19BF9D2B166D8C6700F813B6 /* icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "icon@2x.png"; path = "../icon@2x.png"; sourceTree = "<group>"; };
-		19D910BC16BF0DF900129E22 /* MPNotificationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MPNotificationView.h; sourceTree = "<group>"; };
-		19D910BD16BF0DF900129E22 /* MPNotificationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MPNotificationView.m; sourceTree = "<group>"; };
-		19D910BF16BF0E0900129E22 /* OBGradientView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OBGradientView.h; sourceTree = "<group>"; };
-		19D910C016BF0E0900129E22 /* OBGradientView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OBGradientView.m; sourceTree = "<group>"; };
 		19DCB422168756D9009FF503 /* comments_header.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = comments_header.png; sourceTree = "<group>"; };
 		19DCB423168756D9009FF503 /* comments_header@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "comments_header@2x.png"; sourceTree = "<group>"; };
 		19E5F945169CF037006718F7 /* picture_camera_thumbnail.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = picture_camera_thumbnail.png; sourceTree = "<group>"; };
@@ -729,10 +729,10 @@
 		19D910BB16BF0DEF00129E22 /* MPNotificationView */ = {
 			isa = PBXGroup;
 			children = (
-				19D910BC16BF0DF900129E22 /* MPNotificationView.h */,
-				19D910BD16BF0DF900129E22 /* MPNotificationView.m */,
-				19D910BF16BF0E0900129E22 /* OBGradientView.h */,
-				19D910C016BF0E0900129E22 /* OBGradientView.m */,
+				19094CB816DD8AEC0069F90E /* MPNotificationView.h */,
+				19094CB916DD8AEC0069F90E /* MPNotificationView.m */,
+				19094CBA16DD8AEC0069F90E /* OBGradientView.h */,
+				19094CBB16DD8AEC0069F90E /* OBGradientView.m */,
 			);
 			name = MPNotificationView;
 			sourceTree = "<group>";
@@ -917,10 +917,10 @@
 				19BAB21716801043005688DE /* UILabel+UILabel_Resize.m in Sources */,
 				198A3CF416877C380016F45C /* NSDate+NSDate_Formatter.m in Sources */,
 				196E43B6168BC2BE009608E4 /* UILabel+Extensions.m in Sources */,
-				19D910BE16BF0DF900129E22 /* MPNotificationView.m in Sources */,
-				19D910C116BF0E0900129E22 /* OBGradientView.m in Sources */,
 				197AB10D16C1DB360084D3FA /* UIUnderlinedButton.m in Sources */,
 				198B5BD616CDA00E00DC2ED2 /* ProfileHeaderViewCell.m in Sources */,
+				19094CBC16DD8AEC0069F90E /* MPNotificationView.m in Sources */,
+				19094CBD16DD8AEC0069F90E /* OBGradientView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
