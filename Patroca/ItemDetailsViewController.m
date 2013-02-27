@@ -22,13 +22,15 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    CGRect screenRect = [[UIScreen mainScreen] bounds];
+    [self.view setFrame:CGRectMake(0, 0, screenRect.size.width, screenRect.size.height)];
+
 
     [self setupHeaderWithBackButton:YES doneButton:NO addItemButton:YES];
     [self setupWholeScreenScrollView];
-
     [self setupItemImagesScrollView];
-
-    
+    [self setupFooter];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardDidShow:) name:UIKeyboardDidShowNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardDidHide:) name:UIKeyboardDidHideNotification object:nil];
@@ -47,21 +49,13 @@
     NSValue* keyboardFrameBegin = [keyboardInfo valueForKey:UIKeyboardFrameBeginUserInfoKey];
     CGRect keyboardFrameBeginRect = [keyboardFrameBegin CGRectValue];
     
-    CGRect scrollViewFrame = wholeScreenScrollView.frame;
-    
-    [wholeScreenScrollView setFrame:CGRectMake(scrollViewFrame.origin.x, scrollViewFrame.origin.y, scrollViewFrame.size.width, scrollViewFrame.size.height - keyboardFrameBeginRect.size.height)];
+    [wholeScreenScrollView setFrame:CGRectMake(scrollViewFrame.origin.x, scrollViewFrame.origin.y, scrollViewFrame.size.width, scrollViewFrame.size.height - keyboardFrameBeginRect.size.height+24)];
     [self scrollWholeScreenToBottom];
 }
 
 - (void)keyboardDidHide:(NSNotification*)notification {
 
-    NSDictionary* keyboardInfo = [notification userInfo];
-    NSValue* keyboardFrameBegin = [keyboardInfo valueForKey:UIKeyboardFrameBeginUserInfoKey];
-    CGRect keyboardFrameBeginRect = [keyboardFrameBegin CGRectValue];
-    
-    CGRect scrollViewFrame = wholeScreenScrollView.frame;
-    
-    [wholeScreenScrollView setFrame:CGRectMake(scrollViewFrame.origin.x, scrollViewFrame.origin.y, scrollViewFrame.size.width, scrollViewFrame.size.height + keyboardFrameBeginRect.size.height)];
+    [wholeScreenScrollView setFrame:scrollViewFrame];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -70,10 +64,11 @@
 }
 
 
-
 - (void)setupWholeScreenScrollView {
     
-    wholeScreenScrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 44, 320, self.view.frame.size.height - 44 - 45)]; //44 is the header, 45 is the footer
+    wholeScreenScrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 44, 320, self.view.frame.size.height - 44 - 44)]; //44 is the header, and the other 44 is the footer
+    scrollViewFrame = wholeScreenScrollView.frame;
+
     [self.view addSubview:wholeScreenScrollView];
     
     //Item images scroll view
@@ -122,6 +117,7 @@
     //An invisible button over the profiile pic and name, so it's tappable without hacks
     UIButton *profileInvisibleButton = [UIButton buttonWithType:UIButtonTypeCustom];;
     [profileInvisibleButton setFrame:CGRectMake(0, 307, 320, 37)];
+    [profileInvisibleButton setTag:-1]; //each comment has its own tag, this one is the owner
     [profileInvisibleButton addTarget:self action:@selector(userTappedOnProfile:) forControlEvents:UIControlEventTouchUpInside];
     [wholeScreenScrollView addSubview:profileInvisibleButton];
     
@@ -129,13 +125,8 @@
     PFUser *itemUser = [_itemObject objectForKey:DB_FIELD_USER_ID];
     NSString *userId = [itemUser objectId];
     
-    PFUser *userObject = [[UserCache getInstance] getCachedUserForId:userId];
+    userObject = [[UserCache getInstance] getCachedUserForId:userId];
     [ownerNameLabel setText:[userObject objectForKey:DB_FIELD_USER_NAME]];
-    
-    if( [[userObject objectId] isEqualToString:[[PFUser currentUser] objectId]]) {
-        //owner of this item is the current user, so hide the Make Offer button
-        [_makeOfferButton setHidden:YES];
-    }
     
     NSString *facebookProfilePicString = [NSString stringWithFormat:FB_PROFILE_PICTURE_URL, [userObject objectForKey:DB_FIELD_USER_FACEBOOK_ID]];
     NSURL *facebookProfilePicURL = [NSURL URLWithString:facebookProfilePicString];
@@ -179,6 +170,89 @@
     [wholeScreenScrollView setContentSize:CGSizeMake(320, contentHeightWithoutCommentsView)];
 }
 
+
+- (void)setupItemImagesScrollView {
+    
+    PFQuery *itemImagesQuery = [PFQuery queryWithClassName:DB_TABLE_ITEM_IMAGES];
+    [itemImagesQuery whereKey:DB_FIELD_ITEM_ID equalTo:_itemObject];
+    
+    [itemImagesQuery findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+        
+        numberOfImages = [objects count];
+        
+        float xPosition = 0;
+        
+        //load all item images into the image caroussel
+        for(PFObject *item in objects) {
+            
+            PFFile *imageFile = [item objectForKey:DB_FIELD_ITEM_IMAGE];
+            NSString *imageURL = [imageFile url];
+            
+            UIImageView *itemImageView = [[UIImageView alloc] init];
+            [itemImageView setFrame:CGRectMake(xPosition, 0, 320, 320)];
+            [itemImageView setImageWithURL:[NSURL URLWithString:imageURL] placeholderImage:[UIImage imageNamed:@"placeholder.png"]];
+            
+            [itemImagesScrollView addSubview:itemImageView];
+            
+            xPosition += itemImageView.frame.size.width;
+        }
+        [itemImagesScrollView setContentSize:CGSizeMake(xPosition, 320)];
+    }];
+}
+
+
+- (void)setupFooter {
+    
+    //the footer black background
+    UIView *footerBackgroundView = [[UIView alloc] initWithFrame:CGRectMake(0, self.view.frame.size.height-64, 320, 44)];
+    [footerBackgroundView setBackgroundColor:[UIColor blackColor]];
+    [self.view addSubview:footerBackgroundView];
+    
+    //make offer button
+    if( ![[userObject objectId] isEqualToString:[[PFUser currentUser] objectId]]) {
+        //only show the Make Offer button if owner of this item is NOT the current user
+        UIButton *makeOfferButton = [UIButton buttonWithType:UIButtonTypeCustom];
+        [makeOfferButton setImage:[UIImage imageNamed:@"make_offer_button.png"] forState:UIControlStateNormal];
+        [makeOfferButton setFrame:CGRectMake(55, footerBackgroundView.frame.origin.y-22, 210, 45)];
+        [makeOfferButton addTarget:self action:@selector(makeOfferButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
+        [self.view addSubview:makeOfferButton];
+    }
+
+    //report button
+    UIButton *reportButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    [reportButton setImage:[UIImage imageNamed:@"report_this_item.png"] forState:UIControlStateNormal];
+    [reportButton setFrame:CGRectMake(15, footerBackgroundView.frame.origin.y+11, 24, 21)];
+    [reportButton addTarget:self action:@selector(reportThisItem:) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:reportButton];
+
+    
+    //share on Facebook button
+    UIButton *recommendButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    [recommendButton setImage:[UIImage imageNamed:@"recommend_item_button.png"] forState:UIControlStateNormal];
+    [recommendButton setFrame:CGRectMake(281, footerBackgroundView.frame.origin.y+11, 24, 22)];
+    [recommendButton addTarget:self action:@selector(recommendThisItem:) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:recommendButton];
+}
+
+
+- (void)animateImagesScrollViewIn {
+    
+    CGRect scrollFrame = itemImagesScrollView.frame;
+    scrollFrame.origin.x = 500;
+    [itemImagesScrollView setFrame:scrollFrame];
+    [itemImagesScrollView setHidden:NO];
+
+    [UIView beginAnimations:@"scrollViewIn" context:nil];
+    [UIView setAnimationDuration:0.5];
+    [UIView setAnimationCurve:UIViewAnimationCurveEaseOut];
+
+    scrollFrame = itemImagesScrollView.frame;
+    scrollFrame.origin.x = 0;
+    [itemImagesScrollView setFrame:scrollFrame];
+
+    [UIView commitAnimations];
+}
+
 - (void)showItemComments {
     
     if(commentsView) {
@@ -187,7 +261,7 @@
     }
     commentsView = [[UIView alloc] init];
     [commentsView setBackgroundColor:[UIColor colorWithRed:0 green:0 blue:0 alpha:0.7f]];
-
+    
     
     float commentsViewFinalHeight = 75; //the minimum size before the comments are loaded
     
@@ -200,11 +274,12 @@
     [commentsViewTitleLabel setBackgroundColor:[UIColor clearColor]];
     [commentsViewTitleLabel setTextColor:[UIColor colorWithRed:205/255.f green:220/255.f blue:40/255.f alpha:1.0f]];
     [commentsViewTitleLabel setText:@"Troca-ideia"];
-
+    
     
     //building every comment into a UIView and adding to commentsView
     float commentViewYPosition = 55;
     
+    NSInteger commentIndex=0;
     for(PFObject *commentObject in commentObjects) {
         
         UIView *singleCommentView = [[UIView alloc] initWithFrame:CGRectMake(0, commentViewYPosition, 320, 80)];
@@ -235,7 +310,7 @@
         UIImageView *clockIconImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"clock_icon.png"]];
         [clockIconImageView setFrame:CGRectMake(14, 74, clockIconImageView.frame.size.width, clockIconImageView.frame.size.height)];
         [singleCommentView addSubview:clockIconImageView];
-
+        
         //The timestamp text label
         UILabel *timeStampLabel = [[UILabel alloc] initWithFrame:CGRectMake(28, 75, 56, 8)];
         [timeStampLabel setText:(commentObject.createdAt!=nil?[commentObject.createdAt prettyDateDiffFormat]:[[NSDate date] prettyDateDiffFormat])]; //commentObject.createdAt can be nil if the object was just created but not saved on the server, so just show the current timestamp
@@ -254,30 +329,33 @@
         [profilePictureWhiteBorder setBackgroundColor:[UIColor whiteColor]];
         [singleCommentView addSubview:profilePictureWhiteBorder];
         
-        PFUser *commentUser = [commentObject objectForKey:DB_FIELD_USER_ID];
-        NSString *userId = [commentUser objectId];
-        PFUser *userObject = [[UserCache getInstance] getCachedUserForId:userId];
         UIImageView *profilePictureImageView = [[UIImageView alloc] initWithFrame:CGRectMake(274, 23, 30, 30)];
-
+        
         NSString *profilePicString = [NSString stringWithFormat:FB_PROFILE_PICTURE_URL, [userObject objectForKey:DB_FIELD_USER_FACEBOOK_ID]];
         NSURL *profilePicURL = [NSURL URLWithString:profilePicString];
         [profilePictureImageView setImageWithURL:profilePicURL];
         [singleCommentView addSubview:profilePictureImageView];
-
+        
+        UIButton *commenterProfileInvisibleButton = [UIButton buttonWithType:UIButtonTypeCustom];
+        [commenterProfileInvisibleButton setFrame:[profilePictureWhiteBorder frame]];
+        [commenterProfileInvisibleButton setTag:commentIndex];
+        [commenterProfileInvisibleButton addTarget:self action:@selector(userTappedOnProfile:) forControlEvents:UIControlEventTouchUpInside];
+        [singleCommentView addSubview:commenterProfileInvisibleButton];
         
         [commentsView addSubview:singleCommentView];
+        commentIndex++;
     }
     commentsViewFinalHeight += commentViewYPosition - 45;
     
     //show Write Comment section only if user is logged in
     if ([PFUser currentUser] && [PFFacebookUtils isLinkedWithUser:[PFUser currentUser]]) {
-    
+        
         //The new comment text area (image on the BG and text area with no borders in front
         UIImageView *newCommentBackgroundImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"comment_text_area.png"]];
         [newCommentBackgroundImageView setFrame:CGRectMake(14, commentsViewFinalHeight, newCommentBackgroundImageView.frame.size.width, newCommentBackgroundImageView.frame.size.height)];
         [commentsView addSubview:newCommentBackgroundImageView];
         commentsViewFinalHeight += newCommentBackgroundImageView.frame.size.height;
-
+        
         newCommentTextView = [[UITextView alloc] initWithFrame:CGRectMake(48, newCommentBackgroundImageView.frame.origin.y+14, 241, 76)];
         [newCommentTextView setEditable:YES];
         [newCommentTextView setBackgroundColor:[UIColor clearColor]];
@@ -290,13 +368,13 @@
         commentsViewFinalHeight += 22; //half the button's height
         [sendCommentButton setEnabled:NO];
         [sendCommentButton addTarget:self action:@selector(sendCommentButtonPressed) forControlEvents:UIControlEventTouchUpInside];
-
+        
         [commentsView addSubview:newCommentBackgroundImageView];
         [commentsView addSubview:newCommentTextView];
         [commentsView addSubview:sendCommentButton];
     }
     
-    commentsViewFinalHeight+=92; //some additional space at the bottom to make room for the footer
+    commentsViewFinalHeight+=70; //some additional space at the bottom to make room for the footer
     
     //finalize it
     [commentsView setFrame:CGRectMake(0, commentsHeaderImageView.frame.origin.y + 18, wholeScreenScrollView.frame.size.width, commentsViewFinalHeight)];
@@ -308,53 +386,6 @@
     [wholeScreenScrollView setContentSize:CGSizeMake(320, contentHeightWithoutCommentsView+commentsViewFinalHeight)];
 }
 
-- (void)animateImagesScrollViewIn {
-    
-    CGRect scrollFrame = itemImagesScrollView.frame;
-    scrollFrame.origin.x = 500;
-    [itemImagesScrollView setFrame:scrollFrame];
-    [itemImagesScrollView setHidden:NO];
-
-    [UIView beginAnimations:@"scrollViewIn" context:nil];
-    [UIView setAnimationDuration:0.5];
-    [UIView setAnimationCurve:UIViewAnimationCurveEaseOut];
-
-    scrollFrame = itemImagesScrollView.frame;
-    scrollFrame.origin.x = 0;
-    [itemImagesScrollView setFrame:scrollFrame];
-
-    [UIView commitAnimations];
-}
-
-
-- (void)setupItemImagesScrollView {
-    
-    PFQuery *itemImagesQuery = [PFQuery queryWithClassName:DB_TABLE_ITEM_IMAGES];
-    [itemImagesQuery whereKey:DB_FIELD_ITEM_ID equalTo:_itemObject];
-    
-    [itemImagesQuery findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
-        
-        numberOfImages = [objects count];
-
-        float xPosition = 0;
-        
-        //load all item images into the image caroussel
-        for(PFObject *item in objects) {
-        
-            PFFile *imageFile = [item objectForKey:DB_FIELD_ITEM_IMAGE];
-            NSString *imageURL = [imageFile url];
-
-            UIImageView *itemImageView = [[UIImageView alloc] init];
-            [itemImageView setFrame:CGRectMake(xPosition, 0, 320, 320)];
-            [itemImageView setImageWithURL:[NSURL URLWithString:imageURL] placeholderImage:[UIImage imageNamed:@"placeholder.png"]];
-            
-            [itemImagesScrollView addSubview:itemImageView];
-            
-            xPosition += itemImageView.frame.size.width;
-         }
-        [itemImagesScrollView setContentSize:CGSizeMake(xPosition, 320)];
-    }];
-}
 
 - (void)textViewDidChange:(UITextView *)textView {
     if( newCommentTextView.text.length >0 ) {
@@ -391,19 +422,38 @@
     [self showItemComments];
 }
 
-- (IBAction)userTappedOnProfile:(id)sender {
-    
-    ViewProfileViewController *viewProfileViewController = [[ViewProfileViewController alloc] initWithNibName:@"ViewProfileViewController" bundle:nil];
-    [viewProfileViewController setupViewWithUserID:[[_itemObject objectForKey:DB_FIELD_USER_ID] objectId] ];
-    [self.navigationController pushViewController:viewProfileViewController animated:YES];
-}
-
 - (void)scrollWholeScreenToBottom {
     
     CGPoint bottomOffset = CGPointMake(0, wholeScreenScrollView.contentSize.height - wholeScreenScrollView.frame.size.height);
     [wholeScreenScrollView setContentOffset:bottomOffset animated:NO];
 }
 
+
+#pragma mark Actions
+
+- (IBAction)userTappedOnProfile:(id)sender {
+    
+    UIButton *senderButton = (UIButton*)sender;
+    
+    ViewProfileViewController *viewProfileViewController = [[ViewProfileViewController alloc] initWithNibName:@"ViewProfileViewController" bundle:nil];
+    
+    NSString *userID = [[_itemObject objectForKey:DB_FIELD_USER_ID] objectId];
+
+    //tapped on owner's profile?
+    if(senderButton.tag != -1) {
+        //tapped on commenter's profile
+        PFObject *commentObject = [commentObjects objectAtIndex:senderButton.tag];
+        PFUser *commentUser = [commentObject objectForKey:DB_FIELD_USER_ID];
+        userID = [ commentUser objectId];
+    }
+
+    [viewProfileViewController setupViewWithUserID:userID];
+    
+    [self.navigationController pushViewController:viewProfileViewController animated:YES];
+}
+
+
+- (IBAction)makeOfferButtonPressed:(id)sender {}
 - (IBAction)recommendThisItem:(id)sender {}
 - (IBAction)reportThisItem:(id)sender {}
 

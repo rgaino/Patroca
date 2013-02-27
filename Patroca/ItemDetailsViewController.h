@@ -10,6 +10,7 @@
 #import "BaseViewController.h"
 
 @class PFObject;
+@class PFUser;
 
 @interface ItemDetailsViewController : BaseViewController <UIScrollViewDelegate, UITextViewDelegate> {
 
@@ -20,6 +21,8 @@
     UIActivityIndicatorView *loadingCommentsActivityIndicator;
     UIView *commentsView;
     
+    PFUser *userObject;
+    CGRect scrollViewFrame;
     int numberOfImages;
     NSMutableArray *commentObjects;
     float commentsViewYPosition;
@@ -27,20 +30,21 @@
 }
 
 @property (nonatomic, readwrite) PFObject *itemObject;
-@property (weak, nonatomic) IBOutlet UIButton *makeOfferButton;
-@property (weak, nonatomic) IBOutlet UIView *footerView;
 
-- (IBAction)recommendThisItem:(id)sender;
-- (IBAction)reportThisItem:(id)sender;
-- (void)setupItemImagesScrollView;
-- (void)animateImagesScrollViewIn;
 - (void)setupWholeScreenScrollView;
+- (void)setupItemImagesScrollView;
+- (void)setupFooter;
+- (void)animateImagesScrollViewIn;
 - (void)showItemComments;
 - (void)sendCommentButtonPressed;
 - (void)keyboardDidShow:(NSNotification*)notification;
 - (void)keyboardDidHide:(NSNotification*)notification;
 - (void)scrollWholeScreenToBottom;
 - (void)tapDetected;
+
 - (IBAction)userTappedOnProfile:(id)sender;
+- (IBAction)makeOfferButtonPressed:(id)sender;
+- (IBAction)recommendThisItem:(id)sender;
+- (IBAction)reportThisItem:(id)sender;
 
 @end
