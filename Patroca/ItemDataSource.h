@@ -14,10 +14,18 @@
 @class PFGeoPoint;
 @class PFObject;
 
+//the current data mode
+typedef enum {
+    ItemDataSourceModeFeatured,
+    ItemDataSourceModeFriends,
+    ItemDataSourceModeNearby,
+} ItemDataSourceMode;
+
 @interface ItemDataSource : NSObject <CLLocationManagerDelegate> {
     
     CLLocationManager *locationManager;
     PFGeoPoint *myLocationPoint;
+    ItemDataSourceMode itemDataSourceMode;
 }
 
 @property (readonly) NSArray* items;
@@ -25,7 +33,9 @@
 
 - (void)getFriendsItemsAndReturn;
 - (void)getNearbyItemsAndReturn;
+- (void)getFeaturedItemsAndReturn;
 - (void)getItemsAndReturnForUser:(PFObject*)userObject;
 - (void)getTotalCommentsForItems:(NSArray*)objects;
+- (void)refresh;
 
 @end

@@ -13,7 +13,30 @@
 
 @implementation ItemDataSource
 
+
+- (void)refresh {
+    
+    switch(itemDataSourceMode) {
+        case ItemDataSourceModeFeatured:
+            [self getFeaturedItemsAndReturn];
+            break;
+        case ItemDataSourceModeFriends:
+            [self getFriendsItemsAndReturn];
+            break;
+        case ItemDataSourceModeNearby:
+            [self getNearbyItemsAndReturn];
+            break;
+    }
+    
+}
+
+- (void)getFeaturedItemsAndReturn {
+    itemDataSourceMode = ItemDataSourceModeFeatured;
+}
+
 - (void)getFriendsItemsAndReturn {
+    
+    itemDataSourceMode = ItemDataSourceModeFriends;
     
     if([PFUser currentUser] == nil) {
         NSLog(@"Can't get current user");
@@ -74,6 +97,8 @@
 }
 
 - (void)getNearbyItemsAndReturn {
+
+    itemDataSourceMode = ItemDataSourceModeNearby;
 
     if(locationManager == nil) {
         locationManager = [[CLLocationManager alloc] init];

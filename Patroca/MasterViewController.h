@@ -16,6 +16,7 @@
     
     ItemDataSource *itemDataSource;
     NSMutableDictionary *totalCommentsForItemsDictionary;
+    UIRefreshControl *refreshControl;
     
     UIColor *labelSelectedColor;
     UIColor *labelUnselectedColor;

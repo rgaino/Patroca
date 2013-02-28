@@ -44,6 +44,10 @@
     [self.contentDisplayCollectionView registerClass:[ItemViewCell class] forCellWithReuseIdentifier:CELL_REUSE_IDENTIFIER];
     [self setupHeaderWithBackButton:NO doneButton:NO addItemButton:YES];
     
+    refreshControl = UIRefreshControl.alloc.init;
+    [refreshControl addTarget:self action:@selector(startRefresh:) forControlEvents:UIControlEventValueChanged];
+    [_contentDisplayCollectionView addSubview:refreshControl];
+    
     [super viewDidLoad];
 }
 
@@ -54,6 +58,9 @@
     [super viewDidAppear:animated];
 }
 
+- (void)startRefresh:(id)sender {
+    [itemDataSource refresh];
+}
 
 - (IBAction)featuredButtonPressed:(id)sender {
     [_featuredButton setTitleColor:labelSelectedColor forState:UIControlStateNormal];
@@ -120,7 +127,7 @@
     NSLog(@"Populating list with %d items", itemDataSource.items.count);
     [[UserCache getInstance] updateUserNameCacheDictionaryForItems:itemDataSource.items];
     [_contentDisplayCollectionView reloadData];
-
+    [refreshControl endRefreshing];
 }
 
 - (void)populateTotalLikesWithDictionary:(NSDictionary*)tempTotalCommentsForItemsDictionary {
