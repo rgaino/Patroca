@@ -13,6 +13,7 @@
 #import "UIImage+Resize.h"
 #import "DatabaseConstants.h"
 #import <MobileCoreServices/UTCoreTypes.h>
+#import "DoneShareViewController.h"
 
 #define thumbnailSize 53
 #define fullImageSize 640
@@ -265,7 +266,10 @@
 
 - (void)closeThisScreen {
     sleep(1);
-    [self.navigationController popViewControllerAnimated:YES];
+    
+    DoneShareViewController *doneShareViewController = [[DoneShareViewController alloc] initWithNibName:@"DoneShareViewController" bundle:nil];
+    [doneShareViewController setItemObject:currentItem];
+    [self.navigationController pushViewController:doneShareViewController animated:YES];
 }
 
 - (BOOL) textFieldShouldReturn:(UITextField *)textField

@@ -92,6 +92,12 @@
 		19684F94169F99E20011A69C /* flash_button_on.png in Resources */ = {isa = PBXBuildFile; fileRef = 19684F8E169F99E20011A69C /* flash_button_on.png */; };
 		19684F95169F99E20011A69C /* flash_button_on@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 19684F8F169F99E20011A69C /* flash_button_on@2x.png */; };
 		196E43B6168BC2BE009608E4 /* UILabel+Extensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 196E43B5168BC2BE009608E4 /* UILabel+Extensions.m */; };
+		1977163216E035F70010FF5D /* DoneShareViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1977163016E035F70010FF5D /* DoneShareViewController.m */; };
+		1977163316E035F70010FF5D /* DoneShareViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1977163116E035F70010FF5D /* DoneShareViewController.xib */; };
+		1977163616E03AE10010FF5D /* item_share_message.png in Resources */ = {isa = PBXBuildFile; fileRef = 1977163416E03AE10010FF5D /* item_share_message.png */; };
+		1977163716E03AE10010FF5D /* item_share_message@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1977163516E03AE10010FF5D /* item_share_message@2x.png */; };
+		1977163A16E03C980010FF5D /* yellow_button.png in Resources */ = {isa = PBXBuildFile; fileRef = 1977163816E03C980010FF5D /* yellow_button.png */; };
+		1977163B16E03C980010FF5D /* yellow_button@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1977163916E03C980010FF5D /* yellow_button@2x.png */; };
 		197AB0FD16C1D52A0084D3FA /* header_shade.png in Resources */ = {isa = PBXBuildFile; fileRef = 197AB0FB16C1D52A0084D3FA /* header_shade.png */; };
 		197AB0FE16C1D52A0084D3FA /* header_shade@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 197AB0FC16C1D52A0084D3FA /* header_shade@2x.png */; };
 		197AB10516C1D8F50084D3FA /* icon_location.png in Resources */ = {isa = PBXBuildFile; fileRef = 197AB10316C1D8F40084D3FA /* icon_location.png */; };
@@ -251,6 +257,13 @@
 		19684F8F169F99E20011A69C /* flash_button_on@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "flash_button_on@2x.png"; sourceTree = "<group>"; };
 		196E43B4168BC2BE009608E4 /* UILabel+Extensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UILabel+Extensions.h"; sourceTree = "<group>"; };
 		196E43B5168BC2BE009608E4 /* UILabel+Extensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UILabel+Extensions.m"; sourceTree = "<group>"; };
+		1977162F16E035F70010FF5D /* DoneShareViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DoneShareViewController.h; sourceTree = "<group>"; };
+		1977163016E035F70010FF5D /* DoneShareViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DoneShareViewController.m; sourceTree = "<group>"; };
+		1977163116E035F70010FF5D /* DoneShareViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DoneShareViewController.xib; sourceTree = "<group>"; };
+		1977163416E03AE10010FF5D /* item_share_message.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = item_share_message.png; sourceTree = "<group>"; };
+		1977163516E03AE10010FF5D /* item_share_message@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "item_share_message@2x.png"; sourceTree = "<group>"; };
+		1977163816E03C980010FF5D /* yellow_button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = yellow_button.png; sourceTree = "<group>"; };
+		1977163916E03C980010FF5D /* yellow_button@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "yellow_button@2x.png"; sourceTree = "<group>"; };
 		197AB0FB16C1D52A0084D3FA /* header_shade.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = header_shade.png; sourceTree = "<group>"; };
 		197AB0FC16C1D52A0084D3FA /* header_shade@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "header_shade@2x.png"; sourceTree = "<group>"; };
 		197AB10316C1D8F40084D3FA /* icon_location.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_location.png; sourceTree = "<group>"; };
@@ -483,7 +496,7 @@
 			isa = PBXGroup;
 			children = (
 				1939B8B016568D1600435705 /* Base View Controller */,
-				1939CA4F16644A63002C21F6 /* Add New Item */,
+				1939CA4F16644A63002C21F6 /* New Item */,
 				1934ACE9165E2AAF00C8272F /* Profile */,
 				1939B8AC16568CD200435705 /* Master */,
 				1939B8F8165A9B2D00435705 /* Item View Cell */,
@@ -567,6 +580,8 @@
 				197AB10416C1D8F50084D3FA /* icon_location@2x.png */,
 				195B303016781B9200F80073 /* item_details_title_background.png */,
 				195B303116781B9200F80073 /* item_details_title_background@2x.png */,
+				1977163416E03AE10010FF5D /* item_share_message.png */,
+				1977163516E03AE10010FF5D /* item_share_message@2x.png */,
 				19BF9D20166C426D00F813B6 /* item_title_mask.png */,
 				19BF9D21166C426D00F813B6 /* item_title_mask@2x.png */,
 				195B30421679611000F80073 /* location_icon.png */,
@@ -601,6 +616,8 @@
 				193EEA5B169BAB9F0045DE59 /* shutter_button@2x.png */,
 				197AB10E16C1E0F20084D3FA /* tell_your_friends_button.png */,
 				197AB10F16C1E0F20084D3FA /* tell_your_friends_button@2x.png */,
+				1977163816E03C980010FF5D /* yellow_button.png */,
+				1977163916E03C980010FF5D /* yellow_button@2x.png */,
 			);
 			name = Images;
 			sourceTree = "<group>";
@@ -633,14 +650,13 @@
 			name = SDWebImage;
 			sourceTree = "<group>";
 		};
-		1939CA4F16644A63002C21F6 /* Add New Item */ = {
+		1939CA4F16644A63002C21F6 /* New Item */ = {
 			isa = PBXGroup;
 			children = (
-				1939CA5016644A6E002C21F6 /* AddNewItemViewController.h */,
-				1939CA5116644A6E002C21F6 /* AddNewItemViewController.m */,
-				1939CA5216644A6E002C21F6 /* AddNewItemViewController.xib */,
+				1977162E16E0357D0010FF5D /* Add New Item */,
+				1977162D16E0356A0010FF5D /* Done and Share */,
 			);
-			name = "Add New Item";
+			name = "New Item";
 			sourceTree = "<group>";
 		};
 		1939CA5516644B3A002C21F6 /* UIImage Categories */ = {
@@ -684,6 +700,26 @@
 				196E43B5168BC2BE009608E4 /* UILabel+Extensions.m */,
 			);
 			name = "UILabel Categories";
+			sourceTree = "<group>";
+		};
+		1977162D16E0356A0010FF5D /* Done and Share */ = {
+			isa = PBXGroup;
+			children = (
+				1977162F16E035F70010FF5D /* DoneShareViewController.h */,
+				1977163016E035F70010FF5D /* DoneShareViewController.m */,
+				1977163116E035F70010FF5D /* DoneShareViewController.xib */,
+			);
+			name = "Done and Share";
+			sourceTree = "<group>";
+		};
+		1977162E16E0357D0010FF5D /* Add New Item */ = {
+			isa = PBXGroup;
+			children = (
+				1939CA5016644A6E002C21F6 /* AddNewItemViewController.h */,
+				1939CA5116644A6E002C21F6 /* AddNewItemViewController.m */,
+				1939CA5216644A6E002C21F6 /* AddNewItemViewController.xib */,
+			);
+			name = "Add New Item";
 			sourceTree = "<group>";
 		};
 		197AB10716C1DAB30084D3FA /* UIunderlinedButton */ = {
@@ -888,6 +924,11 @@
 				198B5BDE16CDC11A00DC2ED2 /* facebook_profile_button@2x.png in Resources */,
 				19A9DFF116CFACE3005ED23F /* README.md in Resources */,
 				19A9DFF216CFACE3005ED23F /* release_notes.md in Resources */,
+				1977163316E035F70010FF5D /* DoneShareViewController.xib in Resources */,
+				1977163616E03AE10010FF5D /* item_share_message.png in Resources */,
+				1977163716E03AE10010FF5D /* item_share_message@2x.png in Resources */,
+				1977163A16E03C980010FF5D /* yellow_button.png in Resources */,
+				1977163B16E03C980010FF5D /* yellow_button@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -921,6 +962,7 @@
 				198B5BD616CDA00E00DC2ED2 /* ProfileHeaderViewCell.m in Sources */,
 				19094CBC16DD8AEC0069F90E /* MPNotificationView.m in Sources */,
 				19094CBD16DD8AEC0069F90E /* OBGradientView.m in Sources */,
+				1977163216E035F70010FF5D /* DoneShareViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
