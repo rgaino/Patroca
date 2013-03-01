@@ -101,7 +101,7 @@
     UILabel *ownerNameLabel = [[UILabel alloc] initWithFrame:CGRectMake(46, 324, 270, 20)];
     [ownerNameLabel setBackgroundColor:[UIColor clearColor]];
     [ownerNameLabel setTextColor:[UIColor colorWithRed:102/255.0f green:102/255.0f blue:102/255.0f alpha:1.0f]];
-    [ownerNameLabel setFont:[UIFont systemFontOfSize:10.0f]];
+    [ownerNameLabel setFont:[UIFont boldSystemFontOfSize:10.0f]];
     [wholeScreenScrollView addSubview:ownerNameLabel];
     
     //Owner profile pic white background
