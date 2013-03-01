@@ -30,6 +30,11 @@
     
 }
 
+- (void)clearAndReturn {
+    _items = [NSArray array];
+    [_delegate populateCollectionView];
+}
+
 - (void)getFeaturedItemsAndReturn {
     itemDataSourceMode = ItemDataSourceModeFeatured;
 }

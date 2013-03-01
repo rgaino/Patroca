@@ -37,5 +37,6 @@ typedef enum {
 - (void)getItemsAndReturnForUser:(PFObject*)userObject;
 - (void)getTotalCommentsForItems:(NSArray*)objects;
 - (void)refresh;
+- (void)clearAndReturn;
 
 @end

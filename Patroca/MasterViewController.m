@@ -67,6 +67,7 @@
     [_friendsButton setTitleColor:labelUnselectedColor forState:UIControlStateNormal];
     [_nearbyButton setTitleColor:labelUnselectedColor forState:UIControlStateNormal];
     [self moveMenuArrowTo:49];
+    [itemDataSource clearAndReturn];
     [self loadFeaturedItems];
 }
 
@@ -75,6 +76,7 @@
     [_friendsButton setTitleColor:labelSelectedColor forState:UIControlStateNormal];
     [_nearbyButton setTitleColor:labelUnselectedColor forState:UIControlStateNormal];
     [self moveMenuArrowTo:153];
+    [itemDataSource clearAndReturn];
     [self loadFriendsItems];
 }
 
@@ -83,6 +85,7 @@
     [_friendsButton setTitleColor:labelUnselectedColor forState:UIControlStateNormal];
     [_nearbyButton setTitleColor:labelSelectedColor forState:UIControlStateNormal];
     [self moveMenuArrowTo:264];
+    [itemDataSource clearAndReturn];
     [self loadNearbyItems];
 }
 
