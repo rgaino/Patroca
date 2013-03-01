@@ -29,6 +29,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *featuredButton;
 @property (weak, nonatomic) IBOutlet UIButton *friendsButton;
 @property (weak, nonatomic) IBOutlet UIButton *nearbyButton;
+@property (weak, nonatomic) IBOutlet UIActivityIndicatorView *loadingActivityIndicator;
 
 
 - (void)moveMenuArrowTo:(float)xPosition;

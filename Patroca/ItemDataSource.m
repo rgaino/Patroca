@@ -37,6 +37,8 @@
 
 - (void)getFeaturedItemsAndReturn {
     itemDataSourceMode = ItemDataSourceModeFeatured;
+    _items = [NSArray array];
+    [_delegate populateCollectionView];
 }
 
 - (void)getFriendsItemsAndReturn {

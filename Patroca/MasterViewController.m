@@ -68,6 +68,7 @@
     [_nearbyButton setTitleColor:labelUnselectedColor forState:UIControlStateNormal];
     [self moveMenuArrowTo:49];
     [itemDataSource clearAndReturn];
+    [_loadingActivityIndicator startAnimating];
     [self loadFeaturedItems];
 }
 
@@ -77,6 +78,7 @@
     [_nearbyButton setTitleColor:labelUnselectedColor forState:UIControlStateNormal];
     [self moveMenuArrowTo:153];
     [itemDataSource clearAndReturn];
+    [_loadingActivityIndicator startAnimating];
     [self loadFriendsItems];
 }
 
@@ -86,6 +88,7 @@
     [_nearbyButton setTitleColor:labelSelectedColor forState:UIControlStateNormal];
     [self moveMenuArrowTo:264];
     [itemDataSource clearAndReturn];
+    [_loadingActivityIndicator startAnimating];
     [self loadNearbyItems];
 }
 
@@ -102,7 +105,7 @@
 }
 
 - (void)loadFeaturedItems {
-    
+    [itemDataSource getFeaturedItemsAndReturn];
 }
 
 - (void)loadFriendsItems {
@@ -131,6 +134,7 @@
     [[UserCache getInstance] updateUserNameCacheDictionaryForItems:itemDataSource.items];
     [_contentDisplayCollectionView reloadData];
     [refreshControl endRefreshing];
+    [_loadingActivityIndicator stopAnimating];
 }
 
 - (void)populateTotalLikesWithDictionary:(NSDictionary*)tempTotalCommentsForItemsDictionary {
