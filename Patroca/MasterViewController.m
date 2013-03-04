@@ -55,15 +55,13 @@
         [itemDataSource getNextPageAndReturn];
     }];
     
-    [super viewDidLoad];
-}
-
-- (void)viewDidAppear:(BOOL)animated {
     CGRect arrowFrame = _menuArrowImage.frame;
     [_menuArrowImage setFrame:CGRectMake(-100, arrowFrame.origin.y, arrowFrame.size.width, arrowFrame.size.height)];
     [self performSelector:@selector(friendsButtonPressed:) withObject:nil afterDelay:1.0f];
-    [super viewDidAppear:animated];
+
+    [super viewDidLoad];
 }
+
 
 - (void)startRefresh:(id)sender {
     [itemDataSource refresh];
