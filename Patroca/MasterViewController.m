@@ -16,6 +16,7 @@
 #import "AddNewItemViewController.h"
 #import "ItemDetailsViewController.h"
 #import <SDWebImage/UIImageView+WebCache.h>
+#import "SVPullToRefresh.h"
 
 #define CELL_REUSE_IDENTIFIER @"Item_Cell_Master"
 
@@ -44,9 +45,15 @@
     [self.contentDisplayCollectionView registerClass:[ItemViewCell class] forCellWithReuseIdentifier:CELL_REUSE_IDENTIFIER];
     [self setupHeaderWithBackButton:NO doneButton:NO addItemButton:YES];
     
+    //add pull to refresh control
     refreshControl = UIRefreshControl.alloc.init;
     [refreshControl addTarget:self action:@selector(startRefresh:) forControlEvents:UIControlEventValueChanged];
     [_contentDisplayCollectionView addSubview:refreshControl];
+    
+    //add infinite scrolling
+    [_contentDisplayCollectionView addInfiniteScrollingWithActionHandler:^{
+        [itemDataSource getNextPageAndReturn];
+    }];
     
     [super viewDidLoad];
 }
@@ -105,7 +112,31 @@
 }
 
 - (void)loadFeaturedItems {
-    [itemDataSource getFeaturedItemsAndReturn];
+    
+    ////
+//    PFQuery *originalQuery = [PFQuery queryWithClassName:DB_TABLE_ITEMS];
+//    PFObject *originalItem = [originalQuery getObjectWithId:@"ziyuLZHZba"];
+//    
+//    for(int i=1; i<=500; i++) {
+//        NSLog(@"Duplicating item, step %d", i);
+//        
+//        NSString *title = [NSString stringWithFormat:@"Teste %d", i];
+//        
+//        PFObject *cloneItem = [PFObject objectWithClassName:DB_TABLE_ITEMS];
+//        [cloneItem setObject:title forKey:DB_FIELD_ITEM_NAME];
+//        [cloneItem setObject:[originalItem objectForKey:DB_FIELD_ITEM_DESCRIPTION] forKey:DB_FIELD_ITEM_DESCRIPTION];
+//        [cloneItem setObject:[originalItem objectForKey:DB_FIELD_ITEM_LOCATION] forKey:DB_FIELD_ITEM_LOCATION];
+//        [cloneItem setObject:[originalItem objectForKey:DB_FIELD_ITEM_MAIN_IMAGE] forKey:DB_FIELD_ITEM_MAIN_IMAGE];
+//        [cloneItem setObject:[originalItem objectForKey:DB_FIELD_USER_ID] forKey:DB_FIELD_USER_ID];
+//        [cloneItem save];
+//    }
+//    
+//    
+//    return;
+    /////
+    
+    [itemDataSource setItemDataSourceMode:ItemDataSourceModeFeatured];
+    [itemDataSource getNextPageAndReturn];
 }
 
 - (void)loadFriendsItems {
@@ -113,16 +144,17 @@
     // Check if a user is cached and if user is linked to Facebook
     if ([PFUser currentUser] && [PFFacebookUtils isLinkedWithUser:[PFUser currentUser]])
     {
-        [itemDataSource getFriendsItemsAndReturn];
+        [itemDataSource setItemDataSourceMode:ItemDataSourceModeFriends];
+        [itemDataSource getNextPageAndReturn];
     } else {
-        
         [self nearbyButtonPressed:nil];
     }
 }
 
 - (void)loadNearbyItems {
     
-    [itemDataSource getNearbyItemsAndReturn];
+    [itemDataSource setItemDataSourceMode:ItemDataSourceModeNearby];
+    [itemDataSource getNextPageAndReturn];
 }
 
 
@@ -135,6 +167,14 @@
     [_contentDisplayCollectionView reloadData];
     [refreshControl endRefreshing];
     [_loadingActivityIndicator stopAnimating];
+}
+
+- (void)addItemsToColletionView {
+
+    NSLog(@"Addind items to list, new total is %d", itemDataSource.items.count);
+    [[UserCache getInstance] updateUserNameCacheDictionaryForItems:itemDataSource.items];
+    [_contentDisplayCollectionView reloadData];
+    [_contentDisplayCollectionView.infiniteScrollingView stopAnimating];
 }
 
 - (void)populateTotalLikesWithDictionary:(NSDictionary*)tempTotalCommentsForItemsDictionary {

@@ -13,8 +13,28 @@
 
 @implementation ItemDataSource
 
+- (id)init {
+    
+    self = [super init];
+    
+    //custom initialization code
+    currentResultsLimit = 0; //the current page count
+    resultsPerPage = 20 ; //constant
+    return self;
+}
+
+- (void)setItemDataSourceMode:(ItemDataSourceMode)var {
+    itemDataSourceMode = var;
+    currentResultsLimit = 0;
+}
 
 - (void)refresh {
+    currentResultsLimit = 0;
+    [self getNextPageAndReturn];
+}
+
+
+- (void)getNextPageAndReturn {
     
     switch(itemDataSourceMode) {
         case ItemDataSourceModeFeatured:
@@ -26,8 +46,10 @@
         case ItemDataSourceModeNearby:
             [self getNearbyItemsAndReturn];
             break;
+        case ItemDataSourceModeUser:
+            [self getUserItemsAndReturn];
+            break;
     }
-    
 }
 
 - (void)clearAndReturn {
@@ -35,13 +57,52 @@
     [_delegate populateCollectionView];
 }
 
+
+- (void)getTotalCommentsForItems:(NSArray*)objects {
+    
+    //calling CloudCode function to get a count of comments for each item
+    NSMutableArray *ids = [[NSMutableArray alloc] init];
+    for(PFObject *oneItem in objects) {
+        [ids addObject:oneItem.objectId];
+    }
+    NSDictionary *params = [NSDictionary dictionaryWithObject:ids forKey:@"item_ids_array"];
+    
+    [PFCloud callFunctionInBackground:@"totalCommentsForItems" withParameters:params block:^(id object, NSError *error) {
+        
+        NSDictionary *totalCommentsForItemsDictionary = (NSDictionary*) object;
+        [_delegate populateTotalLikesWithDictionary:totalCommentsForItemsDictionary];
+        
+    }];
+}
+
+- (void)locationManager:(CLLocationManager *)manager didUpdateToLocation:(CLLocation *)newLocation fromLocation:(CLLocation *)oldLocation {
+    
+    NSLog(@"Location updated to is %f %f", newLocation.coordinate.latitude, newLocation.coordinate.longitude);
+    
+    myLocationPoint = [PFGeoPoint geoPointWithLatitude:newLocation.coordinate.latitude longitude:newLocation.coordinate.longitude];
+    [locationManager stopUpdatingLocation];
+    [self getNearbyItemsAndReturn];
+}
+
+
+#pragma mark Private or Hidden methods (undeclared on .h file, but must be at the end of this file
+
 - (void)getFeaturedItemsAndReturn {
+    
+    if(itemDataSourceMode!=ItemDataSourceModeFeatured) {
+        currentResultsLimit=0;
+    }
+    
     itemDataSourceMode = ItemDataSourceModeFeatured;
     _items = [NSArray array];
     [_delegate populateCollectionView];
 }
 
 - (void)getFriendsItemsAndReturn {
+    
+    if(itemDataSourceMode!=ItemDataSourceModeFriends) {
+        currentResultsLimit=0;
+    }
     
     itemDataSourceMode = ItemDataSourceModeFriends;
     
@@ -78,16 +139,28 @@
                 [query whereKey:DB_FIELD_USER_ID notEqualTo:[PFUser currentUser]];
                 [query whereKey:DB_FIELD_USER_ID containedIn:friendUsers];
                 
+                [query setSkip:currentResultsLimit];
+                [query setLimit:resultsPerPage];
+                
                 [query orderByDescending:DB_FIELD_UPDATED_AT];
                 
                 [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
                     if (!error) {
                         
-                        _items = [NSArray arrayWithArray:objects];
-                        [_delegate populateCollectionView];
+                        if(currentResultsLimit == 0) {
+                            //first page of results
+                            _items = [NSArray arrayWithArray:objects];
+                            [_delegate populateCollectionView];
+                        } else {
+                            NSMutableArray *tempReturnArray = [NSMutableArray arrayWithArray:_items];
+                            [tempReturnArray addObjectsFromArray:objects];
+                            _items = tempReturnArray;
+                            [_delegate addItemsToColletionView];
+                        }
                         
+                        currentResultsLimit += resultsPerPage;
                         [self getTotalCommentsForItems:objects];
-
+                        
                     } else {
                         // Log details of the failure
                         NSLog(@"Error: %@ %@", error, [error userInfo]);
@@ -95,7 +168,7 @@
                         //TODO: show error message
                     }
                 }];
-
+                
             }];
             
             
@@ -104,9 +177,13 @@
 }
 
 - (void)getNearbyItemsAndReturn {
-
+    
+    if(itemDataSourceMode!=ItemDataSourceModeNearby) {
+        currentResultsLimit=0;
+    }
+    
     itemDataSourceMode = ItemDataSourceModeNearby;
-
+    
     if(locationManager == nil) {
         locationManager = [[CLLocationManager alloc] init];
         [locationManager setDelegate:self];
@@ -118,23 +195,36 @@
         [locationManager startUpdatingLocation];
         return;
     }
-
+    
     
     PFQuery *query = [PFQuery queryWithClassName:DB_TABLE_ITEMS];
     [query whereKey:DB_FIELD_ITEM_LOCATION nearGeoPoint:myLocationPoint];
     if([PFUser currentUser] != nil) {
         [query whereKey:DB_FIELD_USER_ID notEqualTo:[PFUser currentUser]];
     }
+    
+    [query setSkip:currentResultsLimit];
+    [query setLimit:resultsPerPage];
 
     [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
         if (!error) {
             myLocationPoint = nil;
-
-            _items = [NSArray arrayWithArray:objects];
-            [_delegate populateCollectionView];
+            
+            if(currentResultsLimit == 0) {
+                //first page of results
+                _items = [NSArray arrayWithArray:objects];
+                [_delegate populateCollectionView];
+            } else {
+                NSMutableArray *tempReturnArray = [NSMutableArray arrayWithArray:_items];
+                [tempReturnArray addObjectsFromArray:objects];
+                _items = tempReturnArray;
+                [_delegate addItemsToColletionView];
+            }
+            
+            currentResultsLimit += resultsPerPage;
             
             [self getTotalCommentsForItems:objects];
-
+            
         } else {
             // Log details of the failure
             NSLog(@"Error: %@ %@", error, [error userInfo]);
@@ -144,23 +234,40 @@
 }
 
 
-- (void)getItemsAndReturnForUser:(PFObject*)userObject; {
+- (void)getUserItemsAndReturn {
     
-    if(userObject == nil) {
+    if(itemDataSourceMode!=ItemDataSourceModeUser) {
+        currentResultsLimit=0;
+    }
+
+    if(_userObject == nil) {
         NSLog(@"Can't get current user");
         //TODO: show a nice error message
     }
     
     PFQuery *query = [PFQuery queryWithClassName:DB_TABLE_ITEMS];
-    [query whereKey:DB_FIELD_USER_ID equalTo:userObject];
-    
+    [query whereKey:DB_FIELD_USER_ID equalTo:_userObject];
+
+    [query setSkip:currentResultsLimit];
+    [query setLimit:resultsPerPage];
+
     [query orderByDescending:DB_FIELD_UPDATED_AT];
     
     [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
         if (!error) {
             
-            _items = [NSArray arrayWithArray:objects];
-            [_delegate populateCollectionView];
+            if(currentResultsLimit == 0) {
+                //first page of results
+                _items = [NSArray arrayWithArray:objects];
+                [_delegate populateCollectionView];
+            } else {
+                NSMutableArray *tempReturnArray = [NSMutableArray arrayWithArray:_items];
+                [tempReturnArray addObjectsFromArray:objects];
+                _items = tempReturnArray;
+                [_delegate addItemsToColletionView];
+            }
+            
+            currentResultsLimit += resultsPerPage;
             
             [self getTotalCommentsForItems:objects];
             
@@ -174,30 +281,5 @@
 }
 
 
-- (void)getTotalCommentsForItems:(NSArray*)objects {
-    
-    //calling CloudCode function to get a count of comments for each item
-    NSMutableArray *ids = [[NSMutableArray alloc] init];
-    for(PFObject *oneItem in objects) {
-        [ids addObject:oneItem.objectId];
-    }
-    NSDictionary *params = [NSDictionary dictionaryWithObject:ids forKey:@"item_ids_array"];
-    
-    [PFCloud callFunctionInBackground:@"totalCommentsForItems" withParameters:params block:^(id object, NSError *error) {
-        
-        NSDictionary *totalCommentsForItemsDictionary = (NSDictionary*) object;
-        [_delegate populateTotalLikesWithDictionary:totalCommentsForItemsDictionary];
-        
-    }];
-}
-
-- (void)locationManager:(CLLocationManager *)manager didUpdateToLocation:(CLLocation *)newLocation fromLocation:(CLLocation *)oldLocation {
-    
-    NSLog(@"Location updated to is %f %f", newLocation.coordinate.latitude, newLocation.coordinate.longitude);
-    
-    myLocationPoint = [PFGeoPoint geoPointWithLatitude:newLocation.coordinate.latitude longitude:newLocation.coordinate.longitude];
-    [locationManager stopUpdatingLocation];
-    [self getNearbyItemsAndReturn];
-}
 
 @end

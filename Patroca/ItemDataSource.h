@@ -19,10 +19,13 @@ typedef enum {
     ItemDataSourceModeFeatured,
     ItemDataSourceModeFriends,
     ItemDataSourceModeNearby,
+    ItemDataSourceModeUser
 } ItemDataSourceMode;
 
 @interface ItemDataSource : NSObject <CLLocationManagerDelegate> {
     
+    NSInteger currentResultsLimit;
+    NSInteger resultsPerPage;
     CLLocationManager *locationManager;
     PFGeoPoint *myLocationPoint;
     ItemDataSourceMode itemDataSourceMode;
@@ -30,13 +33,17 @@ typedef enum {
 
 @property (readonly) NSArray* items;
 @property (readwrite) NSObject<ItemDataSourceDelegate> *delegate;
+@property (readwrite) PFObject *userObject;
 
-- (void)getFriendsItemsAndReturn;
-- (void)getNearbyItemsAndReturn;
-- (void)getFeaturedItemsAndReturn;
-- (void)getItemsAndReturnForUser:(PFObject*)userObject;
+//- (void)getFriendsItemsAndReturn;
+//- (void)getNearbyItemsAndReturn;
+//- (void)getFeaturedItemsAndReturn;
+//- (void)getUserItemsAndReturn;
+
+- (void)setItemDataSourceMode:(ItemDataSourceMode)var;
 - (void)getTotalCommentsForItems:(NSArray*)objects;
 - (void)refresh;
+- (void)getNextPageAndReturn;
 - (void)clearAndReturn;
 
 @end
