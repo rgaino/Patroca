@@ -15,6 +15,7 @@
 #import "UserCache.h"
 #import "ItemDetailsViewController.h"
 #import "ProfileHeaderViewCell.h"
+#import "SVPullToRefresh.h"
 
 #define CELL_REUSE_IDENTIFIER @"Item_Profile_Cell"
 #define HEADER_CELL_REUSE_IDENTIFIER @"Header_Profile_Cell"
@@ -28,6 +29,7 @@
     if (self) {
         
         itemDataSource = [[ItemDataSource alloc] init];
+        [itemDataSource setItemDataSourceMode:ItemDataSourceModeUser];
         [itemDataSource setDelegate:self];
     }
     return self;
@@ -44,6 +46,12 @@
     [_contentDisplayCollectionView registerClass:[ProfileHeaderViewCell class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:HEADER_CELL_REUSE_IDENTIFIER];
     
     userData = nil;
+    
+    //add infinite scrolling
+    [_contentDisplayCollectionView addInfiniteScrollingWithActionHandler:^{
+        [itemDataSource getNextPageAndReturn];
+    }];
+
 }
 
 
@@ -82,7 +90,8 @@
  
     //read Facebook profile information
     userData = (NSDictionary *)result;
-    [itemDataSource getItemsAndReturnForUser:userObject];
+    [itemDataSource setUserObject:userObject];
+    [itemDataSource getNextPageAndReturn];
 }
 
 
@@ -94,6 +103,14 @@
     NSLog(@"Populating list with %d items", itemDataSource.items.count);
     [[UserCache getInstance] updateUserNameCacheDictionaryForItems:itemDataSource.items];
     [_contentDisplayCollectionView reloadData];
+}
+
+- (void)addItemsToColletionView {
+    
+    NSLog(@"Addind items to list, new total is %d", itemDataSource.items.count);
+    [[UserCache getInstance] updateUserNameCacheDictionaryForItems:itemDataSource.items];
+    [_contentDisplayCollectionView reloadData];
+    [_contentDisplayCollectionView.infiniteScrollingView stopAnimating];
 }
 
 - (void)populateTotalLikesWithDictionary:(NSDictionary*)tempTotalCommentsForItemsDictionary {
