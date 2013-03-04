@@ -113,28 +113,6 @@
 
 - (void)loadFeaturedItems {
     
-    ////
-//    PFQuery *originalQuery = [PFQuery queryWithClassName:DB_TABLE_ITEMS];
-//    PFObject *originalItem = [originalQuery getObjectWithId:@"ziyuLZHZba"];
-//    
-//    for(int i=1; i<=500; i++) {
-//        NSLog(@"Duplicating item, step %d", i);
-//        
-//        NSString *title = [NSString stringWithFormat:@"Teste %d", i];
-//        
-//        PFObject *cloneItem = [PFObject objectWithClassName:DB_TABLE_ITEMS];
-//        [cloneItem setObject:title forKey:DB_FIELD_ITEM_NAME];
-//        [cloneItem setObject:[originalItem objectForKey:DB_FIELD_ITEM_DESCRIPTION] forKey:DB_FIELD_ITEM_DESCRIPTION];
-//        [cloneItem setObject:[originalItem objectForKey:DB_FIELD_ITEM_LOCATION] forKey:DB_FIELD_ITEM_LOCATION];
-//        [cloneItem setObject:[originalItem objectForKey:DB_FIELD_ITEM_MAIN_IMAGE] forKey:DB_FIELD_ITEM_MAIN_IMAGE];
-//        [cloneItem setObject:[originalItem objectForKey:DB_FIELD_USER_ID] forKey:DB_FIELD_USER_ID];
-//        [cloneItem save];
-//    }
-//    
-//    
-//    return;
-    /////
-    
     [itemDataSource setItemDataSourceMode:ItemDataSourceModeFeatured];
     [itemDataSource getNextPageAndReturn];
 }
