@@ -13,6 +13,7 @@
 
 @interface ProfileHeaderViewCell : UICollectionViewCell {
     
+    PFUser *userObject;
     float xProfileImageView;
     float sizeProfileImageView;
 }
@@ -30,10 +31,11 @@
 @property (weak, nonatomic) IBOutlet UILabel *totalOffersLabel;
 @property (weak, nonatomic) IBOutlet UILabel *totalCommentsLabel;
 
+
 - (void)setupProfileHeaderViewCellWithUser:(PFUser*)user UserData:(NSDictionary*)userData;
 - (void)loadFriendsProfilePictures;
 - (IBAction)logoutButtonPressed:(id)sender;
-- (IBAction)shareOnFacebookButtonPressed:(id)sender;
 - (IBAction)tellYourFriendsButtonPressed:(id)sender;
+- (IBAction)openUserProfileOnFacebookButtonPressed:(id)sender;
 
 @end

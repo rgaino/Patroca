@@ -48,7 +48,7 @@
 										<int key="NSvFlags">1298</int>
 										<string key="NSFrame">{{118, 0}, {85, 101}}</string>
 										<reference key="NSSuperview" ref="868219676"/>
-										<reference key="NSNextKeyView"/>
+										<reference key="NSNextKeyView" ref="550118795"/>
 										<string key="NSReuseIdentifierKey">_NS:9</string>
 										<int key="IBUIContentMode">1</int>
 										<bool key="IBUIUserInteractionEnabled">NO</bool>
@@ -466,12 +466,12 @@
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchEventConnection" key="connection">
-						<string key="label">shareOnFacebookButtonPressed:</string>
+						<string key="label">openUserProfileOnFacebookButtonPressed:</string>
 						<reference key="source" ref="997232069"/>
 						<reference key="destination" ref="564753841"/>
 						<int key="IBEventType">7</int>
 					</object>
-					<int key="connectionID">215</int>
+					<int key="connectionID">288</int>
 				</object>
 			</array>
 			<object class="IBMutableOrderedSet" key="objectRecords">
@@ -1676,7 +1676,7 @@
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">287</int>
+			<int key="maxID">288</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes"/>
 		<int key="IBDocument.localizationMode">0</int>

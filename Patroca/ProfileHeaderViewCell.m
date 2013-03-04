@@ -33,6 +33,8 @@
 
 - (void)setupProfileHeaderViewCellWithUser:(PFUser*)user UserData:(NSDictionary*)userData {
     
+    userObject = user;
+    
     //Making sure we don't use nulls but blank strings instead
     NSString *facebookId = ([userData objectForKey:@"id"] == nil ? @"" : [userData objectForKey:@"id"]);
     NSString *name       = ([userData objectForKey:@"name"] == nil ? @"" : [userData objectForKey:@"name"]);
@@ -152,10 +154,24 @@
     [_parentViewController.navigationController popViewControllerAnimated:YES];
 }
 
-- (IBAction)shareOnFacebookButtonPressed:(id)sender {
-}
 
 - (IBAction)tellYourFriendsButtonPressed:(id)sender {
+}
+
+- (IBAction)openUserProfileOnFacebookButtonPressed:(id)sender {
+
+    NSString *facebookNativeProfileURLString = [NSString stringWithFormat:FB_NATIVE_PROFILE_URL, [userObject objectForKey:DB_FIELD_USER_FACEBOOK_ID]];
+
+    // Check to make sure URL can be opened on device (whether the user has the Facebook app installed)
+    if ( [[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:facebookNativeProfileURLString]])
+    {
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:facebookNativeProfileURLString]];
+    }
+    // Otherwise, just open it in the browser
+    {
+        NSString *facebookBrowserProfileURLString = [NSString stringWithFormat:FB_BROWSER_PROFILE_URL, [userObject objectForKey:DB_FIELD_USER_FACEBOOK_ID]];
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:facebookBrowserProfileURLString]];
+    }
 }
 
 @end
