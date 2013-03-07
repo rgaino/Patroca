@@ -43,6 +43,8 @@
 @property (weak, nonatomic) IBOutlet UIButton *doneTakingPicturesButton;
 @property (weak, nonatomic) IBOutlet UITextView *itemDescriptionTextView;
 @property (weak, nonatomic) IBOutlet UIButton *flashButton;
+@property (weak, nonatomic) IBOutlet UILabel *cameraMessageLabel;
+@property (weak, nonatomic) IBOutlet UIImageView *cameraMessageBackgroundImageView;
 
 - (IBAction)takePictureButtonPressed:(id)sender;
 - (IBAction)doneTakingPicturesButtonPressed:(id)sender;
@@ -55,6 +57,7 @@
 - (void)setupCameraOverlayView;
 - (void)setupImagePicker;
 - (void)presentCamera;
+- (void)fadeOutCameraMessageLabel;
 - (void)closeThisScreen;
 
 @end

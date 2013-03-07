@@ -96,6 +96,16 @@
 - (void)presentCamera {
     
     [self presentViewController:imagePicker animated:YES completion:nil];
+    [self performSelector:@selector(fadeOutCameraMessageLabel) withObject:nil afterDelay:4.0f];
+}
+
+- (void)fadeOutCameraMessageLabel {
+
+    [UIView beginAnimations:nil context:NULL];
+    [UIView setAnimationDuration:2.0];
+    [_cameraMessageLabel setAlpha:0];
+    [_cameraMessageBackgroundImageView setAlpha:0];
+    [UIView commitAnimations];
 }
 
 - (void)doneButtonPressed {

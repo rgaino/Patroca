@@ -14,6 +14,7 @@
 			<string>IBProxyObject</string>
 			<string>IBUIButton</string>
 			<string>IBUIImageView</string>
+			<string>IBUILabel</string>
 			<string>IBUITextField</string>
 			<string>IBUITextView</string>
 			<string>IBUIView</string>
@@ -43,7 +44,7 @@
 						<int key="NSvFlags">292</int>
 						<string key="NSFrameSize">{321, 548}</string>
 						<reference key="NSSuperview" ref="284520077"/>
-						<reference key="NSNextKeyView" ref="661580462"/>
+						<reference key="NSNextKeyView" ref="559667737"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<bool key="IBUIUserInteractionEnabled">NO</bool>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
@@ -287,6 +288,50 @@
 						</object>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 					</object>
+					<object class="IBUIImageView" id="559667737">
+						<reference key="NSNextResponder" ref="284520077"/>
+						<int key="NSvFlags">292</int>
+						<string key="NSFrame">{{29, 68}, {263, 156}}</string>
+						<reference key="NSSuperview" ref="284520077"/>
+						<reference key="NSNextKeyView" ref="1061003115"/>
+						<string key="NSReuseIdentifierKey">_NS:9</string>
+						<bool key="IBUIUserInteractionEnabled">NO</bool>
+						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
+						<object class="NSCustomResource" key="IBUIImage">
+							<string key="NSClassName">NSImage</string>
+							<string key="NSResourceName">camera_message_background.png</string>
+						</object>
+					</object>
+					<object class="IBUILabel" id="1061003115">
+						<reference key="NSNextResponder" ref="284520077"/>
+						<int key="NSvFlags">292</int>
+						<string key="NSFrame">{{29, 121}, {263, 50}}</string>
+						<reference key="NSSuperview" ref="284520077"/>
+						<reference key="NSNextKeyView" ref="661580462"/>
+						<string key="NSReuseIdentifierKey">_NS:9</string>
+						<bool key="IBUIOpaque">NO</bool>
+						<bool key="IBUIClipsSubviews">YES</bool>
+						<int key="IBUIContentMode">7</int>
+						<bool key="IBUIUserInteractionEnabled">NO</bool>
+						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
+						<string type="base64-UTF8" key="IBUIText">VmFtb3MgdHJvY2FyIGFsZ28/CkNvbWVjZSBhIGZvdG9ncmFmYXIuA</string>
+						<reference key="IBUITextColor" ref="434999743"/>
+						<nil key="IBUIHighlightedColor"/>
+						<int key="IBUIBaselineAdjustment">0</int>
+						<int key="IBUINumberOfLines">2</int>
+						<int key="IBUITextAlignment">1</int>
+						<object class="IBUIFontDescription" key="IBUIFontDescription">
+							<int key="type">1</int>
+							<double key="pointSize">17</double>
+						</object>
+						<object class="NSFont" key="IBUIFont">
+							<string key="NSName">Helvetica</string>
+							<double key="NSSize">17</double>
+							<int key="NSfFlags">16</int>
+						</object>
+						<bool key="IBUIAdjustsFontSizeToFit">NO</bool>
+						<double key="preferredMaxLayoutWidth">263</double>
+					</object>
 				</array>
 				<string key="NSFrameSize">{320, 480}</string>
 				<reference key="NSSuperview"/>
@@ -433,6 +478,22 @@
 					<int key="connectionID">42</int>
 				</object>
 				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">cameraMessageLabel</string>
+						<reference key="source" ref="372490531"/>
+						<reference key="destination" ref="1061003115"/>
+					</object>
+					<int key="connectionID">45</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">cameraMessageBackgroundImageView</string>
+						<reference key="source" ref="372490531"/>
+						<reference key="destination" ref="559667737"/>
+					</object>
+					<int key="connectionID">47</int>
+				</object>
+				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchEventConnection" key="connection">
 						<string key="label">takePictureButtonPressed:</string>
 						<reference key="source" ref="670862178"/>
@@ -518,6 +579,8 @@
 							<reference ref="857930868"/>
 							<reference ref="661580462"/>
 							<reference ref="608721003"/>
+							<reference ref="559667737"/>
+							<reference ref="1061003115"/>
 						</array>
 						<reference key="parent" ref="0"/>
 						<string key="objectName">Camera Overlay View</string>
@@ -618,6 +681,16 @@
 						<reference key="parent" ref="661580462"/>
 						<string key="objectName">thumb 4 Image View</string>
 					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">44</int>
+						<reference key="object" ref="1061003115"/>
+						<reference key="parent" ref="284520077"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">46</int>
+						<reference key="object" ref="559667737"/>
+						<reference key="parent" ref="284520077"/>
+					</object>
 				</array>
 			</object>
 			<dictionary class="NSMutableDictionary" key="flattenedProperties">
@@ -642,12 +715,14 @@
 				<string key="38.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<string key="39.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<string key="4.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
+				<string key="44.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
+				<string key="46.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 			</dictionary>
 			<dictionary class="NSMutableDictionary" key="unlocalizedProperties"/>
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">43</int>
+			<int key="maxID">47</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes"/>
 		<int key="IBDocument.localizationMode">0</int>
@@ -657,6 +732,7 @@
 		<dictionary class="NSMutableDictionary" key="IBDocument.LastKnownImageSizes">
 			<string key="back_button.png">{51, 45}</string>
 			<string key="camera_background.png">{321, 548}</string>
+			<string key="camera_message_background.png">{263, 156}</string>
 			<string key="done_button.png">{51, 45}</string>
 			<string key="flash_button_off.png">{60, 44}</string>
 			<string key="gallery_button.png">{60, 45}</string>
