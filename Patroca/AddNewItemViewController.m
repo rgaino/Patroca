@@ -70,8 +70,7 @@
 
 
 - (void)localizeStrings {
-    [_doneButton setTitle:NSLocalizedString(@"Done", nil) forState:UIControlStateNormal];
-    [_doneTakingPicturesButton setTitle:NSLocalizedString(@"Done", nil) forState:UIControlStateNormal];
+    [_cameraMessageLabel setText:NSLocalizedString(@"camera_message_1", nil)];
 }
 
 - (void)setupCameraOverlayView {
@@ -115,7 +114,7 @@
 
 	HUD = [[MBProgressHUD alloc] initWithView:self.navigationController.view];
 	[HUD setDimBackground:YES];
-	[HUD setLabelText: NSLocalizedString(@"Saving", nil)];
+	[HUD setLabelText: NSLocalizedString(@"saving", nil)];
     [HUD setDelegate:self];
     [self.navigationController.view addSubview:HUD];
 
@@ -231,7 +230,7 @@
 - (void)saveItem {
     
     //save item details
-    NSLog(@"Saving Item...");
+    NSLog(@"saving item...");
     [currentItem setObject:[_itemNameTextField text] forKey:DB_FIELD_ITEM_NAME];
     [currentItem setObject:[_itemDescriptionTextView text] forKey:DB_FIELD_ITEM_DESCRIPTION];
     [currentItem setObject:[PFUser currentUser] forKey:DB_FIELD_USER_ID];
@@ -240,8 +239,7 @@
     //save all thumbnails and images
     for(int i=0; i<[itemThumbnails count]; i++) {
         
-        NSLog(@"Saving image %d of %d...", i+1, [itemThumbnails count]);
-        [HUD setLabelText:[NSString stringWithFormat:NSLocalizedString(@"Saving image %d of %d...", nil), i+1, [itemThumbnails count]]];
+        [HUD setLabelText:[NSString stringWithFormat:NSLocalizedString(@"saving image %d of %d...", nil), i+1, [itemThumbnails count]]];
         
         UIImage *fullImage = [itemImages objectAtIndex:i];
         NSData *imageData = UIImageJPEGRepresentation(fullImage, 0.6f);
@@ -255,8 +253,6 @@
         if( [currentItem objectForKey:DB_FIELD_ITEM_MAIN_IMAGE] == nil) {
             [currentItem setObject:imageFile forKey:DB_FIELD_ITEM_MAIN_IMAGE];
         }
-        
-        NSLog(@"Images saved!");
     }
     
     [currentItem save];
@@ -269,7 +265,7 @@
 
     HUD.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"37x-Checkmark.png"]];
 	HUD.mode = MBProgressHUDModeCustomView;
-	HUD.labelText = NSLocalizedString(@"Saved!", nil);
+	HUD.labelText = NSLocalizedString(@"saved!", nil);
 
     [self closeThisScreen];
 }

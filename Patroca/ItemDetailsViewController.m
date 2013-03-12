@@ -212,7 +212,10 @@
     if( ![[userObject objectId] isEqualToString:[[PFUser currentUser] objectId]]) {
         //only show the Make Offer button if owner of this item is NOT the current user
         UIButton *makeOfferButton = [UIButton buttonWithType:UIButtonTypeCustom];
-        [makeOfferButton setImage:[UIImage imageNamed:@"make_offer_button.png"] forState:UIControlStateNormal];
+        [makeOfferButton setBackgroundImage:[UIImage imageNamed:@"make_offer_button.png"] forState:UIControlStateNormal];
+        [makeOfferButton.titleLabel setFont:[UIFont boldSystemFontOfSize:16]];
+        [makeOfferButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        [makeOfferButton setTitle:NSLocalizedString(@"make offer", nil) forState:UIControlStateNormal];
         [makeOfferButton setFrame:CGRectMake(55, footerBackgroundView.frame.origin.y-22, 210, 45)];
         [makeOfferButton addTarget:self action:@selector(makeOfferButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
         [self.view addSubview:makeOfferButton];
@@ -273,7 +276,7 @@
     [commentsViewTitleLabel setTextAlignment:NSTextAlignmentCenter];
     [commentsViewTitleLabel setBackgroundColor:[UIColor clearColor]];
     [commentsViewTitleLabel setTextColor:[UIColor colorWithRed:205/255.f green:220/255.f blue:40/255.f alpha:1.0f]];
-    [commentsViewTitleLabel setText:@"Troca-ideia"];
+    [commentsViewTitleLabel setText:NSLocalizedString(@"comments section", nil)];
     
     
     //building every comment into a UIView and adding to commentsView
@@ -367,7 +370,10 @@
         
         sendCommentButton = [UIButton buttonWithType:UIButtonTypeCustom];
         [sendCommentButton setFrame:CGRectMake(217, newCommentBackgroundImageView.frame.origin.y + newCommentBackgroundImageView.frame.size.height-22, 103, 45)];
-        [sendCommentButton setImage:[UIImage imageNamed:@"send_comment_button.png"] forState:UIControlStateNormal];
+        [sendCommentButton setBackgroundImage:[UIImage imageNamed:@"send_comment_button.png"] forState:UIControlStateNormal];
+        [sendCommentButton setTitle:NSLocalizedString(@"send", nil) forState:UIControlStateNormal];
+        [sendCommentButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+        [sendCommentButton.titleLabel setFont:[UIFont boldSystemFontOfSize:16]];
         commentsViewFinalHeight += 22; //half the button's height
         [sendCommentButton setEnabled:NO];
         [sendCommentButton addTarget:self action:@selector(sendCommentButtonPressed) forControlEvents:UIControlEventTouchUpInside];

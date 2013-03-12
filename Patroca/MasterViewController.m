@@ -41,6 +41,8 @@
 
 - (void)viewDidLoad {
 
+    [self localizeStrings];
+
     totalCommentsForItemsDictionary = [[NSMutableDictionary alloc] init];
     [self.contentDisplayCollectionView registerClass:[ItemViewCell class] forCellWithReuseIdentifier:CELL_REUSE_IDENTIFIER];
     [self setupHeaderWithBackButton:NO doneButton:NO addItemButton:YES];
@@ -62,6 +64,12 @@
     [super viewDidLoad];
 }
 
+- (void)localizeStrings {
+    [_featuredButton setTitle:NSLocalizedString(@"featured", nil) forState:UIControlStateNormal];
+    [_friendsButton setTitle:NSLocalizedString(@"friends", nil) forState:UIControlStateNormal];
+    [_nearbyButton setTitle:NSLocalizedString(@"nearby", nil) forState:UIControlStateNormal];
+    
+}
 
 - (void)startRefresh:(id)sender {
     [itemDataSource refresh];

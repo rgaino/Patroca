@@ -27,6 +27,8 @@
     [super viewDidLoad];
 }
 
+- (void)localizeStrings {}
+
 - (void)viewDidAppear:(BOOL)animated {
 
     //hide profile picture if user logged out

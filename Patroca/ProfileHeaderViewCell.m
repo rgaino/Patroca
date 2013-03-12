@@ -27,8 +27,15 @@
         if (![[arrayOfViews objectAtIndex:0] isKindOfClass:[UICollectionViewCell class]]) { return nil; }
         
         self = [arrayOfViews objectAtIndex:0];
+        
+        [self localizeStrings];
     }
     return self;
+}
+
+- (void)localizeStrings {
+    [_shareOnFacebookButton setTitle:NSLocalizedString(@"tell your friends", nil) forState:UIControlStateNormal];
+    [_moreFriendsMoreStuffLabel setText:NSLocalizedString(@"the more the merrier", nil)];
 }
 
 - (void)setupProfileHeaderViewCellWithUser:(PFUser*)user UserData:(NSDictionary*)userData {

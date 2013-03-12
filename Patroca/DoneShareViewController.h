@@ -18,6 +18,7 @@
 @property (nonatomic, readwrite) PFObject *itemObject;
 @property (weak, nonatomic) IBOutlet UILabel *itemTitleLabel;
 @property (weak, nonatomic) IBOutlet UIButton *shareButton;
+@property (weak, nonatomic) IBOutlet UILabel *shareMessageLabel;
 
 - (IBAction)shareButtonPressed:(id)sender;
     

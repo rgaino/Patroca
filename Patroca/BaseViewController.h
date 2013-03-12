@@ -23,5 +23,6 @@
 - (void)loginProfileButtonPressed;
 - (void)backButtonPressed;
 - (void)doneButtonPressed;
+- (void)localizeStrings;
 
 @end

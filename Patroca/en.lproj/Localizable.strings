@@ -1,0 +1,24 @@
+/* 
+  Localizable.strings
+  Patroca
+
+  Created by Rafael Gaino on 3/11/13.
+  Copyright (c) 2013 Punk Opera. All rights reserved.
+*/
+
+"camera_message_1" = "Let's trade something?\nFirst take a picture.";
+"saving" = "Saving";
+"saving item..." = "Saving your item...";
+"saving image %d of %d..." = "Saving picture %d of %d...";
+"saved!" = "Saved!";
+"featured" = "Featured";
+"friends" = "Friends";
+"nearby" = "Nearby";
+"tell your friends" = "Tell your friends!";
+"the more the merrier" = "(The more the merrier)";
+"share" = "Share";
+"share item message" = "";
+"share item message" = "Take this opportunity to tell your friends about it. The more people see this, the more offers you'll get.";
+"send" = "SEND";
+"make offer" = "MAKE AN OFFER";
+"comments section" = "Let's talk about it";

@@ -24,10 +24,15 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
+    [self localizeStrings];
+
     [self setupHeaderWithBackButton:YES doneButton:YES addItemButton:NO];
     [_shareButton setBackgroundImage:[UIImage imageNamed:@"yellow_button.png"] forState:UIControlStateNormal];
     [_itemTitleLabel setText:[_itemObject objectForKey:DB_FIELD_ITEM_NAME]];
+}
+- (void)localizeStrings {
+    [_shareButton setTitle:NSLocalizedString(@"share", nil) forState:UIControlStateNormal];
+    [_shareMessageLabel setText:NSLocalizedString(@"share item message", nil)];
 }
 
 - (void)backButtonPressed {

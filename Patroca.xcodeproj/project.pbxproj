@@ -98,6 +98,7 @@
 		19684F94169F99E20011A69C /* flash_button_on.png in Resources */ = {isa = PBXBuildFile; fileRef = 19684F8E169F99E20011A69C /* flash_button_on.png */; };
 		19684F95169F99E20011A69C /* flash_button_on@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 19684F8F169F99E20011A69C /* flash_button_on@2x.png */; };
 		196E43B6168BC2BE009608E4 /* UILabel+Extensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 196E43B5168BC2BE009608E4 /* UILabel+Extensions.m */; };
+		1971781F16EEBF5A00F0A57F /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 1971782116EEBF5A00F0A57F /* Localizable.strings */; };
 		1977163216E035F70010FF5D /* DoneShareViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1977163016E035F70010FF5D /* DoneShareViewController.m */; };
 		1977163316E035F70010FF5D /* DoneShareViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1977163116E035F70010FF5D /* DoneShareViewController.xib */; };
 		1977163616E03AE10010FF5D /* item_share_message.png in Resources */ = {isa = PBXBuildFile; fileRef = 1977163416E03AE10010FF5D /* item_share_message.png */; };
@@ -270,6 +271,9 @@
 		19684F8F169F99E20011A69C /* flash_button_on@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "flash_button_on@2x.png"; sourceTree = "<group>"; };
 		196E43B4168BC2BE009608E4 /* UILabel+Extensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UILabel+Extensions.h"; sourceTree = "<group>"; };
 		196E43B5168BC2BE009608E4 /* UILabel+Extensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UILabel+Extensions.m"; sourceTree = "<group>"; };
+		1971782016EEBF5A00F0A57F /* en */ = {isa = PBXFileReference; lastKnownFileType = file; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		1971782216EEBFD100F0A57F /* pt */ = {isa = PBXFileReference; lastKnownFileType = file; name = pt; path = pt.lproj/Localizable.strings; sourceTree = "<group>"; };
+		1971782316EEBFD100F0A57F /* pt */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = pt; path = pt.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		1977162F16E035F70010FF5D /* DoneShareViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DoneShareViewController.h; sourceTree = "<group>"; };
 		1977163016E035F70010FF5D /* DoneShareViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DoneShareViewController.m; sourceTree = "<group>"; };
 		1977163116E035F70010FF5D /* DoneShareViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DoneShareViewController.xib; sourceTree = "<group>"; };
@@ -482,6 +486,7 @@
 		1939B88D16568C3300435705 /* Patroca */ = {
 			isa = PBXGroup;
 			children = (
+				1971781C16EEBF1A00F0A57F /* i18n */,
 				19D910C216BF0ED100129E22 /* Classes */,
 				1934ACF6165E2B9300C8272F /* Libs */,
 				1939B8B716568F8400435705 /* Images */,
@@ -736,6 +741,14 @@
 			name = "UILabel Categories";
 			sourceTree = "<group>";
 		};
+		1971781C16EEBF1A00F0A57F /* i18n */ = {
+			isa = PBXGroup;
+			children = (
+				1971782116EEBF5A00F0A57F /* Localizable.strings */,
+			);
+			name = i18n;
+			sourceTree = "<group>";
+		};
 		1977162D16E0356A0010FF5D /* Done and Share */ = {
 			isa = PBXGroup;
 			children = (
@@ -852,6 +865,7 @@
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
+				pt,
 			);
 			mainGroup = 1939B87816568C3300435705;
 			productRefGroup = 1939B88416568C3300435705 /* Products */;
@@ -965,6 +979,7 @@
 				19241BE816E8215E00E381F7 /* camera_message_background@2x.png in Resources */,
 				19241BEA16E8254400E381F7 /* icon.png in Resources */,
 				19241BEC16E8254700E381F7 /* icon@2x.png in Resources */,
+				1971781F16EEBF5A00F0A57F /* Localizable.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1011,8 +1026,18 @@
 			isa = PBXVariantGroup;
 			children = (
 				1939B89116568C3300435705 /* en */,
+				1971782316EEBFD100F0A57F /* pt */,
 			);
 			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		1971782116EEBF5A00F0A57F /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				1971782016EEBF5A00F0A57F /* en */,
+				1971782216EEBFD100F0A57F /* pt */,
+			);
+			name = Localizable.strings;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */

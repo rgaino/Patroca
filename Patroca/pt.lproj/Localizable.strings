@@ -1,0 +1,23 @@
+/* 
+  Localizable.strings
+  Patroca
+
+  Created by Rafael Gaino on 3/11/13.
+  Copyright (c) 2013 Punk Opera. All rights reserved.
+*/
+
+"camera_message_1" = "Vamos trocar algo?\nComece a fotografar.";
+"saving" = "Salvando"
+"saving item..." = "Salvando seu item..."
+"saving image %d of %d..." = "Salvando foto %d de %d...";
+"saved!" = "Salvo!";
+"featured" = "Destaque";
+"friends" = "Amigos";
+"nearby" = "Por Perto";
+"tell your friends" = "Conte para seus amigos!";
+"the more the merrier" = "(quanto mais amigos, mais coisas patroca)";
+"share" = "Compartilhe!";
+"share item message" = "Aproveite para contar aos seus amigos. Quanto mais gente souber, mais ofertas bacanas você receberá.";
+"send" = "ENVIAR";
+"make offer" = "FAÇA UMA OFERTA";
+"comments section" = "Troca-ideia";
