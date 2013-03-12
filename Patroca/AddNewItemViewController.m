@@ -250,7 +250,7 @@
         [itemImagesObject setObject:imageFile forKey:DB_FIELD_ITEM_IMAGE];
         [itemImagesObject save];
         
-        if( [currentItem objectForKey:DB_FIELD_ITEM_MAIN_IMAGE] == nil) {
+        if(i==0) {
             [currentItem setObject:imageFile forKey:DB_FIELD_ITEM_MAIN_IMAGE];
         }
     }
