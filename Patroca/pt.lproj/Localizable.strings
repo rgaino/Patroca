@@ -6,7 +6,10 @@
   Copyright (c) 2013 Punk Opera. All rights reserved.
 */
 
-"camera_message_1" = "Vamos trocar algo?\nComece a fotografar.";
+"camera_message_1" = "Capriche na primeira foto. Ela será a principal imagem do seu item.";
+"camera_message_2" = "Agora tente outros ângulos, mostre detalhes importantes e use a criatividade.";
+"camera_message_3" = "Quer mostrar mais ângulos? Você tem mais duas fotos ainda.";
+"camera_message_4" = "Pronto, agora é a última foto!";
 "saving" = "Salvando";
 "saving item..." = "Salvando seu item...";
 "saving image %d of %d..." = "Salvando foto %d de %d...";

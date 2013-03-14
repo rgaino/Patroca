@@ -21,6 +21,7 @@
 #define imageCornerRadius 0
 #define thumbnailsAnimationSpeed 0.25f
 #define maxPictures 4
+#define fadeOutCameraMessageDelay 4.0f
 
 @interface AddNewItemViewController ()
 
@@ -95,7 +96,7 @@
 - (void)presentCamera {
     
     [self presentViewController:imagePicker animated:YES completion:nil];
-    [self performSelector:@selector(fadeOutCameraMessageLabel) withObject:nil afterDelay:4.0f];
+    [self performSelector:@selector(fadeOutCameraMessageLabel) withObject:nil afterDelay:fadeOutCameraMessageDelay];
 }
 
 - (void)fadeOutCameraMessageLabel {
@@ -221,8 +222,15 @@
     [UIView commitAnimations];
     
     if( itemImages.count >= maxPictures ) {
-//        [self doneTakingPicturesButtonPressed:nil];
         [self performSelector:@selector(doneTakingPicturesButtonPressed:) withObject:nil afterDelay:thumbnailsAnimationSpeed];
+    } else {
+        
+        //show camera message
+        NSString *cameraMessageString = [NSString stringWithFormat:@"camera_message_%d", itemImages.count+1];
+        [_cameraMessageLabel setText:NSLocalizedString(cameraMessageString, nil)];
+        [_cameraMessageLabel setAlpha:1.0f];
+        [_cameraMessageBackgroundImageView setAlpha:1.0f];
+        [self performSelector:@selector(fadeOutCameraMessageLabel) withObject:nil afterDelay:fadeOutCameraMessageDelay];
     }
 }
 
