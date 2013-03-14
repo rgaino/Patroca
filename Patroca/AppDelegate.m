@@ -64,7 +64,7 @@
     [PFPush storeDeviceToken:newDeviceToken]; // Send parse the device token
     // Subscribe this user to the broadcast channel, ""
     [[PFInstallation currentInstallation] addUniqueObject:@"" forKey:@"channels"];
-    [[PFInstallation currentInstallation] save];
+    [[PFInstallation currentInstallation] saveInBackground];
 
     TFLog(@"Leaving didRegisterForRemoteNotificationsWithDeviceToken with PFInstallation objectID is %@", [[PFInstallation currentInstallation] objectId]);
 }
