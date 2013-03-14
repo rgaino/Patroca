@@ -125,8 +125,8 @@
     NSString *requestPath = @"me/?fields=name,email";
     
     // Send request to Facebook
-    PF_FBRequest *request = [PF_FBRequest requestForGraphPath:requestPath];
-    [request startWithCompletionHandler:^(PF_FBRequestConnection *connection, id result, NSError *error) {
+    FBRequest *request = [FBRequest requestForGraphPath:requestPath];
+    [request startWithCompletionHandler:^(FBRequestConnection *connection, id result, NSError *error) {
         if (!error) {
             
             NSDictionary *userData = (NSDictionary *)result; // The result is a dictionary

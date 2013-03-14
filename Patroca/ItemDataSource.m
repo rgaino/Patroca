@@ -113,9 +113,9 @@
     
     
     // Issue a Facebook Graph API request to get your user's friend list
-    PF_FBRequest *request = [PF_FBRequest requestForGraphPath:@"me/friends"];
+    FBRequest *request = [FBRequest requestForGraphPath:@"me/friends"];
     [request setSession:[PFFacebookUtils session]];
-    [request startWithCompletionHandler:^(PF_FBRequestConnection *connection,
+    [request startWithCompletionHandler:^(FBRequestConnection *connection,
                                           id result,
                                           NSError *error) {
         if (!error) {

@@ -65,8 +65,8 @@
     
     NSString *userFacebookID = [userObject objectForKey:DB_FIELD_USER_FACEBOOK_ID];
     NSString *facebookGraphPath = [NSString stringWithFormat:@"%@/?fields=name,location,picture,email", userFacebookID];
-    PF_FBRequest *request = [PF_FBRequest requestForGraphPath:facebookGraphPath];
-    [request startWithCompletionHandler:^(PF_FBRequestConnection *connection,
+    FBRequest *request = [FBRequest requestForGraphPath:facebookGraphPath];
+    [request startWithCompletionHandler:^(FBRequestConnection *connection,
                                           id result,
                                           NSError *error) {
         if (!error) {

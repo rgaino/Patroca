@@ -109,8 +109,8 @@
 - (void)loadFriendsProfilePictures {
     
     // Issue a Facebook Graph API request to get your user's friend list
-    PF_FBRequest *request = [PF_FBRequest requestForMyFriends];
-    [request startWithCompletionHandler:^(PF_FBRequestConnection *connection,
+    FBRequest *request = [FBRequest requestForMyFriends];
+    [request startWithCompletionHandler:^(FBRequestConnection *connection,
                                           id result,
                                           NSError *error) {
         

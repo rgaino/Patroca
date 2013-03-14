@@ -14,7 +14,7 @@
 @class ItemDataSource;
 @class PFObject;
 
-@interface ViewProfileViewController : BaseViewController <PF_FBRequestDelegate, ItemDataSourceDelegate,
+@interface ViewProfileViewController : BaseViewController <ItemDataSourceDelegate,
                                                             UICollectionViewDataSource, UICollectionViewDelegateFlowLayout> {
 
     PFUser *userObject;

@@ -23,7 +23,7 @@
 
     //Initialize Parse
     [Parse setApplicationId:@"oqM758m32dGwvjzOwwm5SP4yWTBFeteAPfX7U0Sq" clientKey:@"nuCQvRTW9s4TK9pscWpq0ZVShQKHtUjmwYDJEIcE"];
-    [PFFacebookUtils initializeWithApplicationId:@"100901256728525"];
+    [PFFacebookUtils initializeFacebook];
 
     
     // Register for push notifications
@@ -60,11 +60,16 @@
 {
     //logging for bug tracking according to https://www.parse.com/questions/pfinstallation-resets-channels-on-new-app-update#answer-both-approaches-should-not-reset-the-channels-column-installing-an
     TFLog(@"Entering didRegisterForRemoteNotificationsWithDeviceToken with PFInstallation objectID is %@", [[PFInstallation currentInstallation] objectId]);
+
+    // Store the deviceToken in the current Installation and save it to Parse.
+    PFInstallation *currentInstallation = [PFInstallation currentInstallation];
+    [currentInstallation setDeviceTokenFromData:newDeviceToken];
+    [currentInstallation saveInBackground];
     
-    [PFPush storeDeviceToken:newDeviceToken]; // Send parse the device token
-    // Subscribe this user to the broadcast channel, ""
-    [[PFInstallation currentInstallation] addUniqueObject:@"" forKey:@"channels"];
-    [[PFInstallation currentInstallation] saveInBackground];
+//    [PFPush storeDeviceToken:newDeviceToken]; // Send parse the device token
+//    // Subscribe this user to the broadcast channel, ""
+//    [[PFInstallation currentInstallation] addUniqueObject:@"" forKey:@"channels"];
+//    [[PFInstallation currentInstallation] saveInBackground];
 
     TFLog(@"Leaving didRegisterForRemoteNotificationsWithDeviceToken with PFInstallation objectID is %@", [[PFInstallation currentInstallation] objectId]);
 }
