@@ -7,8 +7,8 @@
 */
 
 "camera_message_1" = "Vamos trocar algo?\nComece a fotografar.";
-"saving" = "Salvando"
-"saving item..." = "Salvando seu item..."
+"saving" = "Salvando";
+"saving item..." = "Salvando seu item...";
 "saving image %d of %d..." = "Salvando foto %d de %d...";
 "saved!" = "Salvo!";
 "featured" = "Destaque";
