@@ -110,8 +110,8 @@
     [_nearbyButton setTitleColor:labelUnselectedColor forState:UIControlStateNormal];
     [menuButton setTitleColor:labelSelectedColor forState:UIControlStateNormal];
     
-    //animate the arrow
-    float arrowPosition = menuButton.frame.origin.x+(menuButton.frame.size.width/2);
+    //animate the arrow to the center of the button
+    float arrowPosition = menuButton.frame.origin.x + (menuButton.frame.size.width/2) - (_menuArrowImage.frame.size.width/2);
     [self moveMenuArrowTo:arrowPosition];
 
     //load data
@@ -222,7 +222,8 @@
 }
 
 - (void)inviteFriendsButtonPressed {
-    NSLog(@"inviteFriendsButtonPressed");
+
+
 }
 
 #pragma mark ItemDataSourceDelegate
