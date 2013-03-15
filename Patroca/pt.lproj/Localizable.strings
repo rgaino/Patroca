@@ -24,3 +24,6 @@
 "send" = "ENVIAR";
 "make offer" = "FAÇA UMA OFERTA";
 "comments section" = "Troca-ideia";
+"oops_friends" = "Ops!\nSeus amigos ainda não começaram a trocar.";
+"invite_them" = "Convide eles";
+"or_search_for_people_around_you" = " para trocar ou procure por coisas perto de você.";

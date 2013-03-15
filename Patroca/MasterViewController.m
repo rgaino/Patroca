@@ -17,6 +17,7 @@
 #import "ItemDetailsViewController.h"
 #import <SDWebImage/UIImageView+WebCache.h>
 #import "SVPullToRefresh.h"
+#import "UILabel+UILabel_Resize.h"
 
 #define CELL_REUSE_IDENTIFIER @"Item_Cell_Master"
 
@@ -57,10 +58,23 @@
         [itemDataSource getNextPageAndReturn];
     }];
     
+    //move the arrow from out of the screen to Friends
     CGRect arrowFrame = _menuArrowImage.frame;
     [_menuArrowImage setFrame:CGRectMake(-100, arrowFrame.origin.y, arrowFrame.size.width, arrowFrame.size.height)];
-    [self performSelector:@selector(friendsButtonPressed:) withObject:nil afterDelay:1.0f];
-
+    
+    //if user is logged in, load friends, otherwise load nearby
+    if ([PFUser currentUser] && [PFFacebookUtils isLinkedWithUser:[PFUser currentUser]]) {
+        [self performSelector:@selector(menuButtonPressed:) withObject:_friendsButton afterDelay:1.0f];
+    } else {
+        [self performSelector:@selector(menuButtonPressed:) withObject:_nearbyButton afterDelay:1.0f];
+    }
+    
+    //create the error message view
+    [self createErrorMessageView];
+    
+    //make sure the content view is always at the top
+    [self.view bringSubviewToFront:_contentDisplayCollectionView];
+    
     [super viewDidLoad];
 }
 
@@ -68,42 +82,56 @@
     [_featuredButton setTitle:NSLocalizedString(@"featured", nil) forState:UIControlStateNormal];
     [_friendsButton setTitle:NSLocalizedString(@"friends", nil) forState:UIControlStateNormal];
     [_nearbyButton setTitle:NSLocalizedString(@"nearby", nil) forState:UIControlStateNormal];
-    
+}
+
+- (void)createErrorMessageView {
+    //create the error message view but it's empty for now
+    errorMessageView = [[UIView alloc] initWithFrame:CGRectMake(0, _contentDisplayCollectionView.frame.origin.y, self.view.frame.size.width, 250)];
+    [errorMessageView setBackgroundColor:[UIColor clearColor]];
+    [self.view addSubview:errorMessageView];
 }
 
 - (void)startRefresh:(id)sender {
     [itemDataSource refresh];
 }
 
-- (IBAction)featuredButtonPressed:(id)sender {
-    [_featuredButton setTitleColor:labelSelectedColor forState:UIControlStateNormal];
-    [_friendsButton setTitleColor:labelUnselectedColor forState:UIControlStateNormal];
-    [_nearbyButton setTitleColor:labelUnselectedColor forState:UIControlStateNormal];
-    [self moveMenuArrowTo:49];
-    [itemDataSource clearAndReturn];
-    [_loadingActivityIndicator startAnimating];
-    [self loadFeaturedItems];
-}
+- (IBAction)menuButtonPressed:(id)sender {
 
-- (IBAction)friendsButtonPressed:(id)sender {
-    [_featuredButton setTitleColor:labelUnselectedColor forState:UIControlStateNormal];
-    [_friendsButton setTitleColor:labelSelectedColor forState:UIControlStateNormal];
-    [_nearbyButton setTitleColor:labelUnselectedColor forState:UIControlStateNormal];
-    [self moveMenuArrowTo:153];
-    [itemDataSource clearAndReturn];
-    [_loadingActivityIndicator startAnimating];
-    [self loadFriendsItems];
-}
-
-- (IBAction)nearbyButtonPressed:(id)sender {
+    UIButton *menuButton = (UIButton*)sender;
+    
+    //remove any error message
+    [[errorMessageView subviews] makeObjectsPerformSelector:@selector(removeFromSuperview)];
+    
+    //highlight the selected menu button
     [_featuredButton setTitleColor:labelUnselectedColor forState:UIControlStateNormal];
     [_friendsButton setTitleColor:labelUnselectedColor forState:UIControlStateNormal];
-    [_nearbyButton setTitleColor:labelSelectedColor forState:UIControlStateNormal];
-    [self moveMenuArrowTo:264];
+    [_nearbyButton setTitleColor:labelUnselectedColor forState:UIControlStateNormal];
+    [menuButton setTitleColor:labelSelectedColor forState:UIControlStateNormal];
+    
+    //animate the arrow
+    float arrowPosition = menuButton.frame.origin.x+(menuButton.frame.size.width/2);
+    [self moveMenuArrowTo:arrowPosition];
+
+    //load data
     [itemDataSource clearAndReturn];
     [_loadingActivityIndicator startAnimating];
-    [self loadNearbyItems];
+    
+    switch (menuButton.tag) {
+        case 0:
+            [self loadFeaturedItems];
+            break;
+        case 1:
+            [self loadFriendsItems];
+            break;
+        case 2:
+            [self loadNearbyItems];
+            break;
+        default:
+            break;
+    }
 }
+
+
 
 - (void)moveMenuArrowTo:(float)xPosition {
     
@@ -131,7 +159,51 @@
         [itemDataSource setItemDataSourceMode:ItemDataSourceModeFriends];
         [itemDataSource getNextPageAndReturn];
     } else {
-        [self nearbyButtonPressed:nil];
+
+        //build the error message for a user with no friends on Patroca
+        
+        UILabel *oopsLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 15, errorMessageView.frame.size.width-120, 100)];
+        [oopsLabel setFont:[UIFont boldSystemFontOfSize:16.0f]];
+        [oopsLabel setTextAlignment:NSTextAlignmentCenter];
+        [oopsLabel setNumberOfLines:0];
+        [oopsLabel setBackgroundColor:[UIColor clearColor]];
+        [oopsLabel setText:NSLocalizedString(@"oops_friends", nil)];
+        [oopsLabel sizeToFit];
+        [oopsLabel setFrame:CGRectMake(errorMessageView.frame.size.width/2 - oopsLabel.frame.size.width/2, oopsLabel.frame.origin.y, oopsLabel.frame.size.width, oopsLabel.frame.size.height)];
+        [errorMessageView addSubview:oopsLabel];
+        
+        NSShadow *dropShadow = [[NSShadow alloc] init];
+        [dropShadow setShadowColor:[UIColor whiteColor]];
+        [dropShadow setShadowBlurRadius:0];
+        [dropShadow setShadowOffset:CGSizeMake(-1, 0)];
+        
+        NSMutableAttributedString *fullInviteString = [[NSMutableAttributedString alloc] init];
+        NSString *inviteString = NSLocalizedString(@"invite_them", nil);
+        NSMutableAttributedString *inviteAttributedString = [[NSMutableAttributedString alloc] initWithString:inviteString];
+        [inviteAttributedString addAttribute:NSForegroundColorAttributeName value:[UIColor colorWithRed:197/255.0f green:18/255.0f blue:67/255.0f alpha:1.0f] range:NSMakeRange(0, inviteString.length)];
+        [inviteAttributedString addAttribute:NSUnderlineStyleAttributeName value:[NSNumber numberWithInteger:NSUnderlineStyleSingle] range:NSMakeRange(0, inviteString.length)];
+        [inviteAttributedString addAttribute:NSShadowAttributeName value:dropShadow range:NSMakeRange(0, inviteString.length)];
+        [fullInviteString appendAttributedString:inviteAttributedString];
+        
+        NSString *searchForPeopleString = NSLocalizedString(@"or_search_for_people_around_you", nil);
+        NSMutableAttributedString *searchForPeopleAttributedString = [[NSMutableAttributedString alloc] initWithString:searchForPeopleString];
+        [searchForPeopleAttributedString addAttribute:NSForegroundColorAttributeName value:[UIColor colorWithRed:89/255.0f green:89/255.0f blue:89/255.0f alpha:1.0f] range:NSMakeRange(0, searchForPeopleString.length)];
+        [fullInviteString appendAttributedString:searchForPeopleAttributedString];
+        
+        UILabel *inviteFriendsLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, oopsLabel.frame.origin.y+oopsLabel.frame.size.height+5, errorMessageView.frame.size.width-120, 100)];
+        [inviteFriendsLabel setAttributedText:fullInviteString];
+        [inviteFriendsLabel setBackgroundColor:[UIColor clearColor]];
+        [inviteFriendsLabel setTextAlignment:NSTextAlignmentCenter];
+        [inviteFriendsLabel setNumberOfLines:0];
+        [inviteFriendsLabel sizeToFit];
+        [inviteFriendsLabel setFrame:CGRectMake(errorMessageView.frame.size.width/2 - inviteFriendsLabel.frame.size.width/2, inviteFriendsLabel.frame.origin.y, inviteFriendsLabel.frame.size.width, inviteFriendsLabel.frame.size.height)];
+        [errorMessageView addSubview:inviteFriendsLabel];
+
+        
+//        "invite them" 
+//        "" 
+        
+        [_loadingActivityIndicator stopAnimating];
     }
 }
 

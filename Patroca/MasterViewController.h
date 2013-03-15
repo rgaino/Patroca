@@ -21,6 +21,7 @@
     UIColor *labelSelectedColor;
     UIColor *labelUnselectedColor;
     
+    UIView *errorMessageView;
 }
 
 @property (weak, nonatomic) IBOutlet UIImageView *menuArrowImage;
@@ -36,8 +37,6 @@
 - (void)loadFeaturedItems;
 - (void)loadFriendsItems;
 - (void)loadNearbyItems;
-- (IBAction)friendsButtonPressed:(id)sender;
-- (IBAction)featuredButtonPressed:(id)sender;
-- (IBAction)nearbyButtonPressed:(id)sender;
+- (IBAction)menuButtonPressed:(id)sender;
 
 @end

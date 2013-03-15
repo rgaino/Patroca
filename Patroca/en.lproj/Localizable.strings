@@ -25,3 +25,6 @@
 "send" = "SEND";
 "make offer" = "MAKE AN OFFER";
 "comments section" = "Let's talk about it";
+"oops_friends" = "Oops!\nYour friends haven't started trading yet.";
+"invite_them" = "Invite them";
+"or_search_for_people_around_you" = " or search for people around you.";
