@@ -20,7 +20,6 @@
     
     UIColor *labelSelectedColor;
     UIColor *labelUnselectedColor;
-    
     UIView *errorMessageView;
 }
 
@@ -37,6 +36,7 @@
 - (void)loadFeaturedItems;
 - (void)loadFriendsItems;
 - (void)loadNearbyItems;
+- (void)inviteFriendsButtonPressed;
 - (IBAction)menuButtonPressed:(id)sender;
 
 @end

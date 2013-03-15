@@ -61,7 +61,7 @@
     //move the arrow from out of the screen to Friends
     CGRect arrowFrame = _menuArrowImage.frame;
     [_menuArrowImage setFrame:CGRectMake(-100, arrowFrame.origin.y, arrowFrame.size.width, arrowFrame.size.height)];
-    
+
     //if user is logged in, load friends, otherwise load nearby
     if ([PFUser currentUser] && [PFFacebookUtils isLinkedWithUser:[PFUser currentUser]]) {
         [self performSelector:@selector(menuButtonPressed:) withObject:_friendsButton afterDelay:1.0f];
@@ -84,6 +84,7 @@
     [_nearbyButton setTitle:NSLocalizedString(@"nearby", nil) forState:UIControlStateNormal];
 }
 
+
 - (void)createErrorMessageView {
     //create the error message view but it's empty for now
     errorMessageView = [[UIView alloc] initWithFrame:CGRectMake(0, _contentDisplayCollectionView.frame.origin.y, self.view.frame.size.width, 250)];
@@ -99,9 +100,10 @@
 
     UIButton *menuButton = (UIButton*)sender;
     
-    //remove any error message
+    //remove any error message and show the collection view in case it's hidden
     [[errorMessageView subviews] makeObjectsPerformSelector:@selector(removeFromSuperview)];
-    
+    [_contentDisplayCollectionView setHidden:NO];
+
     //highlight the selected menu button
     [_featuredButton setTitleColor:labelUnselectedColor forState:UIControlStateNormal];
     [_friendsButton setTitleColor:labelUnselectedColor forState:UIControlStateNormal];
@@ -129,6 +131,8 @@
         default:
             break;
     }
+    
+    
 }
 
 
@@ -161,6 +165,7 @@
     } else {
 
         //build the error message for a user with no friends on Patroca
+        [_contentDisplayCollectionView setHidden:YES];
         
         UILabel *oopsLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 15, errorMessageView.frame.size.width-120, 100)];
         [oopsLabel setFont:[UIFont boldSystemFontOfSize:16.0f]];
@@ -197,12 +202,15 @@
         [inviteFriendsLabel setNumberOfLines:0];
         [inviteFriendsLabel sizeToFit];
         [inviteFriendsLabel setFrame:CGRectMake(errorMessageView.frame.size.width/2 - inviteFriendsLabel.frame.size.width/2, inviteFriendsLabel.frame.origin.y, inviteFriendsLabel.frame.size.width, inviteFriendsLabel.frame.size.height)];
-        [errorMessageView addSubview:inviteFriendsLabel];
+        
+        UIButton *inviteFriendsButton = [UIButton buttonWithType:UIButtonTypeCustom];
+        [inviteFriendsButton setFrame:inviteFriendsLabel.frame];
+        [inviteFriendsButton.titleLabel setNumberOfLines:0];
+        [inviteFriendsButton.titleLabel setTextAlignment:0];
+        [inviteFriendsButton setAttributedTitle:fullInviteString forState:UIControlStateNormal];
+        [inviteFriendsButton addTarget:self action:@selector(inviteFriendsButtonPressed) forControlEvents:UIControlEventTouchUpInside];
+        [errorMessageView addSubview:inviteFriendsButton];
 
-        
-//        "invite them" 
-//        "" 
-        
         [_loadingActivityIndicator stopAnimating];
     }
 }
@@ -213,6 +221,9 @@
     [itemDataSource getNextPageAndReturn];
 }
 
+- (void)inviteFriendsButtonPressed {
+    NSLog(@"inviteFriendsButtonPressed");
+}
 
 #pragma mark ItemDataSourceDelegate
 
