@@ -15,6 +15,7 @@
 #import "NSDate+NSDate_Formatter.h"
 #import "UILabel+Extensions.h"
 #import "ViewProfileViewController.h"
+#import "MPNotificationView.h"
 
 @implementation ItemDetailsViewController
 
@@ -210,7 +211,9 @@
     
     //make offer button
     if( ![[userObject objectId] isEqualToString:[[PFUser currentUser] objectId]]) {
-        //only show the Make Offer button if owner of this item is NOT the current user
+        
+        //only show the Make Offer and Report button if owner of this item is NOT the current user
+        
         UIButton *makeOfferButton = [UIButton buttonWithType:UIButtonTypeCustom];
         [makeOfferButton setBackgroundImage:[UIImage imageNamed:@"make_offer_button.png"] forState:UIControlStateNormal];
         [makeOfferButton.titleLabel setFont:[UIFont boldSystemFontOfSize:16]];
@@ -219,16 +222,15 @@
         [makeOfferButton setFrame:CGRectMake(55, footerBackgroundView.frame.origin.y-22, 210, 45)];
         [makeOfferButton addTarget:self action:@selector(makeOfferButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
         [self.view addSubview:makeOfferButton];
+
+        //report button
+        UIButton *reportButton = [UIButton buttonWithType:UIButtonTypeCustom];
+        [reportButton setImage:[UIImage imageNamed:@"report_this_item.png"] forState:UIControlStateNormal];
+        [reportButton setFrame:CGRectMake(15, footerBackgroundView.frame.origin.y+11, 24, 21)];
+        [reportButton addTarget:self action:@selector(reportThisItem:) forControlEvents:UIControlEventTouchUpInside];
+        [self.view addSubview:reportButton];
     }
 
-    //report button
-    UIButton *reportButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    [reportButton setImage:[UIImage imageNamed:@"report_this_item.png"] forState:UIControlStateNormal];
-    [reportButton setFrame:CGRectMake(15, footerBackgroundView.frame.origin.y+11, 24, 21)];
-    [reportButton addTarget:self action:@selector(reportThisItem:) forControlEvents:UIControlEventTouchUpInside];
-    [self.view addSubview:reportButton];
-
-    
     //share on Facebook button
     UIButton *recommendButton = [UIButton buttonWithType:UIButtonTypeCustom];
     [recommendButton setImage:[UIImage imageNamed:@"recommend_item_button.png"] forState:UIControlStateNormal];
@@ -463,10 +465,39 @@
 
 
 - (IBAction)makeOfferButtonPressed:(id)sender {}
+
 - (IBAction)recommendThisItem:(id)sender {}
-- (IBAction)reportThisItem:(id)sender {}
 
+- (IBAction)reportThisItem:(id)sender {
 
+    UIActionSheet *reportItemActionSheet = [[UIActionSheet alloc] initWithTitle:NSLocalizedString(@"sure_report_item_question", nil)
+                                                    delegate:self
+                                                    cancelButtonTitle:NSLocalizedString(@"no", nil)
+                                                    destructiveButtonTitle:NSLocalizedString(@"yes", nil)
+                                                    otherButtonTitles:nil];
+    
+    [reportItemActionSheet setActionSheetStyle:UIActionSheetStyleBlackTranslucent];
+    [reportItemActionSheet showInView:self.view];
+    
+}
+
+ -(void) actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
+     
+     if(buttonIndex == 0) {
+        //report this item and leave
+        PFObject *reported = [PFObject objectWithClassName:DB_TABLE_REPORTED_ITEMS];
+        [reported addObject:_itemObject.objectId forKey:DB_FIELD_ITEM_ID];
+        [reported addObject:[PFUser currentUser].objectId forKey:DB_FIELD_USER_ID];
+        [reported saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+        
+            [MPNotificationView notifyWithText:NSLocalizedString(@"item_reported", nil) detail:NSLocalizedString(@"thanks_for_reporting", nil)
+                                image:[UIImage imageNamed:@"report_this_item.png"] andDuration:3.0f];
+
+        }];
+         
+        [self.navigationController popViewControllerAnimated:YES];
+     }
+}
 
 
 @end

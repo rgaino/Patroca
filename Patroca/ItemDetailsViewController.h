@@ -12,7 +12,7 @@
 @class PFObject;
 @class PFUser;
 
-@interface ItemDetailsViewController : BaseViewController <UIScrollViewDelegate, UITextViewDelegate> {
+@interface ItemDetailsViewController : BaseViewController <UIScrollViewDelegate, UITextViewDelegate, UIActionSheetDelegate> {
 
     UIScrollView *wholeScreenScrollView;
     UIScrollView *itemImagesScrollView;

@@ -27,3 +27,9 @@
 "oops_friends" = "Ops!\nSeus amigos ainda não começaram a trocar.";
 "invite_them" = "Convide eles";
 "or_search_for_people_around_you" = " para trocar ou procure por coisas perto de você.";
+"sure_report_item_question" = "Reportar este item como inapropriado?";
+"cancel" = "Cancelar";
+"yes" = "Sim";
+"no" = "Não";
+"item_reported" = "Item Reportado!";
+"thanks_for_reporting" = "Obrigado, em breve alguém irá analizar este item.";
