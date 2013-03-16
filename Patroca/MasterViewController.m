@@ -58,10 +58,6 @@
         [itemDataSource getNextPageAndReturn];
     }];
     
-    //move the arrow from out of the screen to Friends
-    CGRect arrowFrame = _menuArrowImage.frame;
-    [_menuArrowImage setFrame:CGRectMake(-100, arrowFrame.origin.y, arrowFrame.size.width, arrowFrame.size.height)];
-
     //if user is logged in, load friends, otherwise load nearby
     if ([PFUser currentUser] && [PFFacebookUtils isLinkedWithUser:[PFUser currentUser]]) {
         [self performSelector:@selector(menuButtonPressed:) withObject:_friendsButton afterDelay:1.0f];
@@ -139,12 +135,21 @@
 
 - (void)moveMenuArrowTo:(float)xPosition {
     
+    //change the arrow image leading space constraint...
+    for(NSLayoutConstraint *constraint in [_menuBarView constraints]) {
+        if(constraint.secondItem == _menuArrowImage || constraint.firstItem == _menuArrowImage) {
+            if(constraint.firstAttribute == NSLayoutAttributeLeading) {
+                [constraint setConstant:xPosition];
+            }
+        }
+    }
+
+    //... then animate it
     [UIView animateWithDuration:1.0f
             delay:0
             options:UIViewAnimationOptionCurveEaseInOut
             animations:^{
-                CGRect arrowFrame = _menuArrowImage.frame;
-                [_menuArrowImage setFrame:CGRectMake(xPosition, arrowFrame.origin.y, arrowFrame.size.width, arrowFrame.size.height)];
+                [_menuBarView layoutSubviews];
             } completion:nil
      ];
 }
@@ -222,7 +227,50 @@
 }
 
 - (void)inviteFriendsButtonPressed {
-
+    //    [FBNativeDialogs presentShareDialogModallyFrom:self initialText:@"initialText" image:nil url:[NSURL URLWithString:@"http://joystiq.com"] handler:^(FBNativeDialogResult result, NSError *error) {
+    //
+    //    }     ];
+    
+    //    NSMutableDictionary *params = [NSMutableDictionary dictionaryWithObjectsAndKeys:
+    //                                   @"Nome do Patroca", @"name",
+    //                                   @"Patroca.", @"caption",
+    //                                   @"Texto para instigar os amigos.", @"description",
+    //                                   @"http://www.patroca.com/", @"link",
+    ////                                   @"http://www.facebookmobileweb.com/hackbook/img/facebook_icon_large.png", @"picture",
+    ////                                   actionLinksStr, @"actions",
+    //                                   nil];
+    
+    //    [FBNativeDialogs presentShareDialogModallyFrom:self initialText:nil image:nil url:[NSURL URLWithString:@"http://www.patroca.com/"] handler:^(FBNativeDialogResult result, NSError *error) {
+    //        NSLog(@"");
+    //    }];
+    
+    //    [FBWebDialogs presentFeedDialogModallyWithSession:[PFFacebookUtils session] parameters:params handler:^(FBWebDialogResult result, NSURL *resultURL, NSError *error) {
+    //        NSLog(@"");
+    //    }];
+    
+    /*
+     currentAPICall = kDialogFeedUser;
+     FBSBJSON *jsonWriter = [[FBSBJSON new] autorelease];
+     
+     // The action links to be shown with the post in the feed
+     NSArray* actionLinks = [NSArray arrayWithObjects:[NSDictionary dictionaryWithObjectsAndKeys:
+     @"Get Started",@"name",@"http://m.facebook.com/apps/hackbookios/",@"link", nil], nil];
+     NSString *actionLinksStr = [jsonWriter stringWithObject:actionLinks];
+     // Dialog parameters
+     NSMutableDictionary *params = [NSMutableDictionary dictionaryWithObjectsAndKeys:
+     @"I'm using the Hackbook for iOS app", @"name",
+     @"Hackbook for iOS.", @"caption",
+     @"Check out Hackbook for iOS to learn how you can make your iOS apps social using Facebook Platform.", @"description",
+     @"http://m.facebook.com/apps/hackbookios/", @"link",
+     @"http://www.facebookmobileweb.com/hackbook/img/facebook_icon_large.png", @"picture",
+     actionLinksStr, @"actions",
+     nil];
+     
+     HackbookAppDelegate *delegate = (HackbookAppDelegate *)[[UIApplication sharedApplication] delegate];
+     [[delegate facebook] dialog:@"feed"
+     andParams:params
+     andDelegate:self];
+     */
 
 }
 
