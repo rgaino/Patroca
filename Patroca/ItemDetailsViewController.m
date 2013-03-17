@@ -486,8 +486,8 @@
      if(buttonIndex == 0) {
         //report this item and leave
         PFObject *reported = [PFObject objectWithClassName:DB_TABLE_REPORTED_ITEMS];
-        [reported addObject:_itemObject.objectId forKey:DB_FIELD_ITEM_ID];
-        [reported addObject:[PFUser currentUser].objectId forKey:DB_FIELD_USER_ID];
+        [reported setObject:_itemObject forKey:DB_FIELD_ITEM_ID];
+        [reported setObject:[PFUser currentUser] forKey:DB_FIELD_USER_ID];
         [reported saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
         
             [MPNotificationView notifyWithText:NSLocalizedString(@"item_reported", nil) detail:NSLocalizedString(@"thanks_for_reporting", nil)
