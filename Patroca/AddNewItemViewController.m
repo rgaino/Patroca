@@ -230,6 +230,8 @@
         [_cameraMessageLabel setText:NSLocalizedString(cameraMessageString, nil)];
         [_cameraMessageLabel setAlpha:1.0f];
         [_cameraMessageBackgroundImageView setAlpha:1.0f];
+        
+        [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(fadeOutCameraMessageLabel) object:nil];
         [self performSelector:@selector(fadeOutCameraMessageLabel) withObject:nil afterDelay:fadeOutCameraMessageDelay];
     }
 }
