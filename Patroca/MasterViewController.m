@@ -136,14 +136,8 @@
 - (void)moveMenuArrowTo:(float)xPosition {
     
     //change the arrow image leading space constraint...
-    for(NSLayoutConstraint *constraint in [_menuBarView constraints]) {
-        if(constraint.secondItem == _menuArrowImage || constraint.firstItem == _menuArrowImage) {
-            if(constraint.firstAttribute == NSLayoutAttributeLeading) {
-                [constraint setConstant:xPosition];
-            }
-        }
-    }
-
+    [_arrowHorizontalSpacingConstraint setConstant:xPosition];
+    
     //... then animate it
     [UIView animateWithDuration:1.0f
             delay:0
