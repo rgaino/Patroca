@@ -187,25 +187,16 @@
 	[galleryImagePicker setDelegate:self];
 	[galleryImagePicker setAllowsEditing:NO];
     [galleryImagePicker setMediaTypes:[NSArray arrayWithObject:(NSString *)kUTTypeImage]];
-    [self presentViewController:galleryImagePicker animated:YES completion:nil];
-
-    
-    
-//	[galleryImagePicker setMediaTypes:[UIImagePickerController availableMediaTypesForSourceType:[imagePicker sourceType]]];
-    
-//    if([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypePhotoLibrary]) {
-//        [imagePicker setSourceType:UIImagePickerControllerSourceTypePhotoLibrary];
-//    }
+    [imagePicker presentViewController:galleryImagePicker animated:YES completion:nil];
 }
 
 
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
 	
-    if( galleryImagePicker!=nil ) {
-        [self dismissViewControllerAnimated:NO completion:nil];
+    if( picker == galleryImagePicker ) {
+        [imagePicker dismissViewControllerAnimated:NO completion:nil];
         galleryImagePicker = nil;
     }
-
     
 	UIImage *picture = [info objectForKey:UIImagePickerControllerOriginalImage];
     [self savePicture:picture];
@@ -296,7 +287,6 @@
     //subscribe the user for push notifications on this item
     NSString *subscribeChannel = [NSString stringWithFormat:NOTIFICATIONS_COMMENTS_ON_ITEM, currentItem.objectId];
     [PFPush subscribeToChannelInBackground:subscribeChannel];
-    
 
     HUD.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"37x-Checkmark.png"]];
 	HUD.mode = MBProgressHUDModeCustomView;
