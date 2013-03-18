@@ -92,7 +92,7 @@
             
             NSLog(@"Processing remote notification in foreground with userInfo: %@", userInfo);
             
-            [MPNotificationView notifyWithText:commenterName detail:commentText image:[UIImage imageNamed:@"icon.png"] duration:3.0f andTouchBlock:^(MPNotificationView *notificationView) {
+            [MPNotificationView notifyWithText:commenterName detail:commentText image:[UIImage imageNamed:@"icon.png"] duration:PT_NOTIFICATION_DURATION andTouchBlock:^(MPNotificationView *notificationView) {
                 PFQuery *queryItem = [PFQuery queryWithClassName:DB_TABLE_ITEMS];
                 PFObject *item = [queryItem getObjectWithId:itemId];
                 

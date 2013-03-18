@@ -10,6 +10,8 @@
 
 @implementation DatabaseConstants
 
+//Other global constants
+float const PT_NOTIFICATION_DURATION = 3.0f;
 
 //Generic ID (each table has its own with the same name)
 NSString* const DB_FIELD_ID = @"objectId";

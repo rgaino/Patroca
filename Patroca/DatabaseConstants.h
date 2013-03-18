@@ -8,6 +8,9 @@
 
 #import <Foundation/Foundation.h>
 
+//Other global constants
+extern float const PT_NOTIFICATION_DURATION;
+
 //Generic ID (each table has its own with the same name)
 extern NSString* const DB_FIELD_ID;
 extern NSString* const DB_FIELD_CREATED_AT;

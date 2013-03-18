@@ -491,7 +491,7 @@
         [reported saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
         
             [MPNotificationView notifyWithText:NSLocalizedString(@"item_reported", nil) detail:NSLocalizedString(@"thanks_for_reporting", nil)
-                                image:[UIImage imageNamed:@"report_this_item.png"] andDuration:3.0f];
+                                image:[UIImage imageNamed:@"report_this_item.png"] andDuration:PT_NOTIFICATION_DURATION];
 
         }];
          
