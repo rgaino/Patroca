@@ -214,6 +214,7 @@
 
 - (void)savePicture:(UIImage *)picture {
 
+    [_doneTakingPicturesButton setEnabled:YES];
 
     float imageWidth = picture.size.width;
     float imageHeight = picture.size.height;
