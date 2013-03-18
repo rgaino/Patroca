@@ -16,6 +16,7 @@
 }
 
 @property (weak, nonatomic) IBOutlet UIButton *loginProfileButton;
+@property (weak, nonatomic) IBOutlet UIButton *addNewItemButton;
 
 - (void)setupHeaderWithBackButton:(BOOL)hasBackButton doneButton:(BOOL)hasDoneButton addItemButton:(BOOL)hasAddItemButton;
 - (void)userLoggedInSuccessfully;

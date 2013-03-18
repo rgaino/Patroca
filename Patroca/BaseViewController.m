@@ -34,6 +34,9 @@
     //hide profile picture if user logged out
     if (![PFUser currentUser] || ![PFFacebookUtils isLinkedWithUser:[PFUser currentUser]]) {
         [_loginProfileButton setImage:[UIImage imageNamed:@"login_with_fb.png"] forState:UIControlStateNormal];
+        [_addNewItemButton setEnabled:NO];
+    } else {
+        [_addNewItemButton setEnabled:YES];
     }
 
     [super viewDidAppear:animated];
@@ -85,12 +88,19 @@
     
     if(hasAddItemButton) {
         //the Add Item button
-        UIButton *addNewItemButton = [UIButton buttonWithType:UIButtonTypeCustom];
-        [addNewItemButton setFrame:CGRectMake(270, 0, 51, 44)];
-        [addNewItemButton setImage:[UIImage imageNamed:@"add_new_item_button.png"] forState:UIControlStateNormal];
-        [addNewItemButton addTarget:self action:@selector(addNewItemButtonPressed) forControlEvents:UIControlEventTouchUpInside];
-        [headerView addSubview:addNewItemButton];
-    } else if (hasDoneButton) {
+        _addNewItemButton = [UIButton buttonWithType:UIButtonTypeCustom];
+        [_addNewItemButton setFrame:CGRectMake(270, 0, 51, 44)];
+        [_addNewItemButton setImage:[UIImage imageNamed:@"add_new_item_button.png"] forState:UIControlStateNormal];
+        [_addNewItemButton addTarget:self action:@selector(addNewItemButtonPressed) forControlEvents:UIControlEventTouchUpInside];
+        
+        if ([PFUser currentUser] && [PFFacebookUtils isLinkedWithUser:[PFUser currentUser]]) {
+            [_addNewItemButton setEnabled:YES];
+        } else {
+            [_addNewItemButton setEnabled:NO];
+        }
+        
+        [headerView addSubview:_addNewItemButton];
+    } if (hasDoneButton) {
         //the Done button
         UIButton *doneButton = [UIButton buttonWithType:UIButtonTypeCustom];
         [doneButton setFrame:CGRectMake(270, 0, 51, 44)];
@@ -120,6 +130,7 @@
 
 -(void) userLoggedInSuccessfully {
     
+    [_addNewItemButton setEnabled:YES];
     
     // Create request for user's Facebook data
     NSString *requestPath = @"me/?fields=name,email";

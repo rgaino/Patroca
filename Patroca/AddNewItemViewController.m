@@ -297,7 +297,7 @@
 
 - (void)closeThisScreen {
     sleep(1);
-    
+    [self.navigationController popViewControllerAnimated:NO];
     DoneShareViewController *doneShareViewController = [[DoneShareViewController alloc] initWithNibName:@"DoneShareViewController" bundle:nil];
     [doneShareViewController setItemObject:currentItem];
     [self.navigationController pushViewController:doneShareViewController animated:YES];
