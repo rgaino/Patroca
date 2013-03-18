@@ -14,10 +14,9 @@
 @class PFObject;
 @class PFGeoPoint;
 
-@interface AddNewItemViewController : BaseViewController <UITextFieldDelegate,
-                                                          UIImagePickerControllerDelegate,
-                                                          UINavigationControllerDelegate,
-                                                          CLLocationManagerDelegate> {
+@interface AddNewItemViewController : BaseViewController <UITextFieldDelegate, UIImagePickerControllerDelegate,
+                                                          UINavigationControllerDelegate, CLLocationManagerDelegate,
+                                                          UIActionSheetDelegate> {
 
     //the item and its images (thumbs and full sizes)
     PFObject *currentItem;
@@ -48,7 +47,6 @@
 
 - (IBAction)takePictureButtonPressed:(id)sender;
 - (IBAction)doneTakingPicturesButtonPressed:(id)sender;
-- (IBAction)backButtonPressed:(id)sender;
 - (IBAction)flashButtonPressed:(id)sender;
 - (IBAction)galleryButtonPressed:(id)sender;
 

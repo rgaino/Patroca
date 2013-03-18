@@ -135,9 +135,33 @@
     [locationManager startUpdatingLocation];
 }
 
-- (IBAction)backButtonPressed:(id)sender {
-	[self dismissViewControllerAnimated:NO completion:nil];
-    [super backButtonPressed];
+- (IBAction)backButtonPressed {
+    
+    if(itemImages.count == 0) {
+        //user didn't take any pictures yet, so just pop out
+        [self dismissViewControllerAnimated:NO completion:nil];
+        [super backButtonPressed];
+
+    } else {
+        //ask before popping out
+
+        UIActionSheet *discardItemActionSheet = [[UIActionSheet alloc] initWithTitle:NSLocalizedString(@"sure_discard_item_question", nil)
+                                                                           delegate:self
+                                                                  cancelButtonTitle:NSLocalizedString(@"no", nil)
+                                                             destructiveButtonTitle:NSLocalizedString(@"yes", nil)
+                                                                  otherButtonTitles:nil];
+        
+        [discardItemActionSheet setActionSheetStyle:UIActionSheetStyleBlackTranslucent];
+        [discardItemActionSheet showInView:self.view];
+    }
+}
+
+-(void) actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
+
+    if(buttonIndex == 0) {
+        [self dismissViewControllerAnimated:NO completion:nil];
+        [super backButtonPressed];
+    }
 }
 
 - (IBAction)flashButtonPressed:(id)sender {

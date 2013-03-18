@@ -33,3 +33,4 @@
 "no" = "Não";
 "item_reported" = "Item Reportado!";
 "thanks_for_reporting" = "Obrigado, em breve alguém irá analizar este item.";
+"sure_discard_item_question" = "Descartar este item?";

@@ -108,7 +108,7 @@
 
 
 
-- (void)backButtonPressed {
+- (IBAction)backButtonPressed {
     [self.navigationController popViewControllerAnimated:YES];
 }
 

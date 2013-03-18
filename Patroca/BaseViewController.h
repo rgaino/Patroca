@@ -21,7 +21,7 @@
 - (void)userLoggedInSuccessfully;
 - (void)addNewItemButtonPressed;
 - (void)loginProfileButtonPressed;
-- (void)backButtonPressed;
+- (IBAction)backButtonPressed;
 - (void)doneButtonPressed;
 - (void)localizeStrings;
 
