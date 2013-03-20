@@ -19,7 +19,7 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     //Initialize TestFlight
-    [TestFlight takeOff:@"a943cfdec0ba874821ba2c51515c2935_ODgyMTY4MjAxMy0wMi0xNCAxOTo0NDowOS4wMjQ2NjQ"];
+//    [TestFlight takeOff:@"a943cfdec0ba874821ba2c51515c2935_ODgyMTY4MjAxMy0wMi0xNCAxOTo0NDowOS4wMjQ2NjQ"];
 
     //Initialize Parse
     [Parse setApplicationId:@"oqM758m32dGwvjzOwwm5SP4yWTBFeteAPfX7U0Sq" clientKey:@"nuCQvRTW9s4TK9pscWpq0ZVShQKHtUjmwYDJEIcE"];
