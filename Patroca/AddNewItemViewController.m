@@ -108,21 +108,6 @@
     [UIView commitAnimations];
 }
 
-- (void)doneButtonPressed {
-
-    //dismiss keyboard
-    [self.view endEditing:YES];
-
-	HUD = [[MBProgressHUD alloc] initWithView:self.navigationController.view];
-	[HUD setDimBackground:YES];
-	[HUD setLabelText: NSLocalizedString(@"saving", nil)];
-    [HUD setDelegate:self];
-    [self.navigationController.view addSubview:HUD];
-
-	[HUD showWhileExecuting:@selector(saveItem) onTarget:self withObject:nil animated:YES];
-}
-
-
 
 - (IBAction)takePictureButtonPressed:(id)sender {
 	
@@ -205,7 +190,7 @@
 
 - (void)savePicture:(UIImage *)picture {
 
-    [_doneTakingPicturesButton setEnabled:YES];
+    [_doneTakingPicturesButton setHidden:NO];
 
     float imageWidth = picture.size.width;
     float imageHeight = picture.size.height;
@@ -253,6 +238,23 @@
 }
 
 
+- (void)doneButtonPressed {
+    
+    //dismiss keyboard
+    [self.view endEditing:YES];
+    
+	HUD = [[MBProgressHUD alloc] initWithView:self.navigationController.view];
+    [HUD setMode:MBProgressHUDModeIndeterminate];
+	[HUD setDimBackground:YES];
+	[HUD setLabelText: NSLocalizedString(@"saving", nil)];
+    [HUD setDelegate:self];
+    [self.navigationController.view addSubview:HUD];
+    
+    //	[HUD showWhileExecuting:@selector(saveItem) onTarget:self withObject:nil animated:YES];
+    [HUD show:YES];
+    [self saveItem];
+}
+
 - (void)saveItem {
     
     //save item details
@@ -262,42 +264,85 @@
     [currentItem setObject:[PFUser currentUser] forKey:DB_FIELD_USER_ID];
     [currentItem setObject:itemLocationPoint forKey:DB_FIELD_ITEM_LOCATION];
 
-    //save all thumbnails and images
-    for(int i=0; i<[itemThumbnails count]; i++) {
+    imageNumber=0;
+    [self saveNextItemImage]; //start with the first one, then this method will check and upload others.
+}
+
+- (void)saveNextItemImage {
+    
+    NSString *hudString = [NSString stringWithFormat:NSLocalizedString(@"saving image %d of %d...", nil), imageNumber+1, [itemThumbnails count]];
+    [HUD setProgress:0.0f];
+    [HUD setLabelText:hudString];
+    NSLog(@"%@", hudString);
+    
+    UIImage *fullImage = [itemImages objectAtIndex:imageNumber];
+    NSData *imageData = UIImageJPEGRepresentation(fullImage, 0.6f);
+    PFFile *imageFile = [PFFile fileWithName:@"image.png" data:imageData];
+    NSLog(@"Begin upload at %@", [NSDate date]);
+    [imageFile saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
         
-        [HUD setLabelText:[NSString stringWithFormat:NSLocalizedString(@"saving image %d of %d...", nil), i+1, [itemThumbnails count]]];
-        
-        UIImage *fullImage = [itemImages objectAtIndex:i];
-        NSData *imageData = UIImageJPEGRepresentation(fullImage, 0.6f);
-        PFFile *imageFile = [PFFile fileWithName:@"image.png" data:imageData];
-        
+        NSLog(@"Finished upload at %@", [NSDate date]);
         PFObject *itemImagesObject = [PFObject objectWithClassName:DB_TABLE_ITEM_IMAGES];
         [itemImagesObject setObject:currentItem forKey:DB_FIELD_ITEM_ID];
         [itemImagesObject setObject:imageFile forKey:DB_FIELD_ITEM_IMAGE];
-        [itemImagesObject save];
+        [itemImagesObject saveInBackground];
         
-        if(i==0) {
-            [currentItem setObject:imageFile forKey:DB_FIELD_ITEM_MAIN_IMAGE];
+        if(imageNumber == itemImages.count-1) {
+            
+            //last image, save and we're done.
+            dispatch_async(dispatch_get_main_queue(), ^{
+                // This block will be executed asynchronously on the main thread.
+                //because UI elements must be updated on the main thread
+                [HUD setMode:MBProgressHUDModeIndeterminate];
+                [HUD setLabelText:NSLocalizedString(@"wrapping_up", nil)];
+            });
+            [currentItem saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+                //subscribe the user for push notifications on this item
+                NSString *subscribeChannel = [NSString stringWithFormat:NOTIFICATIONS_COMMENTS_ON_ITEM, currentItem.objectId];
+                [PFPush subscribeToChannelInBackground:subscribeChannel];
+                NSLog(@"Item saved!");
+                HUD.mode = MBProgressHUDModeCustomView;
+                HUD.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"37x-Checkmark.png"]];
+                HUD.labelText = NSLocalizedString(@"saved!", nil);
+                
+                [self performSelector:@selector(closeThisScreen) withObject:nil afterDelay:1.0f];
+            }];
+            
+            
+        } else {
+            
+            //there's more images to save, so call this method again
+            imageNumber++;
+            [self saveNextItemImage];
         }
+
+
+    } progressBlock:^(int percentDone) {
+//        NSLog(@"d", percentDone);
+//        dispatch_async(dispatch_get_main_queue(), ^{
+//            // This block will be executed asynchronously on the main thread.
+//            //because UI elements must be updated on the main thread
+//            [HUD setProgress:percentDone];
+//        });        
+    }];
+
+
+    if(imageNumber == 0) {
+        
+        //first image, use it as poster image for the item
+        [currentItem setObject:imageFile forKey:DB_FIELD_ITEM_MAIN_IMAGE];
     }
     
-    [currentItem save];
-    NSLog(@"Item saved!");
 
-    //subscribe the user for push notifications on this item
-    NSString *subscribeChannel = [NSString stringWithFormat:NOTIFICATIONS_COMMENTS_ON_ITEM, currentItem.objectId];
-    [PFPush subscribeToChannelInBackground:subscribeChannel];
 
-    HUD.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"37x-Checkmark.png"]];
-	HUD.mode = MBProgressHUDModeCustomView;
-	HUD.labelText = NSLocalizedString(@"saved!", nil);
-
-    [self closeThisScreen];
 }
 
 - (void)closeThisScreen {
-    sleep(1);
-    [self.navigationController popViewControllerAnimated:NO];
+    
+//    sleep(1);
+    [HUD removeFromSuperview];
+    
+    [self.navigationController popViewControllerAnimated:YES];
     DoneShareViewController *doneShareViewController = [[DoneShareViewController alloc] initWithNibName:@"DoneShareViewController" bundle:nil];
     [doneShareViewController setItemObject:currentItem];
     [self.navigationController pushViewController:doneShareViewController animated:YES];

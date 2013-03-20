@@ -22,7 +22,8 @@
     PFObject *currentItem;
     NSMutableArray *itemThumbnails;
     NSMutableArray *itemImages;
-    
+    NSInteger imageNumber;
+                                                              
     float xPosition; //the pictures taken are put side by side in thumbnails endlessly at xPosition
     float xSpacing;  //the spacing between the thumbnails
     float thumbnailSize;
@@ -52,6 +53,7 @@
 
 
 - (void)saveItem;
+- (void)saveNextItemImage;
 - (void)setupCameraOverlayView;
 - (void)setupImagePicker;
 - (void)presentCamera;
