@@ -175,6 +175,7 @@
 - (void)setupItemImagesScrollView {
     
     PFQuery *itemImagesQuery = [PFQuery queryWithClassName:DB_TABLE_ITEM_IMAGES];
+    [itemImagesQuery orderByAscending:DB_FIELD_CREATED_AT];
     [itemImagesQuery whereKey:DB_FIELD_ITEM_ID equalTo:_itemObject];
     
     [itemImagesQuery findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
