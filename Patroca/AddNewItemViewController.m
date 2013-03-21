@@ -244,13 +244,12 @@
     [self.view endEditing:YES];
     
 	HUD = [[MBProgressHUD alloc] initWithView:self.navigationController.view];
-    [HUD setMode:MBProgressHUDModeIndeterminate];
+    [HUD setMode:MBProgressHUDModeDeterminate];
 	[HUD setDimBackground:YES];
 	[HUD setLabelText: NSLocalizedString(@"saving", nil)];
     [HUD setDelegate:self];
     [self.navigationController.view addSubview:HUD];
     
-    //	[HUD showWhileExecuting:@selector(saveItem) onTarget:self withObject:nil animated:YES];
     [HUD show:YES];
     [self saveItem];
 }
@@ -318,12 +317,8 @@
 
 
     } progressBlock:^(int percentDone) {
-//        NSLog(@"d", percentDone);
-//        dispatch_async(dispatch_get_main_queue(), ^{
-//            // This block will be executed asynchronously on the main thread.
-//            //because UI elements must be updated on the main thread
-//            [HUD setProgress:percentDone];
-//        });        
+        float perc = percentDone/100.0f;
+        [HUD setProgress:perc];
     }];
 
 
@@ -339,7 +334,6 @@
 
 - (void)closeThisScreen {
     
-//    sleep(1);
     [HUD removeFromSuperview];
     
     [self.navigationController popViewControllerAnimated:YES];
