@@ -227,7 +227,7 @@
     } else {
         
         //show camera message
-        NSString *cameraMessageString = [NSString stringWithFormat:@"camera_message_%d", itemImages.count+1];
+        NSString *cameraMessageString = [NSString stringWithFormat:@"camera_message_%u", itemImages.count+1];
         [_cameraMessageLabel setText:NSLocalizedString(cameraMessageString, nil)];
         [_cameraMessageLabel setAlpha:1.0f];
         [_cameraMessageBackgroundImageView setAlpha:1.0f];

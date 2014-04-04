@@ -153,11 +153,17 @@
             [currentUser saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
                 
                 NSURL *profilePictureURL = [NSURL URLWithString:[NSString stringWithFormat:@"https://graph.facebook.com/%@/picture?type=square", [[PFUser currentUser] objectForKey:DB_FIELD_USER_FACEBOOK_ID]]];
-                [_loginProfileButton.imageView setImageWithURL:profilePictureURL placeholderImage:nil success:^(UIImage *image, BOOL cached) {
+                
+                [_loginProfileButton.imageView setImageWithURL:profilePictureURL placeholderImage:nil completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType) {
+                    //TODO: check for error and do something about it
                     [_loginProfileButton setImage:_loginProfileButton.imageView.image forState:UIControlStateNormal];
-                } failure:^(NSError *error) {
-                    NSLog(@"");
                 }];
+                
+//                [_loginProfileButton.imageView setImageWithURL:profilePictureURL placeholderImage:nil success:^(UIImage *image, BOOL cached) {
+//                    [_loginProfileButton setImage:_loginProfileButton.imageView.image forState:UIControlStateNormal];
+//                } failure:^(NSError *error) {
+//                    NSLog(@"");
+//                }];
                 
                 PFInstallation *myInstallation = [PFInstallation currentInstallation];
                 [myInstallation setObject:[PFUser currentUser] forKey:DB_FIELD_USER_ID];
