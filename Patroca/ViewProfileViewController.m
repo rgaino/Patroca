@@ -92,6 +92,11 @@
     userData = (NSDictionary *)result;
     [itemDataSource setUserObject:userObject];
     [itemDataSource getNextPageAndReturn];
+    
+    totalCommentsForItemsDictionary = [[NSMutableDictionary alloc] init];
+    [_contentDisplayCollectionView registerClass:[ItemViewCell class] forCellWithReuseIdentifier:CELL_REUSE_IDENTIFIER];
+    [_contentDisplayCollectionView registerClass:[ProfileHeaderViewCell class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:HEADER_CELL_REUSE_IDENTIFIER];
+   
 }
 
 
@@ -167,16 +172,16 @@
 
 - (UICollectionReusableView *)collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath
 {
-    if(userData == nil) {
-        //don't display the header until we have user data information from Facebook
-        return nil;
-    }
 
     ProfileHeaderViewCell *profileHeaderViewCell = [collectionView dequeueReusableSupplementaryViewOfKind:
                                          UICollectionElementKindSectionHeader withReuseIdentifier:HEADER_CELL_REUSE_IDENTIFIER forIndexPath:indexPath];
 
-    [profileHeaderViewCell setupProfileHeaderViewCellWithUser:userObject UserData:userData];
-    [profileHeaderViewCell setParentViewController:self];
+    if(userData != nil) {
+        [profileHeaderViewCell setupProfileHeaderViewCellWithUser:userObject UserData:userData];
+        [profileHeaderViewCell setParentViewController:self];
+    }
+
+
     return profileHeaderViewCell;
 }
 
