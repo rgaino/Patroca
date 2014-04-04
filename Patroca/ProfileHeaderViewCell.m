@@ -128,12 +128,12 @@
             int numberOfFriends = 10;
             NSMutableArray *randomFriendIds = [NSMutableArray arrayWithCapacity:numberOfFriends];
             
-            int randomId = arc4random_uniform(friendObjects.count);
+            int randomId = arc4random_uniform((uint32_t)friendObjects.count );
             [randomFriendIds addObject:[NSNumber numberWithInteger:randomId]];
             
             for(int i=1; i<numberOfFriends; i++) {
                 while( [randomFriendIds indexOfObject:[NSNumber numberWithInteger:randomId]] != NSNotFound) {
-                    randomId = arc4random_uniform(friendObjects.count);
+                    randomId = arc4random_uniform((uint32_t)friendObjects.count);
                 }
                 [randomFriendIds addObject:[NSNumber numberWithInteger:randomId]];
             }
