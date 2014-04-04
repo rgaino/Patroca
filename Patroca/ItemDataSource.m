@@ -89,13 +89,44 @@
 
 - (void)getFeaturedItemsAndReturn {
     
+    //TODO: for now Featured Items just show everything for testing purposes
+    
     if(itemDataSourceMode!=ItemDataSourceModeFeatured) {
         currentResultsLimit=0;
     }
     
-    itemDataSourceMode = ItemDataSourceModeFeatured;
-    _items = [NSArray array];
-    [_delegate populateCollectionView];
+    
+    PFQuery *query = [PFQuery queryWithClassName:DB_TABLE_ITEMS];
+    [query orderByDescending:DB_FIELD_UPDATED_AT];
+    
+    [query setSkip:currentResultsLimit];
+    [query setLimit:resultsPerPage];
+    
+    [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+        if (!error) {
+            myLocationPoint = nil;
+            
+            if(currentResultsLimit == 0) {
+                //first page of results
+                _items = [NSArray arrayWithArray:objects];
+                [_delegate populateCollectionView];
+            } else {
+                NSMutableArray *tempReturnArray = [NSMutableArray arrayWithArray:_items];
+                [tempReturnArray addObjectsFromArray:objects];
+                _items = tempReturnArray;
+                [_delegate addItemsToColletionView];
+            }
+            
+            currentResultsLimit += resultsPerPage;
+            
+            [self getTotalCommentsForItems:objects];
+            
+        } else {
+            // Log details of the failure
+            NSLog(@"Error: %@ %@", error, [error userInfo]);
+            _items = [NSArray array];
+        }
+    }];
 }
 
 - (void)getFriendsItemsAndReturn {

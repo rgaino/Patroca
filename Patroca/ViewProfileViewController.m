@@ -100,14 +100,14 @@
 
 - (void)populateCollectionView {
     
-    NSLog(@"Populating list with %d items", itemDataSource.items.count);
+    NSLog(@"Populating list with %lu items", (unsigned long)itemDataSource.items.count);
     [[UserCache getInstance] updateUserNameCacheDictionaryForItems:itemDataSource.items];
     [_contentDisplayCollectionView reloadData];
 }
 
 - (void)addItemsToColletionView {
     
-    NSLog(@"Addind items to list, new total is %d", itemDataSource.items.count);
+    NSLog(@"Addind items to list, new total is %lu", (unsigned long)itemDataSource.items.count);
     [[UserCache getInstance] updateUserNameCacheDictionaryForItems:itemDataSource.items];
     [_contentDisplayCollectionView reloadData];
     [_contentDisplayCollectionView.infiniteScrollingView stopAnimating];

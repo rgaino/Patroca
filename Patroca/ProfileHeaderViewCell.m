@@ -85,7 +85,7 @@
     [totalCommentsQuery findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
         if(!error) {
             NSUInteger totalComments = [objects count];
-            [_totalCommentsLabel setText: [NSString stringWithFormat: @"%d", totalComments] ];
+            [_totalCommentsLabel setText: [NSString stringWithFormat: @"%lu", (unsigned long)totalComments] ];
         } else {
             NSLog(@"Error: %@ %@", error, [error userInfo]);
         }

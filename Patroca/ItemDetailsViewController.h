@@ -23,7 +23,7 @@
     
     PFUser *userObject;
     CGRect scrollViewFrame;
-    int numberOfImages;
+    uint numberOfImages;
     NSMutableArray *commentObjects;
     float commentsViewYPosition;
     float contentHeightWithoutCommentsView;
