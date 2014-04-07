@@ -30,6 +30,7 @@
 @property (strong, nonatomic) UIViewController *parentViewController;
 @property (weak, nonatomic) IBOutlet UILabel *totalOffersLabel;
 @property (weak, nonatomic) IBOutlet UILabel *totalCommentsLabel;
+@property (weak, nonatomic) IBOutlet UIActivityIndicatorView *activityIndicator;
 
 
 - (void)setupProfileHeaderViewCellWithUser:(PFUser*)user UserData:(NSDictionary*)userData;

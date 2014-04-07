@@ -54,7 +54,9 @@
     //pull profile picture (type=normal means 100px wide)
     NSURL *profilePictureURL = [NSURL URLWithString:[NSString stringWithFormat:@"https://graph.facebook.com/%@/picture?width=170&height=200", facebookId]];
     [_profileImageView setImageWithURL:profilePictureURL];
-    
+    [_profileImageView setImageWithURL:profilePictureURL placeholderImage:nil completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType) {
+        [_activityIndicator stopAnimating];
+    }];
 
     //create the location icon and label
     UIImageView *locationIconImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"icon_location.png"]];
