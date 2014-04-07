@@ -120,7 +120,7 @@
         [headerView addSubview:_addNewItemButton];
     } if (hasDoneButton) {
         //the Done button
-        UIButton *doneButton = [UIButton buttonWithType:UIButtonTypeCustom];
+        doneButton = [UIButton buttonWithType:UIButtonTypeCustom];
         [doneButton setFrame:CGRectMake(270, headerOffset, 51, 44)];
         [doneButton setImage:[UIImage imageNamed:@"done_button.png"] forState:UIControlStateNormal];
         [doneButton addTarget:self action:@selector(doneButtonPressed) forControlEvents:UIControlEventTouchUpInside];

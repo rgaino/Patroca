@@ -41,8 +41,10 @@
 {
     [super viewDidLoad];
     [self setupHeaderWithBackButton:YES doneButton:YES addItemButton:NO];
-
+    [doneButton setEnabled:NO];
+    
     [_itemNameTextField setDelegate:self];
+    [_itemNameTextField addTarget:self action:@selector(textFieldDidChange:) forControlEvents:UIControlEventEditingChanged];
 
     locationManager = [[CLLocationManager alloc] init];
     [locationManager setDelegate:self];
@@ -108,6 +110,9 @@
     [UIView commitAnimations];
 }
 
+- (void)textFieldDidChange:(id)sender {
+    [doneButton setEnabled: (_itemNameTextField.text.length > 0) ];
+}
 
 - (IBAction)takePictureButtonPressed:(id)sender {
 	
@@ -227,7 +232,7 @@
     } else {
         
         //show camera message
-        NSString *cameraMessageString = [NSString stringWithFormat:@"camera_message_%lu", itemImages.count+1];
+        NSString *cameraMessageString = [NSString stringWithFormat:@"camera_message_%u", itemImages.count+1];
         [_cameraMessageLabel setText:NSLocalizedString(cameraMessageString, nil)];
         [_cameraMessageLabel setAlpha:1.0f];
         [_cameraMessageBackgroundImageView setAlpha:1.0f];
@@ -354,7 +359,6 @@
 }
 
 - (void)viewDidUnload {
-    [self setDoneButton:nil];
     [self setItemNameTextField:nil];
     [self setPicturesTakenView:nil];
     [self setCameraOverlayView:nil];
