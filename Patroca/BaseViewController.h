@@ -13,6 +13,7 @@
     
     MBProgressHUD *HUD;
     UIView *headerView;
+    CGFloat headerOffset; //the pixel offset for the header for iOS7 due to its translucent bar
 }
 
 @property (weak, nonatomic) IBOutlet UIButton *loginProfileButton;

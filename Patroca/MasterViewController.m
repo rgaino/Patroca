@@ -43,6 +43,10 @@
 - (void)viewDidLoad {
 
     [self localizeStrings];
+    
+    //adjust view positions for iOS7 status bar
+    [_menuBarView setFrame:CGRectMake(_menuBarView.frame.origin.x, _menuBarView.frame.origin.y + headerOffset,_menuBarView.frame.size.width, _menuBarView.frame.size.height)];
+    [_contentDisplayCollectionView setFrame:CGRectMake(0, _menuBarView.frame.origin.y + 44, _contentDisplayCollectionView.frame.size.width, self.view.frame.size.height - (_menuBarView.frame.origin.y + 44))];
 
     totalCommentsForItemsDictionary = [[NSMutableDictionary alloc] init];
     [self.contentDisplayCollectionView registerClass:[ItemViewCell class] forCellWithReuseIdentifier:CELL_REUSE_IDENTIFIER];
@@ -136,14 +140,15 @@
 - (void)moveMenuArrowTo:(float)xPosition {
     
     //change the arrow image leading space constraint...
-    [_arrowHorizontalSpacingConstraint setConstant:xPosition];
+//    [_arrowHorizontalSpacingConstraint setConstant:xPosition];
     
     //... then animate it
     [UIView animateWithDuration:1.0f
             delay:0
             options:UIViewAnimationOptionCurveEaseInOut
             animations:^{
-                [_menuBarView layoutSubviews];
+//                [_menuBarView layoutSubviews];
+                [_menuArrowImage setFrame:CGRectMake(xPosition, _menuArrowImage.frame.origin.y, _menuArrowImage.frame.size.width, _menuArrowImage.frame.size.height)];
             } completion:nil
      ];
 }

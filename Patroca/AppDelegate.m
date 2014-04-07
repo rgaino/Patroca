@@ -129,6 +129,7 @@
         [itemDetailsViewController setItemObject:item];
         
         UINavigationController *navigationController = (UINavigationController*)self.window.rootViewController;
+        [navigationController.navigationBar setTranslucent:NO];
         [navigationController pushViewController:itemDetailsViewController animated:YES];
     }
 }

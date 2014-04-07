@@ -19,6 +19,23 @@
 
 @implementation BaseViewController
 
+
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
+{
+    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+    if (self) {
+        
+        headerOffset=0;
+        if([[[UIDevice currentDevice] systemVersion] floatValue] >= 7.0) {
+            //add 20px to the header if iOS7 or greater due to the fact that
+            //the status bar is translucent
+            headerOffset = 20;
+        }
+
+    }
+    return self;
+}
+
 - (void)viewDidLoad {
     
     UIColor *backgroundPattern = [UIColor colorWithPatternImage:[UIImage imageNamed:@"background_repeat.png"]];
@@ -46,12 +63,13 @@
     
     headerView = [[UIView alloc] init];
     [headerView setBackgroundColor:[UIColor whiteColor]];
-    [headerView setFrame:CGRectMake(0, 0, 320, 44)];
+
+    [headerView setFrame:CGRectMake(0, 0, 320, 44+headerOffset)];
     
     if(hasBackButton) {
         
         UIButton *backButton = [UIButton buttonWithType:UIButtonTypeCustom];
-        [backButton setFrame:CGRectMake(0, 0, 51, 45)];
+        [backButton setFrame:CGRectMake(0, headerOffset, 51, 45)];
         [backButton setImage:[UIImage imageNamed:@"back_button"] forState:UIControlStateNormal];
         [backButton addTarget:self action:@selector(backButtonPressed) forControlEvents:UIControlEventTouchUpInside];
         [headerView addSubview:backButton];
@@ -59,7 +77,7 @@
     } else {
         //the Login/Profile button
         _loginProfileButton = [UIButton buttonWithType:UIButtonTypeCustom];
-        [_loginProfileButton setFrame:CGRectMake(0, 0, 51, 44)];
+        [_loginProfileButton setFrame:CGRectMake(0, headerOffset, 51, 44)];
         
         //see if user is already logged in on Facebook and display the profile picture
         if ([PFUser currentUser] && [PFFacebookUtils isLinkedWithUser:[PFUser currentUser]]) {
@@ -75,13 +93,13 @@
     
     //the Avatar mask image
     UIImageView *avatarMaskImageView = [[UIImageView alloc] init];
-    [avatarMaskImageView setFrame:CGRectMake(0, 0, 82, 44)];
+    [avatarMaskImageView setFrame:CGRectMake(0, headerOffset, 82, 44)];
     [avatarMaskImageView setImage:[UIImage imageNamed:@"mask_fb_avatar.png"]];
     [headerView addSubview:avatarMaskImageView];
 
     //the logo
     UIImageView *logoImageView = [[UIImageView alloc] init];
-    [logoImageView setFrame:CGRectMake(99, 12, 122, 22)];
+    [logoImageView setFrame:CGRectMake(99, 12+headerOffset, 122, 22)];
     [logoImageView setImage:[UIImage imageNamed:@"patroca_logo.png"]];
     [headerView addSubview:logoImageView];
     
@@ -89,7 +107,7 @@
     if(hasAddItemButton) {
         //the Add Item button
         _addNewItemButton = [UIButton buttonWithType:UIButtonTypeCustom];
-        [_addNewItemButton setFrame:CGRectMake(270, 0, 51, 44)];
+        [_addNewItemButton setFrame:CGRectMake(270, headerOffset, 51, 44)];
         [_addNewItemButton setImage:[UIImage imageNamed:@"add_new_item_button.png"] forState:UIControlStateNormal];
         [_addNewItemButton addTarget:self action:@selector(addNewItemButtonPressed) forControlEvents:UIControlEventTouchUpInside];
         
@@ -103,14 +121,14 @@
     } if (hasDoneButton) {
         //the Done button
         UIButton *doneButton = [UIButton buttonWithType:UIButtonTypeCustom];
-        [doneButton setFrame:CGRectMake(270, 0, 51, 44)];
+        [doneButton setFrame:CGRectMake(270, headerOffset, 51, 44)];
         [doneButton setImage:[UIImage imageNamed:@"done_button.png"] forState:UIControlStateNormal];
         [doneButton addTarget:self action:@selector(doneButtonPressed) forControlEvents:UIControlEventTouchUpInside];
         [headerView addSubview:doneButton];
     }
     
     UIImageView *headerShadeImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"header_shade.png"]];
-    [headerShadeImageView setFrame:CGRectMake(0, 44, headerShadeImageView.image.size.width, headerShadeImageView.image.size.height)];
+    [headerShadeImageView setFrame:CGRectMake(0, 44+headerOffset, headerShadeImageView.image.size.width, headerShadeImageView.image.size.height)];
     [headerView addSubview:headerShadeImageView];
 
     [self.view insertSubview:headerView atIndex:999];
@@ -158,12 +176,7 @@
                     //TODO: check for error and do something about it
                     [_loginProfileButton setImage:_loginProfileButton.imageView.image forState:UIControlStateNormal];
                 }];
-                
-//                [_loginProfileButton.imageView setImageWithURL:profilePictureURL placeholderImage:nil success:^(UIImage *image, BOOL cached) {
-//                    [_loginProfileButton setImage:_loginProfileButton.imageView.image forState:UIControlStateNormal];
-//                } failure:^(NSError *error) {
-//                    NSLog(@"");
-//                }];
+
                 
                 PFInstallation *myInstallation = [PFInstallation currentInstallation];
                 [myInstallation setObject:[PFUser currentUser] forKey:DB_FIELD_USER_ID];
