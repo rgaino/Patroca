@@ -123,6 +123,7 @@
 
 	[self dismissViewControllerAnimated:YES completion:nil];
     [locationManager startUpdatingLocation];
+    [_itemNameTextField becomeFirstResponder];
 }
 
 - (IBAction)backButtonPressed {
