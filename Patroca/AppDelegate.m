@@ -137,10 +137,6 @@
     return [FBAppCall handleOpenURL:url sourceApplication:sourceApplication];
 }
 
-//- (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation {
-//    
-//    return [PFFacebookUtils handleOpenURL:url];
-//}
 
 #pragma mark Unused signatured methods
 
