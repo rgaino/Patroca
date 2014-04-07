@@ -67,7 +67,7 @@
 
 - (void)setupWholeScreenScrollView {
     
-    wholeScreenScrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 44, 320, self.view.frame.size.height - 44 - 44)]; //44 is the header, and the other 44 is the footer
+    wholeScreenScrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 44+headerOffset, 320, self.view.frame.size.height - 44 - 44 + headerOffset)]; //44 is the header, and the other 44 is the footer
     scrollViewFrame = wholeScreenScrollView.frame;
 
     [self.view addSubview:wholeScreenScrollView];
@@ -206,7 +206,7 @@
 - (void)setupFooter {
     
     //the footer black background
-    UIView *footerBackgroundView = [[UIView alloc] initWithFrame:CGRectMake(0, self.view.frame.size.height-64, 320, 44)];
+    footerBackgroundView = [[UIView alloc] initWithFrame:CGRectMake(0, self.view.frame.size.height-44, 320, 44)];
     [footerBackgroundView setBackgroundColor:[UIColor blackColor]];
     [self.view addSubview:footerBackgroundView];
     

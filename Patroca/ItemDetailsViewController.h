@@ -20,7 +20,7 @@
     UIButton *sendCommentButton;
     UIActivityIndicatorView *loadingCommentsActivityIndicator;
     UIView *commentsView;
-    
+    UIView *footerBackgroundView;
     PFUser *userObject;
     CGRect scrollViewFrame;
     NSUInteger numberOfImages;
