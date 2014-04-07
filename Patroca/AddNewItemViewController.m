@@ -342,9 +342,9 @@
     [HUD removeFromSuperview];
     
     [self.navigationController popViewControllerAnimated:YES];
-    DoneShareViewController *doneShareViewController = [[DoneShareViewController alloc] initWithNibName:@"DoneShareViewController" bundle:nil];
-    [doneShareViewController setItemObject:currentItem];
-    [self.navigationController pushViewController:doneShareViewController animated:YES];
+//    DoneShareViewController *doneShareViewController = [[DoneShareViewController alloc] initWithNibName:@"DoneShareViewController" bundle:nil];
+//    [doneShareViewController setItemObject:currentItem];
+//    [self.navigationController pushViewController:doneShareViewController animated:YES];
 }
 
 - (BOOL) textFieldShouldReturn:(UITextField *)textField
