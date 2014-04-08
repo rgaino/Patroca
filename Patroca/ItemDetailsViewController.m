@@ -224,12 +224,14 @@
         [makeOfferButton addTarget:self action:@selector(makeOfferButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
         [self.view addSubview:makeOfferButton];
 
-        //report button
-        UIButton *reportButton = [UIButton buttonWithType:UIButtonTypeCustom];
-        [reportButton setImage:[UIImage imageNamed:@"report_this_item.png"] forState:UIControlStateNormal];
-        [reportButton setFrame:CGRectMake(15, footerBackgroundView.frame.origin.y+11, 24, 21)];
-        [reportButton addTarget:self action:@selector(reportThisItem:) forControlEvents:UIControlEventTouchUpInside];
-        [self.view addSubview:reportButton];
+        //report button (if logged in)
+        if ([PFUser currentUser] && [PFFacebookUtils isLinkedWithUser:[PFUser currentUser]]) {
+            UIButton *reportButton = [UIButton buttonWithType:UIButtonTypeCustom];
+            [reportButton setImage:[UIImage imageNamed:@"report_this_item.png"] forState:UIControlStateNormal];
+            [reportButton setFrame:CGRectMake(15, footerBackgroundView.frame.origin.y+11, 24, 21)];
+            [reportButton addTarget:self action:@selector(reportThisItem:) forControlEvents:UIControlEventTouchUpInside];
+            [self.view addSubview:reportButton];
+        }
     }
 
     //share on Facebook button
