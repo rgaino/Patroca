@@ -42,7 +42,8 @@
     NSString *userId = [itemUser objectId];
     
     PFUser *userObject = [[UserCache getInstance] getCachedUserForId:userId];
-    [self.ownerNameLabel setText:[userObject objectForKey:DB_FIELD_USER_NAME]];
+    [_ownerNameLabel setText:[userObject objectForKey:DB_FIELD_USER_NAME]];
+    [_ownerNameLabel setHidden:YES];
     
     
     PFFile *itemImageFile = [itemObject objectForKey:DB_FIELD_ITEM_MAIN_IMAGE];
