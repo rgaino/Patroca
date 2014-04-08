@@ -153,7 +153,6 @@
     // Create request for user's Facebook data
     NSString *requestPath = @"me/?fields=name,email";
     
-    // Send request to Facebook
     FBRequest *request = [FBRequest requestForGraphPath:requestPath];
     [request startWithCompletionHandler:^(FBRequestConnection *connection, id result, NSError *error) {
         if (!error) {
@@ -185,6 +184,8 @@
 
         } else {
             NSLog(@"Error: %@ %@", error, [error userInfo]);
+            //probably token expired or user logged out
+            [PFUser logOut];
         }
     }];
     
@@ -225,6 +226,7 @@
                                                 }
                                             } else if (user.isNew) { // Success - a new user was created
                                                 NSLog(@"User with facebook signed up and logged in!");
+                                                [self sendNewUserPushNotifications];
                                                 [self userLoggedInSuccessfully];
                                             } else { // Success - an existing user logged in
                                                 NSLog(@"User with facebook logged in!");
@@ -241,6 +243,82 @@
     
     AddNewItemViewController *addNewItemViewController = [[AddNewItemViewController alloc] initWithNibName:@"AddNewItemViewController" bundle:nil];
     [self.navigationController pushViewController:addNewItemViewController animated:YES];
+}
+
+- (void)sendNewUserPushNotifications {
+    /*
+    
+    if([PFUser currentUser] == nil) {
+        NSLog(@"Can't get current user");
+        //TODO: show a nice error message
+    }
+    
+    
+    // Issue a Facebook Graph API request to get your user's friend list
+    FBRequest *request = [FBRequest requestForGraphPath:@"me/friends"];
+    [request setSession:[PFFacebookUtils session]];
+    [request startWithCompletionHandler:^(FBRequestConnection *connection,
+                                          id result,
+                                          NSError *error) {
+        if (!error) {
+            // result will contain an array with your user's friends in the "data" key
+            NSArray *friendObjects = [result objectForKey:@"data"];
+            NSMutableArray *friendIds = [NSMutableArray arrayWithCapacity:friendObjects.count];
+            // Create a list of friends' Facebook IDs
+            for (NSDictionary *friendObject in friendObjects) {
+                [friendIds addObject:[friendObject objectForKey:@"id"]];
+            }
+            
+
+            
+            // Construct a PFUser query that will find friends whose facebook ids
+            // are contained in the current user's friend list.
+            PFQuery *friendQuery = [PFUser query];
+            [friendQuery whereKey:DB_FIELD_USER_FACEBOOK_ID containedIn:friendIds];
+            
+            // findObjects will return a list of PFUsers that are friends
+            // with the current user
+            [friendQuery findObjectsInBackgroundWithBlock:^(NSArray *friendUsers, NSError *error) {
+                PFQuery *query = [PFQuery queryWithClassName:DB_TABLE_ITEMS];
+                [query whereKey:DB_FIELD_USER_ID notEqualTo:[PFUser currentUser]];
+                [query whereKey:DB_FIELD_USER_ID containedIn:friendUsers];
+                
+                [query setSkip:currentResultsLimit];
+                [query setLimit:resultsPerPage];
+                
+                [query orderByDescending:DB_FIELD_UPDATED_AT];
+                
+                [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+                    if (!error) {
+                        
+                        if(currentResultsLimit == 0) {
+                            //first page of results
+                            _items = [NSArray arrayWithArray:objects];
+                            [_delegate populateCollectionView];
+                        } else {
+                            NSMutableArray *tempReturnArray = [NSMutableArray arrayWithArray:_items];
+                            [tempReturnArray addObjectsFromArray:objects];
+                            _items = tempReturnArray;
+                            [_delegate addItemsToColletionView];
+                        }
+                        
+                        currentResultsLimit += resultsPerPage;
+                        [self getTotalCommentsForItems:objects];
+                        
+                    } else {
+                        // Log details of the failure
+                        NSLog(@"Error: %@ %@", error, [error userInfo]);
+                        _items = [NSArray array];
+                        //TODO: show error message
+                    }
+                }];
+                
+            }];
+            
+            
+        }
+    }];
+*/
 }
 
 

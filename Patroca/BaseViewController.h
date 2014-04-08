@@ -27,5 +27,6 @@
 - (IBAction)backButtonPressed;
 - (void)doneButtonPressed;
 - (void)localizeStrings;
+- (void)sendNewUserPushNotifications;
 
 @end
