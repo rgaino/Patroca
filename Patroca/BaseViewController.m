@@ -189,9 +189,6 @@
         }
     }];
     
-    
-    
-
 }
 
 - (void)loginProfileButtonPressed {
@@ -233,8 +230,6 @@
                                                 [self userLoggedInSuccessfully];
                                             }
                                         }];
-        
-        
     }
 }
 

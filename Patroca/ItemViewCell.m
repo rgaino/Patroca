@@ -33,7 +33,7 @@
 }
 
 - (void)setupCellWithItem:(PFObject*)itemObject {
-    
+
     [self setCellItemObject:itemObject];
     
     [self.itemNameLabel setText:[itemObject objectForKey:DB_FIELD_ITEM_NAME]];
@@ -41,8 +41,9 @@
     PFUser *itemUser = [itemObject objectForKey:DB_FIELD_USER_ID];
     NSString *userId = [itemUser objectId];
     
+    
     PFUser *userObject = [[UserCache getInstance] getCachedUserForId:userId];
-    [_ownerNameLabel setText:[userObject objectForKey:DB_FIELD_USER_NAME]];
+//    [_ownerNameLabel setText:[userObject objectForKey:DB_FIELD_USER_NAME]];
     [_ownerNameLabel setHidden:YES];
     
     
@@ -54,12 +55,41 @@
     NSURL *facebookProfilePicURL = [NSURL URLWithString:facebookProfilePicString];
     [_ownerProfilePic setImageWithURL:facebookProfilePicURL];
 
+    if(locationManager == nil) {
+        locationManager = [[CLLocationManager alloc] init];
+        [locationManager setDelegate:self];
+        [locationManager setDistanceFilter:kCLDistanceFilterNone];
+        [locationManager setDesiredAccuracy:kCLLocationAccuracyBest];
+    }
+    [locationManager startUpdatingLocation];
 }
 
 - (void)updateTotalComments:(int)totalComments {
     [_totalCommentsLabel setText:[NSString stringWithFormat:@"%d", totalComments]];
 }
 
+#pragma mark CLLocationManagerDelegate methods
 
+- (void)locationManager:(CLLocationManager *)manager didUpdateToLocation:(CLLocation *)newLocation fromLocation:(CLLocation *)oldLocation {
+    
+    PFGeoPoint *myLocationPoint = [PFGeoPoint geoPointWithLatitude:newLocation.coordinate.latitude longitude:newLocation.coordinate.longitude];
+    [locationManager stopUpdatingLocation];
+
+    PFObject *itemObject = [self cellItemObject];
+    PFGeoPoint *itemLocation = [itemObject  objectForKey:DB_FIELD_ITEM_LOCATION];
+
+    NSLocale *locale = [NSLocale systemLocale];
+    BOOL usesMetric = [[locale objectForKey:NSLocaleUsesMetricSystem] boolValue];
+    NSString *distanceText = [NSString stringWithFormat:@"%.2lf", [itemLocation distanceInKilometersTo:myLocationPoint]];
+
+    if(usesMetric) {
+        [_ownerNameLabel setText:[NSString stringWithFormat:@"%@ %@", distanceText, NSLocalizedString(@"KMs", nil)]];
+    } else {
+        [_ownerNameLabel setText:[NSString stringWithFormat:@"%@ %@", distanceText, NSLocalizedString(@"Miles", nil)]];
+    }
+    [_ownerNameLabel setHidden:NO];
+    
+    NSLog(@"%@ - %@", [itemObject objectForKey:DB_FIELD_ITEM_NAME], _ownerNameLabel.text);
+}
 
 @end
