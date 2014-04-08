@@ -213,8 +213,8 @@
     //make offer button
     if( ![[userObject objectId] isEqualToString:[[PFUser currentUser] objectId]]) {
         
+        /*
         //only show the Make Offer and Report button if owner of this item is NOT the current user
-        
         UIButton *makeOfferButton = [UIButton buttonWithType:UIButtonTypeCustom];
         [makeOfferButton setBackgroundImage:[UIImage imageNamed:@"make_offer_button.png"] forState:UIControlStateNormal];
         [makeOfferButton.titleLabel setFont:[UIFont boldSystemFontOfSize:16]];
@@ -223,7 +223,8 @@
         [makeOfferButton setFrame:CGRectMake(55, footerBackgroundView.frame.origin.y-22, 210, 45)];
         [makeOfferButton addTarget:self action:@selector(makeOfferButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
         [self.view addSubview:makeOfferButton];
-
+         */
+        
         //report button (if logged in)
         if ([PFUser currentUser] && [PFFacebookUtils isLinkedWithUser:[PFUser currentUser]]) {
             UIButton *reportButton = [UIButton buttonWithType:UIButtonTypeCustom];
