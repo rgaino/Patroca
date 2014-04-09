@@ -78,13 +78,15 @@
     PFObject *itemObject = [self cellItemObject];
     PFGeoPoint *itemLocation = [itemObject  objectForKey:DB_FIELD_ITEM_LOCATION];
 
-    NSLocale *locale = [NSLocale systemLocale];
+    NSLocale *locale = [NSLocale currentLocale];
     BOOL usesMetric = [[locale objectForKey:NSLocaleUsesMetricSystem] boolValue];
-    NSString *distanceText = [NSString stringWithFormat:@"%.2lf", [itemLocation distanceInKilometersTo:myLocationPoint]];
+    NSString *distanceText;
 
     if(usesMetric) {
+        distanceText = [NSString stringWithFormat:@"%.2lf", [itemLocation distanceInKilometersTo:myLocationPoint]];
         [_ownerNameLabel setText:[NSString stringWithFormat:@"%@ %@", distanceText, NSLocalizedString(@"KMs", nil)]];
     } else {
+        distanceText = [NSString stringWithFormat:@"%.2lf", [itemLocation distanceInMilesTo:myLocationPoint]];
         [_ownerNameLabel setText:[NSString stringWithFormat:@"%@ %@", distanceText, NSLocalizedString(@"Miles", nil)]];
     }
     [_ownerNameLabel setHidden:NO];
