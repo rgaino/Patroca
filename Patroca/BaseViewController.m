@@ -241,11 +241,9 @@
 }
 
 - (void)sendNewUserPushNotifications {
-    /*
     
     if([PFUser currentUser] == nil) {
-        NSLog(@"Can't get current user");
-        //TODO: show a nice error message
+        NSLog(@"Can't get current user on sendNewUserPushNotifications");
     }
     
     
@@ -264,56 +262,20 @@
                 [friendIds addObject:[friendObject objectForKey:@"id"]];
             }
             
+            NSDictionary *params = [NSDictionary dictionaryWithObject:friendIds forKey:@"friend_ids_array"];
 
-            
-            // Construct a PFUser query that will find friends whose facebook ids
-            // are contained in the current user's friend list.
-            PFQuery *friendQuery = [PFUser query];
-            [friendQuery whereKey:DB_FIELD_USER_FACEBOOK_ID containedIn:friendIds];
-            
-            // findObjects will return a list of PFUsers that are friends
-            // with the current user
-            [friendQuery findObjectsInBackgroundWithBlock:^(NSArray *friendUsers, NSError *error) {
-                PFQuery *query = [PFQuery queryWithClassName:DB_TABLE_ITEMS];
-                [query whereKey:DB_FIELD_USER_ID notEqualTo:[PFUser currentUser]];
-                [query whereKey:DB_FIELD_USER_ID containedIn:friendUsers];
+            [PFCloud callFunctionInBackground:@"notifyFriendsThatUserJoined" withParameters:params block:^(id object, NSError *error) {
                 
-                [query setSkip:currentResultsLimit];
-                [query setLimit:resultsPerPage];
-                
-                [query orderByDescending:DB_FIELD_UPDATED_AT];
-                
-                [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
-                    if (!error) {
-                        
-                        if(currentResultsLimit == 0) {
-                            //first page of results
-                            _items = [NSArray arrayWithArray:objects];
-                            [_delegate populateCollectionView];
-                        } else {
-                            NSMutableArray *tempReturnArray = [NSMutableArray arrayWithArray:_items];
-                            [tempReturnArray addObjectsFromArray:objects];
-                            _items = tempReturnArray;
-                            [_delegate addItemsToColletionView];
-                        }
-                        
-                        currentResultsLimit += resultsPerPage;
-                        [self getTotalCommentsForItems:objects];
-                        
-                    } else {
-                        // Log details of the failure
-                        NSLog(@"Error: %@ %@", error, [error userInfo]);
-                        _items = [NSArray array];
-                        //TODO: show error message
-                    }
-                }];
-                
+                if(!error) {
+                    NSLog(@"notifyFriendsThatUserJoined called with success");
+                } else {
+                    NSLog(@"Error calling notifyFriendsThatUserJoined: %@ %@", error, [error userInfo]);
+                }
             }];
-            
-            
+
         }
     }];
-*/
+
 }
 
 
