@@ -59,7 +59,7 @@
 - (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)newDeviceToken
 {
     //logging for bug tracking according to https://www.parse.com/questions/pfinstallation-resets-channels-on-new-app-update#answer-both-approaches-should-not-reset-the-channels-column-installing-an
-    TFLog(@"Entering didRegisterForRemoteNotificationsWithDeviceToken with PFInstallation objectID is %@", [[PFInstallation currentInstallation] objectId]);
+    NSLog(@"Entering didRegisterForRemoteNotificationsWithDeviceToken with PFInstallation objectID is %@", [[PFInstallation currentInstallation] objectId]);
 
     // Store the deviceToken in the current Installation and save it to Parse.
     PFInstallation *currentInstallation = [PFInstallation currentInstallation];
