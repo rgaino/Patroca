@@ -196,8 +196,6 @@
 
 - (void)savePicture:(UIImage *)picture {
 
-    [_doneTakingPicturesButton setHidden:NO];
-
     float imageWidth = picture.size.width;
     float imageHeight = picture.size.height;
     
@@ -214,6 +212,22 @@
     [itemThumbnails addObject:thumbnail];
     [itemImages addObject:croppedSquareImage];
 
+    
+    
+/*
+Commenting out the next section because I only want one picture taken (it was 4 before)
+To bring that back, simply uncomment these lines and:
+  1) unhide the pic thumbs that are hidden on the XIB file.
+  2) unhide the cameraMessage label and backgroundMessageView
+ 
+The only line left is the one that dismissess the camera/gallery
+ */
+    
+    [self performSelector:@selector(doneTakingPicturesButtonPressed:) withObject:nil];
+
+    /*
+    [_doneTakingPicturesButton setHidden:NO];
+
     float thumbnailXPosition = xPosition + (xSpacing * (itemThumbnails.count-1) + (thumbnailSize * (itemThumbnails.count-1)) );
     
     //Create the new thumbnail imageView
@@ -228,6 +242,7 @@
     thumbnailImageView.transform = CGAffineTransformMakeTranslation(0, -_picturesTakenView.frame.size.height);
     [UIView commitAnimations];
     
+    
     if( itemImages.count >= maxPictures ) {
         [self performSelector:@selector(doneTakingPicturesButtonPressed:) withObject:nil afterDelay:thumbnailsAnimationSpeed];
     } else {
@@ -241,6 +256,8 @@
         [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(fadeOutCameraMessageLabel) object:nil];
         [self performSelector:@selector(fadeOutCameraMessageLabel) withObject:nil afterDelay:fadeOutCameraMessageDelay];
     }
+    
+    */
 }
 
 

@@ -31,19 +31,19 @@
                     <rect key="frame" x="0.0" y="315" width="320" height="60"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <subviews>
-                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="picture_camera_thumbnail.png" id="36" userLabel="thumb 1 Image View">
+                        <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" image="picture_camera_thumbnail.png" id="36" userLabel="thumb 1 Image View">
                             <rect key="frame" x="18" y="0.0" width="53" height="53"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         </imageView>
-                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="picture_camera_thumbnail.png" id="37" userLabel="thumb 2 Image View">
+                        <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" image="picture_camera_thumbnail.png" id="37" userLabel="thumb 2 Image View">
                             <rect key="frame" x="95" y="0.0" width="53" height="53"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         </imageView>
-                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="picture_camera_thumbnail.png" id="38" userLabel="thumb 3 Image View">
+                        <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" image="picture_camera_thumbnail.png" id="38" userLabel="thumb 3 Image View">
                             <rect key="frame" x="172" y="0.0" width="53" height="53"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         </imageView>
-                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="picture_camera_thumbnail.png" id="39" userLabel="thumb 4 Image View">
+                        <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" image="picture_camera_thumbnail.png" id="39" userLabel="thumb 4 Image View">
                             <rect key="frame" x="249" y="0.0" width="53" height="53"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         </imageView>
@@ -137,11 +137,11 @@
                     </subviews>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                 </view>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="camera_message_background.png" id="46">
+                <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" image="camera_message_background.png" id="46">
                     <rect key="frame" x="29" y="68" width="263" height="156"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 </imageView>
-                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="44">
+                <label hidden="YES" opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="44">
                     <rect key="frame" x="29" y="121" width="263" height="50"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <string key="text">Vamos trocar algo?
