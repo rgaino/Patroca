@@ -12,6 +12,7 @@
 #import "ViewProfileViewController.h"
 #import <SDWebImage/UIImageView+WebCache.h>
 #import "AddNewItemViewController.h"
+#import "FacebookCache.h"
 
 @interface BaseViewController ()
 
@@ -246,24 +247,13 @@
         NSLog(@"Can't get current user on sendNewUserPushNotifications");
     }
     
-    
-    // Issue a Facebook Graph API request to get your user's friend list
-    FBRequest *request = [FBRequest requestForGraphPath:@"me/friends"];
-    [request setSession:[PFFacebookUtils session]];
-    [request startWithCompletionHandler:^(FBRequestConnection *connection,
-                                          id result,
-                                          NSError *error) {
-        if (!error) {
-            // result will contain an array with your user's friends in the "data" key
-            NSArray *friendObjects = [result objectForKey:@"data"];
-            NSMutableArray *friendIds = [NSMutableArray arrayWithCapacity:friendObjects.count];
-            // Create a list of friends' Facebook IDs
-            for (NSDictionary *friendObject in friendObjects) {
-                [friendIds addObject:[friendObject objectForKey:@"id"]];
-            }
+    FacebookCache *facebookCache = [FacebookCache getInstance];
+    [facebookCache getFacebookFriendsInBackgroundWithCallback:^(NSArray *friendIdsArray, NSError *error) {
+        
+        if(!error) {
+        
+            NSDictionary *params = [NSDictionary dictionaryWithObject:friendIdsArray forKey:@"friend_ids_array"];
             
-            NSDictionary *params = [NSDictionary dictionaryWithObject:friendIds forKey:@"friend_ids_array"];
-
             [PFCloud callFunctionInBackground:@"notifyFriendsThatUserJoined" withParameters:params block:^(id object, NSError *error) {
                 
                 if(!error) {
@@ -272,10 +262,10 @@
                     NSLog(@"Error calling notifyFriendsThatUserJoined: %@ %@", error, [error userInfo]);
                 }
             }];
-
+        } else {
+            NSLog(@"Error: %@ %@", error, [error userInfo]);
         }
     }];
-
 }
 
 

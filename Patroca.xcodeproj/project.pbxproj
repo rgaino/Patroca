@@ -116,6 +116,7 @@
 		197AB11116C1E0F20084D3FA /* tell_your_friends_button@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 197AB10F16C1E0F20084D3FA /* tell_your_friends_button@2x.png */; };
 		197AB11416C1E6CA0084D3FA /* profile_background.png in Resources */ = {isa = PBXBuildFile; fileRef = 197AB11216C1E6CA0084D3FA /* profile_background.png */; };
 		197AB11516C1E6CA0084D3FA /* profile_background@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 197AB11316C1E6CA0084D3FA /* profile_background@2x.png */; };
+		197EB5C418F718E8005BD047 /* FacebookCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 197EB5C318F718E8005BD047 /* FacebookCache.m */; };
 		1986625516670397003C19EE /* sample_avatar.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 1986625416670397003C19EE /* sample_avatar.jpeg */; };
 		198A3CE71687756F0016F45C /* clock_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 198A3CE51687756F0016F45C /* clock_icon.png */; };
 		198A3CE81687756F0016F45C /* clock_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 198A3CE61687756F0016F45C /* clock_icon@2x.png */; };
@@ -296,6 +297,8 @@
 		197AB10F16C1E0F20084D3FA /* tell_your_friends_button@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tell_your_friends_button@2x.png"; sourceTree = "<group>"; };
 		197AB11216C1E6CA0084D3FA /* profile_background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = profile_background.png; sourceTree = "<group>"; };
 		197AB11316C1E6CA0084D3FA /* profile_background@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "profile_background@2x.png"; sourceTree = "<group>"; };
+		197EB5C218F718E8005BD047 /* FacebookCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FacebookCache.h; sourceTree = "<group>"; };
+		197EB5C318F718E8005BD047 /* FacebookCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FacebookCache.m; sourceTree = "<group>"; };
 		1986625416670397003C19EE /* sample_avatar.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = sample_avatar.jpeg; sourceTree = "<group>"; };
 		198A3CE51687756F0016F45C /* clock_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = clock_icon.png; sourceTree = "<group>"; };
 		198A3CE61687756F0016F45C /* clock_icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "clock_icon@2x.png"; sourceTree = "<group>"; };
@@ -662,6 +665,7 @@
 		1939B912165DB47100435705 /* Database Access */ = {
 			isa = PBXGroup;
 			children = (
+				197EB5C118F718CD005BD047 /* Facebook Cache */,
 				1950E503165F136A00E98488 /* User Cache */,
 				1934ACE5165DC57500C8272F /* Item Data Source */,
 				1934ACE1165DBC7500C8272F /* Constants */,
@@ -790,6 +794,15 @@
 				197AB10C16C1DB360084D3FA /* UIUnderlinedButton.m */,
 			);
 			name = UIunderlinedButton;
+			sourceTree = "<group>";
+		};
+		197EB5C118F718CD005BD047 /* Facebook Cache */ = {
+			isa = PBXGroup;
+			children = (
+				197EB5C218F718E8005BD047 /* FacebookCache.h */,
+				197EB5C318F718E8005BD047 /* FacebookCache.m */,
+			);
+			name = "Facebook Cache";
 			sourceTree = "<group>";
 		};
 		198A3CF516877C490016F45C /* NSDate Categories */ = {
@@ -1022,6 +1035,7 @@
 				198B5BD616CDA00E00DC2ED2 /* ProfileHeaderViewCell.m in Sources */,
 				1977163216E035F70010FF5D /* DoneShareViewController.m in Sources */,
 				194A9FCB16E50AFE00091947 /* UIScrollView+SVInfiniteScrolling.m in Sources */,
+				197EB5C418F718E8005BD047 /* FacebookCache.m in Sources */,
 				194A9FCC16E50AFE00091947 /* UIScrollView+SVPullToRefresh.m in Sources */,
 				199E103C16F16E2600C5B7CA /* MPNotificationView.m in Sources */,
 				199E103D16F16E2600C5B7CA /* OBGradientView.m in Sources */,
