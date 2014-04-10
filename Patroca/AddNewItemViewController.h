@@ -44,6 +44,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *flashButton;
 @property (weak, nonatomic) IBOutlet UILabel *cameraMessageLabel;
 @property (weak, nonatomic) IBOutlet UIImageView *cameraMessageBackgroundImageView;
+@property (weak, nonatomic) IBOutlet UIImageView *picturePreviewImageView;
 
 - (IBAction)takePictureButtonPressed:(id)sender;
 - (IBAction)doneTakingPicturesButtonPressed:(id)sender;

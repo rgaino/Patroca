@@ -860,6 +860,11 @@
 			attributes = {
 				LastUpgradeCheck = 0450;
 				ORGANIZATIONNAME = "Punk Opera";
+				TargetAttributes = {
+					1939B88216568C3300435705 = {
+						DevelopmentTeam = RB48G5FQ88;
+					};
+				};
 			};
 			buildConfigurationList = 1939B87D16568C3300435705 /* Build configuration list for PBXProject "Patroca" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -1108,8 +1113,8 @@
 		1939B8A816568C3300435705 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "iPhone Developer: Rafael Gaino (NNNZ3BJYAA)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Rafael Gaino (NNNZ3BJYAA)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)",
@@ -1128,8 +1133,8 @@
 					"-ObjC",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "3B437362-9C7A-4F3D-8D85-23154E984AEC";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "3B437362-9C7A-4F3D-8D85-23154E984AEC";
+				PROVISIONING_PROFILE = "CFA6B526-C1B9-4177-A9AF-51070A191128";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "CFA6B526-C1B9-4177-A9AF-51070A191128";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -1137,8 +1142,8 @@
 		1939B8A916568C3300435705 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Rafael Gaino";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Rafael Gaino";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)",
@@ -1157,8 +1162,8 @@
 					"-ObjC",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "44A96E18-2631-4B87-AE16-A4A945C1A4C0";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "44A96E18-2631-4B87-AE16-A4A945C1A4C0";
+				PROVISIONING_PROFILE = "7B71B354-3D9F-4FAE-B262-9532229C37F4";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "7B71B354-3D9F-4FAE-B262-9532229C37F4";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

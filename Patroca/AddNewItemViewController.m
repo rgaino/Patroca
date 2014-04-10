@@ -45,6 +45,7 @@
     
     [_itemNameTextField setDelegate:self];
     [_itemNameTextField addTarget:self action:@selector(textFieldDidChange:) forControlEvents:UIControlEventEditingChanged];
+    [_itemNameTextField setPlaceholder:NSLocalizedString(@"what is this?", nil)];
 
     locationManager = [[CLLocationManager alloc] init];
     [locationManager setDelegate:self];
@@ -211,6 +212,7 @@
     
     [itemThumbnails addObject:thumbnail];
     [itemImages addObject:croppedSquareImage];
+    [_picturePreviewImageView setImage:croppedSquareImage];
 
     
     
