@@ -26,5 +26,6 @@
 
 - (void)setupCellWithItem:(PFObject*)itemObject;
 - (void)updateTotalComments:(int)totalComments;
+- (IBAction)likeButtonPressed:(id)sender;
 
 @end

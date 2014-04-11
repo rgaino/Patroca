@@ -68,6 +68,12 @@
     [_totalCommentsLabel setText:[NSString stringWithFormat:@"%d", totalComments]];
 }
 
+- (IBAction)likeButtonPressed:(id)sender {
+    PFRelation *relation = [_cellItemObject relationForKey:DB_RELATION_USER_LIKES_ITEMS];
+    [relation addObject:[PFUser currentUser]];
+    [_cellItemObject saveEventually];
+}
+
 #pragma mark CLLocationManagerDelegate methods
 
 - (void)locationManager:(CLLocationManager *)manager didUpdateToLocation:(CLLocation *)newLocation fromLocation:(CLLocation *)oldLocation {
