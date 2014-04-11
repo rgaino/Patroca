@@ -96,38 +96,48 @@
         currentResultsLimit=0;
     }
     
-    
-    PFQuery *query = [PFQuery queryWithClassName:DB_TABLE_ITEMS];
-    [query orderByDescending:DB_FIELD_UPDATED_AT];
-    
-    [query setSkip:currentResultsLimit];
-    [query setLimit:resultsPerPage];
-    
-    [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
-        if (!error) {
-            myLocationPoint = nil;
-            
-            if(currentResultsLimit == 0) {
-                //first page of results
-                _items = [NSArray arrayWithArray:objects];
-                [_delegate populateCollectionView];
+    FacebookCache *facebookCache = [FacebookCache getInstance];
+    [facebookCache getFacebookFriendsPFUserArrayInBackgroundWithCallback:^(NSArray *friendPFUserArray, NSError *error) {
+        
+        PFQuery *itemsQuery = [PFQuery queryWithClassName:DB_TABLE_ITEMS];
+        [itemsQuery whereKey:DB_RELATION_USER_LIKES_ITEMS containedIn:friendPFUserArray];
+        [itemsQuery whereKey:DB_FIELD_USER_ID notEqualTo:[PFUser currentUser]];
+        [itemsQuery orderByDescending:DB_FIELD_UPDATED_AT];
+        
+        [itemsQuery setSkip:currentResultsLimit];
+        [itemsQuery setLimit:resultsPerPage];
+        
+        [itemsQuery findObjectsInBackgroundWithBlock:^(NSArray *itemObjects, NSError *error) {
+            if (!error) {
+                myLocationPoint = nil;
+                
+                if(currentResultsLimit == 0) {
+                    //first page of results
+                    _items = [NSArray arrayWithArray:itemObjects];
+                    [_delegate populateCollectionView];
+                } else {
+                    NSMutableArray *tempReturnArray = [NSMutableArray arrayWithArray:_items];
+                    [tempReturnArray addObjectsFromArray:itemObjects];
+                    _items = tempReturnArray;
+                    [_delegate addItemsToColletionView];
+                }
+                
+                currentResultsLimit += resultsPerPage;
+                
+                [self getTotalCommentsForItems:itemObjects];
+                
             } else {
-                NSMutableArray *tempReturnArray = [NSMutableArray arrayWithArray:_items];
-                [tempReturnArray addObjectsFromArray:objects];
-                _items = tempReturnArray;
-                [_delegate addItemsToColletionView];
+                // Log details of the failure
+                NSLog(@"Error: %@ %@", error, [error userInfo]);
+                _items = [NSArray array];
             }
-            
-            currentResultsLimit += resultsPerPage;
-            
-            [self getTotalCommentsForItems:objects];
-            
-        } else {
-            // Log details of the failure
-            NSLog(@"Error: %@ %@", error, [error userInfo]);
-            _items = [NSArray array];
-        }
+        }];
+
+        
     }];
+    
+    
+    
 }
 
 - (void)getFriendsItemsAndReturn {
@@ -145,59 +155,45 @@
     
     FacebookCache *facebookCache = [FacebookCache getInstance];
     
-    [facebookCache getFacebookFriendsInBackgroundWithCallback:^(NSArray *friendIdsArray, NSError *error) {
-        
-        if(!error) {
-            
-            // Construct a PFUser query that will find friends whose facebook ids
-            // are contained in the current user's friend list.
-            PFQuery *friendQuery = [PFUser query];
-            [friendQuery whereKey:DB_FIELD_USER_FACEBOOK_ID containedIn:friendIdsArray];
-            
-            // findObjects will return a list of PFUsers that are friends
-            // with the current user
-            [friendQuery findObjectsInBackgroundWithBlock:^(NSArray *friendUsers, NSError *error) {
-                PFQuery *query = [PFQuery queryWithClassName:DB_TABLE_ITEMS];
-                [query whereKey:DB_FIELD_USER_ID notEqualTo:[PFUser currentUser]];
-                [query whereKey:DB_FIELD_USER_ID containedIn:friendUsers];
-                
-                [query setSkip:currentResultsLimit];
-                [query setLimit:resultsPerPage];
-                
-                [query orderByDescending:DB_FIELD_UPDATED_AT];
-                
-                [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
-                    if (!error) {
-                        
-                        if(currentResultsLimit == 0) {
-                            //first page of results
-                            _items = [NSArray arrayWithArray:objects];
-                            [_delegate populateCollectionView];
-                        } else {
-                            NSMutableArray *tempReturnArray = [NSMutableArray arrayWithArray:_items];
-                            [tempReturnArray addObjectsFromArray:objects];
-                            _items = tempReturnArray;
-                            [_delegate addItemsToColletionView];
-                        }
-                        
-                        currentResultsLimit += resultsPerPage;
-                        [self getTotalCommentsForItems:objects];
-                        
-                    } else {
-                        // Log details of the failure
-                        NSLog(@"Error: %@ %@", error, [error userInfo]);
-                        _items = [NSArray array];
-                        //TODO: show error message
-                    }
-                }];
-                
-                
-            }];
-        } else {
-            NSLog(@"Error: %@ %@", error, [error userInfo]);
-        }
+    [facebookCache getFacebookFriendsPFUserArrayInBackgroundWithCallback:^(NSArray *friendPFUserArray, NSError *error) {
 
+        PFQuery *query = [PFQuery queryWithClassName:DB_TABLE_ITEMS];
+        [query whereKey:DB_FIELD_USER_ID notEqualTo:[PFUser currentUser]];
+        [query whereKey:DB_FIELD_USER_ID containedIn:friendPFUserArray];
+        
+        [query setSkip:currentResultsLimit];
+        [query setLimit:resultsPerPage];
+        
+        [query orderByDescending:DB_FIELD_UPDATED_AT];
+        
+        [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+            if (!error) {
+                
+                if(currentResultsLimit == 0) {
+                    //first page of results
+                    _items = [NSArray arrayWithArray:objects];
+                    [_delegate populateCollectionView];
+                } else {
+                    NSMutableArray *tempReturnArray = [NSMutableArray arrayWithArray:_items];
+                    [tempReturnArray addObjectsFromArray:objects];
+                    _items = tempReturnArray;
+                    [_delegate addItemsToColletionView];
+                }
+                
+                currentResultsLimit += resultsPerPage;
+                [self getTotalCommentsForItems:objects];
+                
+            } else {
+                // Log details of the failure
+                NSLog(@"Error: %@ %@", error, [error userInfo]);
+                _items = [NSArray array];
+                //TODO: show error message
+            }
+        }];
+        
+        
     }];
+
     
     
     

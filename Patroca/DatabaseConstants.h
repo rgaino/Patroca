@@ -47,6 +47,8 @@ extern NSString* const DB_TABLE_ITEM_LIKES;
 //Reported items table
 extern NSString* const DB_TABLE_REPORTED_ITEMS;
 
+//Relations
+extern NSString* const DB_RELATION_USER_LIKES_ITEMS;
 
 //Push Notifications channel names
 extern NSString* const NOTIFICATIONS_COMMENTS_ON_ITEM;

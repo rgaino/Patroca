@@ -49,8 +49,12 @@ NSString* const DB_TABLE_ITEM_LIKES = @"Item_Likes";
 //Reported items table
 NSString* const DB_TABLE_REPORTED_ITEMS = @"Item_Reports";
 
+//Relations
+NSString* const DB_RELATION_USER_LIKES_ITEMS = @"user_likes_items";
+
 //Push Notifications channel names
 NSString* const NOTIFICATIONS_COMMENTS_ON_ITEM = @"comments_on_item_%@";
+
 
 
 @end

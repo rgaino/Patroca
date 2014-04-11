@@ -248,7 +248,7 @@
     }
     
     FacebookCache *facebookCache = [FacebookCache getInstance];
-    [facebookCache getFacebookFriendsInBackgroundWithCallback:^(NSArray *friendIdsArray, NSError *error) {
+    [facebookCache getFacebookFriendIDsInBackgroundWithCallback:^(NSArray *friendIdsArray, NSError *error) {
         
         if(!error) {
         
