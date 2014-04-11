@@ -10,12 +10,17 @@
 
 @interface FacebookCache : NSObject {
     NSMutableArray *friendIdsArray;
-    NSDate *lastCache;
+    NSDate *lastCacheForFriendIdsArray;
+
+    NSArray *friendPFUsersArray;
+    NSDate *lastCacheForFriendPFUsersArray;
 }
 
-typedef void (^FacebookCacheCompletionBlock)(NSArray *friendIdsArray, NSError *error);
+typedef void (^FacebookFriendIDsArrayCacheCompletionBlock)(NSArray *friendIdsArray, NSError *error);
+typedef void (^FacebookFriendsPFUserArrayCacheCompletionBlock)(NSArray *friendPFUserArray, NSError *error);
 
 +(FacebookCache *) getInstance;
-- (void)getFacebookFriendsInBackgroundWithCallback:(FacebookCacheCompletionBlock)callback;
+- (void)getFacebookFriendIDsInBackgroundWithCallback:(FacebookFriendIDsArrayCacheCompletionBlock)callback;
+- (void)getFacebookFriendsPFUserArrayInBackgroundWithCallback:(FacebookFriendsPFUserArrayCacheCompletionBlock)callback;
 
 @end
