@@ -72,6 +72,7 @@
     PFRelation *relation = [_cellItemObject relationForKey:DB_RELATION_USER_LIKES_ITEMS];
     [relation addObject:[PFUser currentUser]];
     [_cellItemObject saveEventually];
+    [_likeButton setImage:[UIImage imageNamed:@"star-on.png"] forState:UIControlStateNormal];
 }
 
 #pragma mark CLLocationManagerDelegate methods

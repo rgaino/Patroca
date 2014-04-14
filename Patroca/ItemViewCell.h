@@ -23,6 +23,7 @@
 @property (weak, nonatomic) IBOutlet UIImageView *itemImageView;
 @property (weak, nonatomic) IBOutlet UIImageView *ownerProfilePic;
 @property (weak, nonatomic) IBOutlet UILabel *totalCommentsLabel;
+@property (weak, nonatomic) IBOutlet UIButton *likeButton;
 
 - (void)setupCellWithItem:(PFObject*)itemObject;
 - (void)updateTotalComments:(int)totalComments;
