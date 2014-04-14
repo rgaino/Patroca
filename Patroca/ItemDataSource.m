@@ -220,7 +220,7 @@
     PFQuery *query = [PFQuery queryWithClassName:DB_TABLE_ITEMS];
     [query whereKey:DB_FIELD_ITEM_LOCATION nearGeoPoint:myLocationPoint];
     if([PFUser currentUser] != nil) {
-//        [query whereKey:DB_FIELD_USER_ID notEqualTo:[PFUser currentUser]];
+        [query whereKey:DB_FIELD_USER_ID notEqualTo:[PFUser currentUser]];
     }
     
     [query setSkip:currentResultsLimit];
