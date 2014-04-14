@@ -69,7 +69,7 @@
     NSDictionary *params = [NSDictionary dictionaryWithObject:ids forKey:@"item_ids_array"];
     
     [PFCloud callFunctionInBackground:@"totalCommentsForItems" withParameters:params block:^(id object, NSError *error) {
-        
+        NSLog(@"Fetched total comments in background.");
         NSDictionary *totalCommentsForItemsDictionary = (NSDictionary*) object;
         [_delegate populateTotalCommentsWithDictionary:totalCommentsForItemsDictionary];
         
