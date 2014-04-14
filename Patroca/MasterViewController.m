@@ -120,13 +120,13 @@
     
     switch (menuButton.tag) {
         case 0:
-            [self loadFeaturedItems];
+            [self loadNearbyItems];
             break;
         case 1:
             [self loadFriendsItems];
             break;
         case 2:
-            [self loadNearbyItems];
+            [self loadFeaturedItems];
             break;
         default:
             break;
