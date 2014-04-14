@@ -41,9 +41,6 @@ extern NSString* const DB_FIELD_ITEM_IMAGE;
 extern NSString* const DB_TABLE_ITEM_COMMENTS;
 extern NSString* const DB_FIELD_ITEM_COMMENT_TEXT;
 
-//Item_Likes table
-extern NSString* const DB_TABLE_ITEM_LIKES;
-
 //Reported items table
 extern NSString* const DB_TABLE_REPORTED_ITEMS;
 
