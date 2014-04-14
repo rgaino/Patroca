@@ -97,8 +97,6 @@
         [_ownerNameLabel setText:[NSString stringWithFormat:@"%@ %@", distanceText, NSLocalizedString(@"Miles", nil)]];
     }
     [_ownerNameLabel setHidden:NO];
-    
-    NSLog(@"%@ - %@", [itemObject objectForKey:DB_FIELD_ITEM_NAME], _ownerNameLabel.text);
 }
 
 @end
