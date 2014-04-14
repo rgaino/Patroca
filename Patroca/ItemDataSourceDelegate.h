@@ -15,7 +15,7 @@
 @required
 - (void)populateCollectionView;
 - (void)addItemsToColletionView;
-- (void)populateTotalLikesWithDictionary:(NSDictionary*)tempTotalCommentsForItemsDictionary;
-- (void)updateTotalLikesForItemViewCell:(ItemViewCell*)itemViewCell;
+- (void)populateTotalCommentsWithDictionary:(NSDictionary*)tempTotalCommentsForItemsDictionary;
+- (void)updateTotalCommentsForItemViewCell:(ItemViewCell*)itemViewCell;
 
 @end

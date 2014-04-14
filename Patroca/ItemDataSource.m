@@ -71,7 +71,7 @@
     [PFCloud callFunctionInBackground:@"totalCommentsForItems" withParameters:params block:^(id object, NSError *error) {
         
         NSDictionary *totalCommentsForItemsDictionary = (NSDictionary*) object;
-        [_delegate populateTotalLikesWithDictionary:totalCommentsForItemsDictionary];
+        [_delegate populateTotalCommentsWithDictionary:totalCommentsForItemsDictionary];
         
     }];
 }

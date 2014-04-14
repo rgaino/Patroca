@@ -292,7 +292,7 @@
     [_contentDisplayCollectionView.infiniteScrollingView stopAnimating];
 }
 
-- (void)populateTotalLikesWithDictionary:(NSDictionary*)tempTotalCommentsForItemsDictionary {
+- (void)populateTotalCommentsWithDictionary:(NSDictionary*)tempTotalCommentsForItemsDictionary {
     
     //updating the dictionary with items and their total comments...
     NSArray *itemIDs = [tempTotalCommentsForItemsDictionary objectForKey:@"item_ids"];
@@ -303,11 +303,11 @@
     
     //...then update all visible cells
     for(ItemViewCell *itemViewCell in [_contentDisplayCollectionView visibleCells]) {
-        [self updateTotalLikesForItemViewCell:itemViewCell];
+        [self updateTotalCommentsForItemViewCell:itemViewCell];
     }
 }
 
-- (void)updateTotalLikesForItemViewCell:(ItemViewCell*)itemViewCell {
+- (void)updateTotalCommentsForItemViewCell:(ItemViewCell*)itemViewCell {
     
     //lookup item on totalCommentsForItemsDictionary and update its cell
     PFObject *cellItemObject = [itemViewCell cellItemObject];
@@ -341,7 +341,7 @@
     PFObject *item = [[itemDataSource items] objectAtIndex:indexPath.row];
     [itemViewCell setupCellWithItem:item];
     
-    [self updateTotalLikesForItemViewCell:itemViewCell];
+    [self updateTotalCommentsForItemViewCell:itemViewCell];
     
     return itemViewCell;
 }
