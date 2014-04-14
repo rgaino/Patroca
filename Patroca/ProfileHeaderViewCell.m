@@ -28,18 +28,22 @@
         
         self = [arrayOfViews objectAtIndex:0];
         
-        [self localizeStrings];
     }
     return self;
 }
 
+
 - (void)localizeStrings {
-    [_shareOnFacebookButton setTitle:NSLocalizedString(@"tell your friends", nil) forState:UIControlStateNormal];
+    [_tellYourFriendsButton setTitle:NSLocalizedString(@"tell your friends", nil) forState:UIControlStateNormal];
     [_moreFriendsMoreStuffLabel setText:NSLocalizedString(@"the more the merrier", nil)];
+    [_tellYourFriendsButton setHidden:NO];
+    [_moreFriendsMoreStuffLabel setHidden:NO];
 }
 
 - (void)setupProfileHeaderViewCellWithUser:(PFUser*)user UserData:(NSDictionary*)userData {
     
+    [self localizeStrings];
+
     userObject = user;
     
     //Making sure we don't use nulls but blank strings instead
