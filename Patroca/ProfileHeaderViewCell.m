@@ -153,6 +153,7 @@
                 
                 xProfileImageView+=sizeProfileImageView;
             }
+            [_friendsPicturesView bringSubviewToFront:_tellYourFriendsButton];
         }
     }];
 }
