@@ -49,6 +49,7 @@ static UserCache *_userCacheInstance = nil;
 	    if(userNameCacheDictionary==nil) {
             //initialize user cache dictionary if necessary
             userNameCacheDictionary = [NSMutableDictionary dictionary];
+            _likedItemsArray = [NSMutableArray array];
         }
     }
     
@@ -109,6 +110,29 @@ static UserCache *_userCacheInstance = nil;
     }
     
     return [userNameCacheDictionary objectForKey:userid];
+}
+
+- (void)getLikedItemsArrayWithCallback:(LikedItemsCacheCompletionBlock)callback {
+
+    if(lastCacheForLikedItems!=nil && [[NSDate date] timeIntervalSinceDate:lastCacheForLikedItems] < 1800) {
+        //cached, return it
+        callback(_likedItemsArray, nil);
+    } else {
+        NSLog(@"Retrieving cache for this user's liked items.");
+        PFQuery *userLikesQuery = [PFQuery queryWithClassName:DB_TABLE_ITEMS];
+        [userLikesQuery whereKey:DB_RELATION_USER_LIKES_ITEMS equalTo:[PFUser currentUser]];
+        [userLikesQuery findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+            if(!error) {
+                NSLog(@"Retrieved items liked by this user with success. Total of %lu items retrieved", (unsigned long)[objects count]);
+                [_likedItemsArray addObjectsFromArray:objects];
+                lastCacheForLikedItems = [NSDate date];
+                callback(_likedItemsArray, nil);
+            } else {
+                NSLog(@"Failed to retrieve items liked by current user, with error: %@ %@", error, [error userInfo]);
+                callback(nil, error);
+            }
+        }];
+    }
 }
 
 

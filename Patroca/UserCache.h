@@ -13,10 +13,17 @@
 @interface UserCache : NSObject {
 
     NSMutableDictionary *userNameCacheDictionary;
+    NSDate *lastCacheForLikedItems;
+
 }
+
+typedef void (^LikedItemsCacheCompletionBlock)(NSMutableArray *likedItemsArray, NSError *error);
 
 +(UserCache*) getInstance;
 - (void)updateUserNameCacheDictionaryForItems:(NSArray*) items;
-- (PFUser*) getCachedUserForId:(NSString*)userid;
+- (PFUser*)getCachedUserForId:(NSString*)userid;
+- (void)getLikedItemsArrayWithCallback:(LikedItemsCacheCompletionBlock)callback;
+
+@property (readwrite) NSMutableArray *likedItemsArray;
 
 @end

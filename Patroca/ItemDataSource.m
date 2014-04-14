@@ -11,6 +11,7 @@
 #import "DatabaseConstants.h"
 #import "MasterViewController.h"
 #import "FacebookCache.h"
+#import "UserCache.h"
 
 @implementation ItemDataSource
 
@@ -94,11 +95,9 @@
 }
 
 
-#pragma mark Private or Hidden methods (undeclared on .h file, but must be at the end of this file
+#pragma mark Private or Hidden methods (undeclared on .h file, but must be at the end of this file)
 
 - (void)getFeaturedItemsAndReturn {
-    
-    //TODO: for now Featured Items just show everything for testing purposes
     
     if(itemDataSourceMode!=ItemDataSourceModeFeatured) {
         currentResultsLimit=0;
@@ -116,6 +115,8 @@
         [itemsQuery setLimit:resultsPerPage];
         
         [itemsQuery findObjectsInBackgroundWithBlock:^(NSArray *itemObjects, NSError *error) {
+            
+            //TODO: this code is repeated in the 3 functions, we should make a single method
             if (!error) {
                 myLocationPoint = nil;
                 
@@ -131,9 +132,8 @@
                 }
                 
                 currentResultsLimit += resultsPerPage;
-                
+
                 [self getTotalCommentsForItems:itemObjects];
-                
             } else {
                 // Log details of the failure
                 NSLog(@"Error: %@ %@", error, [error userInfo]);
@@ -170,31 +170,33 @@
         [query orderByDescending:DB_FIELD_UPDATED_AT];
         
         [query findObjectsInBackgroundWithBlock:^(NSArray *itemObjects, NSError *error) {
-            if (!error) {
-                
-                if(currentResultsLimit == 0) {
-                    //first page of results
-                    _items = [NSArray arrayWithArray:itemObjects];
-                    [_delegate populateCollectionView];
+            
+            [[UserCache getInstance] getLikedItemsArrayWithCallback:^(NSMutableArray *likedItemsArray, NSError *error) {
+            
+                if (!error) {
+                    
+                    if(currentResultsLimit == 0) {
+                        //first page of results
+                        _items = [NSArray arrayWithArray:itemObjects];
+                        [_delegate populateCollectionView];
+                    } else {
+                        NSMutableArray *tempReturnArray = [NSMutableArray arrayWithArray:_items];
+                        [tempReturnArray addObjectsFromArray:itemObjects];
+                        _items = tempReturnArray;
+                        [_delegate addItemsToCollectionView];
+                    }
+                    
+                    currentResultsLimit += resultsPerPage;
+                    [self getTotalCommentsForItems:itemObjects];
+                    
                 } else {
-                    NSMutableArray *tempReturnArray = [NSMutableArray arrayWithArray:_items];
-                    [tempReturnArray addObjectsFromArray:itemObjects];
-                    _items = tempReturnArray;
-                    [_delegate addItemsToCollectionView];
+                    // Log details of the failure
+                    NSLog(@"Error: %@ %@", error, [error userInfo]);
+                    _items = [NSArray array];
+                    //TODO: show error message
                 }
-                
-                currentResultsLimit += resultsPerPage;
-                [self getTotalCommentsForItems:itemObjects];
-                
-            } else {
-                // Log details of the failure
-                NSLog(@"Error: %@ %@", error, [error userInfo]);
-                _items = [NSArray array];
-                //TODO: show error message
-            }
+            }];
         }];
-        
-        
     }];
 
 }

@@ -61,6 +61,15 @@
         [locationManager setDistanceFilter:kCLDistanceFilterNone];
         [locationManager setDesiredAccuracy:kCLLocationAccuracyBest];
     }
+    
+    [_likeButton setImage:[UIImage imageNamed:@"star-off.png"] forState:UIControlStateNormal];
+    for(PFObject *likedItem in [[UserCache getInstance] likedItemsArray]) {
+        if([likedItem.objectId isEqualToString:itemObject.objectId]) {
+            [_likeButton setImage:[UIImage imageNamed:@"star-on.png"] forState:UIControlStateNormal];
+            [_likeButton setTag:1];
+            break;
+        }
+    }
     [locationManager startUpdatingLocation];
 }
 
@@ -69,10 +78,29 @@
 }
 
 - (IBAction)likeButtonPressed:(id)sender {
+    
     PFRelation *relation = [_cellItemObject relationForKey:DB_RELATION_USER_LIKES_ITEMS];
-    [relation addObject:[PFUser currentUser]];
+    
+    if(_likeButton.tag == 0) {
+        //Likes item
+        [relation addObject:[PFUser currentUser]];
+        [[[UserCache getInstance] likedItemsArray] addObject:_cellItemObject];
+        [_likeButton setImage:[UIImage imageNamed:@"star-on.png"] forState:UIControlStateNormal];
+        [_likeButton setTag:1];
+    } else {
+        //Removes like on item
+        [relation removeObject:[PFUser currentUser]];
+        [_likeButton setImage:[UIImage imageNamed:@"star-off.png"] forState:UIControlStateNormal];
+        [_likeButton setTag:0];
+        for(PFObject *likedItem in [[UserCache getInstance] likedItemsArray]) {
+            if([[likedItem objectId] isEqualToString:[_cellItemObject objectId]]) {
+                [[[UserCache getInstance] likedItemsArray] removeObject:likedItem];
+                break;
+            }
+        }
+    }
+    
     [_cellItemObject saveEventually];
-    [_likeButton setImage:[UIImage imageNamed:@"star-on.png"] forState:UIControlStateNormal];
 }
 
 #pragma mark CLLocationManagerDelegate methods

@@ -292,6 +292,8 @@
     [_contentDisplayCollectionView.infiniteScrollingView stopAnimating];
 }
 
+
+
 - (void)populateTotalCommentsWithDictionary:(NSDictionary*)tempTotalCommentsForItemsDictionary {
     
     //updating the dictionary with items and their total comments...
