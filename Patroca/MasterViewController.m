@@ -284,7 +284,7 @@
     [_loadingActivityIndicator stopAnimating];
 }
 
-- (void)addItemsToColletionView {
+- (void)addItemsToCollectionView {
 
     NSLog(@"Addind items to list, new total is %lu", (unsigned long)itemDataSource.items.count);
     [[UserCache getInstance] updateUserNameCacheDictionaryForItems:itemDataSource.items];

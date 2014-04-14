@@ -127,7 +127,7 @@
                     NSMutableArray *tempReturnArray = [NSMutableArray arrayWithArray:_items];
                     [tempReturnArray addObjectsFromArray:itemObjects];
                     _items = tempReturnArray;
-                    [_delegate addItemsToColletionView];
+                    [_delegate addItemsToCollectionView];
                 }
                 
                 currentResultsLimit += resultsPerPage;
@@ -140,12 +140,7 @@
                 _items = [NSArray array];
             }
         }];
-
-        
     }];
-    
-    
-    
 }
 
 - (void)getFriendsItemsAndReturn {
@@ -174,22 +169,22 @@
         
         [query orderByDescending:DB_FIELD_UPDATED_AT];
         
-        [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+        [query findObjectsInBackgroundWithBlock:^(NSArray *itemObjects, NSError *error) {
             if (!error) {
                 
                 if(currentResultsLimit == 0) {
                     //first page of results
-                    _items = [NSArray arrayWithArray:objects];
+                    _items = [NSArray arrayWithArray:itemObjects];
                     [_delegate populateCollectionView];
                 } else {
                     NSMutableArray *tempReturnArray = [NSMutableArray arrayWithArray:_items];
-                    [tempReturnArray addObjectsFromArray:objects];
+                    [tempReturnArray addObjectsFromArray:itemObjects];
                     _items = tempReturnArray;
-                    [_delegate addItemsToColletionView];
+                    [_delegate addItemsToCollectionView];
                 }
                 
                 currentResultsLimit += resultsPerPage;
-                [self getTotalCommentsForItems:objects];
+                [self getTotalCommentsForItems:itemObjects];
                 
             } else {
                 // Log details of the failure
@@ -234,24 +229,24 @@
     [query setSkip:currentResultsLimit];
     [query setLimit:resultsPerPage];
 
-    [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+    [query findObjectsInBackgroundWithBlock:^(NSArray *itemObjects, NSError *error) {
         if (!error) {
             myLocationPoint = nil;
             
             if(currentResultsLimit == 0) {
                 //first page of results
-                _items = [NSArray arrayWithArray:objects];
+                _items = [NSArray arrayWithArray:itemObjects];
                 [_delegate populateCollectionView];
             } else {
                 NSMutableArray *tempReturnArray = [NSMutableArray arrayWithArray:_items];
-                [tempReturnArray addObjectsFromArray:objects];
+                [tempReturnArray addObjectsFromArray:itemObjects];
                 _items = tempReturnArray;
-                [_delegate addItemsToColletionView];
+                [_delegate addItemsToCollectionView];
             }
             
             currentResultsLimit += resultsPerPage;
             
-            [self getTotalCommentsForItems:objects];
+            [self getTotalCommentsForItems:itemObjects];
             
         } else {
             // Log details of the failure
@@ -281,23 +276,23 @@
 
     [query orderByDescending:DB_FIELD_UPDATED_AT];
     
-    [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+    [query findObjectsInBackgroundWithBlock:^(NSArray *itemObjects, NSError *error) {
         if (!error) {
             
             if(currentResultsLimit == 0) {
                 //first page of results
-                _items = [NSArray arrayWithArray:objects];
+                _items = [NSArray arrayWithArray:itemObjects];
                 [_delegate populateCollectionView];
             } else {
                 NSMutableArray *tempReturnArray = [NSMutableArray arrayWithArray:_items];
-                [tempReturnArray addObjectsFromArray:objects];
+                [tempReturnArray addObjectsFromArray:itemObjects];
                 _items = tempReturnArray;
-                [_delegate addItemsToColletionView];
+                [_delegate addItemsToCollectionView];
             }
             
             currentResultsLimit += resultsPerPage;
             
-            [self getTotalCommentsForItems:objects];
+            [self getTotalCommentsForItems:itemObjects];
             
         } else {
             // Log details of the failure
