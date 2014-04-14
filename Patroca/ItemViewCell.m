@@ -62,14 +62,21 @@
         [locationManager setDesiredAccuracy:kCLLocationAccuracyBest];
     }
     
-    [_likeButton setImage:[UIImage imageNamed:@"star-off.png"] forState:UIControlStateNormal];
-    for(PFObject *likedItem in [[UserCache getInstance] likedItemsArray]) {
-        if([likedItem.objectId isEqualToString:itemObject.objectId]) {
-            [_likeButton setImage:[UIImage imageNamed:@"star-on.png"] forState:UIControlStateNormal];
-            [_likeButton setTag:1];
-            break;
+    
+    if([[[_cellItemObject objectForKey:DB_FIELD_USER_ID] objectId] isEqualToString:[[PFUser currentUser] objectId]]) {
+        [_likeButton setHidden:YES];
+    } else {
+        [_likeButton setHidden:NO];
+        [_likeButton setImage:[UIImage imageNamed:@"star-off.png"] forState:UIControlStateNormal];
+        for(PFObject *likedItem in [[UserCache getInstance] likedItemsArray]) {
+            if([likedItem.objectId isEqualToString:itemObject.objectId]) {
+                [_likeButton setImage:[UIImage imageNamed:@"star-on.png"] forState:UIControlStateNormal];
+                [_likeButton setTag:1];
+                break;
+            }
         }
     }
+       
     [locationManager startUpdatingLocation];
 }
 
