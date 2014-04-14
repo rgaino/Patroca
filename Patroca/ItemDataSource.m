@@ -109,7 +109,7 @@
         PFQuery *itemsQuery = [PFQuery queryWithClassName:DB_TABLE_ITEMS];
         [itemsQuery whereKey:DB_RELATION_USER_LIKES_ITEMS containedIn:friendPFUserArray];
         [itemsQuery whereKey:DB_FIELD_USER_ID notEqualTo:[PFUser currentUser]];
-        [itemsQuery orderByDescending:DB_FIELD_UPDATED_AT];
+        [itemsQuery orderByDescending:DB_FIELD_CREATED_AT];
         
         [itemsQuery setSkip:currentResultsLimit];
         [itemsQuery setLimit:resultsPerPage];
@@ -167,7 +167,7 @@
         [query setSkip:currentResultsLimit];
         [query setLimit:resultsPerPage];
         
-        [query orderByDescending:DB_FIELD_UPDATED_AT];
+        [query orderByDescending:DB_FIELD_CREATED_AT];
         
         [query findObjectsInBackgroundWithBlock:^(NSArray *itemObjects, NSError *error) {
             
@@ -276,7 +276,7 @@
     [query setSkip:currentResultsLimit];
     [query setLimit:resultsPerPage];
 
-    [query orderByDescending:DB_FIELD_UPDATED_AT];
+    [query orderByDescending:DB_FIELD_CREATED_AT];
     
     [query findObjectsInBackgroundWithBlock:^(NSArray *itemObjects, NSError *error) {
         if (!error) {
