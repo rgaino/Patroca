@@ -61,6 +61,14 @@
 
 - (void)getTotalCommentsForItems:(NSArray*)objects {
     
+    //WARNING: function disabled because we're not displaying total comments anymore (nowhere)
+    
+    
+    
+    return;
+    
+    
+    
     //calling CloudCode function to get a count of comments for each item
     NSMutableArray *ids = [[NSMutableArray alloc] init];
     for(PFObject *oneItem in objects) {
