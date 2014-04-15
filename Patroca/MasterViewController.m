@@ -84,6 +84,10 @@
     [_nearbyButton setTitle:NSLocalizedString(@"nearby", nil) forState:UIControlStateNormal];
 }
 
+- (void)userLoggedInSuccessfully {
+    [super userLoggedInSuccessfully];
+    [itemDataSource refresh];
+}
 
 - (void)createErrorMessageView {
     //create the error message view but it's empty for now

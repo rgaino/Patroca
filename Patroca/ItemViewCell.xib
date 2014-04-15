@@ -236,7 +236,7 @@
 							</object>
 							<object class="IBUIButton" id="49906651">
 								<reference key="NSNextResponder" ref="725356657"/>
-								<int key="NSvFlags">1316</int>
+								<int key="NSvFlags">-2147482332</int>
 								<string key="NSFrame">{{122, 122}, {25, 24}}</string>
 								<reference key="NSSuperview" ref="725356657"/>
 								<string key="NSReuseIdentifierKey">_NS:9</string>
@@ -1259,6 +1259,7 @@
 						<reference key="object" ref="49906651"/>
 						<array class="NSMutableArray" key="children"/>
 						<reference key="parent" ref="867562313"/>
+						<string key="objectName">Like Button</string>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">355</int>
