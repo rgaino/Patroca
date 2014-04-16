@@ -26,31 +26,34 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+//    CGRect frame = CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height);
+    CGRect frame = [[UIScreen mainScreen] bounds];
+    NSLog(@"%.2f %.2f", frame.size.width, frame.size.height);
 
-    MYIntroductionPanel *panel1 = [[MYIntroductionPanel alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)
+    MYIntroductionPanel *panel1 = [[MYIntroductionPanel alloc] initWithFrame:frame
                                                                title:NSLocalizedString(@"tutorial_panel_1_title", nil)
                                                                description:NSLocalizedString(@"tutorial_panel_1_description", nil)
                                                                image:[UIImage imageNamed:@"patroca_logo.png"]];
     
-    MYIntroductionPanel *panel2 = [[MYIntroductionPanel alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)
+    MYIntroductionPanel *panel2 = [[MYIntroductionPanel alloc] initWithFrame:frame
                                                                title:NSLocalizedString(@"tutorial_panel_2_title", nil)
                                                                description:NSLocalizedString(@"tutorial_panel_2_description", nil)
                                                                image:[UIImage imageNamed:@"tutorial_panel_1.png"]];
 
-    MYIntroductionPanel *panel3 = [[MYIntroductionPanel alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)
+    MYIntroductionPanel *panel3 = [[MYIntroductionPanel alloc] initWithFrame:frame
                                                                title:NSLocalizedString(@"tutorial_panel_3_title", nil)
                                                                  description:NSLocalizedString(@"tutorial_panel_3_description", nil)];
 
-    MYIntroductionPanel *panel4 = [[MYIntroductionPanel alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)
+    MYIntroductionPanel *panel4 = [[MYIntroductionPanel alloc] initWithFrame:frame
                                                                title:NSLocalizedString(@"tutorial_panel_4_title", nil)
                                                                description:NSLocalizedString(@"tutorial_panel_4_description", nil)];
 
-    MYIntroductionPanel *panel5 = [[MYIntroductionPanel alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)
+    MYIntroductionPanel *panel5 = [[MYIntroductionPanel alloc] initWithFrame:frame
                                                                title:NSLocalizedString(@"tutorial_panel_5_title", nil)
                                                                description:NSLocalizedString(@"tutorial_panel_5_description", nil)];
 
     
-    MYBlurIntroductionView *introductionView = [[MYBlurIntroductionView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)];
+    MYBlurIntroductionView *introductionView = [[MYBlurIntroductionView alloc] initWithFrame:frame];
     [introductionView setDelegate:self];
     NSArray *panels = @[panel1, panel2, panel3, panel4, panel5];
     [introductionView buildIntroductionWithPanels:panels];
