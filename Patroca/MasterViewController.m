@@ -18,6 +18,7 @@
 #import <SDWebImage/UIImageView+WebCache.h>
 #import "SVPullToRefresh.h"
 #import "UILabel+UILabel_Resize.h"
+#import "TutorialViewController.h"
 
 #define CELL_REUSE_IDENTIFIER @"Item_Cell_Master"
 
@@ -62,12 +63,6 @@
         [itemDataSource getNextPageAndReturn];
     }];
     
-    //if user is logged in, load friends, otherwise load nearby
-    if ([PFUser currentUser] && [PFFacebookUtils isLinkedWithUser:[PFUser currentUser]]) {
-        [self performSelector:@selector(menuButtonPressed:) withObject:_friendsButton afterDelay:1.0f];
-    } else {
-        [self performSelector:@selector(menuButtonPressed:) withObject:_nearbyButton afterDelay:1.0f];
-    }
     
     //create the error message view
     [self createErrorMessageView];
@@ -76,6 +71,17 @@
     [self.view bringSubviewToFront:_contentDisplayCollectionView];
     
     [super viewDidLoad];
+
+    //if user is logged in, load friends, otherwise load nearby
+    if ([PFUser currentUser] && [PFFacebookUtils isLinkedWithUser:[PFUser currentUser]]) {
+        [self performSelector:@selector(menuButtonPressed:) withObject:_friendsButton afterDelay:1.0f];
+    } else {
+        TutorialViewController *tutorialViewController = [[TutorialViewController alloc] initWithNibName:@"TutorialViewController" bundle:nil];
+        [tutorialViewController setMasterViewController:self];
+        [self.navigationController pushViewController:tutorialViewController animated:YES];
+//        [self performSelector:@selector(menuButtonPressed:) withObject:_nearbyButton afterDelay:1.0f];
+    }
+
 }
 
 - (void)localizeStrings {

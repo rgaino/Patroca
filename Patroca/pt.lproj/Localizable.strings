@@ -38,3 +38,14 @@
 "KMs" = "KMs";
 "Miles" = "Milhas";
 "what is this?" = "O que é isso?";
+"tutorial_panel_1_title" = "Bem-vindo ao Patroca";
+"tutorial_panel_1_description" = "O Patroca é uma ferramenta de escambo social, para trocarmos qualquer coisa por qualquer outra coisa. Entre seus amigos ou com pessoas pertinho de você.";
+"tutorial_panel_2_title" = "Bem-vindo ao Patroca";
+"tutorial_panel_2_description" = "O Patroca funciona através de sua conta do Facebook. Assim que você permitir o acesso nós já mostraremos o que seus amigos tem para trocar.";
+"tutorial_panel_3_title" = "Bem-vindo ao Patroca";
+"tutorial_panel_3_description" = "Para oferecer coisas que você tem é fácil. Acesse o botão \"+\" ali em cima e você poderá tirar uma foto e mostrar aos seus amigos o que você tem para dar em troca.";
+"tutorial_panel_4_title" = "Bem-vindo ao Patroca";
+"tutorial_panel_4_description" = "Para negociar, simplesmente escolha um item e faça um comentário demonstrando interesse. Seu amigo será notificado e poderá responder.";
+"tutorial_panel_5_title" = "Bem-vindo ao Patroca";
+"tutorial_panel_5_description" = "Para começar, conecte-se com o Facebook. Após conectar-se, acesse a sua foto para ver seu perfil.";
+"Skip"= "Pular";

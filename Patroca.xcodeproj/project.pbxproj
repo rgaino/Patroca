@@ -117,6 +117,12 @@
 		197AB11416C1E6CA0084D3FA /* profile_background.png in Resources */ = {isa = PBXBuildFile; fileRef = 197AB11216C1E6CA0084D3FA /* profile_background.png */; };
 		197AB11516C1E6CA0084D3FA /* profile_background@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 197AB11316C1E6CA0084D3FA /* profile_background@2x.png */; };
 		197EB5C418F718E8005BD047 /* FacebookCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 197EB5C318F718E8005BD047 /* FacebookCache.m */; };
+		1982299518FE044400DF72CA /* TutorialViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1982299318FE044400DF72CA /* TutorialViewController.m */; };
+		1982299618FE044400DF72CA /* TutorialViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1982299418FE044400DF72CA /* TutorialViewController.xib */; };
+		1982299C18FE046800DF72CA /* MYBlurIntroductionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1982299918FE046800DF72CA /* MYBlurIntroductionView.m */; };
+		1982299D18FE046800DF72CA /* MYIntroductionPanel.m in Sources */ = {isa = PBXBuildFile; fileRef = 1982299B18FE046800DF72CA /* MYIntroductionPanel.m */; };
+		198229A018FE1D0800DF72CA /* tutorial_panel_1.png in Resources */ = {isa = PBXBuildFile; fileRef = 1982299E18FE1D0800DF72CA /* tutorial_panel_1.png */; };
+		198229A118FE1D0800DF72CA /* tutorial_panel_1@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1982299F18FE1D0800DF72CA /* tutorial_panel_1@2x.png */; };
 		1986625516670397003C19EE /* sample_avatar.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 1986625416670397003C19EE /* sample_avatar.jpeg */; };
 		198A3CE71687756F0016F45C /* clock_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 198A3CE51687756F0016F45C /* clock_icon.png */; };
 		198A3CE81687756F0016F45C /* clock_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 198A3CE61687756F0016F45C /* clock_icon@2x.png */; };
@@ -303,6 +309,15 @@
 		197AB11316C1E6CA0084D3FA /* profile_background@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "profile_background@2x.png"; sourceTree = "<group>"; };
 		197EB5C218F718E8005BD047 /* FacebookCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FacebookCache.h; sourceTree = "<group>"; };
 		197EB5C318F718E8005BD047 /* FacebookCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FacebookCache.m; sourceTree = "<group>"; };
+		1982299218FE044400DF72CA /* TutorialViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TutorialViewController.h; sourceTree = "<group>"; };
+		1982299318FE044400DF72CA /* TutorialViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TutorialViewController.m; sourceTree = "<group>"; };
+		1982299418FE044400DF72CA /* TutorialViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TutorialViewController.xib; sourceTree = "<group>"; };
+		1982299818FE046800DF72CA /* MYBlurIntroductionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MYBlurIntroductionView.h; sourceTree = "<group>"; };
+		1982299918FE046800DF72CA /* MYBlurIntroductionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MYBlurIntroductionView.m; sourceTree = "<group>"; };
+		1982299A18FE046800DF72CA /* MYIntroductionPanel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MYIntroductionPanel.h; sourceTree = "<group>"; };
+		1982299B18FE046800DF72CA /* MYIntroductionPanel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MYIntroductionPanel.m; sourceTree = "<group>"; };
+		1982299E18FE1D0800DF72CA /* tutorial_panel_1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tutorial_panel_1.png; sourceTree = "<group>"; };
+		1982299F18FE1D0800DF72CA /* tutorial_panel_1@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tutorial_panel_1@2x.png"; sourceTree = "<group>"; };
 		1986625416670397003C19EE /* sample_avatar.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = sample_avatar.jpeg; sourceTree = "<group>"; };
 		198A3CE51687756F0016F45C /* clock_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = clock_icon.png; sourceTree = "<group>"; };
 		198A3CE61687756F0016F45C /* clock_icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "clock_icon@2x.png"; sourceTree = "<group>"; };
@@ -435,6 +450,7 @@
 		1934ACF6165E2B9300C8272F /* Libs */ = {
 			isa = PBXGroup;
 			children = (
+				1982299718FE045100DF72CA /* MYBlurIntroductionView */,
 				194A9FC416E509AF00091947 /* Infinite Scroll */,
 				19D910BB16BF0DEF00129E22 /* MPNotificationView */,
 				1934ACF7165E2BAD00C8272F /* MBProgressHUD */,
@@ -531,6 +547,7 @@
 		1939B8AA16568CBB00435705 /* View Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				1982299118FE040200DF72CA /* Tutorial */,
 				1939B8B016568D1600435705 /* Base View Controller */,
 				1939CA4F16644A63002C21F6 /* New Item */,
 				1934ACE9165E2AAF00C8272F /* Profile */,
@@ -658,6 +675,8 @@
 				19F8EE4218FC39D700E4C847 /* star-off@2x.png */,
 				197AB10E16C1E0F20084D3FA /* tell_your_friends_button.png */,
 				197AB10F16C1E0F20084D3FA /* tell_your_friends_button@2x.png */,
+				1982299E18FE1D0800DF72CA /* tutorial_panel_1.png */,
+				1982299F18FE1D0800DF72CA /* tutorial_panel_1@2x.png */,
 				1977163816E03C980010FF5D /* yellow_button.png */,
 				1977163916E03C980010FF5D /* yellow_button@2x.png */,
 			);
@@ -817,6 +836,27 @@
 			name = "Facebook Cache";
 			sourceTree = "<group>";
 		};
+		1982299118FE040200DF72CA /* Tutorial */ = {
+			isa = PBXGroup;
+			children = (
+				1982299218FE044400DF72CA /* TutorialViewController.h */,
+				1982299318FE044400DF72CA /* TutorialViewController.m */,
+				1982299418FE044400DF72CA /* TutorialViewController.xib */,
+			);
+			name = Tutorial;
+			sourceTree = "<group>";
+		};
+		1982299718FE045100DF72CA /* MYBlurIntroductionView */ = {
+			isa = PBXGroup;
+			children = (
+				1982299818FE046800DF72CA /* MYBlurIntroductionView.h */,
+				1982299918FE046800DF72CA /* MYBlurIntroductionView.m */,
+				1982299A18FE046800DF72CA /* MYIntroductionPanel.h */,
+				1982299B18FE046800DF72CA /* MYIntroductionPanel.m */,
+			);
+			name = MYBlurIntroductionView;
+			sourceTree = "<group>";
+		};
 		198A3CF516877C490016F45C /* NSDate Categories */ = {
 			isa = PBXGroup;
 			children = (
@@ -936,6 +976,7 @@
 				1939B908165AA0D900435705 /* comments_icon.png in Resources */,
 				1939B909165AA0D900435705 /* comments_icon@2x.png in Resources */,
 				1950E4FC165F09B700E98488 /* ViewProfileViewController.xib in Resources */,
+				198229A018FE1D0800DF72CA /* tutorial_panel_1.png in Resources */,
 				1950E4FE165F0BAF00E98488 /* ItemViewCell.xib in Resources */,
 				1939CA5416644A6E002C21F6 /* AddNewItemViewController.xib in Resources */,
 				1986625516670397003C19EE /* sample_avatar.jpeg in Resources */,
@@ -953,6 +994,7 @@
 				195B304016795F0D00F80073 /* offers_icon.png in Resources */,
 				195B304116795F0D00F80073 /* offers_icon@2x.png in Resources */,
 				195B30441679611000F80073 /* location_icon.png in Resources */,
+				1982299618FE044400DF72CA /* TutorialViewController.xib in Resources */,
 				195B30451679611000F80073 /* location_icon@2x.png in Resources */,
 				195B30481679617A00F80073 /* circle_shade.png in Resources */,
 				19F8EE4618FC39D700E4C847 /* star-off@2x.png in Resources */,
@@ -966,6 +1008,7 @@
 				198A3CF01687768F0016F45C /* comment_divider_line.png in Resources */,
 				198A3CF11687768F0016F45C /* comment_divider_line@2x.png in Resources */,
 				198A3CF81688CD300016F45C /* comment_text_area.png in Resources */,
+				198229A118FE1D0800DF72CA /* tutorial_panel_1@2x.png in Resources */,
 				198A3CF91688CD300016F45C /* comment_text_area@2x.png in Resources */,
 				198A3CFC1688CD3B0016F45C /* send_comment_button.png in Resources */,
 				19F8EE4418FC39D700E4C847 /* star-on.png in Resources */,
@@ -1042,14 +1085,17 @@
 				1939CA5316644A6E002C21F6 /* AddNewItemViewController.m in Sources */,
 				1939CA5C16644B53002C21F6 /* UIImage+Resize.m in Sources */,
 				1939CA5D16644B53002C21F6 /* UIImage+Alpha.m in Sources */,
+				1982299518FE044400DF72CA /* TutorialViewController.m in Sources */,
 				1939CA5E16644B53002C21F6 /* UIImage+RoundedCorner.m in Sources */,
 				195B30281676B74F00F80073 /* ItemDetailsViewController.m in Sources */,
 				19BAB21716801043005688DE /* UILabel+UILabel_Resize.m in Sources */,
 				198A3CF416877C380016F45C /* NSDate+NSDate_Formatter.m in Sources */,
 				196E43B6168BC2BE009608E4 /* UILabel+Extensions.m in Sources */,
 				197AB10D16C1DB360084D3FA /* UIUnderlinedButton.m in Sources */,
+				1982299C18FE046800DF72CA /* MYBlurIntroductionView.m in Sources */,
 				198B5BD616CDA00E00DC2ED2 /* ProfileHeaderViewCell.m in Sources */,
 				1977163216E035F70010FF5D /* DoneShareViewController.m in Sources */,
+				1982299D18FE046800DF72CA /* MYIntroductionPanel.m in Sources */,
 				194A9FCB16E50AFE00091947 /* UIScrollView+SVInfiniteScrolling.m in Sources */,
 				197EB5C418F718E8005BD047 /* FacebookCache.m in Sources */,
 				194A9FCC16E50AFE00091947 /* UIScrollView+SVPullToRefresh.m in Sources */,
