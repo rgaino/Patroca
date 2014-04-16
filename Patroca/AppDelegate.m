@@ -138,6 +138,9 @@
     return [FBAppCall handleOpenURL:url sourceApplication:sourceApplication];
 }
 
+- (BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url {
+    return [PFFacebookUtils handleOpenURL:url];
+}
 
 #pragma mark Unused signatured methods
 
@@ -161,6 +164,7 @@
 - (void)applicationDidBecomeActive:(UIApplication *)application
 {
     // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
+    [[PFFacebookUtils session] handleDidBecomeActive];
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application

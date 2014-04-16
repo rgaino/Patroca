@@ -1,4 +1,4 @@
-//
+    //
 //  BaseViewController.m
 //  Patroca
 //
@@ -79,17 +79,23 @@
         //the Login/Profile button
         _loginProfileButton = [UIButton buttonWithType:UIButtonTypeCustom];
         [_loginProfileButton setFrame:CGRectMake(0, headerOffset, 51, 44)];
-        
+
+        //activity indicator to login
+        loginActivityIndicator = [[UIActivityIndicatorView alloc] initWithFrame:_loginProfileButton.frame];
+        [loginActivityIndicator setActivityIndicatorViewStyle:UIActivityIndicatorViewStyleGray];
+        [loginActivityIndicator setHidesWhenStopped:YES];
+        [loginActivityIndicator stopAnimating];
+
         //see if user is already logged in on Facebook and display the profile picture
         if ([PFUser currentUser] && [PFFacebookUtils isLinkedWithUser:[PFUser currentUser]]) {
             [self userLoggedInSuccessfully];
         }else {
-            
             [_loginProfileButton setImage:[UIImage imageNamed:@"login_with_fb.png"] forState:UIControlStateNormal];
         }
         [_loginProfileButton addTarget:self action:@selector(loginProfileButtonPressed) forControlEvents:UIControlEventTouchUpInside];
 
         [headerView addSubview:_loginProfileButton];
+        [headerView addSubview:loginActivityIndicator];
     }
     
     //the Avatar mask image
@@ -174,9 +180,16 @@
                 
                 [_loginProfileButton.imageView setImageWithURL:profilePictureURL placeholderImage:nil completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType) {
                     //TODO: check for error and do something about it
-                    [_loginProfileButton setImage:_loginProfileButton.imageView.image forState:UIControlStateNormal];
-                }];
+                    [loginActivityIndicator stopAnimating];
+                    [_loginProfileButton setHidden:NO];
 
+                    if(!error) {
+                        [_loginProfileButton setImage:_loginProfileButton.imageView.image forState:UIControlStateNormal];
+                    } else {
+                        NSLog(@"Error: %@ %@", error, [error userInfo]);
+                        [_loginProfileButton setImage:[UIImage imageNamed:@"login_with_fb.png"] forState:UIControlStateNormal];
+                    }
+                }];
                 
                 PFInstallation *myInstallation = [PFInstallation currentInstallation];
                 [myInstallation setObject:[PFUser currentUser] forKey:DB_FIELD_USER_ID];
@@ -187,6 +200,9 @@
             NSLog(@"Error: %@ %@", error, [error userInfo]);
             //probably token expired or user logged out
             [PFUser logOut];
+            [loginActivityIndicator stopAnimating];
+            [_loginProfileButton setImage:[UIImage imageNamed:@"login_with_fb.png"] forState:UIControlStateNormal];
+            [_loginProfileButton setHidden:NO];
         }
     }];
     
@@ -203,6 +219,8 @@
     } else {
         
         //First time user (on this device at least) so log in
+        [loginActivityIndicator startAnimating];
+        [_loginProfileButton setHidden:YES];
         
         // The permissions requested from the user
         NSArray *permissionsArray = [NSArray arrayWithObjects:
@@ -217,6 +235,9 @@
         [PFFacebookUtils logInWithPermissions:permissionsArray
                                         block:^(PFUser *user, NSError *error) {
                                             if (!user) {
+                                                [_loginProfileButton setImage:[UIImage imageNamed:@"login_with_fb.png"] forState:UIControlStateNormal];
+                                                [_loginProfileButton setHidden:NO];
+                                                [loginActivityIndicator stopAnimating];
                                                 if (!error) { // The user cancelled the login
                                                     NSLog(@"Uh oh. The user cancelled the Facebook login.");
                                                 } else { // An error occurred
