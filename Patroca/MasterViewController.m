@@ -93,8 +93,6 @@
 - (void)userLoggedInSuccessfully {
     [super userLoggedInSuccessfully];
     [self menuButtonPressed:_friendsButton];
-//    [itemDataSource setItemDataSourceMode:ItemDataSourceModeFriends];
-//    [itemDataSource refresh];
 }
 
 - (void)createErrorMessageView {
