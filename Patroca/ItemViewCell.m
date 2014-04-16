@@ -55,7 +55,8 @@
     NSURL *facebookProfilePicURL = [NSURL URLWithString:facebookProfilePicString];
     [_ownerProfilePic setImageWithURL:facebookProfilePicURL];
 
-    if(locationManager == nil) {
+    //don't ask for CLLocation permissions for this yet... defer to when the user chooses Nearby items
+    if(locationManager == nil && [CLLocationManager authorizationStatus] == kCLAuthorizationStatusAuthorized) {
         locationManager = [[CLLocationManager alloc] init];
         [locationManager setDelegate:self];
         [locationManager setDistanceFilter:kCLDistanceFilterNone];
@@ -78,7 +79,9 @@
         }
     }
     
-    [locationManager startUpdatingLocation];
+    if([CLLocationManager authorizationStatus] == kCLAuthorizationStatusAuthorized) {
+        [locationManager startUpdatingLocation];
+    }
 }
 
 - (void)updateTotalComments:(int)totalComments {
