@@ -26,9 +26,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-//    CGRect frame = CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height);
     CGRect frame = [[UIScreen mainScreen] bounds];
-    NSLog(@"%.2f %.2f", frame.size.width, frame.size.height);
 
     MYIntroductionPanel *panel1 = [[MYIntroductionPanel alloc] initWithFrame:frame
                                                                title:NSLocalizedString(@"tutorial_panel_1_title", nil)
