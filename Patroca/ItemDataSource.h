@@ -14,6 +14,8 @@
 @class PFGeoPoint;
 @class PFObject;
 
+typedef void (^GetItemsCompletionBlock)(NSError *error);
+
 //the current data mode
 typedef enum {
     ItemDataSourceModeFeatured,
@@ -35,15 +37,10 @@ typedef enum {
 @property (readwrite) NSObject<ItemDataSourceDelegate> *delegate;
 @property (readwrite) PFObject *userObject;
 
-//- (void)getFriendsItemsAndReturn;
-//- (void)getNearbyItemsAndReturn;
-//- (void)getFeaturedItemsAndReturn;
-//- (void)getUserItemsAndReturn;
-
 - (void)setItemDataSourceMode:(ItemDataSourceMode)var;
 - (void)getTotalCommentsForItems:(NSArray*)objects;
 - (void)refresh;
-- (void)getNextPageAndReturn;
+- (void)getNextPageAndReturnWithCallback:(GetItemsCompletionBlock)callback;
 - (void)clearAndReturn;
 
 @end

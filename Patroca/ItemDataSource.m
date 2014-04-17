@@ -32,25 +32,31 @@
 
 - (void)refresh {
     currentResultsLimit = 0;
-    [self getNextPageAndReturn];
+    [self getNextPageAndReturnWithCallback:^(NSError *error) {
+        
+    }];
 }
 
 
-- (void)getNextPageAndReturn {
+- (void)getNextPageAndReturnWithCallback:(GetItemsCompletionBlock)callback {
     
-    switch(itemDataSourceMode) {
-        case ItemDataSourceModeFeatured:
-            [self getFeaturedItemsAndReturn];
-            break;
-        case ItemDataSourceModeFriends:
-            [self getFriendsItemsAndReturn];
-            break;
-        case ItemDataSourceModeNearby:
-            [self getNearbyItemsAndReturn];
-            break;
-        case ItemDataSourceModeUser:
-            [self getUserItemsAndReturn];
-            break;
+    if(itemDataSourceMode == ItemDataSourceModeFeatured) {
+        [self getFeaturedItemsAndReturnWithCallback:^(NSError *error) {
+            callback(error);
+        }];
+    }
+    else if(itemDataSourceMode == ItemDataSourceModeFriends) {
+            [self getFriendsItemsAndReturnWithCallback:^(NSError *error) {
+                callback(error);
+            }];
+    } else if(itemDataSourceMode ==  ItemDataSourceModeNearby) {
+            [self getNearbyItemsAndReturnWithCallback:^(NSError *error) {
+                callback(error);
+            }];
+    } else if(itemDataSourceMode == ItemDataSourceModeUser) {
+            [self getUserItemsAndReturnWithCallback:^(NSError *error) {
+                callback(error);
+            }];
     }
 }
 
@@ -63,13 +69,8 @@
 - (void)getTotalCommentsForItems:(NSArray*)objects {
     
     //WARNING: function disabled because we're not displaying total comments anymore (nowhere)
-    
-    
-    
-    return;
-    
-    
-    
+
+    /*
     //calling CloudCode function to get a count of comments for each item
     NSMutableArray *ids = [[NSMutableArray alloc] init];
     for(PFObject *oneItem in objects) {
@@ -83,6 +84,7 @@
         [_delegate populateTotalCommentsWithDictionary:totalCommentsForItemsDictionary];
         
     }];
+     */
 }
 
 - (void)locationManager:(CLLocationManager *)manager didUpdateToLocation:(CLLocation *)newLocation fromLocation:(CLLocation *)oldLocation {
@@ -91,13 +93,15 @@
     
     myLocationPoint = [PFGeoPoint geoPointWithLatitude:newLocation.coordinate.latitude longitude:newLocation.coordinate.longitude];
     [locationManager stopUpdatingLocation];
-    [self getNearbyItemsAndReturn];
+    [self getNearbyItemsAndReturnWithCallback:^(NSError *error) {
+        //nothing to do here
+    }];
 }
 
 
 #pragma mark Private or Hidden methods (undeclared on .h file, but must be at the end of this file)
 
-- (void)getFeaturedItemsAndReturn {
+- (void)getFeaturedItemsAndReturnWithCallback:(GetItemsCompletionBlock)callback {
     
     if(itemDataSourceMode!=ItemDataSourceModeFeatured) {
         currentResultsLimit=0;
@@ -105,45 +109,51 @@
     
     FacebookCache *facebookCache = [FacebookCache getInstance];
     [facebookCache getFacebookFriendsPFUserArrayInBackgroundWithCallback:^(NSArray *friendPFUserArray, NSError *error) {
-        
-        PFQuery *itemsQuery = [PFQuery queryWithClassName:DB_TABLE_ITEMS];
-        [itemsQuery whereKey:DB_RELATION_USER_LIKES_ITEMS containedIn:friendPFUserArray];
-        [itemsQuery whereKey:DB_FIELD_USER_ID notEqualTo:[PFUser currentUser]];
-        [itemsQuery orderByDescending:DB_FIELD_CREATED_AT];
-        
-        [itemsQuery setSkip:currentResultsLimit];
-        [itemsQuery setLimit:resultsPerPage];
-        
-        [itemsQuery findObjectsInBackgroundWithBlock:^(NSArray *itemObjects, NSError *error) {
+        if(!error) {
+            PFQuery *itemsQuery = [PFQuery queryWithClassName:DB_TABLE_ITEMS];
+            [itemsQuery whereKey:DB_RELATION_USER_LIKES_ITEMS containedIn:friendPFUserArray];
+            [itemsQuery whereKey:DB_FIELD_USER_ID notEqualTo:[PFUser currentUser]];
+            [itemsQuery orderByDescending:DB_FIELD_CREATED_AT];
             
-            //TODO: this code is repeated in the 3 functions, we should make a single method
-            if (!error) {
-                myLocationPoint = nil;
+            [itemsQuery setSkip:currentResultsLimit];
+            [itemsQuery setLimit:resultsPerPage];
+            
+            [itemsQuery findObjectsInBackgroundWithBlock:^(NSArray *itemObjects, NSError *error) {
                 
-                if(currentResultsLimit == 0) {
-                    //first page of results
-                    _items = [NSArray arrayWithArray:itemObjects];
-                    [_delegate populateCollectionView];
-                } else {
-                    NSMutableArray *tempReturnArray = [NSMutableArray arrayWithArray:_items];
-                    [tempReturnArray addObjectsFromArray:itemObjects];
-                    _items = tempReturnArray;
-                    [_delegate addItemsToCollectionView];
-                }
-                
-                currentResultsLimit += resultsPerPage;
+                //TODO: this code is repeated in the 3 functions, we should make a single method
+                if (!error) {
+                    myLocationPoint = nil;
+                    
+                    if(currentResultsLimit == 0) {
+                        //first page of results
+                        _items = [NSArray arrayWithArray:itemObjects];
+                        [_delegate populateCollectionView];
+                    } else {
+                        NSMutableArray *tempReturnArray = [NSMutableArray arrayWithArray:_items];
+                        [tempReturnArray addObjectsFromArray:itemObjects];
+                        _items = tempReturnArray;
+                        [_delegate addItemsToCollectionView];
+                    }
+                    
+                    currentResultsLimit += resultsPerPage;
 
-                [self getTotalCommentsForItems:itemObjects];
-            } else {
-                // Log details of the failure
-                NSLog(@"Error: %@ %@", error, [error userInfo]);
-                _items = [NSArray array];
-            }
-        }];
+                    [self getTotalCommentsForItems:itemObjects];
+                } else {
+                    // Log details of the failure
+                    NSLog(@"Error: %@ %@", error, [error userInfo]);
+                    _items = [NSArray array];
+                    callback(error);
+                }
+            }];
+        } else {
+            NSLog(@"Error: %@ %@", error, [error userInfo]);
+            _items = [NSArray array];
+            callback(error);
+        }
     }];
 }
 
-- (void)getFriendsItemsAndReturn {
+- (void)getFriendsItemsAndReturnWithCallback:(GetItemsCompletionBlock)callback {
     
     if(itemDataSourceMode!=ItemDataSourceModeFriends) {
         currentResultsLimit=0;
@@ -160,48 +170,53 @@
     
     [facebookCache getFacebookFriendsPFUserArrayInBackgroundWithCallback:^(NSArray *friendPFUserArray, NSError *error) {
 
-        PFQuery *query = [PFQuery queryWithClassName:DB_TABLE_ITEMS];
-        [query whereKey:DB_FIELD_USER_ID notEqualTo:[PFUser currentUser]];
-        [query whereKey:DB_FIELD_USER_ID containedIn:friendPFUserArray];
-        
-        [query setSkip:currentResultsLimit];
-        [query setLimit:resultsPerPage];
-        
-        [query orderByDescending:DB_FIELD_CREATED_AT];
-        
-        [query findObjectsInBackgroundWithBlock:^(NSArray *itemObjects, NSError *error) {
+        if(!error) {
+            PFQuery *query = [PFQuery queryWithClassName:DB_TABLE_ITEMS];
+            [query whereKey:DB_FIELD_USER_ID notEqualTo:[PFUser currentUser]];
+            [query whereKey:DB_FIELD_USER_ID containedIn:friendPFUserArray];
             
-            [[UserCache getInstance] getLikedItemsArrayWithCallback:^(NSMutableArray *likedItemsArray, NSError *error) {
+            [query setSkip:currentResultsLimit];
+            [query setLimit:resultsPerPage];
             
-                if (!error) {
-                    
-                    if(currentResultsLimit == 0) {
-                        //first page of results
-                        _items = [NSArray arrayWithArray:itemObjects];
-                        [_delegate populateCollectionView];
+            [query orderByDescending:DB_FIELD_CREATED_AT];
+            
+            [query findObjectsInBackgroundWithBlock:^(NSArray *itemObjects, NSError *error) {
+                
+                [[UserCache getInstance] getLikedItemsArrayWithCallback:^(NSMutableArray *likedItemsArray, NSError *error) {
+                
+                    if (!error) {
+                        
+                        if(currentResultsLimit == 0) {
+                            //first page of results
+                            _items = [NSArray arrayWithArray:itemObjects];
+                            [_delegate populateCollectionView];
+                        } else {
+                            NSMutableArray *tempReturnArray = [NSMutableArray arrayWithArray:_items];
+                            [tempReturnArray addObjectsFromArray:itemObjects];
+                            _items = tempReturnArray;
+                            [_delegate addItemsToCollectionView];
+                        }
+                        
+                        currentResultsLimit += resultsPerPage;
+                        [self getTotalCommentsForItems:itemObjects];
+                        
                     } else {
-                        NSMutableArray *tempReturnArray = [NSMutableArray arrayWithArray:_items];
-                        [tempReturnArray addObjectsFromArray:itemObjects];
-                        _items = tempReturnArray;
-                        [_delegate addItemsToCollectionView];
+                        NSLog(@"Error: %@ %@", error, [error userInfo]);
+                        _items = [NSArray array];
+                        callback(error);
                     }
-                    
-                    currentResultsLimit += resultsPerPage;
-                    [self getTotalCommentsForItems:itemObjects];
-                    
-                } else {
-                    // Log details of the failure
-                    NSLog(@"Error: %@ %@", error, [error userInfo]);
-                    _items = [NSArray array];
-                    //TODO: show error message
-                }
+                }];
             }];
-        }];
+        } else {
+            NSLog(@"Error: %@ %@", error, [error userInfo]);
+            _items = [NSArray array];
+            callback(error);
+        }
     }];
 
 }
 
-- (void)getNearbyItemsAndReturn {
+- (void)getNearbyItemsAndReturnWithCallback:(GetItemsCompletionBlock)callback {
     
     if(itemDataSourceMode!=ItemDataSourceModeNearby) {
         currentResultsLimit=0;
@@ -251,15 +266,15 @@
             [self getTotalCommentsForItems:itemObjects];
             
         } else {
-            // Log details of the failure
             NSLog(@"Error: %@ %@", error, [error userInfo]);
             _items = [NSArray array];
+            callback(error);
         }
     }];
 }
 
 
-- (void)getUserItemsAndReturn {
+- (void)getUserItemsAndReturnWithCallback:(GetItemsCompletionBlock)callback {
     
     if(itemDataSourceMode!=ItemDataSourceModeUser) {
         currentResultsLimit=0;
@@ -297,14 +312,12 @@
             [self getTotalCommentsForItems:itemObjects];
             
         } else {
-            // Log details of the failure
             NSLog(@"Error: %@ %@", error, [error userInfo]);
             _items = [NSArray array];
-            //TODO: show error message
+            callback(error);
         }
     }];
 }
-
 
 
 @end

@@ -49,7 +49,7 @@
     
     //add infinite scrolling
     [_contentDisplayCollectionView addInfiniteScrollingWithActionHandler:^{
-        [itemDataSource getNextPageAndReturn];
+        [itemDataSource getNextPageAndReturnWithCallback:^(NSError *error) {}];
     }];
 
 }
@@ -91,7 +91,7 @@
     //read Facebook profile information
     userData = (NSDictionary *)result;
     [itemDataSource setUserObject:userObject];
-    [itemDataSource getNextPageAndReturn];
+    [itemDataSource getNextPageAndReturnWithCallback:^(NSError *error) {}];
     
     totalCommentsForItemsDictionary = [[NSMutableDictionary alloc] init];
     [_contentDisplayCollectionView registerClass:[ItemViewCell class] forCellWithReuseIdentifier:CELL_REUSE_IDENTIFIER];
