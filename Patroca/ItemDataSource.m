@@ -136,8 +136,8 @@
                     }
                     
                     currentResultsLimit += resultsPerPage;
-
                     [self getTotalCommentsForItems:itemObjects];
+                    callback(nil);
                 } else {
                     // Log details of the failure
                     NSLog(@"Error: %@ %@", error, [error userInfo]);
@@ -199,7 +199,7 @@
                         
                         currentResultsLimit += resultsPerPage;
                         [self getTotalCommentsForItems:itemObjects];
-                        
+                        callback(nil);
                     } else {
                         NSLog(@"Error: %@ %@", error, [error userInfo]);
                         _items = [NSArray array];
@@ -262,9 +262,8 @@
             }
             
             currentResultsLimit += resultsPerPage;
-            
             [self getTotalCommentsForItems:itemObjects];
-            
+            callback(nil);
         } else {
             NSLog(@"Error: %@ %@", error, [error userInfo]);
             _items = [NSArray array];
@@ -308,9 +307,8 @@
             }
             
             currentResultsLimit += resultsPerPage;
-            
             [self getTotalCommentsForItems:itemObjects];
-            
+            callback(nil);
         } else {
             NSLog(@"Error: %@ %@", error, [error userInfo]);
             _items = [NSArray array];

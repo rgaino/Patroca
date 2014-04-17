@@ -181,7 +181,8 @@
     {
         [itemDataSource setItemDataSourceMode:ItemDataSourceModeFriends];
         [itemDataSource getNextPageAndReturnWithCallback:^(NSError *error) {
-            if(!error) {
+            if(!error && itemDataSource.items.count==0) {
+                
                 //list empty, show invite message
                 //build the error message for a user with no friends on Patroca
                 [_contentDisplayCollectionView setHidden:YES];
