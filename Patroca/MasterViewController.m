@@ -104,6 +104,16 @@
     [self.view addSubview:errorMessageView];
 }
 
+- (void)showErrorIcon {
+    [_contentDisplayCollectionView setHidden:YES];
+    [_loadingActivityIndicator stopAnimating];
+    [self createErrorMessageView];
+    UIImageView *errorIconImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"error.png"]];
+    float centerX = (errorMessageView.frame.size.width/2) - (errorIconImageView.frame.size.width/2);
+    [errorIconImageView setFrame:CGRectMake(centerX, 40, errorIconImageView.frame.size.width, errorIconImageView.frame.size.height)];
+    [errorMessageView addSubview:errorIconImageView];
+}
+
 - (void)startRefresh:(id)sender {
     [itemDataSource refresh];
 }
@@ -166,11 +176,13 @@
 }
 
 - (void)loadFeaturedItems {
-    
+
     [itemDataSource setItemDataSourceMode:ItemDataSourceModeFeatured];
     [itemDataSource getNextPageAndReturnWithCallback:^(NSError *error) {
-        //TODO: show error message here
         [_loadingActivityIndicator stopAnimating];
+        if (error) {
+            [self showErrorIcon];
+        }
     }];
 }
 
@@ -182,7 +194,6 @@
         [itemDataSource setItemDataSourceMode:ItemDataSourceModeFriends];
         [itemDataSource getNextPageAndReturnWithCallback:^(NSError *error) {
             if(!error && itemDataSource.items.count==0) {
-                
                 //list empty, show invite message
                 //build the error message for a user with no friends on Patroca
                 [_contentDisplayCollectionView setHidden:YES];
@@ -233,11 +244,13 @@
                 
                 [_loadingActivityIndicator stopAnimating];
             }
+            if (error) {
+                [self showErrorIcon];
+            }
         }];
     } else {
         //user not logged in yet
-        //TODO: show nice message
-        [_loadingActivityIndicator stopAnimating];
+        [self showErrorIcon];
     }
 }
 
@@ -245,9 +258,13 @@
     
     [itemDataSource setItemDataSourceMode:ItemDataSourceModeNearby];
     [itemDataSource getNextPageAndReturnWithCallback:^(NSError *error) {
-        //TODO:show error message
+        [_loadingActivityIndicator stopAnimating];
+        if (error) {
+            [self showErrorIcon];
+        }
     }];
 }
+
 
 - (void)inviteFriendsButtonPressed {
     //    [FBNativeDialogs presentShareDialogModallyFrom:self initialText:@"initialText" image:nil url:[NSURL URLWithString:@"http://joystiq.com"] handler:^(FBNativeDialogResult result, NSError *error) {

@@ -87,15 +87,18 @@
      */
 }
 
+- (void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error {
+    NSLog(@"Error on 'locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error': %@ %@", error, [error userInfo]);
+    [_delegate showErrorIcon];
+}
+
 - (void)locationManager:(CLLocationManager *)manager didUpdateToLocation:(CLLocation *)newLocation fromLocation:(CLLocation *)oldLocation {
     
     NSLog(@"Location updated to is %f %f", newLocation.coordinate.latitude, newLocation.coordinate.longitude);
     
     myLocationPoint = [PFGeoPoint geoPointWithLatitude:newLocation.coordinate.latitude longitude:newLocation.coordinate.longitude];
     [locationManager stopUpdatingLocation];
-    [self getNearbyItemsAndReturnWithCallback:^(NSError *error) {
-        //nothing to do here
-    }];
+    [self getNearbyItemsAndReturnWithCallback:^(NSError *error) {}];
 }
 
 

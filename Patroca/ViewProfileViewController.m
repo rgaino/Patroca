@@ -35,6 +35,10 @@
     return self;
 }
 
+- (void)showErrorIcon {
+    //TODO: this
+};
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -49,7 +53,7 @@
     
     //add infinite scrolling
     [_contentDisplayCollectionView addInfiniteScrollingWithActionHandler:^{
-        [itemDataSource getNextPageAndReturnWithCallback:^(NSError *error) {}];
+        [itemDataSource getNextPageAndReturnWithCallback:^(NSError *error) {  }];
     }];
 
 }
