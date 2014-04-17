@@ -49,3 +49,5 @@
 "tutorial_panel_5_title" = "Welcome to Patroca";
 "tutorial_panel_5_description" = "To begin, connect with Facebook. Once you're in, tap your profile picture to see your profile page.";
 "Skip"= "Skip";
+"login_profile_help" = "Welcome!\n To see what your friends have to trade with you, tap the Facebook button and connect.";
+"got it" = "Got it!";

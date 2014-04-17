@@ -49,3 +49,5 @@
 "tutorial_panel_5_title" = "Bem-vindo ao Patroca";
 "tutorial_panel_5_description" = "Para começar, conecte-se com o Facebook. Após conectar-se, acesse a sua foto para ver seu perfil.";
 "Skip"= "Pular";
+"login_profile_help" = "Bem-vindo!\n Para ver o que seus amigos tem para trocar, toque no botão do Facebook para conectar.";
+"got it" = "Entendi!";

@@ -19,6 +19,7 @@
 #import "SVPullToRefresh.h"
 #import "UILabel+UILabel_Resize.h"
 #import "TutorialViewController.h"
+#import "HelpView.h"
 
 #define CELL_REUSE_IDENTIFIER @"Item_Cell_Master"
 
@@ -72,14 +73,21 @@
     
     [super viewDidLoad];
 
+//    UIButton *tutorialButton = [UIButton buttonWithType:UIButtonTypeCustom];
+//    [tutorialButton setFrame:CGRectMake(10, 10, 25, 25)];
+//    [tutorialButton setImage:[UIImage imageNamed:@"icon.png"] forState:UIControlStateNormal];
+//    [tutorialButton addTarget:self action:@selector(loginProfileButtonPressed) forControlEvents:UIControlEventTouchUpInside];
+//    [self.view addSubview:tutorialButton];
+    
     //if user is logged in, load friends, otherwise load nearby
     if ([PFUser currentUser] && [PFFacebookUtils isLinkedWithUser:[PFUser currentUser]]) {
         [self performSelector:@selector(menuButtonPressed:) withObject:_friendsButton afterDelay:1.0f];
     } else {
-        TutorialViewController *tutorialViewController = [[TutorialViewController alloc] initWithNibName:@"TutorialViewController" bundle:nil];
-        [tutorialViewController setMasterViewController:self];
-        [self.navigationController pushViewController:tutorialViewController animated:YES];
-//        [self performSelector:@selector(menuButtonPressed:) withObject:_nearbyButton afterDelay:1.0f];
+        HelpView *loginHelpView = [[HelpView alloc] initWithStyle:HelpViewTypeLogin];
+        [self.view addSubview:loginHelpView];
+//        TutorialViewController *tutorialViewController = [[TutorialViewController alloc] initWithNibName:@"TutorialViewController" bundle:nil];
+//        [tutorialViewController setMasterViewController:self];
+//        [self.navigationController pushViewController:tutorialViewController animated:YES];
     }
 
 }
