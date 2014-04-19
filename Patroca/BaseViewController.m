@@ -14,12 +14,7 @@
 #import "AddNewItemViewController.h"
 #import "FacebookCache.h"
 
-@interface BaseViewController ()
-
-@end
-
 @implementation BaseViewController
-
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -174,14 +169,14 @@
             [currentUser setObject:facebookId forKey:DB_FIELD_USER_FACEBOOK_ID];
             [currentUser setObject:name forKey:DB_FIELD_USER_NAME];
             [currentUser setEmail:email];
-            [currentUser saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+            [currentUser saveInBackground];//WithBlock:^(BOOL succeeded, NSError *error) {
                 
-                NSURL *profilePictureURL = [NSURL URLWithString:[NSString stringWithFormat:@"https://graph.facebook.com/%@/picture?type=square", [[PFUser currentUser] objectForKey:DB_FIELD_USER_FACEBOOK_ID]]];
+                NSURL *profilePictureURL = [NSURL URLWithString:[NSString stringWithFormat:@"https://graph.facebook.com/%@/picture?type=square", facebookId]];
                 
-                [_loginProfileButton.imageView setImageWithURL:profilePictureURL placeholderImage:nil completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType) {
+                [_loginProfileButton.imageView setImageWithURL:profilePictureURL placeholderImage:[UIImage imageNamed:@"avatar_default.png"] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType) {
                     //TODO: check for error and do something about it
                     [loginActivityIndicator stopAnimating];
-                    [_loginProfileButton setHidden:NO];
+//                    [_loginProfileButton setHidden:NO];
 
                     if(!error) {
                         [_loginProfileButton setImage:_loginProfileButton.imageView.image forState:UIControlStateNormal];
@@ -194,7 +189,7 @@
                 PFInstallation *myInstallation = [PFInstallation currentInstallation];
                 [myInstallation setObject:[PFUser currentUser] forKey:DB_FIELD_USER_ID];
                 [myInstallation saveEventually];
-            }];
+//            }];
 
         } else {
             NSLog(@"Error: %@ %@", error, [error userInfo]);
@@ -202,7 +197,7 @@
             [PFUser logOut];
             [loginActivityIndicator stopAnimating];
             [_loginProfileButton setImage:[UIImage imageNamed:@"login_with_fb.png"] forState:UIControlStateNormal];
-            [_loginProfileButton setHidden:NO];
+//            [_loginProfileButton setHidden:NO];
         }
     }];
     
@@ -220,7 +215,8 @@
         
         //First time user (on this device at least) so log in
         [loginActivityIndicator startAnimating];
-        [_loginProfileButton setHidden:YES];
+        [_loginProfileButton setImage:[UIImage imageNamed:@"avatar_default.png"] forState:UIControlStateNormal];
+//        [_loginProfileButton setHidden:YES];
         
         // The permissions requested from the user
         NSArray *permissionsArray = [NSArray arrayWithObjects:
@@ -236,7 +232,7 @@
                                         block:^(PFUser *user, NSError *error) {
                                             if (!user) {
                                                 [_loginProfileButton setImage:[UIImage imageNamed:@"login_with_fb.png"] forState:UIControlStateNormal];
-                                                [_loginProfileButton setHidden:NO];
+//                                                [_loginProfileButton setHidden:NO];
                                                 [loginActivityIndicator stopAnimating];
                                                 if (!error) { // The user cancelled the login
                                                     NSLog(@"Uh oh. The user cancelled the Facebook login.");

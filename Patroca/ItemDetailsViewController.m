@@ -131,8 +131,7 @@
     
     NSString *facebookProfilePicString = [NSString stringWithFormat:FB_PROFILE_PICTURE_URL, [userObject objectForKey:DB_FIELD_USER_FACEBOOK_ID]];
     NSURL *facebookProfilePicURL = [NSURL URLWithString:facebookProfilePicString];
-    [ownerProfilePic setImageWithURL:facebookProfilePicURL];
-
+    [ownerProfilePic setImageWithURL:facebookProfilePicURL placeholderImage:[UIImage imageNamed:@"avatar_default.png"]];
     
     UILabel *itemDescriptionLabel = [[UILabel alloc] initWithFrame:CGRectMake(15, 355, 290, 15)];
     [itemDescriptionLabel setText:[_itemObject objectForKey:DB_FIELD_ITEM_DESCRIPTION]];
@@ -345,7 +344,7 @@
         PFUser *commenterUserObject = [[UserCache getInstance] getCachedUserForId:userId];
         NSString *profilePicString = [NSString stringWithFormat:FB_PROFILE_PICTURE_URL, [commenterUserObject objectForKey:DB_FIELD_USER_FACEBOOK_ID]];
         NSURL *profilePicURL = [NSURL URLWithString:profilePicString];
-        [profilePictureImageView setImageWithURL:profilePicURL];
+        [profilePictureImageView setImageWithURL:profilePicURL placeholderImage:[UIImage imageNamed:@"avatar_default.png"]];
         [singleCommentView addSubview:profilePictureImageView];
         
         UIButton *commenterProfileInvisibleButton = [UIButton buttonWithType:UIButtonTypeCustom];

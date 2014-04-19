@@ -53,7 +53,7 @@
     
     NSString *facebookProfilePicString = [NSString stringWithFormat:FB_PROFILE_PICTURE_URL, [userObject objectForKey:DB_FIELD_USER_FACEBOOK_ID]];
     NSURL *facebookProfilePicURL = [NSURL URLWithString:facebookProfilePicString];
-    [_ownerProfilePic setImageWithURL:facebookProfilePicURL];
+    [_ownerProfilePic setImageWithURL:facebookProfilePicURL placeholderImage:[UIImage imageNamed:@"avatar_default.png"]];
 
     //don't ask for CLLocation permissions for this yet... defer to when the user chooses Nearby items
     if(locationManager == nil && [CLLocationManager authorizationStatus] == kCLAuthorizationStatusAuthorized) {

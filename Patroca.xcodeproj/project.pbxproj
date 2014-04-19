@@ -144,6 +144,8 @@
 		198B5BDA16CDA0AA00DC2ED2 /* ProfileHeaderViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 198B5BD916CDA0AA00DC2ED2 /* ProfileHeaderViewCell.xib */; };
 		198B5BDD16CDC11A00DC2ED2 /* facebook_profile_button.png in Resources */ = {isa = PBXBuildFile; fileRef = 198B5BDB16CDC11A00DC2ED2 /* facebook_profile_button.png */; };
 		198B5BDE16CDC11A00DC2ED2 /* facebook_profile_button@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 198B5BDC16CDC11A00DC2ED2 /* facebook_profile_button@2x.png */; };
+		19996B751902B4D600232D84 /* avatar_default.png in Resources */ = {isa = PBXBuildFile; fileRef = 19996B731902B4D600232D84 /* avatar_default.png */; };
+		19996B761902B4D600232D84 /* avatar_default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 19996B741902B4D600232D84 /* avatar_default@2x.png */; };
 		199E103516F1687400C5B7CA /* FacebookSDKResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 199E103416F1687400C5B7CA /* FacebookSDKResources.bundle */; };
 		199E103C16F16E2600C5B7CA /* MPNotificationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 199E103916F16E2600C5B7CA /* MPNotificationView.m */; settings = {COMPILER_FLAGS = "-w"; }; };
 		199E103D16F16E2600C5B7CA /* OBGradientView.m in Sources */ = {isa = PBXBuildFile; fileRef = 199E103B16F16E2600C5B7CA /* OBGradientView.m */; };
@@ -347,6 +349,8 @@
 		198B5BD916CDA0AA00DC2ED2 /* ProfileHeaderViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ProfileHeaderViewCell.xib; sourceTree = "<group>"; };
 		198B5BDB16CDC11A00DC2ED2 /* facebook_profile_button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = facebook_profile_button.png; sourceTree = "<group>"; };
 		198B5BDC16CDC11A00DC2ED2 /* facebook_profile_button@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "facebook_profile_button@2x.png"; sourceTree = "<group>"; };
+		19996B731902B4D600232D84 /* avatar_default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = avatar_default.png; sourceTree = "<group>"; };
+		19996B741902B4D600232D84 /* avatar_default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "avatar_default@2x.png"; sourceTree = "<group>"; };
 		199E103416F1687400C5B7CA /* FacebookSDKResources.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = FacebookSDKResources.bundle; sourceTree = "<group>"; };
 		199E103816F16E2600C5B7CA /* MPNotificationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MPNotificationView.h; sourceTree = "<group>"; };
 		199E103916F16E2600C5B7CA /* MPNotificationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MPNotificationView.m; sourceTree = "<group>"; };
@@ -602,6 +606,8 @@
 			children = (
 				19241BEB16E8254700E381F7 /* icon@2x.png */,
 				19241BE916E8254400E381F7 /* icon.png */,
+				19996B731902B4D600232D84 /* avatar_default.png */,
+				19996B741902B4D600232D84 /* avatar_default@2x.png */,
 				1986625416670397003C19EE /* sample_avatar.jpeg */,
 				19F1C33A16A4DC3200CAB526 /* sample_item.jpg */,
 				1939B8C01656915600435705 /* add_new_item_button.png */,
@@ -977,6 +983,7 @@
 				1939B89A16568C3300435705 /* Default.png in Resources */,
 				19331FF019003BD7006396C9 /* error.png in Resources */,
 				1939B89C16568C3300435705 /* Default@2x.png in Resources */,
+				19996B761902B4D600232D84 /* avatar_default@2x.png in Resources */,
 				1939B89E16568C3300435705 /* Default-568h@2x.png in Resources */,
 				1939B8B516568D3500435705 /* MasterViewController.xib in Resources */,
 				1939B8C81656915600435705 /* add_new_item_button.png in Resources */,
@@ -1026,6 +1033,7 @@
 				198A3CEC168776870016F45C /* comment_bottom_line.png in Resources */,
 				198A3CED168776870016F45C /* comment_bottom_line@2x.png in Resources */,
 				198A3CF01687768F0016F45C /* comment_divider_line.png in Resources */,
+				19996B751902B4D600232D84 /* avatar_default.png in Resources */,
 				198A3CF11687768F0016F45C /* comment_divider_line@2x.png in Resources */,
 				198A3CF81688CD300016F45C /* comment_text_area.png in Resources */,
 				198229A118FE1D0800DF72CA /* tutorial_panel_1@2x.png in Resources */,

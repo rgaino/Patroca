@@ -57,8 +57,7 @@
 
     //pull profile picture (type=normal means 100px wide)
     NSURL *profilePictureURL = [NSURL URLWithString:[NSString stringWithFormat:@"https://graph.facebook.com/%@/picture?width=170&height=200", facebookId]];
-    [_profileImageView setImageWithURL:profilePictureURL];
-    [_profileImageView setImageWithURL:profilePictureURL placeholderImage:nil completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType) {
+    [_profileImageView setImageWithURL:profilePictureURL placeholderImage:[UIImage imageNamed:@"avatar_default.png"] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType) {
         [_activityIndicator stopAnimating];
     }];
 
@@ -152,7 +151,7 @@
                 //load friends' profile pics
                 NSURL *profilePictureURL = [NSURL URLWithString:[NSString stringWithFormat:@"https://graph.facebook.com/%@/picture?type=square", [friendIds objectAtIndex:randomFriendId.integerValue]]];
                 UIImageView *profilePictureImageView = [[UIImageView alloc] initWithFrame:CGRectMake(xProfileImageView, 0, sizeProfileImageView, sizeProfileImageView)];
-                [profilePictureImageView setImageWithURL:profilePictureURL];
+                [profilePictureImageView setImageWithURL:profilePictureURL placeholderImage:[UIImage imageNamed:@"avatar_default.png"]];
                 [_friendsPicturesView addSubview:profilePictureImageView];
                 
                 xProfileImageView+=sizeProfileImageView;
