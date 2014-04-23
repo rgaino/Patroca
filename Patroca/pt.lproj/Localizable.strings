@@ -51,3 +51,4 @@
 "Skip"= "Pular";
 "login_profile_help" = "Bem-vindo!\n Para ver o que seus amigos tem para trocar, toque no botão do Facebook para conectar.";
 "got it" = "Entendi!";
+"user_liked_item" = "%@ recomendeu seu item %@";

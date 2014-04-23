@@ -98,6 +98,16 @@
         [[[UserCache getInstance] likedItemsArray] addObject:_cellItemObject];
         [_likeButton setImage:[UIImage imageNamed:@"star-on.png"] forState:UIControlStateNormal];
         [_likeButton setTag:1];
+        
+        // Notify owner that Item was liked
+        NSString *notificationMessage = [NSString stringWithFormat:NSLocalizedString(@"user_liked_item", nil),
+                                         [[PFUser currentUser] objectForKey:DB_FIELD_USER_NAME ],
+                                         [_cellItemObject objectForKey:DB_FIELD_ITEM_NAME]];
+
+        PFQuery *pushQuery = [PFInstallation query];
+        [pushQuery whereKey:DB_FIELD_USER_ID equalTo:[_cellItemObject objectForKey:DB_FIELD_USER_ID]];
+        [PFPush sendPushMessageToQueryInBackground:pushQuery withMessage:notificationMessage];
+        
     } else {
         //Removes like on item
         [relation removeObject:[PFUser currentUser]];
