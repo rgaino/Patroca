@@ -78,6 +78,8 @@
 
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo {
     
+    NSLog(@"Processing remote notification with userInfo: %@", userInfo);
+
     //if item_id comes in, show that item's page
     NSString *itemId = [userInfo objectForKey:@"item_id"];
     
@@ -112,8 +114,6 @@
 }
 
 - (void)processRemoteNotification:(NSDictionary*)userInfo {
-    
-    NSLog(@"Processing remote notification with userInfo: %@", userInfo);
     
     //if item_id comes in, show that item's page
     NSString *itemId = [userInfo objectForKey:@"item_id"];

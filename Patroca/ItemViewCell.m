@@ -104,9 +104,17 @@
                                          [[PFUser currentUser] objectForKey:DB_FIELD_USER_NAME ],
                                          [_cellItemObject objectForKey:DB_FIELD_ITEM_NAME]];
 
+        NSDictionary *pushData = [NSDictionary dictionaryWithObjectsAndKeys:_cellItemObject.objectId,@"item_id",
+                                                                            notificationMessage, @"alert",
+                                  nil];
+        
         PFQuery *pushQuery = [PFInstallation query];
         [pushQuery whereKey:DB_FIELD_USER_ID equalTo:[_cellItemObject objectForKey:DB_FIELD_USER_ID]];
-        [PFPush sendPushMessageToQueryInBackground:pushQuery withMessage:notificationMessage];
+        
+        PFPush *pushNotification = [[PFPush alloc] init];
+        [pushNotification setQuery:pushQuery];
+        [pushNotification setData:pushData];
+        [pushNotification sendPushInBackground];
         
     } else {
         //Removes like on item
