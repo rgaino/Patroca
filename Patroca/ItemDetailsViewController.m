@@ -234,12 +234,14 @@
         }
     }
 
+    /*
     //share on Facebook button
     UIButton *recommendButton = [UIButton buttonWithType:UIButtonTypeCustom];
     [recommendButton setImage:[UIImage imageNamed:@"recommend_item_button.png"] forState:UIControlStateNormal];
     [recommendButton setFrame:CGRectMake(281, footerBackgroundView.frame.origin.y+11, 24, 22)];
     [recommendButton addTarget:self action:@selector(recommendThisItem:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:recommendButton];
+     */
 }
 
 
