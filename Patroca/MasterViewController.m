@@ -177,13 +177,21 @@
 
 - (void)loadFeaturedItems {
 
-    [itemDataSource setItemDataSourceMode:ItemDataSourceModeFeatured];
-    [itemDataSource getNextPageAndReturnWithCallback:^(NSError *error) {
-        [_loadingActivityIndicator stopAnimating];
-        if (error) {
-            [self showErrorIcon];
-        }
-    }];
+    // Check if a user is cached and if user is linked to Facebook
+    if ([PFUser currentUser] && [PFFacebookUtils isLinkedWithUser:[PFUser currentUser]])
+    {
+
+        [itemDataSource setItemDataSourceMode:ItemDataSourceModeFeatured];
+        [itemDataSource getNextPageAndReturnWithCallback:^(NSError *error) {
+            [_loadingActivityIndicator stopAnimating];
+            if (error) {
+                [self showErrorIcon];
+            }
+        }];
+    } else {
+        //user not logged in yet
+        [self showErrorIcon];
+    }
 }
 
 - (void)loadFriendsItems {
