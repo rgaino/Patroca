@@ -59,7 +59,7 @@
     BOOL traded = [tradedNumber boolValue];
     [_tradedLabel setText:NSLocalizedString(@"traded", nil)];
     [_tradedLabel setHidden:!traded];
-    [_tradedImageView setHidden:!traded];
+    [_tradedView setHidden:!traded];
     
     //don't ask for CLLocation permissions for this yet... defer to when the user chooses Nearby items
     if(locationManager == nil && [CLLocationManager authorizationStatus] == kCLAuthorizationStatusAuthorized) {
