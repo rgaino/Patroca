@@ -43,7 +43,6 @@
 - (void)tapDetected;
 
 - (IBAction)userTappedOnProfile:(id)sender;
-- (IBAction)makeOfferButtonPressed:(id)sender;
 - (IBAction)recommendThisItem:(id)sender;
 - (IBAction)reportThisItem:(id)sender;
 

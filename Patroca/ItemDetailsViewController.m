@@ -232,7 +232,16 @@
             [reportButton addTarget:self action:@selector(reportThisItem:) forControlEvents:UIControlEventTouchUpInside];
             [self.view addSubview:reportButton];
         }
+    } else {
+        //Traded button
+        UIButton *tradedButton = [UIButton buttonWithType:UIButtonTypeCustom];
+        [tradedButton setImage:[UIImage imageNamed:@"trade_button.png"] forState:UIControlStateNormal];
+        [tradedButton setFrame:CGRectMake(281, footerBackgroundView.frame.origin.y+11, 24, 22)];
+        [tradedButton addTarget:self action:@selector(tradeButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
+        [self.view addSubview:tradedButton];
     }
+
+
 
     /*
     //share on Facebook button
@@ -469,7 +478,10 @@
 }
 
 
-- (IBAction)makeOfferButtonPressed:(id)sender {}
+- (IBAction)tradeButtonPressed:(id)sender {
+    [_itemObject setObject:[NSNumber numberWithBool:YES] forKey:DB_FIELD_ITEM_TRADED];
+    [_itemObject saveEventually];
+}
 
 - (IBAction)recommendThisItem:(id)sender {}
 

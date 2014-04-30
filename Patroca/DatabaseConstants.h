@@ -31,6 +31,7 @@ extern NSString* const DB_FIELD_ITEM_NAME;
 extern NSString* const DB_FIELD_ITEM_DESCRIPTION;
 extern NSString* const DB_FIELD_ITEM_MAIN_IMAGE;
 extern NSString* const DB_FIELD_ITEM_LOCATION;
+extern NSString* const DB_FIELD_ITEM_TRADED;
 
 //Item_Images table
 extern NSString* const DB_TABLE_ITEM_IMAGES;
