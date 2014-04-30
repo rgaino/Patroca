@@ -52,3 +52,4 @@
 "login_profile_help" = "Welcome!\n To see what your friends have to trade with you, tap the Facebook button and connect.";
 "got it" = "Got it!";
 "user_liked_item" = "%@ recommended your item %@";
+"traded" = "Traded";

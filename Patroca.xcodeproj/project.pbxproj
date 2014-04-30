@@ -165,6 +165,8 @@
 		19BF9D23166C426D00F813B6 /* item_title_mask@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 19BF9D21166C426D00F813B6 /* item_title_mask@2x.png */; };
 		19C022B219107B8D008A1817 /* trade_button.png in Resources */ = {isa = PBXBuildFile; fileRef = 19C022B019107B8D008A1817 /* trade_button.png */; };
 		19C022B319107B8D008A1817 /* trade_button@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 19C022B119107B8D008A1817 /* trade_button@2x.png */; };
+		19C022BA1910814D008A1817 /* traded_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 19C022B81910814D008A1817 /* traded_icon.png */; };
+		19C022BB1910814D008A1817 /* traded_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 19C022B91910814D008A1817 /* traded_icon@2x.png */; };
 		19DCB424168756D9009FF503 /* comments_header.png in Resources */ = {isa = PBXBuildFile; fileRef = 19DCB422168756D9009FF503 /* comments_header.png */; };
 		19DCB425168756D9009FF503 /* comments_header@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 19DCB423168756D9009FF503 /* comments_header@2x.png */; };
 		19E5F947169CF037006718F7 /* picture_camera_thumbnail.png in Resources */ = {isa = PBXBuildFile; fileRef = 19E5F945169CF037006718F7 /* picture_camera_thumbnail.png */; };
@@ -375,6 +377,8 @@
 		19BF9D21166C426D00F813B6 /* item_title_mask@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "item_title_mask@2x.png"; sourceTree = "<group>"; };
 		19C022B019107B8D008A1817 /* trade_button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = trade_button.png; sourceTree = "<group>"; };
 		19C022B119107B8D008A1817 /* trade_button@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "trade_button@2x.png"; sourceTree = "<group>"; };
+		19C022B81910814D008A1817 /* traded_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = traded_icon.png; sourceTree = "<group>"; };
+		19C022B91910814D008A1817 /* traded_icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "traded_icon@2x.png"; sourceTree = "<group>"; };
 		19DCB422168756D9009FF503 /* comments_header.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = comments_header.png; sourceTree = "<group>"; };
 		19DCB423168756D9009FF503 /* comments_header@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "comments_header@2x.png"; sourceTree = "<group>"; };
 		19E5F945169CF037006718F7 /* picture_camera_thumbnail.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = picture_camera_thumbnail.png; sourceTree = "<group>"; };
@@ -702,6 +706,8 @@
 				197AB10F16C1E0F20084D3FA /* tell_your_friends_button@2x.png */,
 				19C022B019107B8D008A1817 /* trade_button.png */,
 				19C022B119107B8D008A1817 /* trade_button@2x.png */,
+				19C022B81910814D008A1817 /* traded_icon.png */,
+				19C022B91910814D008A1817 /* traded_icon@2x.png */,
 				1982299E18FE1D0800DF72CA /* tutorial_panel_1.png */,
 				1982299F18FE1D0800DF72CA /* tutorial_panel_1@2x.png */,
 				1977163816E03C980010FF5D /* yellow_button.png */,
@@ -1033,6 +1039,7 @@
 				195B30481679617A00F80073 /* circle_shade.png in Resources */,
 				19C022B319107B8D008A1817 /* trade_button@2x.png in Resources */,
 				19F8EE4618FC39D700E4C847 /* star-off@2x.png in Resources */,
+				19C022BA1910814D008A1817 /* traded_icon.png in Resources */,
 				195B30491679617A00F80073 /* circle_shade@2x.png in Resources */,
 				19DCB424168756D9009FF503 /* comments_header.png in Resources */,
 				19DCB425168756D9009FF503 /* comments_header@2x.png in Resources */,
@@ -1086,6 +1093,7 @@
 				197AB11516C1E6CA0084D3FA /* profile_background@2x.png in Resources */,
 				198B5BDA16CDA0AA00DC2ED2 /* ProfileHeaderViewCell.xib in Resources */,
 				198B5BDD16CDC11A00DC2ED2 /* facebook_profile_button.png in Resources */,
+				19C022BB1910814D008A1817 /* traded_icon@2x.png in Resources */,
 				198B5BDE16CDC11A00DC2ED2 /* facebook_profile_button@2x.png in Resources */,
 				1977163316E035F70010FF5D /* DoneShareViewController.xib in Resources */,
 				1977163616E03AE10010FF5D /* item_share_message.png in Resources */,

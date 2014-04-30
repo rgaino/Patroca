@@ -55,6 +55,12 @@
     NSURL *facebookProfilePicURL = [NSURL URLWithString:facebookProfilePicString];
     [_ownerProfilePic setImageWithURL:facebookProfilePicURL placeholderImage:[UIImage imageNamed:@"avatar_default.png"]];
 
+    NSNumber *tradedNumber =  [itemObject objectForKey:DB_FIELD_ITEM_TRADED];
+    BOOL traded = [tradedNumber boolValue];
+    [_tradedLabel setText:NSLocalizedString(@"traded", nil)];
+    [_tradedLabel setHidden:!traded];
+    [_tradedImageView setHidden:!traded];
+    
     //don't ask for CLLocation permissions for this yet... defer to when the user chooses Nearby items
     if(locationManager == nil && [CLLocationManager authorizationStatus] == kCLAuthorizationStatusAuthorized) {
         locationManager = [[CLLocationManager alloc] init];
