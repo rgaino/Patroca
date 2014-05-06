@@ -90,7 +90,7 @@
         [_loginProfileButton addTarget:self action:@selector(loginProfileButtonPressed) forControlEvents:UIControlEventTouchUpInside];
 
         [headerView addSubview:_loginProfileButton];
-        [headerView addSubview:loginActivityIndicator];
+//        [headerView addSubview:loginActivityIndicator];
     }
     
     //the Avatar mask image
@@ -176,7 +176,6 @@
                 [_loginProfileButton.imageView setImageWithURL:profilePictureURL placeholderImage:[UIImage imageNamed:@"avatar_default.png"] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType) {
                     //TODO: check for error and do something about it
                     [loginActivityIndicator stopAnimating];
-//                    [_loginProfileButton setHidden:NO];
 
                     if(!error) {
                         [_loginProfileButton setImage:_loginProfileButton.imageView.image forState:UIControlStateNormal];
@@ -197,7 +196,6 @@
             [PFUser logOut];
             [loginActivityIndicator stopAnimating];
             [_loginProfileButton setImage:[UIImage imageNamed:@"login_with_fb.png"] forState:UIControlStateNormal];
-//            [_loginProfileButton setHidden:NO];
         }
     }];
     
@@ -216,7 +214,6 @@
         //First time user (on this device at least) so log in
         [loginActivityIndicator startAnimating];
         [_loginProfileButton setImage:[UIImage imageNamed:@"avatar_default.png"] forState:UIControlStateNormal];
-//        [_loginProfileButton setHidden:YES];
         
         // The permissions requested from the user
         NSArray *permissionsArray = [NSArray arrayWithObjects:
@@ -232,7 +229,6 @@
                                         block:^(PFUser *user, NSError *error) {
                                             if (!user) {
                                                 [_loginProfileButton setImage:[UIImage imageNamed:@"login_with_fb.png"] forState:UIControlStateNormal];
-//                                                [_loginProfileButton setHidden:NO];
                                                 [loginActivityIndicator stopAnimating];
                                                 if (!error) { // The user cancelled the login
                                                     NSLog(@"Uh oh. The user cancelled the Facebook login.");
