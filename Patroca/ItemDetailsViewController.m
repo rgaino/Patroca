@@ -208,49 +208,16 @@
     footerBackgroundView = [[UIView alloc] initWithFrame:CGRectMake(0, self.view.frame.size.height-44, 320, 44)];
     [footerBackgroundView setBackgroundColor:[UIColor blackColor]];
     [self.view addSubview:footerBackgroundView];
-    
-    //make offer button
-    if( ![[userObject objectId] isEqualToString:[[PFUser currentUser] objectId]]) {
-        
-        /*
-        //only show the Make Offer and Report button if owner of this item is NOT the current user
-        UIButton *makeOfferButton = [UIButton buttonWithType:UIButtonTypeCustom];
-        [makeOfferButton setBackgroundImage:[UIImage imageNamed:@"make_offer_button.png"] forState:UIControlStateNormal];
-        [makeOfferButton.titleLabel setFont:[UIFont boldSystemFontOfSize:16]];
-        [makeOfferButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-        [makeOfferButton setTitle:NSLocalizedString(@"make offer", nil) forState:UIControlStateNormal];
-        [makeOfferButton setFrame:CGRectMake(55, footerBackgroundView.frame.origin.y-22, 210, 45)];
-        [makeOfferButton addTarget:self action:@selector(makeOfferButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
-        [self.view addSubview:makeOfferButton];
-         */
-        
-        //report button (if logged in)
-        if ([PFUser currentUser] && [PFFacebookUtils isLinkedWithUser:[PFUser currentUser]]) {
-            UIButton *reportButton = [UIButton buttonWithType:UIButtonTypeCustom];
-            [reportButton setImage:[UIImage imageNamed:@"report_this_item.png"] forState:UIControlStateNormal];
-            [reportButton setFrame:CGRectMake(15, footerBackgroundView.frame.origin.y+11, 24, 21)];
-            [reportButton addTarget:self action:@selector(reportThisItem:) forControlEvents:UIControlEventTouchUpInside];
-            [self.view addSubview:reportButton];
-        }
-    } else {
-        //Traded button
-        UIButton *tradedButton = [UIButton buttonWithType:UIButtonTypeCustom];
-        [tradedButton setImage:[UIImage imageNamed:@"trade_button.png"] forState:UIControlStateNormal];
-        [tradedButton setFrame:CGRectMake(281, footerBackgroundView.frame.origin.y+11, 24, 22)];
-        [tradedButton addTarget:self action:@selector(tradeButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
-        [self.view addSubview:tradedButton];
+
+    //add more button if logged in
+    if ([PFUser currentUser] && [PFFacebookUtils isLinkedWithUser:[PFUser currentUser]]) {
+        UIButton *moreButton = [UIButton buttonWithType:UIButtonTypeCustom];
+        [moreButton setImage:[UIImage imageNamed:@"more_button.png"] forState:UIControlStateNormal];
+        [moreButton setFrame:CGRectMake(265, footerBackgroundView.frame.origin.y+18, 33, 10)];
+        [moreButton addTarget:self action:@selector(moreButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
+        [self.view addSubview:moreButton];
     }
 
-
-
-    /*
-    //share on Facebook button
-    UIButton *recommendButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    [recommendButton setImage:[UIImage imageNamed:@"recommend_item_button.png"] forState:UIControlStateNormal];
-    [recommendButton setFrame:CGRectMake(281, footerBackgroundView.frame.origin.y+11, 24, 22)];
-    [recommendButton addTarget:self action:@selector(recommendThisItem:) forControlEvents:UIControlEventTouchUpInside];
-    [self.view addSubview:recommendButton];
-     */
 }
 
 
@@ -477,13 +444,45 @@
     [self.navigationController pushViewController:viewProfileViewController animated:YES];
 }
 
+- (IBAction)moreButtonPressed:(id)sender {
+    
+    if( [[userObject objectId] isEqualToString:[[PFUser currentUser] objectId]]) {
+        //traded button if this item is owned by the current user
+        UIActionSheet *tradeItemActionSheet = [[UIActionSheet alloc] initWithTitle:@""
+                                                                           delegate:self
+                                                                  cancelButtonTitle:NSLocalizedString(@"cancel", nil)
+                                                             destructiveButtonTitle:nil
+                                                                  otherButtonTitles:NSLocalizedString(@"sure_mark_item_traded_question", nil), nil];
+        [tradeItemActionSheet setTag:0];
+        [tradeItemActionSheet setActionSheetStyle:UIActionSheetStyleBlackTranslucent];
+        [tradeItemActionSheet showInView:self.view];
 
-- (IBAction)tradeButtonPressed:(id)sender {
-    [_itemObject setObject:[NSNumber numberWithBool:YES] forKey:DB_FIELD_ITEM_TRADED];
-    [_itemObject saveEventually];
+    } else {
+        //report button if this item is NOT owned by the current user
+        UIActionSheet *reportItemActionSheet = [[UIActionSheet alloc] initWithTitle:@""
+                                                                           delegate:self
+                                                                  cancelButtonTitle:NSLocalizedString(@"cancel", nil)
+                                                             destructiveButtonTitle:nil
+                                                                  otherButtonTitles:NSLocalizedString(@"sure_report_item_question", nil), nil];
+        [reportItemActionSheet setTag:1];
+        [reportItemActionSheet setActionSheetStyle:UIActionSheetStyleBlackTranslucent];
+        [reportItemActionSheet showInView:self.view];
+    }
 }
 
-- (IBAction)recommendThisItem:(id)sender {}
+
+- (IBAction)tradeThisItem:(id)sender {
+    
+    UIActionSheet *tradeItemActionSheet = [[UIActionSheet alloc] initWithTitle:NSLocalizedString(@"sure_mark_item_traded_question", nil)
+                                                                       delegate:self
+                                                              cancelButtonTitle:NSLocalizedString(@"no", nil)
+                                                         destructiveButtonTitle:NSLocalizedString(@"yes", nil)
+                                                              otherButtonTitles:nil];
+    [tradeItemActionSheet setTag:2];
+    [tradeItemActionSheet setActionSheetStyle:UIActionSheetStyleBlackTranslucent];
+    [tradeItemActionSheet showInView:self.view];
+    
+}
 
 - (IBAction)reportThisItem:(id)sender {
 
@@ -492,27 +491,53 @@
                                                     cancelButtonTitle:NSLocalizedString(@"no", nil)
                                                     destructiveButtonTitle:NSLocalizedString(@"yes", nil)
                                                     otherButtonTitles:nil];
-    
+    [reportItemActionSheet setTag:3];
     [reportItemActionSheet setActionSheetStyle:UIActionSheetStyleBlackTranslucent];
     [reportItemActionSheet showInView:self.view];
     
 }
 
  -(void) actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
-     
-     if(buttonIndex == 0) {
-        //report this item and leave
-        PFObject *reported = [PFObject objectWithClassName:DB_TABLE_REPORTED_ITEMS];
-        [reported setObject:_itemObject forKey:DB_FIELD_ITEM_ID];
-        [reported setObject:[PFUser currentUser] forKey:DB_FIELD_USER_ID];
-        [reported saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
-        
-            [MPNotificationView notifyWithText:NSLocalizedString(@"item_reported", nil) detail:NSLocalizedString(@"thanks_for_reporting", nil)
-                                image:[UIImage imageNamed:@"report_this_item.png"] andDuration:PT_NOTIFICATION_DURATION];
 
-        }];
-         
-        [self.navigationController popViewControllerAnimated:YES];
+     if(actionSheet.tag==0)  { //mark item as traded
+         if(buttonIndex == 0) {
+             [self tradeThisItem:nil];
+         }
+     }
+
+
+     if(actionSheet.tag==1) { //report item
+         if(buttonIndex == 0) {
+             [self reportThisItem:nil];
+         }
+     }
+     
+     if(actionSheet.tag==2) { //confirm mark item as traded
+         if(buttonIndex == 0) {
+             [_itemObject setObject:[NSNumber numberWithBool:YES] forKey:DB_FIELD_ITEM_TRADED];
+             [_itemObject saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+                 [MPNotificationView notifyWithText:NSLocalizedString(@"item_traded", nil) detail:NSLocalizedString(@"thanks_for_trading", nil)
+                                              image:[UIImage imageNamed:@"trade_button.png"] andDuration:PT_NOTIFICATION_DURATION];
+             }];
+             [self.navigationController popViewControllerAnimated:YES];
+         }
+     }
+     
+     if(actionSheet.tag==3) { //confirm report item
+         if(buttonIndex == 0) {
+            //report this item and leave
+            PFObject *reported = [PFObject objectWithClassName:DB_TABLE_REPORTED_ITEMS];
+            [reported setObject:_itemObject forKey:DB_FIELD_ITEM_ID];
+            [reported setObject:[PFUser currentUser] forKey:DB_FIELD_USER_ID];
+            [reported saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+            
+                [MPNotificationView notifyWithText:NSLocalizedString(@"item_reported", nil) detail:NSLocalizedString(@"thanks_for_reporting", nil)
+                                    image:[UIImage imageNamed:@"report_this_item.png"] andDuration:PT_NOTIFICATION_DURATION];
+
+            }];
+             
+            [self.navigationController popViewControllerAnimated:YES];
+         }
      }
 }
 

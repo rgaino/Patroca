@@ -55,9 +55,11 @@
     [_contentDisplayCollectionView addInfiniteScrollingWithActionHandler:^{
         [itemDataSource getNextPageAndReturnWithCallback:^(NSError *error) {  }];
     }];
-
 }
 
+- (void)viewDidAppear:(BOOL)animated {
+    [_contentDisplayCollectionView reloadData];
+}
 
 - (void)setupViewWithUserID:(NSString*)profileUserID {
     

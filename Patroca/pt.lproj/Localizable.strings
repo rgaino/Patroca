@@ -27,7 +27,7 @@
 "oops_friends" = "Ops!\nSeus amigos ainda não começaram a trocar.";
 "invite_them" = "Convide eles";
 "or_search_for_people_around_you" = " para trocar ou procure por coisas perto de você.";
-"sure_report_item_question" = "Reportar este item como inapropriado?";
+"sure_report_item_question" = "Reportar como inapropriado?";
 "cancel" = "Cancelar";
 "yes" = "Sim";
 "no" = "Não";
@@ -53,3 +53,6 @@
 "got it" = "Entendi!";
 "user_liked_item" = "%@ recomendeu seu item %@";
 "traded" = "Trocado";
+"sure_mark_item_traded_question" = "Marcar este item como trocado?";
+"item_traded" = "Ótimo!";
+"thanks_for_trading" = "Seu item foi marcado como trocado";

@@ -155,6 +155,8 @@
 		19B01D1516AF5D8400587505 /* recommend_item_button@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 19B01D1316AF5D8400587505 /* recommend_item_button@2x.png */; };
 		19B01D1816AF5D9400587505 /* report_this_item.png in Resources */ = {isa = PBXBuildFile; fileRef = 19B01D1616AF5D9400587505 /* report_this_item.png */; };
 		19B01D1916AF5D9400587505 /* report_this_item@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 19B01D1716AF5D9400587505 /* report_this_item@2x.png */; };
+		19B8EF6E191B006200FD5B85 /* more_button.png in Resources */ = {isa = PBXBuildFile; fileRef = 19B8EF6C191B006200FD5B85 /* more_button.png */; };
+		19B8EF6F191B006200FD5B85 /* more_button@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 19B8EF6D191B006200FD5B85 /* more_button@2x.png */; };
 		19BAB21716801043005688DE /* UILabel+UILabel_Resize.m in Sources */ = {isa = PBXBuildFile; fileRef = 19BAB21616801043005688DE /* UILabel+UILabel_Resize.m */; };
 		19BF9D1A166C393E00F813B6 /* mask_fb_avatar.png in Resources */ = {isa = PBXBuildFile; fileRef = 19BF9D18166C393E00F813B6 /* mask_fb_avatar.png */; };
 		19BF9D1B166C393E00F813B6 /* mask_fb_avatar@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 19BF9D19166C393E00F813B6 /* mask_fb_avatar@2x.png */; };
@@ -365,6 +367,8 @@
 		19B01D1316AF5D8400587505 /* recommend_item_button@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "recommend_item_button@2x.png"; sourceTree = "<group>"; };
 		19B01D1616AF5D9400587505 /* report_this_item.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = report_this_item.png; sourceTree = "<group>"; };
 		19B01D1716AF5D9400587505 /* report_this_item@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "report_this_item@2x.png"; sourceTree = "<group>"; };
+		19B8EF6C191B006200FD5B85 /* more_button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = more_button.png; sourceTree = "<group>"; };
+		19B8EF6D191B006200FD5B85 /* more_button@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "more_button@2x.png"; sourceTree = "<group>"; };
 		19BAB21516801043005688DE /* UILabel+UILabel_Resize.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UILabel+UILabel_Resize.h"; sourceTree = "<group>"; };
 		19BAB21616801043005688DE /* UILabel+UILabel_Resize.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UILabel+UILabel_Resize.m"; sourceTree = "<group>"; };
 		19BF9D18166C393E00F813B6 /* mask_fb_avatar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = mask_fb_avatar.png; sourceTree = "<group>"; };
@@ -682,6 +686,8 @@
 				1939B8D91656C2E500435705 /* menu_arrow@2x.png */,
 				1939B8D41656AF1F00435705 /* menu_bar_background.png */,
 				1939B8D51656AF1F00435705 /* menu_bar_background@2x.png */,
+				19B8EF6C191B006200FD5B85 /* more_button.png */,
+				19B8EF6D191B006200FD5B85 /* more_button@2x.png */,
 				195B303E16795F0D00F80073 /* offers_icon.png */,
 				195B303F16795F0D00F80073 /* offers_icon@2x.png */,
 				1939B8C61656915600435705 /* patroca_logo.png */,
@@ -1059,6 +1065,7 @@
 				193EEA4C169BA14B0045DE59 /* done_button@2x.png in Resources */,
 				1949B33018FF0F1D00F82BEF /* help_login_arrow@2x.png in Resources */,
 				193EEA54169BAA930045DE59 /* camera_background.png in Resources */,
+				19B8EF6F191B006200FD5B85 /* more_button@2x.png in Resources */,
 				193EEA55169BAA930045DE59 /* camera_background@2x.png in Resources */,
 				193EEA5C169BAB9F0045DE59 /* shutter_button.png in Resources */,
 				193EEA5D169BAB9F0045DE59 /* shutter_button@2x.png in Resources */,
@@ -1078,6 +1085,7 @@
 				19B01D1016AF5A8800587505 /* make_offer_button.png in Resources */,
 				19B01D1116AF5A8800587505 /* make_offer_button@2x.png in Resources */,
 				19B01D1416AF5D8400587505 /* recommend_item_button.png in Resources */,
+				19B8EF6E191B006200FD5B85 /* more_button.png in Resources */,
 				19B01D1516AF5D8400587505 /* recommend_item_button@2x.png in Resources */,
 				19B01D1816AF5D9400587505 /* report_this_item.png in Resources */,
 				19B01D1916AF5D9400587505 /* report_this_item@2x.png in Resources */,

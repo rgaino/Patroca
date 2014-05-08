@@ -28,7 +28,7 @@
 "oops_friends" = "Oops!\nYour friends haven't started trading yet.";
 "invite_them" = "Invite them";
 "or_search_for_people_around_you" = " or search for people around you.";
-"sure_report_item_question" = "Report this item as innapropriate?";
+"sure_report_item_question" = "Report as innapropriate?";
 "cancel" = "Cancel";
 "yes" = "Yes";
 "no" = "No";
@@ -53,3 +53,6 @@
 "got it" = "Got it!";
 "user_liked_item" = "%@ recommended your item %@";
 "traded" = "Traded";
+"sure_mark_item_traded_question" = "Mark this item as traded?";
+"item_traded" = "Awesome!";
+"thanks_for_trading" = "Your item was marked as traded";
