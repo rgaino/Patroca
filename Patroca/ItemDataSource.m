@@ -166,7 +166,6 @@
     
     if([PFUser currentUser] == nil) {
         NSLog(@"Can't get current user");
-        //TODO: show a nice error message
     }
     
     FacebookCache *facebookCache = [FacebookCache getInstance];

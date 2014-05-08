@@ -94,7 +94,8 @@
 
 - (void)userLoggedInSuccessfully {
     [super userLoggedInSuccessfully];
-    [self menuButtonPressed:_friendsButton];
+    [itemDataSource clearAndReturn];
+
 }
 
 - (void)createErrorMessageView {
