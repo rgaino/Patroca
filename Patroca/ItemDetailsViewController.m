@@ -447,12 +447,16 @@
 - (IBAction)moreButtonPressed:(id)sender {
     
     if( [[userObject objectId] isEqualToString:[[PFUser currentUser] objectId]]) {
-        //traded button if this item is owned by the current user
+        
+        //trade and delete button if this item is owned by the current user
         UIActionSheet *tradeItemActionSheet = [[UIActionSheet alloc] initWithTitle:@""
                                                                            delegate:self
                                                                   cancelButtonTitle:NSLocalizedString(@"cancel", nil)
                                                              destructiveButtonTitle:nil
-                                                                  otherButtonTitles:NSLocalizedString(@"sure_mark_item_traded_question", nil), nil];
+                                                                  otherButtonTitles:NSLocalizedString(@"mark_item_traded", nil),
+                                                                                    NSLocalizedString(@"delete", nil),
+                                                                                    nil];
+
         [tradeItemActionSheet setTag:0];
         [tradeItemActionSheet setActionSheetStyle:UIActionSheetStyleBlackTranslucent];
         [tradeItemActionSheet showInView:self.view];
@@ -463,7 +467,7 @@
                                                                            delegate:self
                                                                   cancelButtonTitle:NSLocalizedString(@"cancel", nil)
                                                              destructiveButtonTitle:nil
-                                                                  otherButtonTitles:NSLocalizedString(@"sure_report_item_question", nil), nil];
+                                                                  otherButtonTitles:NSLocalizedString(@"report_item", nil), nil];
         [reportItemActionSheet setTag:1];
         [reportItemActionSheet setActionSheetStyle:UIActionSheetStyleBlackTranslucent];
         [reportItemActionSheet showInView:self.view];
@@ -481,7 +485,18 @@
     [tradeItemActionSheet setTag:2];
     [tradeItemActionSheet setActionSheetStyle:UIActionSheetStyleBlackTranslucent];
     [tradeItemActionSheet showInView:self.view];
+}
+
+- (IBAction)deleteThisItem:(id)sender {
     
+    UIActionSheet *deleteItemActionSheet = [[UIActionSheet alloc] initWithTitle:NSLocalizedString(@"delete_item_question", nil)
+                                                                      delegate:self
+                                                             cancelButtonTitle:NSLocalizedString(@"no", nil)
+                                                        destructiveButtonTitle:NSLocalizedString(@"yes", nil)
+                                                             otherButtonTitles:nil];
+    [deleteItemActionSheet setTag:4];
+    [deleteItemActionSheet setActionSheetStyle:UIActionSheetStyleBlackTranslucent];
+    [deleteItemActionSheet showInView:self.view];
 }
 
 - (IBAction)reportThisItem:(id)sender {
@@ -499,10 +514,14 @@
 
  -(void) actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
 
-     if(actionSheet.tag==0)  { //mark item as traded
+     if(actionSheet.tag==0)  { //mark item as traded or deleted
          if(buttonIndex == 0) {
              [self tradeThisItem:nil];
          }
+         if(buttonIndex == 1) {
+             [self deleteThisItem:nil];
+         }
+         
      }
 
 
@@ -517,7 +536,7 @@
              [_itemObject setObject:[NSNumber numberWithBool:YES] forKey:DB_FIELD_ITEM_TRADED];
              [_itemObject saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
                  [MPNotificationView notifyWithText:NSLocalizedString(@"item_traded", nil) detail:NSLocalizedString(@"thanks_for_trading", nil)
-                                              image:[UIImage imageNamed:@"trade_button.png"] andDuration:PT_NOTIFICATION_DURATION];
+                                              image:[UIImage imageNamed:@"icon.png"] andDuration:PT_NOTIFICATION_DURATION];
              }];
              [self.navigationController popViewControllerAnimated:YES];
          }
@@ -532,14 +551,29 @@
             [reported saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
             
                 [MPNotificationView notifyWithText:NSLocalizedString(@"item_reported", nil) detail:NSLocalizedString(@"thanks_for_reporting", nil)
-                                    image:[UIImage imageNamed:@"report_this_item.png"] andDuration:PT_NOTIFICATION_DURATION];
+                                    image:[UIImage imageNamed:@"icon.png"] andDuration:PT_NOTIFICATION_DURATION];
 
             }];
              
             [self.navigationController popViewControllerAnimated:YES];
          }
      }
-}
+
+     if(actionSheet.tag==4) { //confirm delete item
+         if(buttonIndex == 0) {
+             
+             //mark item as deleted
+             [_itemObject setObject:[NSNumber numberWithBool:YES] forKey:DB_FIELD_ITEM_DELETED];
+             [_itemObject saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+                 [MPNotificationView notifyWithText:NSLocalizedString(@"item_deleted", nil) detail:NSLocalizedString(@"item_is_deleted", nil)
+                                              image:[UIImage imageNamed:@"icon.png"] andDuration:PT_NOTIFICATION_DURATION];
+             }];
+
+             [self.navigationController popViewControllerAnimated:YES];
+         }
+     }
+
+ }
 
 
 @end

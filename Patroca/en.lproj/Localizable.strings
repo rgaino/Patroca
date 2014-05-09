@@ -28,12 +28,13 @@
 "oops_friends" = "Oops!\nYour friends haven't started trading yet.";
 "invite_them" = "Invite them";
 "or_search_for_people_around_you" = " or search for people around you.";
+"report_item" = "Report as innapropriate";
 "sure_report_item_question" = "Report as innapropriate?";
 "cancel" = "Cancel";
 "yes" = "Yes";
 "no" = "No";
 "item_reported" = "Item Reported!";
-"thanks_for_reporting" = "Thank you, someone will review it shortly";
+"thanks_for_reporting" = "Someone will review it shortly";
 "sure_discard_item_question" = "Discard this item?";
 "wrapping_up" = "Wrapping up...";
 "KMs" = "KMs";
@@ -53,6 +54,14 @@
 "got it" = "Got it!";
 "user_liked_item" = "%@ recommended your item %@";
 "traded" = "Traded";
-"sure_mark_item_traded_question" = "Mark this item as traded?";
+"mark_item_traded" = "Mark as traded";
+"sure_mark_item_traded_question" = "Mark as traded?";
 "item_traded" = "Awesome!";
 "thanks_for_trading" = "Your item was marked as traded";
+"delete" = "Delete";
+"delete_item_question" = "Delete this item?";
+"item_deleted" = "Item deleted.";
+"item_is_deleted" = "Your item is not available anymore.";
+
+
+

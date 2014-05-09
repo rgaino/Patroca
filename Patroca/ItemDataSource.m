@@ -114,6 +114,7 @@
     [facebookCache getFacebookFriendsPFUserArrayInBackgroundWithCallback:^(NSArray *friendPFUserArray, NSError *error) {
         if(!error) {
             PFQuery *itemsQuery = [PFQuery queryWithClassName:DB_TABLE_ITEMS];
+            [itemsQuery whereKey:DB_FIELD_ITEM_DELETED equalTo:[NSNumber numberWithBool:NO]];
             [itemsQuery whereKey:DB_RELATION_USER_LIKES_ITEMS containedIn:friendPFUserArray];
             [itemsQuery whereKey:DB_FIELD_USER_ID notEqualTo:[PFUser currentUser]];
             [itemsQuery orderByDescending:DB_FIELD_CREATED_AT];
@@ -174,6 +175,7 @@
 
         if(!error) {
             PFQuery *query = [PFQuery queryWithClassName:DB_TABLE_ITEMS];
+            [query whereKey:DB_FIELD_ITEM_DELETED equalTo:[NSNumber numberWithBool:NO]];
             [query whereKey:DB_FIELD_USER_ID notEqualTo:[PFUser currentUser]];
             [query whereKey:DB_FIELD_USER_ID containedIn:friendPFUserArray];
             
@@ -240,6 +242,7 @@
     
     
     PFQuery *query = [PFQuery queryWithClassName:DB_TABLE_ITEMS];
+    [query whereKey:DB_FIELD_ITEM_DELETED equalTo:[NSNumber numberWithBool:NO]];
     [query whereKey:DB_FIELD_ITEM_LOCATION nearGeoPoint:myLocationPoint];
     if([PFUser currentUser] != nil) {
         [query whereKey:DB_FIELD_USER_ID notEqualTo:[PFUser currentUser]];
@@ -287,6 +290,7 @@
     }
     
     PFQuery *query = [PFQuery queryWithClassName:DB_TABLE_ITEMS];
+    [query whereKey:DB_FIELD_ITEM_DELETED equalTo:[NSNumber numberWithBool:NO]];
     [query whereKey:DB_FIELD_USER_ID equalTo:_userObject];
 
     [query setSkip:currentResultsLimit];

@@ -34,6 +34,7 @@ NSString* const DB_FIELD_ITEM_DESCRIPTION = @"item_description";
 NSString* const DB_FIELD_ITEM_MAIN_IMAGE = @"item_main_image";
 NSString* const DB_FIELD_ITEM_LOCATION = @"item_location";
 NSString* const DB_FIELD_ITEM_TRADED = @"item_traded";
+NSString* const DB_FIELD_ITEM_DELETED = @"item_deleted";
 
 //Item_Images table
 NSString* const DB_TABLE_ITEM_IMAGES = @"Item_Images";
