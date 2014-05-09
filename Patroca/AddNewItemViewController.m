@@ -288,7 +288,7 @@ The only line left is the one that dismissess the camera/gallery
     [currentItem setObject:[PFUser currentUser] forKey:DB_FIELD_USER_ID];
     [currentItem setObject:itemLocationPoint forKey:DB_FIELD_ITEM_LOCATION];
     [currentItem setObject:[NSNumber numberWithBool:NO] forKey:DB_FIELD_ITEM_TRADED];
-
+    [currentItem setObject:[NSNumber numberWithBool:NO] forKey:DB_FIELD_ITEM_DELETED];
 
     imageNumber=0;
     [self saveNextItemImage]; //start with the first one, then this method will check and upload others.
