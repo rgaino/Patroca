@@ -34,7 +34,7 @@
 
 
 - (void)setupProfileHeaderViewCellWithUser:(PFUser*)user UserData:(NSDictionary*)userData;
-- (void)loadFriendsProfilePictures;
+//- (void)loadFriendsProfilePictures;
 - (IBAction)logoutButtonPressed:(id)sender;
 - (IBAction)tellYourFriendsButtonPressed:(id)sender;
 - (IBAction)openUserProfileOnFacebookButtonPressed:(id)sender;

@@ -12,6 +12,7 @@
 #import <SDWebImage/UIImageView+WebCache.h>
 #import "AppDelegate.h"
 #import "UIUnderlinedButton.h"
+#import <FacebookSDK/FacebookSDK.h>
 
 @implementation ProfileHeaderViewCell
 
@@ -83,7 +84,7 @@
     [locationIconImageView setFrame:CGRectMake(locationIconX, 128, locationIconImageView.frame.size.width, locationIconImageView.frame.size.height)];
     [self addSubview:locationIconImageView];
 
-    
+/*
     //Query for how many comments this user has ever made
     PFQuery *totalCommentsQuery = [PFQuery queryWithClassName:DB_TABLE_ITEM_COMMENTS];
     [totalCommentsQuery whereKey:DB_FIELD_USER_ID equalTo:user];
@@ -95,13 +96,13 @@
             NSLog(@"Error: %@ %@", error, [error userInfo]);
         }
     }];
-
+*/
     
     //is this the logged user?
     NSString *loggedUserFacebookID = [[PFUser currentUser] objectForKey:DB_FIELD_USER_FACEBOOK_ID];
     if( [facebookId isEqualToString:loggedUserFacebookID] ) {
         //show friends picture and leave all elements as default
-        [self loadFriendsProfilePictures];
+//        [self loadFriendsProfilePictures];
     } else {
         //displaying someone else's profile, so format screen accordingly
         [_logoutButton setHidden:YES];
@@ -110,7 +111,7 @@
         [_tellYourFriendsButton setHidden:YES];
     }
 }
-
+/*
 - (void)loadFriendsProfilePictures {
     
     // Issue a Facebook Graph API request to get your user's friend list
@@ -166,9 +167,79 @@
     [PFUser logOut];
     [_parentViewController.navigationController popViewControllerAnimated:YES];
 }
-
+*/
 
 - (IBAction)tellYourFriendsButtonPressed:(id)sender {
+    
+    NSString *shareURL = @"http://patroca.com";
+    
+    // Check if the Facebook app is installed and we can present the share dialog
+    FBLinkShareParams *params = [[FBLinkShareParams alloc] init];
+    params.link = [NSURL URLWithString:shareURL];
+    
+    // If the Facebook app is installed and we can present the share dialog
+    if ([FBDialogs canPresentShareDialogWithParams:params]) {
+        // Present share dialog
+        [FBDialogs presentShareDialogWithLink:params.link
+                                      handler:^(FBAppCall *call, NSDictionary *results, NSError *error) {
+                                          if(error) {
+                                              NSLog(@"Error publishing story: %@", error.description);
+                                          } else {
+                                              // Success
+                                              NSLog(@"result %@", results);
+                                          }
+                                      }];
+    } else {
+        // Present the feed dialog
+        // Put together the dialog parameters
+        NSMutableDictionary *params = [NSMutableDictionary dictionaryWithObjectsAndKeys:
+                                       @"Patroca", @"name",
+                                       @"Social bartering.", @"caption",
+                                       @"Come join Patroca and let's trade stuff.", @"description",
+                                       shareURL, @"link",
+                                       @"http://patroca.com/images/45e22924.logo.png", @"picture",
+                                       nil];
+        
+        // Show the feed dialog
+        [FBWebDialogs presentFeedDialogModallyWithSession:nil
+                                               parameters:params
+                                                  handler:^(FBWebDialogResult result, NSURL *resultURL, NSError *error) {
+                                                      if (error) {
+                                                          NSLog(@"Error publishing story: %@", error.description);
+                                                      } else {
+                                                          if (result == FBWebDialogResultDialogNotCompleted) {
+                                                              // User cancelled.
+                                                              NSLog(@"User cancelled.");
+                                                          } else {
+                                                              // Handle the publish feed callback
+                                                              NSDictionary *urlParams = [self parseURLParams:[resultURL query]];
+                                                              
+                                                              if (![urlParams valueForKey:@"post_id"]) {
+                                                                  // User cancelled.
+                                                                  NSLog(@"User cancelled.");
+                                                                  
+                                                              } else {
+                                                                  // User clicked the Share button
+                                                                  NSString *result = [NSString stringWithFormat: @"Posted story, id: %@", [urlParams valueForKey:@"post_id"]];
+                                                                  NSLog(@"result %@", result);
+                                                              }
+                                                          }
+                                                      }
+                                                  }];
+    }
+}
+
+// A function for parsing URL parameters returned by the Feed Dialog.
+- (NSDictionary*)parseURLParams:(NSString *)query {
+    NSArray *pairs = [query componentsSeparatedByString:@"&"];
+    NSMutableDictionary *params = [[NSMutableDictionary alloc] init];
+    for (NSString *pair in pairs) {
+        NSArray *kv = [pair componentsSeparatedByString:@"="];
+        NSString *val =
+        [kv[1] stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+        params[kv[0]] = val;
+    }
+    return params;
 }
 
 - (IBAction)openUserProfileOnFacebookButtonPressed:(id)sender {
