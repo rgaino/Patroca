@@ -161,13 +161,13 @@
         }
     }];
 }
-
+*/
 - (IBAction)logoutButtonPressed:(id)sender {
     
     [PFUser logOut];
     [_parentViewController.navigationController popViewControllerAnimated:YES];
 }
-*/
+
 
 - (IBAction)tellYourFriendsButtonPressed:(id)sender {
     
