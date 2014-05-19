@@ -1,4 +1,4 @@
-//
+    //
 //  ViewProfileViewController.m
 //  Patroca
 //
@@ -219,7 +219,7 @@
 
 //header size
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout referenceSizeForHeaderInSection:(NSInteger)section {
-    return CGSizeMake(320, 360);
+    return CGSizeMake(320, 267);
 }
 
 #pragma mark Memory Management
