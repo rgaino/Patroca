@@ -34,8 +34,9 @@
 
 - (void)viewDidLoad {
     
-    UIColor *backgroundPattern = [UIColor colorWithPatternImage:[UIImage imageNamed:@"background_repeat.png"]];
-    [[self view] setBackgroundColor:backgroundPattern];
+//    UIColor *backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"background_repeat.png"]];
+    UIColor *backgroundColor = [UIColor colorWithRed:233/255.0 green:233/255.0 blue:233/255.0 alpha:1.0f];
+    [[self view] setBackgroundColor:backgroundColor];
     
     [super viewDidLoad];
 }
