@@ -39,18 +39,8 @@
 "wrapping_up" = "Wrapping up...";
 "KMs" = "KMs";
 "Miles" = "Miles";
-"tutorial_panel_1_title" = "Welcome to Patroca";
-"tutorial_panel_1_description" = "Patroca is a social bartering tool, where you can trade anything for everything. With friends or people around you.";
-"tutorial_panel_2_title" = "Welcome to Patroca";
-"tutorial_panel_2_description" = "Patroca works with your Facebook account. So as soon as you connect, we'll show what your friends have to trade with you.";
-"tutorial_panel_3_title" = "Welcome to Patroca";
-"tutorial_panel_3_description" = "It's easy to show what you have to trade. Use the \"+\" up there and take a picture of what you have to spare.";
-"tutorial_panel_4_title" = "Welcome to Patroca";
-"tutorial_panel_4_description" = "To trade something, simply pick an item you like and write a comment. Your friend will be notified and will be able to answer you back.";
-"tutorial_panel_5_title" = "Welcome to Patroca";
-"tutorial_panel_5_description" = "To begin, connect with Facebook. Once you're in, tap your profile picture to see your profile page.";
 "Skip"= "Skip";
-"login_profile_help" = "Welcome!\n To see what your friends have to trade with you, tap the Facebook button and connect.";
+"login_profile_help" = "Tap to login with Facebook and see things that your friends have to trade with you.";
 "got it" = "Got it!";
 "user_liked_item" = "%@ recommended your item %@";
 "traded" = "Traded";
@@ -62,6 +52,6 @@
 "delete_item_question" = "Delete this item?";
 "item_deleted" = "Item deleted.";
 "item_is_deleted" = "Your item is not available anymore.";
-
+"welcome!" = "Welcome!";
 
 

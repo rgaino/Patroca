@@ -18,7 +18,6 @@
 #import <SDWebImage/UIImageView+WebCache.h>
 #import "SVPullToRefresh.h"
 #import "UILabel+UILabel_Resize.h"
-#import "TutorialViewController.h"
 #import "HelpView.h"
 
 #define CELL_REUSE_IDENTIFIER @"Item_Cell_Master"
@@ -37,7 +36,6 @@
         
         itemDataSource = [[ItemDataSource alloc] init];
         [itemDataSource setDelegate:self];
-        
     }
     return self;
 }
@@ -74,15 +72,12 @@
     [super viewDidLoad];
     
     //if user is logged in, load friends, otherwise load nearby
-    if ([PFUser currentUser] && [PFFacebookUtils isLinkedWithUser:[PFUser currentUser]]) {
-        [self performSelector:@selector(menuButtonPressed:) withObject:_friendsButton afterDelay:1.0f];
-    } else {
+//    if ([PFUser currentUser] && [PFFacebookUtils isLinkedWithUser:[PFUser currentUser]]) {
+//        [self performSelector:@selector(menuButtonPressed:) withObject:_friendsButton afterDelay:1.0f];
+//    } else {
         HelpView *loginHelpView = [[HelpView alloc] initWithStyle:HelpViewTypeLogin];
         [self.view addSubview:loginHelpView];
-//        TutorialViewController *tutorialViewController = [[TutorialViewController alloc] initWithNibName:@"TutorialViewController" bundle:nil];
-//        [tutorialViewController setMasterViewController:self];
-//        [self.navigationController pushViewController:tutorialViewController animated:YES];
-    }
+//    }
 
 }
 
@@ -154,10 +149,7 @@
         default:
             break;
     }
-    
-    
 }
-
 
 
 - (void)moveMenuArrowTo:(float)xPosition {
