@@ -213,11 +213,11 @@
     if ([PFUser currentUser] && [PFFacebookUtils isLinkedWithUser:[PFUser currentUser]]) {
         UIButton *moreButton = [UIButton buttonWithType:UIButtonTypeCustom];
         [moreButton setImage:[UIImage imageNamed:@"more_button.png"] forState:UIControlStateNormal];
-        [moreButton setFrame:CGRectMake(265, footerBackgroundView.frame.origin.y+18, 33, 10)];
+        [moreButton setFrame:CGRectMake(265, footerBackgroundView.frame.origin.y, 60, footerBackgroundView.frame.size.height)];
+        [[moreButton imageView] setContentMode:UIViewContentModeCenter];
         [moreButton addTarget:self action:@selector(moreButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
         [self.view addSubview:moreButton];
     }
-
 }
 
 
