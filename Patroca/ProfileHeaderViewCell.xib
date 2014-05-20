@@ -76,7 +76,7 @@
 									<object class="IBUIImageView" id="707653611">
 										<reference key="NSNextResponder" ref="868219676"/>
 										<int key="NSvFlags">1316</int>
-										<string key="NSFrameSize">{320, 267}</string>
+										<string key="NSFrameSize">{320, 261}</string>
 										<reference key="NSSuperview" ref="868219676"/>
 										<reference key="NSWindow"/>
 										<reference key="NSNextKeyView" ref="223951508"/>
@@ -129,7 +129,6 @@
 										<string key="NSFrame">{{129, 214}, {62, 21}}</string>
 										<reference key="NSSuperview" ref="868219676"/>
 										<reference key="NSWindow"/>
-										<reference key="NSNextKeyView"/>
 										<string key="NSReuseIdentifierKey">_NS:9</string>
 										<bool key="IBUIOpaque">NO</bool>
 										<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
@@ -820,7 +819,7 @@
 			<string key="comments_icon.png">{21, 25}</string>
 			<string key="facebook_profile_button.png">{52, 37}</string>
 			<string key="offers_icon.png">{17, 24}</string>
-			<string key="profile_background.png">{320, 267}</string>
+			<string key="profile_background.png">{320, 261}</string>
 			<string key="tell_your_friends_button.png">{225, 36}</string>
 		</dictionary>
 		<string key="IBCocoaTouchPluginVersion">3733</string>
