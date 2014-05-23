@@ -31,8 +31,6 @@
 		1939B8B516568D3500435705 /* MasterViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1939B8B316568D3500435705 /* MasterViewController.xib */; };
 		1939B8C81656915600435705 /* add_new_item_button.png in Resources */ = {isa = PBXBuildFile; fileRef = 1939B8C01656915600435705 /* add_new_item_button.png */; };
 		1939B8C91656915600435705 /* add_new_item_button@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1939B8C11656915600435705 /* add_new_item_button@2x.png */; };
-		1939B8CC1656915600435705 /* login_with_fb.png in Resources */ = {isa = PBXBuildFile; fileRef = 1939B8C41656915600435705 /* login_with_fb.png */; };
-		1939B8CD1656915600435705 /* login_with_fb@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1939B8C51656915600435705 /* login_with_fb@2x.png */; };
 		1939B8CE1656915600435705 /* patroca_logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 1939B8C61656915600435705 /* patroca_logo.png */; };
 		1939B8CF1656915600435705 /* patroca_logo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1939B8C71656915600435705 /* patroca_logo@2x.png */; };
 		1939B8D21656954E00435705 /* background_repeat.png in Resources */ = {isa = PBXBuildFile; fileRef = 1939B8D01656954E00435705 /* background_repeat.png */; };
@@ -95,6 +93,8 @@
 		19684F93169F99E20011A69C /* flash_button_off@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 19684F8D169F99E20011A69C /* flash_button_off@2x.png */; };
 		19684F94169F99E20011A69C /* flash_button_on.png in Resources */ = {isa = PBXBuildFile; fileRef = 19684F8E169F99E20011A69C /* flash_button_on.png */; };
 		19684F95169F99E20011A69C /* flash_button_on@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 19684F8F169F99E20011A69C /* flash_button_on@2x.png */; };
+		196D7F11192EE95A001DD98C /* login_with_fb.png in Resources */ = {isa = PBXBuildFile; fileRef = 196D7F0F192EE95A001DD98C /* login_with_fb.png */; };
+		196D7F12192EE95A001DD98C /* login_with_fb@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 196D7F10192EE95A001DD98C /* login_with_fb@2x.png */; };
 		196E43B6168BC2BE009608E4 /* UILabel+Extensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 196E43B5168BC2BE009608E4 /* UILabel+Extensions.m */; };
 		1971781F16EEBF5A00F0A57F /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 1971782116EEBF5A00F0A57F /* Localizable.strings */; };
 		1977163216E035F70010FF5D /* DoneShareViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1977163016E035F70010FF5D /* DoneShareViewController.m */; };
@@ -212,8 +212,6 @@
 		1939B8B316568D3500435705 /* MasterViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MasterViewController.xib; sourceTree = "<group>"; };
 		1939B8C01656915600435705 /* add_new_item_button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = add_new_item_button.png; sourceTree = "<group>"; };
 		1939B8C11656915600435705 /* add_new_item_button@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "add_new_item_button@2x.png"; sourceTree = "<group>"; };
-		1939B8C41656915600435705 /* login_with_fb.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = login_with_fb.png; sourceTree = "<group>"; };
-		1939B8C51656915600435705 /* login_with_fb@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "login_with_fb@2x.png"; sourceTree = "<group>"; };
 		1939B8C61656915600435705 /* patroca_logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = patroca_logo.png; sourceTree = "<group>"; };
 		1939B8C71656915600435705 /* patroca_logo@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "patroca_logo@2x.png"; sourceTree = "<group>"; };
 		1939B8D01656954E00435705 /* background_repeat.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = background_repeat.png; sourceTree = "<group>"; };
@@ -287,6 +285,8 @@
 		19684F8D169F99E20011A69C /* flash_button_off@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "flash_button_off@2x.png"; sourceTree = "<group>"; };
 		19684F8E169F99E20011A69C /* flash_button_on.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = flash_button_on.png; sourceTree = "<group>"; };
 		19684F8F169F99E20011A69C /* flash_button_on@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "flash_button_on@2x.png"; sourceTree = "<group>"; };
+		196D7F0F192EE95A001DD98C /* login_with_fb.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = login_with_fb.png; sourceTree = "<group>"; };
+		196D7F10192EE95A001DD98C /* login_with_fb@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "login_with_fb@2x.png"; sourceTree = "<group>"; };
 		196E43B4168BC2BE009608E4 /* UILabel+Extensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UILabel+Extensions.h"; sourceTree = "<group>"; };
 		196E43B5168BC2BE009608E4 /* UILabel+Extensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UILabel+Extensions.m"; sourceTree = "<group>"; };
 		1971782016EEBF5A00F0A57F /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -667,8 +667,8 @@
 				19BF9D21166C426D00F813B6 /* item_title_mask@2x.png */,
 				195B30421679611000F80073 /* location_icon.png */,
 				195B30431679611000F80073 /* location_icon@2x.png */,
-				1939B8C41656915600435705 /* login_with_fb.png */,
-				1939B8C51656915600435705 /* login_with_fb@2x.png */,
+				196D7F0F192EE95A001DD98C /* login_with_fb.png */,
+				196D7F10192EE95A001DD98C /* login_with_fb@2x.png */,
 				19B01D0E16AF5A8800587505 /* make_offer_button.png */,
 				19B01D0F16AF5A8800587505 /* make_offer_button@2x.png */,
 				19BF9D18166C393E00F813B6 /* mask_fb_avatar.png */,
@@ -985,14 +985,13 @@
 				1939B89216568C3300435705 /* InfoPlist.strings in Resources */,
 				19F8EE4318FC39D700E4C847 /* star-off.png in Resources */,
 				1939B89A16568C3300435705 /* Default.png in Resources */,
+				196D7F12192EE95A001DD98C /* login_with_fb@2x.png in Resources */,
 				19331FF019003BD7006396C9 /* error.png in Resources */,
 				19996B761902B4D600232D84 /* avatar_default@2x.png in Resources */,
 				1939B89E16568C3300435705 /* Default-568h@2x.png in Resources */,
 				1939B8B516568D3500435705 /* MasterViewController.xib in Resources */,
 				1939B8C81656915600435705 /* add_new_item_button.png in Resources */,
 				1939B8C91656915600435705 /* add_new_item_button@2x.png in Resources */,
-				1939B8CC1656915600435705 /* login_with_fb.png in Resources */,
-				1939B8CD1656915600435705 /* login_with_fb@2x.png in Resources */,
 				1939B8CE1656915600435705 /* patroca_logo.png in Resources */,
 				1939B8CF1656915600435705 /* patroca_logo@2x.png in Resources */,
 				1939B8D21656954E00435705 /* background_repeat.png in Resources */,
@@ -1015,6 +1014,7 @@
 				19BF9D1E166C40B600F813B6 /* placeholder.png in Resources */,
 				19BF9D1F166C40B600F813B6 /* placeholder@2x.png in Resources */,
 				19BF9D22166C426D00F813B6 /* item_title_mask.png in Resources */,
+				196D7F11192EE95A001DD98C /* login_with_fb.png in Resources */,
 				19331FF119003BD7006396C9 /* error@2x.png in Resources */,
 				19BF9D23166C426D00F813B6 /* item_title_mask@2x.png in Resources */,
 				195B30291676B74F00F80073 /* ItemDetailsViewController.xib in Resources */,
