@@ -15,11 +15,12 @@
     UIView *headerView;
     CGFloat headerOffset; //the pixel offset for the header for iOS7 due to its translucent bar
     UIButton *doneButton;
-    UIActivityIndicatorView *loginActivityIndicator;
 }
 
 @property (strong, nonatomic) UIButton *loginProfileButton;
 @property (strong, nonatomic) UIButton *addNewItemButton;
+@property (strong, nonatomic) UIActivityIndicatorView *loginActivityIndicator;
+
 
 - (void)setupHeaderWithBackButton:(BOOL)hasBackButton doneButton:(BOOL)hasDoneButton addItemButton:(BOOL)hasAddItemButton;
 - (void)userLoggedInSuccessfully;
