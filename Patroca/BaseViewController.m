@@ -137,6 +137,9 @@
     [self.view insertSubview:headerView atIndex:999];
 }
 
+-(void) userLoggedInSuccessfully {
+    //implemented at Master View
+}
 
 
 - (IBAction)backButtonPressed {
@@ -149,59 +152,6 @@
     [self.navigationController popViewControllerAnimated:YES];
 }
 
--(void) userLoggedInSuccessfully {
-    
-    [_addNewItemButton setEnabled:YES];
-    
-    // Create request for user's Facebook data
-    NSString *requestPath = @"me/?fields=name,email";
-    
-    FBRequest *request = [FBRequest requestForGraphPath:requestPath];
-    [request startWithCompletionHandler:^(FBRequestConnection *connection, id result, NSError *error) {
-        if (!error) {
-            
-            NSDictionary *userData = (NSDictionary *)result; // The result is a dictionary
-            NSString *facebookId = userData[@"id"];
-            NSString *name = userData[@"name"];
-            NSString *email      = ([userData objectForKey:@"email"] == nil ? @"" : [userData objectForKey:@"email"]);
-            
-            //store info on Parse User table
-            PFUser *currentUser = [PFUser currentUser];
-            [currentUser setObject:facebookId forKey:DB_FIELD_USER_FACEBOOK_ID];
-            [currentUser setObject:name forKey:DB_FIELD_USER_NAME];
-            [currentUser setEmail:email];
-            [currentUser saveInBackground];//WithBlock:^(BOOL succeeded, NSError *error) {
-                
-                NSURL *profilePictureURL = [NSURL URLWithString:[NSString stringWithFormat:@"https://graph.facebook.com/%@/picture?type=square", facebookId]];
-
-                __unsafe_unretained typeof(self) weakSelf = self;
-                [_loginProfileButton.imageView setImageWithURL:profilePictureURL placeholderImage:[UIImage imageNamed:@"avatar_default.png"] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType) {
-                    //TODO: check for error and do something about it
-                    [weakSelf.loginActivityIndicator stopAnimating];
-
-                    if(!error) {
-                        [weakSelf.loginProfileButton setImage:weakSelf.loginProfileButton.imageView.image forState:UIControlStateNormal];
-                    } else {
-                        NSLog(@"Error: %@ %@", error, [error userInfo]);
-                        [weakSelf.loginProfileButton setImage:[UIImage imageNamed:@"login_with_fb.png"] forState:UIControlStateNormal];
-                    }
-                }];
-                
-                PFInstallation *myInstallation = [PFInstallation currentInstallation];
-                [myInstallation setObject:[PFUser currentUser] forKey:DB_FIELD_USER_ID];
-                [myInstallation saveEventually];
-//            }];
-
-        } else {
-            NSLog(@"Error: %@ %@", error, [error userInfo]);
-            //probably token expired or user logged out
-            [PFUser logOut];
-            [_loginActivityIndicator stopAnimating];
-            [_loginProfileButton setImage:[UIImage imageNamed:@"login_with_fb.png"] forState:UIControlStateNormal];
-        }
-    }];
-    
-}
 
 - (void)loginProfileButtonPressed {
 

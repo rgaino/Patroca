@@ -9,12 +9,28 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Patroca/BaseViewController.m"
-            timestampString = "422498548.625514"
+            filePath = "Patroca/MasterViewController.m"
+            timestampString = "422503759.860878"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "154"
-            endingLineNumber = "154"
+            startingLineNumber = "316"
+            endingLineNumber = "316"
+            landmarkName = "-loadNearbyItems"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Patroca/MasterViewController.m"
+            timestampString = "422503973.217371"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "116"
+            endingLineNumber = "116"
             landmarkName = "-userLoggedInSuccessfully"
             landmarkType = "5">
          </BreakpointContent>
@@ -25,12 +41,58 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Patroca/BaseViewController.m"
-            timestampString = "422498666.910589"
+            filePath = "Patroca/MasterViewController.m"
+            timestampString = "422503993.228025"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "161"
-            endingLineNumber = "161"
+            startingLineNumber = "118"
+            endingLineNumber = "118"
+            landmarkName = "-userLoggedInSuccessfully"
+            landmarkType = "5">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "__48-[MasterViewController userLoggedInSuccessfully]_block_invoke_2"
+                  moduleName = "Patroca"
+                  urlString = "file:///Users/rgaino/Dropbox/Projects/XCode/Patroca/Patroca/MasterViewController.m"
+                  timestampString = "422504102.658191"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "118"
+                  endingLineNumber = "118"
+                  offsetFromSymbolStart = "193">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "__48-[MasterViewController userLoggedInSuccessfully]_block_invoke_3"
+                  moduleName = "Patroca"
+                  urlString = "file:///Users/rgaino/Dropbox/Projects/XCode/Patroca/Patroca/MasterViewController.m"
+                  timestampString = "422504102.658518"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "118"
+                  endingLineNumber = "118"
+                  offsetFromSymbolStart = "95">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Patroca/MasterViewController.m"
+            timestampString = "422504009.008271"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "120"
+            endingLineNumber = "120"
             landmarkName = "-userLoggedInSuccessfully"
             landmarkType = "5">
          </BreakpointContent>

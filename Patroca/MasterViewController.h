@@ -9,12 +9,10 @@
 #import "BaseViewController.h"
 #import "ItemDataSourceDelegate.h"
 
-@class ItemDataSource;
 @class ItemViewCell;
 
 @interface MasterViewController : BaseViewController <UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemDataSourceDelegate> {
     
-    ItemDataSource *itemDataSource;
     NSMutableDictionary *totalCommentsForItemsDictionary;
     UIRefreshControl *refreshControl;
     

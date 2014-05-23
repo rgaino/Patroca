@@ -11,14 +11,12 @@
 #import "ItemDataSourceDelegate.h"
 #import <Parse/Parse.h>
 
-@class ItemDataSource;
 @class PFObject;
 
 @interface ViewProfileViewController : BaseViewController <ItemDataSourceDelegate,
                                                             UICollectionViewDataSource, UICollectionViewDelegateFlowLayout> {
 
     PFUser *userObject;
-    ItemDataSource *itemDataSource;
     NSDictionary *userData;
     NSMutableDictionary *totalCommentsForItemsDictionary;
 }
