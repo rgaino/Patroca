@@ -61,7 +61,7 @@
     headerView = [[UIView alloc] init];
     [headerView setBackgroundColor:[UIColor whiteColor]];
 
-    [headerView setFrame:CGRectMake(0, 0, 320, 44+headerOffset)];
+    [headerView setFrame:CGRectMake(0, 0, 320, 43+headerOffset)];
     
     if(hasBackButton) {
         
@@ -91,7 +91,7 @@
         [_loginProfileButton addTarget:self action:@selector(loginProfileButtonPressed) forControlEvents:UIControlEventTouchUpInside];
 
         [headerView addSubview:_loginProfileButton];
-//        [headerView addSubview:loginActivityIndicator];
+        [headerView addSubview:_loginActivityIndicator];
     }
     
     //the Avatar mask image
