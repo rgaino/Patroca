@@ -74,7 +74,7 @@
     
     //if user is logged in, load friends, otherwise load nearby
     if ([PFUser currentUser] && [PFFacebookUtils isLinkedWithUser:[PFUser currentUser]]) {
-        [self performSelector:@selector(menuButtonPressed:) withObject:_friendsButton afterDelay:1.0f];
+//        [self performSelector:@selector(menuButtonPressed:) withObject:_friendsButton afterDelay:1.0f];
     } else {
         HelpView *loginHelpView = [[HelpView alloc] initWithStyle:HelpViewTypeLogin];
         [self.view addSubview:loginHelpView];
