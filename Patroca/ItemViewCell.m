@@ -43,8 +43,7 @@
     
     
     PFUser *userObject = [[UserCache getInstance] getCachedUserForId:userId];
-//    [_ownerNameLabel setText:[userObject objectForKey:DB_FIELD_USER_NAME]];
-    [_ownerNameLabel setHidden:YES];
+    [_ownerNameLabel setText:[userObject objectForKey:DB_FIELD_USER_NAME]];
     
     
     PFFile *itemImageFile = [itemObject objectForKey:DB_FIELD_ITEM_MAIN_IMAGE];
@@ -60,7 +59,7 @@
     [_tradedLabel setText:NSLocalizedString(@"traded", nil)];
     [_tradedLabel setHidden:!traded];
     [_tradedView setHidden:!traded];
-    
+    /*
     //don't ask for CLLocation permissions for this yet... defer to when the user chooses Nearby items
     if(locationManager == nil && [CLLocationManager authorizationStatus] == kCLAuthorizationStatusAuthorized) {
         locationManager = [[CLLocationManager alloc] init];
@@ -68,7 +67,7 @@
         [locationManager setDistanceFilter:kCLDistanceFilterNone];
         [locationManager setDesiredAccuracy:kCLLocationAccuracyBest];
     }
-    
+    */
     if ([PFUser currentUser] && [PFFacebookUtils isLinkedWithUser:[PFUser currentUser]]) {
         if([[[_cellItemObject objectForKey:DB_FIELD_USER_ID] objectId] isEqualToString:[[PFUser currentUser] objectId]]) {
             [_likeButton setHidden:YES];
@@ -84,10 +83,11 @@
             }
         }
     }
-    
+    /*
     if([CLLocationManager authorizationStatus] == kCLAuthorizationStatusAuthorized) {
         [locationManager startUpdatingLocation];
     }
+     */
 }
 
 - (void)updateTotalComments:(int)totalComments {
@@ -139,7 +139,7 @@
 }
 
 #pragma mark CLLocationManagerDelegate methods
-
+/*
 - (void)locationManager:(CLLocationManager *)manager didUpdateToLocation:(CLLocation *)newLocation fromLocation:(CLLocation *)oldLocation {
     
     PFGeoPoint *myLocationPoint = [PFGeoPoint geoPointWithLatitude:newLocation.coordinate.latitude longitude:newLocation.coordinate.longitude];
@@ -161,5 +161,5 @@
     }
     [_ownerNameLabel setHidden:NO];
 }
-
+*/
 @end

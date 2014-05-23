@@ -7,14 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
-#import <CoreLocation/CoreLocation.h>
+//#import <CoreLocation/CoreLocation.h>
 
 @class PFObject;
 @class PFGeoPoint;
 
-@interface ItemViewCell : UICollectionViewCell <CLLocationManagerDelegate> {
+@interface ItemViewCell : UICollectionViewCell { //<CLLocationManagerDelegate> {
 
-    CLLocationManager *locationManager;
+//    CLLocationManager *locationManager;
 }
 
 @property (weak, nonatomic) PFObject *cellItemObject;
