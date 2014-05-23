@@ -1,5 +1,5 @@
 //
-//  FacebookCache.h
+//  FacebookUtilsCache.h
 //  Patroca
 //
 //  Created by Rafael Gaino on 4/10/14.
@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface FacebookCache : NSObject {
+@interface FacebookUtilsCache : NSObject {
     NSMutableArray *friendIdsArray;
     NSDate *lastCacheForFriendIdsArray;
 
@@ -19,8 +19,9 @@
 typedef void (^FacebookFriendIDsArrayCacheCompletionBlock)(NSArray *friendIdsArray, NSError *error);
 typedef void (^FacebookFriendsPFUserArrayCacheCompletionBlock)(NSArray *friendPFUserArray, NSError *error);
 
-+(FacebookCache *) getInstance;
++(FacebookUtilsCache *) getInstance;
 - (void)getFacebookFriendIDsInBackgroundWithCallback:(FacebookFriendIDsArrayCacheCompletionBlock)callback;
 - (void)getFacebookFriendsPFUserArrayInBackgroundWithCallback:(FacebookFriendsPFUserArrayCacheCompletionBlock)callback;
+- (void)tellYourFriends;
 
 @end

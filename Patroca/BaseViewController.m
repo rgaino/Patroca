@@ -12,7 +12,7 @@
 #import "ViewProfileViewController.h"
 #import <SDWebImage/UIImageView+WebCache.h>
 #import "AddNewItemViewController.h"
-#import "FacebookCache.h"
+#import "FacebookUtilsCache.h"
 
 @implementation BaseViewController
 
@@ -212,8 +212,8 @@
         NSLog(@"Can't get current user on sendNewUserPushNotifications");
     }
     
-    FacebookCache *facebookCache = [FacebookCache getInstance];
-    [facebookCache getFacebookFriendIDsInBackgroundWithCallback:^(NSArray *friendIdsArray, NSError *error) {
+    FacebookUtilsCache *facebookUtilsCache = [FacebookUtilsCache getInstance];
+    [facebookUtilsCache getFacebookFriendIDsInBackgroundWithCallback:^(NSArray *friendIdsArray, NSError *error) {
         
         if(!error) {
         

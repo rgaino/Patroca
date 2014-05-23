@@ -10,7 +10,7 @@
 #import <Parse/Parse.h>
 #import "DatabaseConstants.h"
 #import "MasterViewController.h"
-#import "FacebookCache.h"
+#import "FacebookUtilsCache.h"
 #import "UserCache.h"
 
 @implementation ItemDataSource
@@ -110,8 +110,8 @@
         currentResultsLimit=0;
     }
     
-    FacebookCache *facebookCache = [FacebookCache getInstance];
-    [facebookCache getFacebookFriendsPFUserArrayInBackgroundWithCallback:^(NSArray *friendPFUserArray, NSError *error) {
+    FacebookUtilsCache *facebookUtilsCache = [FacebookUtilsCache getInstance];
+    [facebookUtilsCache getFacebookFriendsPFUserArrayInBackgroundWithCallback:^(NSArray *friendPFUserArray, NSError *error) {
         if(!error) {
             PFQuery *itemsQuery = [PFQuery queryWithClassName:DB_TABLE_ITEMS];
             [itemsQuery whereKey:DB_FIELD_ITEM_DELETED equalTo:[NSNumber numberWithBool:NO]];
@@ -169,9 +169,9 @@
         NSLog(@"Can't get current user");
     }
     
-    FacebookCache *facebookCache = [FacebookCache getInstance];
+    FacebookUtilsCache *facebookUtilsCache = [FacebookUtilsCache getInstance];
     
-    [facebookCache getFacebookFriendsPFUserArrayInBackgroundWithCallback:^(NSArray *friendPFUserArray, NSError *error) {
+    [facebookUtilsCache getFacebookFriendsPFUserArrayInBackgroundWithCallback:^(NSArray *friendPFUserArray, NSError *error) {
 
         if(!error) {
             PFQuery *query = [PFQuery queryWithClassName:DB_TABLE_ITEMS];

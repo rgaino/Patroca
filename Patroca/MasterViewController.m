@@ -19,6 +19,7 @@
 #import "SVPullToRefresh.h"
 #import "UILabel+UILabel_Resize.h"
 #import "HelpView.h"
+#import "FacebookUtilsCache.h"
 
 #define CELL_REUSE_IDENTIFIER @"Item_Cell_Master"
 
@@ -322,51 +323,7 @@
 
 
 - (void)inviteFriendsButtonPressed {
-    //    [FBNativeDialogs presentShareDialogModallyFrom:self initialText:@"initialText" image:nil url:[NSURL URLWithString:@"http://joystiq.com"] handler:^(FBNativeDialogResult result, NSError *error) {
-    //
-    //    }     ];
-    
-    //    NSMutableDictionary *params = [NSMutableDictionary dictionaryWithObjectsAndKeys:
-    //                                   @"Nome do Patroca", @"name",
-    //                                   @"Patroca.", @"caption",
-    //                                   @"Texto para instigar os amigos.", @"description",
-    //                                   @"http://www.patroca.com/", @"link",
-    ////                                   @"http://www.facebookmobileweb.com/hackbook/img/facebook_icon_large.png", @"picture",
-    ////                                   actionLinksStr, @"actions",
-    //                                   nil];
-    
-    //    [FBNativeDialogs presentShareDialogModallyFrom:self initialText:nil image:nil url:[NSURL URLWithString:@"http://www.patroca.com/"] handler:^(FBNativeDialogResult result, NSError *error) {
-    //        NSLog(@"");
-    //    }];
-    
-    //    [FBWebDialogs presentFeedDialogModallyWithSession:[PFFacebookUtils session] parameters:params handler:^(FBWebDialogResult result, NSURL *resultURL, NSError *error) {
-    //        NSLog(@"");
-    //    }];
-    
-    /*
-     currentAPICall = kDialogFeedUser;
-     FBSBJSON *jsonWriter = [[FBSBJSON new] autorelease];
-     
-     // The action links to be shown with the post in the feed
-     NSArray* actionLinks = [NSArray arrayWithObjects:[NSDictionary dictionaryWithObjectsAndKeys:
-     @"Get Started",@"name",@"http://m.facebook.com/apps/hackbookios/",@"link", nil], nil];
-     NSString *actionLinksStr = [jsonWriter stringWithObject:actionLinks];
-     // Dialog parameters
-     NSMutableDictionary *params = [NSMutableDictionary dictionaryWithObjectsAndKeys:
-     @"I'm using the Hackbook for iOS app", @"name",
-     @"Hackbook for iOS.", @"caption",
-     @"Check out Hackbook for iOS to learn how you can make your iOS apps social using Facebook Platform.", @"description",
-     @"http://m.facebook.com/apps/hackbookios/", @"link",
-     @"http://www.facebookmobileweb.com/hackbook/img/facebook_icon_large.png", @"picture",
-     actionLinksStr, @"actions",
-     nil];
-     
-     HackbookAppDelegate *delegate = (HackbookAppDelegate *)[[UIApplication sharedApplication] delegate];
-     [[delegate facebook] dialog:@"feed"
-     andParams:params
-     andDelegate:self];
-     */
-
+    [[FacebookUtilsCache getInstance] tellYourFriends];
 }
 
 #pragma mark ItemDataSourceDelegate
