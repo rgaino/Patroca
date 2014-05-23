@@ -29,7 +29,8 @@
     // Register for push notifications
     [application registerForRemoteNotificationTypes:
      UIRemoteNotificationTypeBadge |
-     UIRemoteNotificationTypeAlert ];
+     UIRemoteNotificationTypeAlert |
+     UIRemoteNotificationTypeSound ];
     
     // Obtain the installation object for the current device
     PFInstallation *myInstallation = [PFInstallation currentInstallation];
