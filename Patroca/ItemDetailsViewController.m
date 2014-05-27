@@ -228,15 +228,15 @@
     [itemImagesScrollView setFrame:scrollFrame];
     [itemImagesScrollView setHidden:NO];
 
-    [UIView beginAnimations:@"scrollViewIn" context:nil];
-    [UIView setAnimationDuration:0.5];
-    [UIView setAnimationCurve:UIViewAnimationCurveEaseOut];
+//    [UIView beginAnimations:@"scrollViewIn" context:nil];
+//    [UIView setAnimationDuration:0.5];
+//    [UIView setAnimationCurve:UIViewAnimationCurveEaseOut];
 
     scrollFrame = itemImagesScrollView.frame;
     scrollFrame.origin.x = 0;
     [itemImagesScrollView setFrame:scrollFrame];
 
-    [UIView commitAnimations];
+//    [UIView commitAnimations];
 }
 
 - (void)showItemComments {
