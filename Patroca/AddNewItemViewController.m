@@ -14,6 +14,7 @@
 #import "DatabaseConstants.h"
 #import <MobileCoreServices/UTCoreTypes.h>
 #import "DoneShareViewController.h"
+#import "FacebookUtilsCache.h"
 
 #define thumbnailSize 53
 #define fullImageSize 640
@@ -323,6 +324,7 @@ The only line left is the one that dismissess the camera/gallery
                 [HUD setLabelText:NSLocalizedString(@"wrapping_up", nil)];
             });
             [currentItem saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+                
                 //subscribe the user for push notifications on this item
                 NSString *subscribeChannel = [NSString stringWithFormat:NOTIFICATIONS_COMMENTS_ON_ITEM, currentItem.objectId];
                 [PFPush subscribeToChannelInBackground:subscribeChannel];
@@ -331,6 +333,8 @@ The only line left is the one that dismissess the camera/gallery
                 HUD.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"37x-Checkmark.png"]];
                 HUD.labelText = NSLocalizedString(@"saved!", nil);
                 
+                //notify the user's friends of the new item
+                [self sendNewItemPushNotifications];
                 [self performSelector:@selector(closeThisScreen) withObject:nil afterDelay:1.0f];
             }];
             
@@ -354,9 +358,6 @@ The only line left is the one that dismissess the camera/gallery
         //first image, use it as poster image for the item
         [currentItem setObject:imageFile forKey:DB_FIELD_ITEM_MAIN_IMAGE];
     }
-    
-
-
 }
 
 - (void)closeThisScreen {
@@ -364,10 +365,40 @@ The only line left is the one that dismissess the camera/gallery
     [HUD removeFromSuperview];
     
     [self.navigationController popViewControllerAnimated:YES];
-//    DoneShareViewController *doneShareViewController = [[DoneShareViewController alloc] initWithNibName:@"DoneShareViewController" bundle:nil];
-//    [doneShareViewController setItemObject:currentItem];
-//    [self.navigationController pushViewController:doneShareViewController animated:YES];
 }
+
+- (void)sendNewItemPushNotifications {
+    
+    if([PFUser currentUser] == nil) {
+        NSLog(@"Can't get current user on sendNewUserPushNotifications");
+    }
+    
+    FacebookUtilsCache *facebookUtilsCache = [FacebookUtilsCache getInstance];
+    [facebookUtilsCache getFacebookFriendIDsInBackgroundWithCallback:^(NSArray *friendIdsArray, NSError *error) {
+        
+        if(!error) {
+            
+            NSString *newItemMessage = [NSString stringWithFormat:NSLocalizedString(@"new_item_message", nil), [[PFUser currentUser] objectForKey:DB_FIELD_USER_NAME]];
+            
+            NSDictionary *params = [NSDictionary dictionaryWithObjectsAndKeys:friendIdsArray, @"friend_ids_array",
+                                                                              newItemMessage, @"new_item_message",
+                                                                              nil];
+            
+            [PFCloud callFunctionInBackground:@"notifyFriendsOfNewItem" withParameters:params block:^(id object, NSError *error) {
+                
+                if(!error) {
+                    NSLog(@"notifyFriendsOfNewItem called with success");
+                } else {
+                    NSLog(@"Error calling notifyFriendsOfNewItem: %@ %@", error, [error userInfo]);
+                }
+            }];
+        } else {
+            NSLog(@"Error: %@ %@", error, [error userInfo]);
+        }
+    }];
+
+}
+
 
 - (BOOL) textFieldShouldReturn:(UITextField *)textField
 {

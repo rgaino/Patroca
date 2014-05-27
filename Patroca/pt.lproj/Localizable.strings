@@ -53,3 +53,4 @@
 "item_deleted" = "Item deletado.";
 "item_is_deleted" = "Seu item foi removido do Patroca.";
 "welcome!" = "Bem-vindo!";
+"new_item_message" = "Seu amigo %@ acabou de postar alguma coisa!";

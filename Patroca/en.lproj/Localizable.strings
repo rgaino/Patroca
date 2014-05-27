@@ -53,5 +53,5 @@
 "item_deleted" = "Item deleted.";
 "item_is_deleted" = "Your item is not available anymore.";
 "welcome!" = "Welcome!";
-
+"new_item_message" = "Your friend %@ just posted something!";
 
