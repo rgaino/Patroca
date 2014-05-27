@@ -54,4 +54,5 @@
 "item_is_deleted" = "Your item is not available anymore.";
 "welcome!" = "Welcome!";
 "new_item_message" = "Your friend %@ just posted something!";
+"new_user_message" = "%@ has joined Patroca!";
 

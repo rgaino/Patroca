@@ -216,9 +216,13 @@
     [facebookUtilsCache getFacebookFriendIDsInBackgroundWithCallback:^(NSArray *friendIdsArray, NSError *error) {
         
         if(!error) {
-        
-            NSDictionary *params = [NSDictionary dictionaryWithObject:friendIdsArray forKey:@"friend_ids_array"];
-            
+
+            NSString *newUserMessage = [NSString stringWithFormat:NSLocalizedString(@"new_user_message", nil), [[PFUser currentUser] objectForKey:DB_FIELD_USER_NAME]];
+
+            NSDictionary *params = [NSDictionary dictionaryWithObjectsAndKeys:friendIdsArray, @"friend_ids_array",
+                                    newUserMessage, @"new_user_message",
+                                    nil];
+
             [PFCloud callFunctionInBackground:@"notifyFriendsThatUserJoined" withParameters:params block:^(id object, NSError *error) {
                 
                 if(!error) {
