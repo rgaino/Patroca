@@ -9,6 +9,11 @@
 #import <UIKit/UIKit.h>
 #import "BaseViewController.h"
 
-@interface AboutViewController : BaseViewController
+@interface AboutViewController : BaseViewController <UIWebViewDelegate> {
+
+    UIScrollView *aboutScrollView;
+    UIWebView *termsWebView;
+    UIActivityIndicatorView *loadingTermsActivityIndicator;
+}
 
 @end

@@ -58,3 +58,7 @@
 "about" = "About";
 "logout" = "Logout";
 "patroca_credits" = "Patroca was created\nand developed by:";
+"powered by parse" = "Powered by Parse.com";
+"github thanks" = "And some very nice classes from Github:";
+"noum thanks" = "With a little help from The Noum Project:";
+"noum names" = "User designed by Lil Squid";
