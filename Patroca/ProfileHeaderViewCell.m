@@ -14,6 +14,7 @@
 #import "UIUnderlinedButton.h"
 #import <FacebookSDK/FacebookSDK.h>
 #import "FacebookUtilsCache.h"
+#import "AboutViewController.h"
 
 @implementation ProfileHeaderViewCell
 
@@ -40,6 +41,8 @@
     [_moreFriendsMoreStuffLabel setText:NSLocalizedString(@"the more the merrier", nil)];
     [_tellYourFriendsButton setHidden:NO];
     [_moreFriendsMoreStuffLabel setHidden:NO];
+    [_aboutButton setTitle:NSLocalizedString(@"about", nil) forState:UIControlStateNormal];
+    [_logoutButton setTitle:NSLocalizedString(@"logout", nil) forState:UIControlStateNormal];
 }
 
 - (void)setupProfileHeaderViewCellWithUser:(PFUser*)user UserData:(NSDictionary*)userData {
@@ -163,17 +166,22 @@
     }];
 }
 */
+
 - (IBAction)logoutButtonPressed:(id)sender {
     
     [PFUser logOut];
     [_parentViewController.navigationController popViewControllerAnimated:YES];
 }
 
+- (IBAction)aboutButtonPressed:(id)sender {
+    AboutViewController *aboutViewController = [[AboutViewController alloc] initWithNibName:@"AboutViewController" bundle:nil];
+    [self.parentViewController.navigationController pushViewController:aboutViewController animated:YES];
+}
+
 
 - (IBAction)tellYourFriendsButtonPressed:(id)sender {
     [[FacebookUtilsCache getInstance] tellYourFriends];
 }
-
 
 
 - (IBAction)openUserProfileOnFacebookButtonPressed:(id)sender {
@@ -191,5 +199,6 @@
         [[UIApplication sharedApplication] openURL:[NSURL URLWithString:facebookBrowserProfileURLString]];
     }
 }
+
 
 @end

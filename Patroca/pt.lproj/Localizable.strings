@@ -55,4 +55,6 @@
 "welcome!" = "Bem-vindo!";
 "new_item_message" = "Seu amigo %@ acabou de postar alguma coisa!";
 "new_user_message" = "%@ entrou no Patroca!";
-
+"about" = "Sobre";
+"logout" = "Logout";
+"patroca_credits" = "Patroca foi criado\ne desenvolvido por:";

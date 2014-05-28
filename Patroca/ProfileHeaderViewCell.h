@@ -31,6 +31,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *totalOffersLabel;
 @property (weak, nonatomic) IBOutlet UILabel *totalCommentsLabel;
 @property (weak, nonatomic) IBOutlet UIActivityIndicatorView *activityIndicator;
+@property (weak, nonatomic) IBOutlet UIUnderlinedButton *aboutButton;
 
 
 - (void)setupProfileHeaderViewCellWithUser:(PFUser*)user UserData:(NSDictionary*)userData;
@@ -38,5 +39,6 @@
 - (IBAction)logoutButtonPressed:(id)sender;
 - (IBAction)tellYourFriendsButtonPressed:(id)sender;
 - (IBAction)openUserProfileOnFacebookButtonPressed:(id)sender;
+- (IBAction)aboutButtonPressed:(id)sender;
 
 @end
