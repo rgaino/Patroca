@@ -7,12 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		1918E8C31932C02C0055F401 /* error.png in Resources */ = {isa = PBXBuildFile; fileRef = 1918E8C11932C02C0055F401 /* error.png */; };
-		1918E8C41932C02C0055F401 /* error@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1918E8C21932C02C0055F401 /* error@2x.png */; };
 		1918E8C919341FCC0055F401 /* AboutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1918E8C719341FCC0055F401 /* AboutViewController.m */; };
 		1918E8CA19341FCC0055F401 /* AboutViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1918E8C819341FCC0055F401 /* AboutViewController.xib */; };
 		1918E8CD193426940055F401 /* about_header.png in Resources */ = {isa = PBXBuildFile; fileRef = 1918E8CB193426940055F401 /* about_header.png */; };
 		1918E8CE193426940055F401 /* about_header@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1918E8CC193426940055F401 /* about_header@2x.png */; };
+		1919D299193790F1003D81A7 /* error.png in Resources */ = {isa = PBXBuildFile; fileRef = 1919D297193790F1003D81A7 /* error.png */; };
+		1919D29A193790F1003D81A7 /* error@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1919D298193790F1003D81A7 /* error@2x.png */; };
 		19241BE716E8215E00E381F7 /* camera_message_background.png in Resources */ = {isa = PBXBuildFile; fileRef = 19241BE516E8215E00E381F7 /* camera_message_background.png */; };
 		19241BE816E8215E00E381F7 /* camera_message_background@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 19241BE616E8215E00E381F7 /* camera_message_background@2x.png */; };
 		19241BEA16E8254400E381F7 /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 19241BE916E8254400E381F7 /* icon.png */; };
@@ -175,13 +175,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		1918E8C11932C02C0055F401 /* error.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = error.png; sourceTree = "<group>"; };
-		1918E8C21932C02C0055F401 /* error@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "error@2x.png"; sourceTree = "<group>"; };
 		1918E8C619341FCC0055F401 /* AboutViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AboutViewController.h; sourceTree = "<group>"; };
 		1918E8C719341FCC0055F401 /* AboutViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AboutViewController.m; sourceTree = "<group>"; };
 		1918E8C819341FCC0055F401 /* AboutViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AboutViewController.xib; sourceTree = "<group>"; };
 		1918E8CB193426940055F401 /* about_header.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = about_header.png; sourceTree = "<group>"; };
 		1918E8CC193426940055F401 /* about_header@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "about_header@2x.png"; sourceTree = "<group>"; };
+		1919D297193790F1003D81A7 /* error.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = error.png; sourceTree = "<group>"; };
+		1919D298193790F1003D81A7 /* error@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "error@2x.png"; sourceTree = "<group>"; };
 		19241BE516E8215E00E381F7 /* camera_message_background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = camera_message_background.png; sourceTree = "<group>"; };
 		19241BE616E8215E00E381F7 /* camera_message_background@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "camera_message_background@2x.png"; sourceTree = "<group>"; };
 		19241BE916E8254400E381F7 /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = icon.png; path = ../icon.png; sourceTree = "<group>"; };
@@ -652,8 +652,8 @@
 				1939B907165AA0D900435705 /* comments_icon@2x.png */,
 				193EEA49169BA14B0045DE59 /* done_button.png */,
 				193EEA4A169BA14B0045DE59 /* done_button@2x.png */,
-				1918E8C11932C02C0055F401 /* error.png */,
-				1918E8C21932C02C0055F401 /* error@2x.png */,
+				1919D297193790F1003D81A7 /* error.png */,
+				1919D298193790F1003D81A7 /* error@2x.png */,
 				198B5BDB16CDC11A00DC2ED2 /* facebook_profile_button.png */,
 				198B5BDC16CDC11A00DC2ED2 /* facebook_profile_button@2x.png */,
 				19684F8A169F99E20011A69C /* flash_button_auto.png */,
@@ -1002,17 +1002,18 @@
 				1939B909165AA0D900435705 /* comments_icon@2x.png in Resources */,
 				1950E4FC165F09B700E98488 /* ViewProfileViewController.xib in Resources */,
 				198229A018FE1D0800DF72CA /* tutorial_panel_1.png in Resources */,
-				1918E8C31932C02C0055F401 /* error.png in Resources */,
 				1950E4FE165F0BAF00E98488 /* ItemViewCell.xib in Resources */,
 				1939CA5416644A6E002C21F6 /* AddNewItemViewController.xib in Resources */,
 				1986625516670397003C19EE /* sample_avatar.jpeg in Resources */,
 				19BF9D1A166C393E00F813B6 /* mask_fb_avatar.png in Resources */,
 				19BF9D1B166C393E00F813B6 /* mask_fb_avatar@2x.png in Resources */,
+				1919D29A193790F1003D81A7 /* error@2x.png in Resources */,
 				19C022C119108A5A008A1817 /* Default@2x.png in Resources */,
 				19BF9D1E166C40B600F813B6 /* placeholder.png in Resources */,
 				19BF9D1F166C40B600F813B6 /* placeholder@2x.png in Resources */,
 				19BF9D22166C426D00F813B6 /* item_title_mask.png in Resources */,
 				19BF9D23166C426D00F813B6 /* item_title_mask@2x.png in Resources */,
+				1919D299193790F1003D81A7 /* error.png in Resources */,
 				195B30291676B74F00F80073 /* ItemDetailsViewController.xib in Resources */,
 				195B302E167810A800F80073 /* back_button.png in Resources */,
 				195B302F167810A800F80073 /* back_button@2x.png in Resources */,
@@ -1040,7 +1041,6 @@
 				198A3CF91688CD300016F45C /* comment_text_area@2x.png in Resources */,
 				198A3CFC1688CD3B0016F45C /* send_comment_button.png in Resources */,
 				19F8EE4418FC39D700E4C847 /* star-on.png in Resources */,
-				1918E8C41932C02C0055F401 /* error@2x.png in Resources */,
 				198A3CFD1688CD3B0016F45C /* send_comment_button@2x.png in Resources */,
 				193EEA4B169BA14B0045DE59 /* done_button.png in Resources */,
 				193EEA4C169BA14B0045DE59 /* done_button@2x.png in Resources */,
