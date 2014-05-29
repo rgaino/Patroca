@@ -80,7 +80,7 @@
     [itemImagesScrollView setDirectionalLockEnabled:YES];
     [wholeScreenScrollView addSubview:itemImagesScrollView];
     
-    
+    /*
     //Title view 75% opaque) and item title label
     UIView *titleBackgroundView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, 65)];    
     UILabel *itemTitleLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, 5, 300, 55)];
@@ -93,10 +93,9 @@
     [itemTitleLabel setAdjustsLetterSpacingToFitWidth:YES];
     [itemTitleLabel setAdjustsFontSizeToFitWidth:YES];
     [itemTitleLabel setMinimumScaleFactor:0.6f];
-    
     [titleBackgroundView addSubview:itemTitleLabel];
     [wholeScreenScrollView addSubview:titleBackgroundView];
-    
+    */
     
     //Owner name
     UILabel *ownerNameLabel = [[UILabel alloc] initWithFrame:CGRectMake(46, 324, 270, 20)];

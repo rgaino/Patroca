@@ -285,7 +285,8 @@ The only line left is the one that dismissess the camera/gallery
     //save item details
     NSLog(@"saving item...");
     [currentItem setObject:[_itemNameTextField text] forKey:DB_FIELD_ITEM_NAME];
-    [currentItem setObject:[_itemDescriptionTextView text] forKey:DB_FIELD_ITEM_DESCRIPTION];
+    [currentItem setObject:[_itemNameTextField text] forKey:DB_FIELD_ITEM_DESCRIPTION];
+//    [currentItem setObject:[_itemDescriptionTextView text] forKey:DB_FIELD_ITEM_DESCRIPTION];
     [currentItem setObject:[PFUser currentUser] forKey:DB_FIELD_USER_ID];
     [currentItem setObject:itemLocationPoint forKey:DB_FIELD_ITEM_LOCATION];
     [currentItem setObject:[NSNumber numberWithBool:NO] forKey:DB_FIELD_ITEM_TRADED];
