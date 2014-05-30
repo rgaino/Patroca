@@ -227,15 +227,9 @@
     [itemImagesScrollView setFrame:scrollFrame];
     [itemImagesScrollView setHidden:NO];
 
-//    [UIView beginAnimations:@"scrollViewIn" context:nil];
-//    [UIView setAnimationDuration:0.5];
-//    [UIView setAnimationCurve:UIViewAnimationCurveEaseOut];
-
     scrollFrame = itemImagesScrollView.frame;
     scrollFrame.origin.x = 0;
     [itemImagesScrollView setFrame:scrollFrame];
-
-//    [UIView commitAnimations];
 }
 
 - (void)showItemComments {
@@ -297,7 +291,7 @@
         [singleCommentView addSubview:clockIconImageView];
         
         //The timestamp text label
-        UILabel *timeStampLabel = [[UILabel alloc] initWithFrame:CGRectMake(28, 75, 56, 8)];
+        UILabel *timeStampLabel = [[UILabel alloc] initWithFrame:CGRectMake(28, 71, 56, 12)];
         [timeStampLabel setText:(commentObject.createdAt!=nil?[commentObject.createdAt prettyDateDiffFormat]:[[NSDate date] prettyDateDiffFormat])]; //commentObject.createdAt can be nil if the object was just created but not saved on the server, so just show the current timestamp
         [timeStampLabel setBackgroundColor:[UIColor clearColor]];
         [timeStampLabel setTextColor:[UIColor colorWithRed:205/255.f green:220/255.f blue:40/255.f alpha:1.0f]];

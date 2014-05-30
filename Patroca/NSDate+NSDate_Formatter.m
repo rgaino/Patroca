@@ -12,27 +12,40 @@
 
 - (NSString*)prettyDateDiffFormat {
     
-//    if(self)
-    
     NSDate *todayDate = [NSDate date];
     double timeInterval = [self timeIntervalSinceDate:todayDate] * -1;
-        
-    if(timeInterval < 1) {
-    	return @"agora mesmo";
-    } else 	if (timeInterval < 60) {
-    	return @"agora mesmo";
+
+    if (timeInterval < 60) {
+    	return NSLocalizedString(@"right now", nil);
     } else if (timeInterval < 3600) {
     	int diff = round(timeInterval / 60);
-    	return [NSString stringWithFormat:@"%d min atrás", diff];
+        if(diff==1) {
+            return [NSString stringWithFormat:NSLocalizedString(@"%d minute ago", nil), diff];
+        } else {
+            return [NSString stringWithFormat:NSLocalizedString(@"%d minutes ago", nil), diff];
+        }
     } else if (timeInterval < 86400) {
     	int diff = round(timeInterval / 60 / 60);
-    	return[NSString stringWithFormat:@"%d horas atrás", diff];
-    } else if (timeInterval < 2629743) {
+        if(diff==1) {
+            return[NSString stringWithFormat:NSLocalizedString(@"%d hour ago", nil), diff];
+        } else {
+            return[NSString stringWithFormat:NSLocalizedString(@"%d hours ago", nil), diff];
+        }
+    } else if (timeInterval < 2716143) {
     	int diff = round(timeInterval / 60 / 60 / 24);
-    	return[NSString stringWithFormat:@"%d dias atrás", diff];
+        if(diff==1) {
+            return[NSString stringWithFormat:NSLocalizedString(@"%d day ago", nil), diff];
+        } else {
+            return[NSString stringWithFormat:NSLocalizedString(@"%d days ago", nil), diff];
+        }
     } else {
-    	return @"nunca";
+    	int diff = round(timeInterval / 60 / 60 / 24 / 30);
+        if(diff==1) {
+            return[NSString stringWithFormat:NSLocalizedString(@"%d month ago", nil), diff];
+        } else {
+            return[NSString stringWithFormat:NSLocalizedString(@"%d months ago", nil), diff];
+        }
     }
 }
-
+ 
 @end

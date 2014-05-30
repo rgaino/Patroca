@@ -62,3 +62,13 @@
 "github thanks" = "E ótimas classes do Github:";
 "noum thanks" = "Com uma ajudinha do The Noum Project:";
 "noum names" = "User designed by Lil Squid";
+"right now" = "agora mesmo";
+"%d minute ago" = "%d minuto atrás";
+"%d minutes ago" = "%d minutos atrás";
+"%d hour ago" = "%d hora atrás";
+"%d hours ago" = "%d horas atrás";
+"%d day ago" = "%d dia atrás";
+"%d days ago" = "%d dias atrás";
+"%d month ago" = "%d mes atrás";
+"%d months ago" = "%d meses atrás";
+"never" = "nunca";
