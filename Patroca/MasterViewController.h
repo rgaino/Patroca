@@ -13,7 +13,6 @@
 
 @interface MasterViewController : BaseViewController <UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemDataSourceDelegate> {
     
-    NSMutableDictionary *totalCommentsForItemsDictionary;
     UIRefreshControl *refreshControl;
     
     UIColor *labelSelectedColor;

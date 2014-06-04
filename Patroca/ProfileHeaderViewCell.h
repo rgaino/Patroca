@@ -28,8 +28,6 @@
 @property (weak, nonatomic) IBOutlet UILabel *moreFriendsMoreStuffLabel;
 @property (weak, nonatomic) IBOutlet UIButton *tellYourFriendsButton;
 @property (strong, nonatomic) UIViewController *parentViewController;
-@property (weak, nonatomic) IBOutlet UILabel *totalOffersLabel;
-@property (weak, nonatomic) IBOutlet UILabel *totalCommentsLabel;
 @property (weak, nonatomic) IBOutlet UIActivityIndicatorView *activityIndicator;
 @property (weak, nonatomic) IBOutlet UIUnderlinedButton *aboutButton;
 

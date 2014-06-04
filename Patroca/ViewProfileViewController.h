@@ -18,7 +18,6 @@
 
     PFUser *userObject;
     NSDictionary *userData;
-    NSMutableDictionary *totalCommentsForItemsDictionary;
 }
 
 @property (weak, nonatomic) IBOutlet UICollectionView *contentDisplayCollectionView;

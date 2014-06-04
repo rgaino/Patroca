@@ -38,7 +38,6 @@ typedef enum {
 @property (readwrite) PFObject *userObject;
 
 - (void)setItemDataSourceMode:(ItemDataSourceMode)var;
-- (void)getTotalCommentsForItems:(NSArray*)objects;
 - (void)refresh;
 - (void)getNextPageAndReturnWithCallback:(GetItemsCompletionBlock)callback;
 - (void)clearAndReturn;

@@ -66,27 +66,6 @@
 }
 
 
-- (void)getTotalCommentsForItems:(NSArray*)objects {
-    
-    //WARNING: function disabled because we're not displaying total comments anymore (nowhere)
-
-    /*
-    //calling CloudCode function to get a count of comments for each item
-    NSMutableArray *ids = [[NSMutableArray alloc] init];
-    for(PFObject *oneItem in objects) {
-        [ids addObject:oneItem.objectId];
-    }
-    NSDictionary *params = [NSDictionary dictionaryWithObject:ids forKey:@"item_ids_array"];
-    
-    [PFCloud callFunctionInBackground:@"totalCommentsForItems" withParameters:params block:^(id object, NSError *error) {
-        NSLog(@"Fetched total comments in background.");
-        NSDictionary *totalCommentsForItemsDictionary = (NSDictionary*) object;
-        [_delegate populateTotalCommentsWithDictionary:totalCommentsForItemsDictionary];
-        
-    }];
-     */
-}
-
 - (void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error {
     NSLog(@"Error on 'locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error': %@ %@", error, [error userInfo]);
     [_delegate showErrorIcon];
@@ -140,7 +119,6 @@
                     }
                     
                     currentResultsLimit += resultsPerPage;
-                    [self getTotalCommentsForItems:itemObjects];
                     callback(nil);
                 } else {
                     // Log details of the failure
@@ -202,7 +180,6 @@
                         }
                         
                         currentResultsLimit += resultsPerPage;
-                        [self getTotalCommentsForItems:itemObjects];
                         callback(nil);
                     } else {
                         NSLog(@"Error: %@ %@", error, [error userInfo]);
@@ -267,7 +244,6 @@
             }
             
             currentResultsLimit += resultsPerPage;
-            [self getTotalCommentsForItems:itemObjects];
             callback(nil);
         } else {
             NSLog(@"Error: %@ %@", error, [error userInfo]);
@@ -313,7 +289,6 @@
             }
             
             currentResultsLimit += resultsPerPage;
-            [self getTotalCommentsForItems:itemObjects];
             callback(nil);
         } else {
             NSLog(@"Error: %@ %@", error, [error userInfo]);

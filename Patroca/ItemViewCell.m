@@ -36,23 +36,10 @@
 
     [self setCellItemObject:itemObject];
     
-    [self.itemNameLabel setText:[itemObject objectForKey:DB_FIELD_ITEM_NAME]];
-    
-    PFUser *itemUser = [itemObject objectForKey:DB_FIELD_USER_ID];
-    NSString *userId = [itemUser objectId];
-    
-    
-    PFUser *userObject = [[UserCache getInstance] getCachedUserForId:userId];
-    [_ownerNameLabel setText:[userObject objectForKey:DB_FIELD_USER_NAME]];
-    
-    
     PFFile *itemImageFile = [itemObject objectForKey:DB_FIELD_ITEM_MAIN_IMAGE];
     NSURL *itemImageURL = [NSURL URLWithString:[itemImageFile url]];
     [_itemImageView setImageWithURL:itemImageURL placeholderImage:[UIImage imageNamed:@"placeholder.png"]];
     
-    NSString *facebookProfilePicString = [NSString stringWithFormat:FB_PROFILE_PICTURE_URL, [userObject objectForKey:DB_FIELD_USER_FACEBOOK_ID]];
-    NSURL *facebookProfilePicURL = [NSURL URLWithString:facebookProfilePicString];
-    [_ownerProfilePic setImageWithURL:facebookProfilePicURL placeholderImage:[UIImage imageNamed:@"avatar_default.png"]];
 
     NSNumber *tradedNumber =  [itemObject objectForKey:DB_FIELD_ITEM_TRADED];
     BOOL traded = [tradedNumber boolValue];
@@ -88,10 +75,6 @@
         [locationManager startUpdatingLocation];
     }
      */
-}
-
-- (void)updateTotalComments:(int)totalComments {
-    [_totalCommentsLabel setText:[NSString stringWithFormat:@"%d", totalComments]];
 }
 
 - (IBAction)likeButtonPressed:(id)sender {

@@ -45,7 +45,6 @@
     
     [self setupHeaderWithBackButton:YES doneButton:NO addItemButton:YES];
 
-    totalCommentsForItemsDictionary = [[NSMutableDictionary alloc] init];
     [_contentDisplayCollectionView registerClass:[ItemViewCell class] forCellWithReuseIdentifier:CELL_REUSE_IDENTIFIER];
     [_contentDisplayCollectionView registerClass:[ProfileHeaderViewCell class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:HEADER_CELL_REUSE_IDENTIFIER];
     
@@ -99,7 +98,6 @@
     [itemDataSource setUserObject:userObject];
     [itemDataSource getNextPageAndReturnWithCallback:^(NSError *error) {}];
     
-    totalCommentsForItemsDictionary = [[NSMutableDictionary alloc] init];
     [_contentDisplayCollectionView registerClass:[ItemViewCell class] forCellWithReuseIdentifier:CELL_REUSE_IDENTIFIER];
     [_contentDisplayCollectionView registerClass:[ProfileHeaderViewCell class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:HEADER_CELL_REUSE_IDENTIFIER];
    
@@ -125,36 +123,6 @@
 }
 
 
-- (void)populateTotalCommentsWithDictionary:(NSDictionary*)tempTotalCommentsForItemsDictionary {
-    
-    //updating the dictionary with items and their total comments...
-    NSArray *itemIDs = [tempTotalCommentsForItemsDictionary objectForKey:@"item_ids"];
-    NSArray *itemTotalComments = [tempTotalCommentsForItemsDictionary objectForKey:@"item_comments"];
-    for(int i=0; i<itemIDs.count; i++) {
-        [totalCommentsForItemsDictionary setObject:[itemTotalComments objectAtIndex:i] forKey:[itemIDs objectAtIndex:i]];
-    }
-    
-    //...then update all visible cells
-    for(ItemViewCell *itemViewCell in [_contentDisplayCollectionView visibleCells]) {
-        [self updateTotalCommentsForItemViewCell:itemViewCell];
-    }
-}
-
-- (void)updateTotalCommentsForItemViewCell:(ItemViewCell*)itemViewCell {
-    
-    //lookup item on totalCommentsForItemsDictionary and update its cell
-    PFObject *cellItemObject = [itemViewCell cellItemObject];
-    NSString *itemId = [cellItemObject objectId];
-    
-    int totalComments = 0;
-    
-    NSString *totalCommentsString = [totalCommentsForItemsDictionary objectForKey:itemId];
-    if(totalCommentsString != nil) {
-        totalComments = [totalCommentsString intValue];
-    }
-    [itemViewCell updateTotalComments:totalComments];
-}
-
 #pragma mark - UICollectionView Datasource
 
 - (NSInteger)collectionView:(UICollectionView *)view numberOfItemsInSection:(NSInteger)section {
@@ -171,8 +139,6 @@
     
     PFObject *item = [[itemDataSource items] objectAtIndex:indexPath.row];
     [itemViewCell setupCellWithItem:item];
-    
-    [self updateTotalCommentsForItemViewCell:itemViewCell];
     
     return itemViewCell;
 }

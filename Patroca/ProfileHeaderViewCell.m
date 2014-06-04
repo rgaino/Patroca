@@ -87,27 +87,10 @@
     
     [locationIconImageView setFrame:CGRectMake(locationIconX, 128, locationIconImageView.frame.size.width, locationIconImageView.frame.size.height)];
     [self addSubview:locationIconImageView];
-
-/*
-    //Query for how many comments this user has ever made
-    PFQuery *totalCommentsQuery = [PFQuery queryWithClassName:DB_TABLE_ITEM_COMMENTS];
-    [totalCommentsQuery whereKey:DB_FIELD_USER_ID equalTo:user];
-    [totalCommentsQuery findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
-        if(!error) {
-            NSUInteger totalComments = [objects count];
-            [_totalCommentsLabel setText: [NSString stringWithFormat: @"%lu", (unsigned long)totalComments] ];
-        } else {
-            NSLog(@"Error: %@ %@", error, [error userInfo]);
-        }
-    }];
-*/
     
     //is this the logged user?
     NSString *loggedUserFacebookID = [[PFUser currentUser] objectForKey:DB_FIELD_USER_FACEBOOK_ID];
-    if( [facebookId isEqualToString:loggedUserFacebookID] ) {
-        //show friends picture and leave all elements as default
-//        [self loadFriendsProfilePictures];
-    } else {
+    if( ![facebookId isEqualToString:loggedUserFacebookID] ) {
         //displaying someone else's profile, so format screen accordingly
         [_logoutButton setHidden:YES];
         [_shareOnFacebookButton setHidden:NO];
@@ -115,57 +98,6 @@
         [_tellYourFriendsButton setHidden:YES];
     }
 }
-/*
-- (void)loadFriendsProfilePictures {
-    
-    // Issue a Facebook Graph API request to get your user's friend list
-    FBRequest *request = [FBRequest requestForMyFriends];
-    [request startWithCompletionHandler:^(FBRequestConnection *connection,
-                                          id result,
-                                          NSError *error) {
-        
-        if (!error) {
-            
-            // result will contain an array with your user's friends in the "data" key
-            NSArray *friendObjects = [result objectForKey:@"data"];
-            NSMutableArray *friendIds = [NSMutableArray arrayWithCapacity:friendObjects.count];
-            // Create a list of friends' Facebook IDs
-            for (NSDictionary *friendObject in friendObjects) {
-                [friendIds addObject:[friendObject objectForKey:@"id"]];
-            }
-            
-            //generate 10 random unique numbers between 0 and how many friends there are
-            int numberOfFriends = 10;
-            NSMutableArray *randomFriendIds = [NSMutableArray arrayWithCapacity:numberOfFriends];
-            
-            int randomId = arc4random_uniform((uint32_t)friendObjects.count );
-            [randomFriendIds addObject:[NSNumber numberWithInteger:randomId]];
-            
-            for(int i=1; i<numberOfFriends; i++) {
-                while( [randomFriendIds indexOfObject:[NSNumber numberWithInteger:randomId]] != NSNotFound) {
-                    randomId = arc4random_uniform((uint32_t)friendObjects.count);
-                }
-                [randomFriendIds addObject:[NSNumber numberWithInteger:randomId]];
-            }
-            
-            //now having the 10 random friend IDs, load their profile pics async
-            xProfileImageView = 0;
-            sizeProfileImageView = 40;
-            
-            for(NSNumber *randomFriendId in randomFriendIds) {
-                //load friends' profile pics
-                NSURL *profilePictureURL = [NSURL URLWithString:[NSString stringWithFormat:@"https://graph.facebook.com/%@/picture?type=square", [friendIds objectAtIndex:randomFriendId.integerValue]]];
-                UIImageView *profilePictureImageView = [[UIImageView alloc] initWithFrame:CGRectMake(xProfileImageView, 0, sizeProfileImageView, sizeProfileImageView)];
-                [profilePictureImageView setImageWithURL:profilePictureURL placeholderImage:[UIImage imageNamed:@"avatar_default.png"]];
-                [_friendsPicturesView addSubview:profilePictureImageView];
-                
-                xProfileImageView+=sizeProfileImageView;
-            }
-            [_friendsPicturesView bringSubviewToFront:_tellYourFriendsButton];
-        }
-    }];
-}
-*/
 
 - (IBAction)logoutButtonPressed:(id)sender {
     

@@ -15,8 +15,6 @@
 @required
 - (void)populateCollectionView;
 - (void)addItemsToCollectionView;
-- (void)populateTotalCommentsWithDictionary:(NSDictionary*)tempTotalCommentsForItemsDictionary;
-- (void)updateTotalCommentsForItemViewCell:(ItemViewCell*)itemViewCell;
 - (void)showErrorIcon;
 
 @end
