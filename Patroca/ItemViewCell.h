@@ -11,6 +11,7 @@
 
 @class PFObject;
 @class PFGeoPoint;
+@class BaseViewController;
 
 @interface ItemViewCell : UICollectionViewCell { //<CLLocationManagerDelegate> {
 
@@ -22,8 +23,10 @@
 @property (weak, nonatomic) IBOutlet UIButton *likeButton;
 @property (weak, nonatomic) IBOutlet UILabel *tradedLabel;
 @property (weak, nonatomic) IBOutlet UIView *tradedView;
+@property (strong, nonatomic) BaseViewController *parentController;
 
 - (void)setupCellWithItem:(PFObject*)itemObject;
 - (IBAction)likeButtonPressed:(id)sender;
+- (void)openItemDetailsPage;
 
 @end

@@ -362,21 +362,22 @@
     
     PFObject *item = [[itemDataSource items] objectAtIndex:indexPath.row];
     [itemViewCell setupCellWithItem:item];
+    [itemViewCell setParentController:self];
+    
+    UITapGestureRecognizer *singleTap = [[UITapGestureRecognizer alloc] initWithTarget:itemViewCell action:@selector(openItemDetailsPage)];
+    singleTap.numberOfTapsRequired = 1;
+    [itemViewCell addGestureRecognizer:singleTap];
+    
+    UITapGestureRecognizer *doubleTap = [[UITapGestureRecognizer alloc] initWithTarget:itemViewCell action:@selector(likeButtonPressed:)];
+    doubleTap.numberOfTapsRequired = 2;
+    [itemViewCell addGestureRecognizer:doubleTap];
+    
+    [singleTap requireGestureRecognizerToFail:doubleTap];
     
     return itemViewCell;
 }
 
 
-#pragma mark - UICollectionViewDelegate
-- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
-{
-    PFObject *item = [[itemDataSource items] objectAtIndex:indexPath.row];
-    
-    ItemDetailsViewController *itemDetailsViewController = [[ItemDetailsViewController alloc] initWithNibName:@"ItemDetailsViewController" bundle:nil];
-    [itemDetailsViewController setItemObject:item];
-    [self.navigationController pushViewController:itemDetailsViewController animated:YES];
-    
-}
 
 
 #pragma mark – UICollectionViewDelegateFlowLayout

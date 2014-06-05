@@ -12,21 +12,17 @@
 #import "UserCache.h"
 #import <SDWebImage/UIImageView+WebCache.h>
 #import "ViewProfileViewController.h"
+#import "ItemDetailsViewController.h"
 
 @implementation ItemViewCell
 
 - (id)initWithFrame:(CGRect)frame {
     
     self = [super initWithFrame:frame]; if (self) {
-        // Initialization code
         NSArray *arrayOfViews = [[NSBundle mainBundle] loadNibNamed:@"ItemViewCell" owner:self options:nil];
-        
         if ([arrayOfViews count] > 1) { return nil; }
-        
         if (![[arrayOfViews objectAtIndex:0] isKindOfClass:[UICollectionViewCell class]]) { return nil; }
-        
         self = [arrayOfViews objectAtIndex:0];
-        
     }
     
     return self;
@@ -46,6 +42,12 @@
     [_tradedLabel setText:NSLocalizedString(@"traded", nil)];
     [_tradedLabel setHidden:!traded];
     [_tradedView setHidden:!traded];
+    
+    
+    UITapGestureRecognizer *doubleTapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(likeButtonPressed:)];
+    doubleTapGestureRecognizer.numberOfTapsRequired = 2;
+    [self addGestureRecognizer:doubleTapGestureRecognizer];
+    
     /*
     //don't ask for CLLocation permissions for this yet... defer to when the user chooses Nearby items
     if(locationManager == nil && [CLLocationManager authorizationStatus] == kCLAuthorizationStatusAuthorized) {
@@ -60,10 +62,10 @@
             [_likeButton setHidden:YES];
         } else {
             [_likeButton setHidden:NO];
-            [_likeButton setImage:[UIImage imageNamed:@"star-off.png"] forState:UIControlStateNormal];
+            [_likeButton setImage:[UIImage imageNamed:@"star_off.png"] forState:UIControlStateNormal];
             for(PFObject *likedItem in [[UserCache getInstance] likedItemsArray]) {
                 if([likedItem.objectId isEqualToString:itemObject.objectId]) {
-                    [_likeButton setImage:[UIImage imageNamed:@"star-on.png"] forState:UIControlStateNormal];
+                    [_likeButton setImage:[UIImage imageNamed:@"star_on.png"] forState:UIControlStateNormal];
                     [_likeButton setTag:1];
                     break;
                 }
@@ -77,6 +79,13 @@
      */
 }
 
+- (void)openItemDetailsPage {
+    
+    ItemDetailsViewController *itemDetailsViewController = [[ItemDetailsViewController alloc] initWithNibName:@"ItemDetailsViewController" bundle:nil];
+    [itemDetailsViewController setItemObject:_cellItemObject];
+    [_parentController.navigationController pushViewController:itemDetailsViewController animated:YES];
+}
+
 - (IBAction)likeButtonPressed:(id)sender {
     
     PFRelation *relation = [_cellItemObject relationForKey:DB_RELATION_USER_LIKES_ITEMS];
@@ -85,7 +94,7 @@
         //Likes item
         [relation addObject:[PFUser currentUser]];
         [[[UserCache getInstance] likedItemsArray] addObject:_cellItemObject];
-        [_likeButton setImage:[UIImage imageNamed:@"star-on.png"] forState:UIControlStateNormal];
+        [_likeButton setImage:[UIImage imageNamed:@"star_on.png"] forState:UIControlStateNormal];
         [_likeButton setTag:1];
         
         // Notify owner that Item was liked
@@ -108,7 +117,7 @@
     } else {
         //Removes like on item
         [relation removeObject:[PFUser currentUser]];
-        [_likeButton setImage:[UIImage imageNamed:@"star-off.png"] forState:UIControlStateNormal];
+        [_likeButton setImage:[UIImage imageNamed:@"star_off.png"] forState:UIControlStateNormal];
         [_likeButton setTag:0];
         for(PFObject *likedItem in [[UserCache getInstance] likedItemsArray]) {
             if([[likedItem objectId] isEqualToString:[_cellItemObject objectId]]) {

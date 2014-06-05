@@ -139,7 +139,12 @@
     
     PFObject *item = [[itemDataSource items] objectAtIndex:indexPath.row];
     [itemViewCell setupCellWithItem:item];
+    [itemViewCell setParentController:self];
     
+    UITapGestureRecognizer *singleTap = [[UITapGestureRecognizer alloc] initWithTarget:itemViewCell action:@selector(openItemDetailsPage)];
+    singleTap.numberOfTapsRequired = 1;
+    [itemViewCell addGestureRecognizer:singleTap];
+        
     return itemViewCell;
 }
 
@@ -156,20 +161,6 @@
 
 
     return profileHeaderViewCell;
-}
-
-#pragma mark - UICollectionViewDelegate
-- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
-{
-    PFObject *item = [[itemDataSource items] objectAtIndex:indexPath.row];
-    
-    ItemDetailsViewController *itemDetailsViewController = [[ItemDetailsViewController alloc] initWithNibName:@"ItemDetailsViewController" bundle:nil];
-    [itemDetailsViewController setItemObject:item];
-    [self.navigationController pushViewController:itemDetailsViewController animated:YES];
-    
-}
-- (void)collectionView:(UICollectionView *)collectionView didDeselectItemAtIndexPath:(NSIndexPath *)indexPath {
-    // TODO: Deselect item
 }
 
 
