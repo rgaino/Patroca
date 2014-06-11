@@ -27,11 +27,9 @@
     CGRect screenRect = [[UIScreen mainScreen] bounds];
     [self.view setFrame:CGRectMake(0, 0, screenRect.size.width, screenRect.size.height)];
 
-
     [self setupHeaderWithBackButton:YES doneButton:NO addItemButton:YES];
     [self setupWholeScreenScrollView];
     [self setupItemImagesScrollView];
-    [self setupFooter];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardDidShow:) name:UIKeyboardDidShowNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardDidHide:) name:UIKeyboardDidHideNotification object:nil];
@@ -67,7 +65,7 @@
 
 - (void)setupWholeScreenScrollView {
     
-    wholeScreenScrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 44+headerOffset, 320, self.view.frame.size.height - 44 - 44 + headerOffset)]; //44 is the header, and the other 44 is the footer
+    wholeScreenScrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 44+headerOffset, 320, self.view.frame.size.height - 40 - 44 + headerOffset)]; //44 is the header, and the other 44 is the footer
     scrollViewFrame = wholeScreenScrollView.frame;
 
     [self.view addSubview:wholeScreenScrollView];
@@ -80,22 +78,6 @@
     [itemImagesScrollView setDirectionalLockEnabled:YES];
     [wholeScreenScrollView addSubview:itemImagesScrollView];
     
-    /*
-    //Title view 75% opaque) and item title label
-    UIView *titleBackgroundView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, 65)];    
-    UILabel *itemTitleLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, 5, 300, 55)];
-    [titleBackgroundView setBackgroundColor:[UIColor colorWithRed:0 green:0 blue:0 alpha:0.7f]];
-    [itemTitleLabel setText:[_itemObject objectForKey:DB_FIELD_ITEM_NAME]];
-    [itemTitleLabel setBackgroundColor:[UIColor clearColor]];
-    [itemTitleLabel setTextColor:[UIColor whiteColor]];
-    [itemTitleLabel setFont:[UIFont systemFontOfSize:18]];
-    [itemTitleLabel setNumberOfLines:0];
-    [itemTitleLabel setAdjustsLetterSpacingToFitWidth:YES];
-    [itemTitleLabel setAdjustsFontSizeToFitWidth:YES];
-    [itemTitleLabel setMinimumScaleFactor:0.6f];
-    [titleBackgroundView addSubview:itemTitleLabel];
-    [wholeScreenScrollView addSubview:titleBackgroundView];
-    */
     
     //Owner name
     UILabel *ownerNameLabel = [[UILabel alloc] initWithFrame:CGRectMake(46, 324, 270, 20)];
@@ -164,6 +146,8 @@
             commentObjects = [NSMutableArray arrayWithArray:objects];
             [self showItemComments];
         }
+        
+        [self setupFooter];
     }];
     
     [wholeScreenScrollView setContentSize:CGSizeMake(320, contentHeightWithoutCommentsView)];
@@ -204,19 +188,21 @@
 - (void)setupFooter {
     
     //the footer black background
-    footerBackgroundView = [[UIView alloc] initWithFrame:CGRectMake(0, self.view.frame.size.height-44, 320, 44)];
+    footerBackgroundView = [[UIView alloc] initWithFrame:CGRectMake(0, wholeScreenScrollView.contentSize.height, wholeScreenScrollView.contentSize.width, 44)];
     [footerBackgroundView setBackgroundColor:[UIColor blackColor]];
-    [self.view addSubview:footerBackgroundView];
 
     //add more button if logged in
     if ([PFUser currentUser] && [PFFacebookUtils isLinkedWithUser:[PFUser currentUser]]) {
         UIButton *moreButton = [UIButton buttonWithType:UIButtonTypeCustom];
         [moreButton setImage:[UIImage imageNamed:@"more_button.png"] forState:UIControlStateNormal];
-        [moreButton setFrame:CGRectMake(265, footerBackgroundView.frame.origin.y, 60, footerBackgroundView.frame.size.height)];
+        [moreButton setFrame:CGRectMake(265, 4, 60, footerBackgroundView.frame.size.height)];
         [[moreButton imageView] setContentMode:UIViewContentModeCenter];
         [moreButton addTarget:self action:@selector(moreButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
-        [self.view addSubview:moreButton];
+        [footerBackgroundView addSubview:moreButton];
     }
+
+    [wholeScreenScrollView addSubview:footerBackgroundView];
+    [wholeScreenScrollView setContentSize:CGSizeMake(wholeScreenScrollView.contentSize.width, wholeScreenScrollView.contentSize.height+44)];
 }
 
 
