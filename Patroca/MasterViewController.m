@@ -230,7 +230,57 @@
 
         [itemDataSource setItemDataSourceMode:ItemDataSourceModeFeatured];
         [itemDataSource getNextPageAndReturnWithCallback:^(NSError *error) {
-            [_loadingActivityIndicator stopAnimating];
+            if(!error && itemDataSource.items.count==0) {
+                //list empty, show invite message
+                //build the error message for a user with no friends on Patroca
+                [_contentDisplayCollectionView setHidden:YES];
+                
+                UILabel *oopsLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 15, errorMessageView.frame.size.width-120, 100)];
+                [oopsLabel setFont:[UIFont boldSystemFontOfSize:16.0f]];
+                [oopsLabel setTextAlignment:NSTextAlignmentCenter];
+                [oopsLabel setNumberOfLines:0];
+                [oopsLabel setBackgroundColor:[UIColor clearColor]];
+                [oopsLabel setText:NSLocalizedString(@"oops_featured", nil)];
+                [oopsLabel sizeToFit];
+                [oopsLabel setFrame:CGRectMake(errorMessageView.frame.size.width/2 - oopsLabel.frame.size.width/2, oopsLabel.frame.origin.y, oopsLabel.frame.size.width, oopsLabel.frame.size.height)];
+                [errorMessageView addSubview:oopsLabel];
+                
+//                NSShadow *dropShadow = [[NSShadow alloc] init];
+//                [dropShadow setShadowColor:[UIColor whiteColor]];
+//                [dropShadow setShadowBlurRadius:0];
+//                [dropShadow setShadowOffset:CGSizeMake(-1, 0)];
+//                
+//                NSMutableAttributedString *fullInviteString = [[NSMutableAttributedString alloc] init];
+//                NSString *inviteString = NSLocalizedString(@"invite_them", nil);
+//                NSMutableAttributedString *inviteAttributedString = [[NSMutableAttributedString alloc] initWithString:inviteString];
+//                [inviteAttributedString addAttribute:NSForegroundColorAttributeName value:[UIColor colorWithRed:197/255.0f green:18/255.0f blue:67/255.0f alpha:1.0f] range:NSMakeRange(0, inviteString.length)];
+//                [inviteAttributedString addAttribute:NSUnderlineStyleAttributeName value:[NSNumber numberWithInteger:NSUnderlineStyleSingle] range:NSMakeRange(0, inviteString.length)];
+//                [inviteAttributedString addAttribute:NSShadowAttributeName value:dropShadow range:NSMakeRange(0, inviteString.length)];
+//                [fullInviteString appendAttributedString:inviteAttributedString];
+//                
+//                NSString *searchForPeopleString = NSLocalizedString(@"or_search_for_people_around_you", nil);
+//                NSMutableAttributedString *searchForPeopleAttributedString = [[NSMutableAttributedString alloc] initWithString:searchForPeopleString];
+//                [searchForPeopleAttributedString addAttribute:NSForegroundColorAttributeName value:[UIColor colorWithRed:89/255.0f green:89/255.0f blue:89/255.0f alpha:1.0f] range:NSMakeRange(0, searchForPeopleString.length)];
+//                [fullInviteString appendAttributedString:searchForPeopleAttributedString];
+//                
+//                UILabel *inviteFriendsLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, oopsLabel.frame.origin.y+oopsLabel.frame.size.height+5, errorMessageView.frame.size.width-120, 100)];
+//                [inviteFriendsLabel setAttributedText:fullInviteString];
+//                [inviteFriendsLabel setBackgroundColor:[UIColor clearColor]];
+//                [inviteFriendsLabel setTextAlignment:NSTextAlignmentCenter];
+//                [inviteFriendsLabel setNumberOfLines:0];
+//                [inviteFriendsLabel sizeToFit];
+//                [inviteFriendsLabel setFrame:CGRectMake(errorMessageView.frame.size.width/2 - inviteFriendsLabel.frame.size.width/2, inviteFriendsLabel.frame.origin.y, inviteFriendsLabel.frame.size.width, inviteFriendsLabel.frame.size.height)];
+//                
+//                UIButton *inviteFriendsButton = [UIButton buttonWithType:UIButtonTypeCustom];
+//                [inviteFriendsButton setFrame:inviteFriendsLabel.frame];
+//                [inviteFriendsButton.titleLabel setNumberOfLines:0];
+//                [inviteFriendsButton.titleLabel setTextAlignment:0];
+//                [inviteFriendsButton setAttributedTitle:fullInviteString forState:UIControlStateNormal];
+//                [inviteFriendsButton addTarget:self action:@selector(inviteFriendsButtonPressed) forControlEvents:UIControlEventTouchUpInside];
+//                [errorMessageView addSubview:inviteFriendsButton];
+                
+                [_loadingActivityIndicator stopAnimating];
+            }
             if (error) {
                 [self showErrorIcon];
             }
