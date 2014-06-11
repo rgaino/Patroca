@@ -109,7 +109,9 @@
             [currentUser setObject:facebookId forKey:DB_FIELD_USER_FACEBOOK_ID];
             [currentUser setObject:name forKey:DB_FIELD_USER_NAME];
             [currentUser setEmail:email];
-            
+            [currentUser setObject:[[NSLocale currentLocale] localeIdentifier] forKey:DB_FIELD_USER_LOCALE];
+            [currentUser setObject:[[[NSBundle mainBundle] preferredLocalizations] objectAtIndex:0] forKey:DB_FIELD_USER_LANGUAGE];
+
             __unsafe_unretained typeof(self) weakSelf = self;
             [currentUser saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
                 

@@ -26,6 +26,8 @@ NSString* const DB_FIELD_USER_FACEBOOK_ID = @"user_facebook_id";
 NSString* const FB_PROFILE_PICTURE_URL = @"https://graph.facebook.com/%@/picture?type=square";
 NSString* const FB_NATIVE_PROFILE_URL = @"fb://profile/%@";
 NSString* const FB_BROWSER_PROFILE_URL = @"http://www.facebook.com/%@";
+NSString* const DB_FIELD_USER_LOCALE = @"Locale";
+NSString* const DB_FIELD_USER_LANGUAGE = @"Language";
 
 //Item table
 NSString* const DB_TABLE_ITEMS = @"Item";
