@@ -80,10 +80,10 @@
     
     
     //Owner name
-    UILabel *ownerNameLabel = [[UILabel alloc] initWithFrame:CGRectMake(46, 324, 270, 20)];
+    UILabel *ownerNameLabel = [[UILabel alloc] initWithFrame:CGRectMake(46, 322, 270, 20)];
     [ownerNameLabel setBackgroundColor:[UIColor clearColor]];
-    [ownerNameLabel setTextColor:[UIColor colorWithRed:102/255.0f green:102/255.0f blue:102/255.0f alpha:1.0f]];
-    [ownerNameLabel setFont:[UIFont boldSystemFontOfSize:10.0f]];
+    [ownerNameLabel setTextColor:[UIColor colorWithRed:51/255.0f green:51/255.0f blue:51/255.0f alpha:1.0f]];
+    [ownerNameLabel setFont:[UIFont boldSystemFontOfSize:13.0f]];
     [wholeScreenScrollView addSubview:ownerNameLabel];
     
     //Owner profile pic white background
@@ -103,7 +103,7 @@
     [profileInvisibleButton addTarget:self action:@selector(userTappedOnProfile:) forControlEvents:UIControlEventTouchUpInside];
     [wholeScreenScrollView addSubview:profileInvisibleButton];
     
-    //Owner's profiel pic from Facebook
+    //Owner's profile pic from Facebook
     PFUser *itemUser = [_itemObject objectForKey:DB_FIELD_USER_ID];
     NSString *userId = [itemUser objectId];
     
@@ -123,7 +123,7 @@
     [itemDescriptionLabel setMinimumScaleFactor:0.6f];
     [itemDescriptionLabel setAdjustsFontSizeToFitWidth:NO];
     [itemDescriptionLabel setAdjustsLetterSpacingToFitWidth:NO];
-    [itemDescriptionLabel setTextColor:[UIColor colorWithRed:60/255.0 green:60/255.0 blue:60/255.0 alpha:1.0f]];
+    [itemDescriptionLabel setTextColor:[UIColor colorWithRed:51/255.0 green:51/255.0 blue:51/255.0 alpha:1.0f]];
     [itemDescriptionLabel adjustHeight];
     [wholeScreenScrollView addSubview:itemDescriptionLabel];
     
