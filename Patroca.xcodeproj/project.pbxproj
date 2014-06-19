@@ -165,6 +165,7 @@
 		19D051AA193F3A2400E9252F /* star_on@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 19D051A6193F3A2400E9252F /* star_on@2x.png */; };
 		19D073FE194FC170000AD88D /* location_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 19D073FC194FC170000AD88D /* location_icon.png */; };
 		19D073FF194FC170000AD88D /* location_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 19D073FD194FC170000AD88D /* location_icon@2x.png */; };
+		19D0740119510CE7000AD88D /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 19D0740019510CE7000AD88D /* MapKit.framework */; };
 		19DCB424168756D9009FF503 /* comments_header.png in Resources */ = {isa = PBXBuildFile; fileRef = 19DCB422168756D9009FF503 /* comments_header.png */; };
 		19DCB425168756D9009FF503 /* comments_header@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 19DCB423168756D9009FF503 /* comments_header@2x.png */; };
 		19E5F947169CF037006718F7 /* picture_camera_thumbnail.png in Resources */ = {isa = PBXBuildFile; fileRef = 19E5F945169CF037006718F7 /* picture_camera_thumbnail.png */; };
@@ -374,6 +375,7 @@
 		19D051A6193F3A2400E9252F /* star_on@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "star_on@2x.png"; sourceTree = "<group>"; };
 		19D073FC194FC170000AD88D /* location_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = location_icon.png; sourceTree = "<group>"; };
 		19D073FD194FC170000AD88D /* location_icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "location_icon@2x.png"; sourceTree = "<group>"; };
+		19D0740019510CE7000AD88D /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		19DCB422168756D9009FF503 /* comments_header.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = comments_header.png; sourceTree = "<group>"; };
 		19DCB423168756D9009FF503 /* comments_header@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "comments_header@2x.png"; sourceTree = "<group>"; };
 		19E5F945169CF037006718F7 /* picture_camera_thumbnail.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = picture_camera_thumbnail.png; sourceTree = "<group>"; };
@@ -388,6 +390,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				19D0740119510CE7000AD88D /* MapKit.framework in Frameworks */,
 				19A9DFF416CFAD36005ED23F /* libz.dylib in Frameworks */,
 				1939B8ED16571C2700435705 /* MobileCoreServices.framework in Frameworks */,
 				1939CA4A1664434E002C21F6 /* ImageIO.framework in Frameworks */,
@@ -516,6 +519,7 @@
 		1939B88616568C3300435705 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				19D0740019510CE7000AD88D /* MapKit.framework */,
 				1979ED5018EEF323009C00A6 /* Parse.framework */,
 				1979ED4E18EEF2F2009C00A6 /* FacebookSDK.framework */,
 				1979ED3E18EEEE68009C00A6 /* TestFlightSDK3.0.0 */,

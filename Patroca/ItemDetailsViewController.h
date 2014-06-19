@@ -8,11 +8,13 @@
 
 #import <UIKit/UIKit.h>
 #import "BaseViewController.h"
+#import <CoreLocation/CoreLocation.h>
 
 @class PFObject;
 @class PFUser;
 
-@interface ItemDetailsViewController : BaseViewController <UIScrollViewDelegate, UITextViewDelegate, UIActionSheetDelegate> {
+@interface ItemDetailsViewController : BaseViewController <UIScrollViewDelegate,  UITextViewDelegate,
+                                                           UIActionSheetDelegate, CLLocationManagerDelegate> {
 
     UIScrollView *wholeScreenScrollView;
     UIScrollView *itemImagesScrollView;
@@ -27,6 +29,10 @@
     NSMutableArray *commentObjects;
     float commentsViewYPosition;
     float contentHeightWithoutCommentsView;
+    UIImageView *locationIconImageView;
+    UILabel *locationLabel;
+    CLLocationManager *locationManager;
+
 }
 
 @property (nonatomic, readwrite) PFObject *itemObject;

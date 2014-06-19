@@ -48,15 +48,7 @@
     doubleTapGestureRecognizer.numberOfTapsRequired = 2;
     [self addGestureRecognizer:doubleTapGestureRecognizer];
     
-    /*
-    //don't ask for CLLocation permissions for this yet... defer to when the user chooses Nearby items
-    if(locationManager == nil && [CLLocationManager authorizationStatus] == kCLAuthorizationStatusAuthorized) {
-        locationManager = [[CLLocationManager alloc] init];
-        [locationManager setDelegate:self];
-        [locationManager setDistanceFilter:kCLDistanceFilterNone];
-        [locationManager setDesiredAccuracy:kCLLocationAccuracyBest];
-    }
-    */
+
     if ([PFUser currentUser] && [PFFacebookUtils isLinkedWithUser:[PFUser currentUser]]) {
         if([[[_cellItemObject objectForKey:DB_FIELD_USER_ID] objectId] isEqualToString:[[PFUser currentUser] objectId]]) {
             [_likeButton setHidden:YES];
@@ -72,11 +64,6 @@
             }
         }
     }
-    /*
-    if([CLLocationManager authorizationStatus] == kCLAuthorizationStatusAuthorized) {
-        [locationManager startUpdatingLocation];
-    }
-     */
 }
 
 - (void)openItemDetailsPage {
@@ -130,28 +117,5 @@
     [_cellItemObject saveEventually];
 }
 
-#pragma mark CLLocationManagerDelegate methods
-/*
-- (void)locationManager:(CLLocationManager *)manager didUpdateToLocation:(CLLocation *)newLocation fromLocation:(CLLocation *)oldLocation {
-    
-    PFGeoPoint *myLocationPoint = [PFGeoPoint geoPointWithLatitude:newLocation.coordinate.latitude longitude:newLocation.coordinate.longitude];
-    [locationManager stopUpdatingLocation];
 
-    PFObject *itemObject = [self cellItemObject];
-    PFGeoPoint *itemLocation = [itemObject  objectForKey:DB_FIELD_ITEM_LOCATION];
-
-    NSLocale *locale = [NSLocale currentLocale];
-    BOOL usesMetric = [[locale objectForKey:NSLocaleUsesMetricSystem] boolValue];
-    NSString *distanceText;
-
-    if(usesMetric) {
-        distanceText = [NSString stringWithFormat:@"%.2lf", [itemLocation distanceInKilometersTo:myLocationPoint]];
-        [_ownerNameLabel setText:[NSString stringWithFormat:@"%@ %@", distanceText, NSLocalizedString(@"KMs", nil)]];
-    } else {
-        distanceText = [NSString stringWithFormat:@"%.2lf", [itemLocation distanceInMilesTo:myLocationPoint]];
-        [_ownerNameLabel setText:[NSString stringWithFormat:@"%@ %@", distanceText, NSLocalizedString(@"Miles", nil)]];
-    }
-    [_ownerNameLabel setHidden:NO];
-}
-*/
 @end

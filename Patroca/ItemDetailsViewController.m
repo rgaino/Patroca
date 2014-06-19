@@ -16,6 +16,7 @@
 #import "UILabel+Extensions.h"
 #import "ViewProfileViewController.h"
 #import "MPNotificationView.h"
+#import <MapKit/MapKit.h>
 
 @implementation ItemDetailsViewController
 
@@ -39,7 +40,16 @@
     tapRecognizer.numberOfTapsRequired = 1;
     tapRecognizer.numberOfTouchesRequired = 1;
     [self.view addGestureRecognizer:tapRecognizer];
-
+    
+    if(locationManager == nil && [CLLocationManager authorizationStatus] == kCLAuthorizationStatusAuthorized) {
+        locationManager = [[CLLocationManager alloc] init];
+        [locationManager setDelegate:self];
+        [locationManager setDistanceFilter:kCLDistanceFilterNone];
+        [locationManager setDesiredAccuracy:kCLLocationAccuracyBest];
+    }
+    if([CLLocationManager authorizationStatus] == kCLAuthorizationStatusAuthorized) {
+        [locationManager startUpdatingLocation];
+    }
 }
 
 - (void)keyboardDidShow:(NSNotification*)notification {
@@ -70,6 +80,23 @@
 
     [self.view addSubview:wholeScreenScrollView];
     
+    UITapGestureRecognizer *tapLocationImageView = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(openMaps)];
+    [tapLocationImageView setNumberOfTapsRequired:1];
+
+    UITapGestureRecognizer *tapLocationLabel = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(openMaps)];
+    [tapLocationLabel setNumberOfTapsRequired:1];
+
+    UITapGestureRecognizer *tapOwnerProfileLabel = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(userTappedOnProfile:)];
+    [tapOwnerProfileLabel setNumberOfTapsRequired:1];
+
+    UITapGestureRecognizer *tapOwnerProfileImageView = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(userTappedOnProfile:)];
+    [tapOwnerProfileImageView setNumberOfTapsRequired:1];
+
+    [wholeScreenScrollView setCanCancelContentTouches:YES];
+    [wholeScreenScrollView setClipsToBounds:YES];
+    [wholeScreenScrollView setUserInteractionEnabled:YES];
+
+
     //Item images scroll view
     itemImagesScrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, 320, 320)];
     [itemImagesScrollView setAlwaysBounceVertical:NO];
@@ -80,28 +107,47 @@
     
     
     //Owner name
-    UILabel *ownerNameLabel = [[UILabel alloc] initWithFrame:CGRectMake(46, 322, 270, 20)];
+    UILabel *ownerNameLabel = [[UILabel alloc] initWithFrame:CGRectMake(46, 322, 204, 20)];
     [ownerNameLabel setBackgroundColor:[UIColor clearColor]];
     [ownerNameLabel setTextColor:[UIColor colorWithRed:51/255.0f green:51/255.0f blue:51/255.0f alpha:1.0f]];
     [ownerNameLabel setFont:[UIFont boldSystemFontOfSize:13.0f]];
+    [ownerNameLabel setTag:-1];
+    [ownerNameLabel addGestureRecognizer:tapOwnerProfileLabel];
+    [ownerNameLabel setUserInteractionEnabled:YES];
     [wholeScreenScrollView addSubview:ownerNameLabel];
     
     //Owner profile pic white background
     UIView *ownerProfilePicBackgroundView = [[UIView alloc] initWithFrame:CGRectMake(6, 305, 34, 34)];
     [ownerProfilePicBackgroundView setBackgroundColor:[UIColor whiteColor]];
     [wholeScreenScrollView addSubview:ownerProfilePicBackgroundView];
-
+    
     //Owner profile pic
     UIImageView *ownerProfilePic = [[UIImageView alloc] initWithFrame:CGRectMake(8, 307, 30, 30)];
     [ownerProfilePic setContentMode:UIViewContentModeScaleAspectFit];
+    [ownerProfilePic setUserInteractionEnabled:YES];
+    [ownerProfilePic setTag:-1];
+    [ownerProfilePic addGestureRecognizer:tapOwnerProfileImageView];
     [wholeScreenScrollView addSubview:ownerProfilePic];
-    
-    //An invisible button over the profiile pic and name, so it's tappable without hacks
-    UIButton *profileInvisibleButton = [UIButton buttonWithType:UIButtonTypeCustom];;
-    [profileInvisibleButton setFrame:CGRectMake(0, 307, 320, 37)];
-    [profileInvisibleButton setTag:-1]; //each comment has its own tag, this one is the owner
-    [profileInvisibleButton addTarget:self action:@selector(userTappedOnProfile:) forControlEvents:UIControlEventTouchUpInside];
-    [wholeScreenScrollView addSubview:profileInvisibleButton];
+
+    //Location icon image
+    locationIconImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"location_icon.png"]];
+    [locationIconImageView setFrame:CGRectMake(self.view.frame.size.width-locationIconImageView.frame.size.width-10, ownerNameLabel.frame.origin.y, locationIconImageView.frame.size.width, locationIconImageView.frame.size.height)];
+    [locationIconImageView setHidden:YES];
+    [locationIconImageView setUserInteractionEnabled:YES];
+    [locationIconImageView addGestureRecognizer:tapLocationImageView];
+    [wholeScreenScrollView addSubview:locationIconImageView];
+
+    //Location text
+    locationLabel = [[UILabel alloc] initWithFrame:CGRectMake(ownerNameLabel.frame.origin.x+ownerNameLabel.frame.size.width, ownerNameLabel.frame.origin.y, self.view.frame.size.width-ownerNameLabel.frame.origin.x-ownerNameLabel.frame.size.width-locationIconImageView.frame.size.width-10, ownerNameLabel.frame.size.height)];
+    [locationLabel setBackgroundColor:[UIColor clearColor]];
+    [locationLabel setTextColor:[UIColor colorWithRed:51/255.0f green:51/255.0f blue:51/255.0f alpha:1.0f]];
+    [locationLabel setFont:[UIFont boldSystemFontOfSize:13.0f]];
+    [locationLabel setTextAlignment:NSTextAlignmentCenter];
+    [locationLabel setHidden:YES];
+    [locationLabel setUserInteractionEnabled:YES];
+    [locationLabel addGestureRecognizer:tapLocationLabel];
+    [wholeScreenScrollView addSubview:locationLabel];
+
     
     //Owner's profile pic from Facebook
     PFUser *itemUser = [_itemObject objectForKey:DB_FIELD_USER_ID];
@@ -296,19 +342,19 @@
         
         UIImageView *profilePictureImageView = [[UIImageView alloc] initWithFrame:CGRectMake(274, 23, 30, 30)];
         
+        UITapGestureRecognizer *tapProfileCommenter = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(userTappedOnProfile:)];
+        [tapProfileCommenter setNumberOfTapsRequired:1];
+        
         PFUser *commentUser = [commentObject objectForKey:DB_FIELD_USER_ID];
         NSString *userId = [commentUser objectId];
         PFUser *commenterUserObject = [[UserCache getInstance] getCachedUserForId:userId];
         NSString *profilePicString = [NSString stringWithFormat:FB_PROFILE_PICTURE_URL, [commenterUserObject objectForKey:DB_FIELD_USER_FACEBOOK_ID]];
         NSURL *profilePicURL = [NSURL URLWithString:profilePicString];
         [profilePictureImageView setImageWithURL:profilePicURL placeholderImage:[UIImage imageNamed:@"avatar_default.png"]];
+        [singleCommentView setUserInteractionEnabled:YES];
+        [singleCommentView setTag:commentIndex];
+        [singleCommentView addGestureRecognizer:tapProfileCommenter];
         [singleCommentView addSubview:profilePictureImageView];
-        
-        UIButton *commenterProfileInvisibleButton = [UIButton buttonWithType:UIButtonTypeCustom];
-        [commenterProfileInvisibleButton setFrame:[profilePictureWhiteBorder frame]];
-        [commenterProfileInvisibleButton setTag:commentIndex];
-        [commenterProfileInvisibleButton addTarget:self action:@selector(userTappedOnProfile:) forControlEvents:UIControlEventTouchUpInside];
-        [singleCommentView addSubview:commenterProfileInvisibleButton];
         
         [commentsView addSubview:singleCommentView];
         commentIndex++;
@@ -402,9 +448,9 @@
 
 #pragma mark Actions
 
-- (IBAction)userTappedOnProfile:(id)sender {
+- (IBAction)userTappedOnProfile: (UITapGestureRecognizer *)recognizer {
     
-    UIButton *senderButton = (UIButton*)sender;
+    UIButton *senderButton = (UIButton*)recognizer.view;
     
     ViewProfileViewController *viewProfileViewController = [[ViewProfileViewController alloc] initWithNibName:@"ViewProfileViewController" bundle:nil];
     
@@ -491,7 +537,7 @@
     
 }
 
- -(void) actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
+ - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
 
      if(actionSheet.tag==0)  { //mark item as traded or deleted
          if(buttonIndex == 0) {
@@ -551,8 +597,53 @@
              [self.navigationController popViewControllerAnimated:YES];
          }
      }
+}
 
- }
+- (void)openMaps {
+    
+    PFGeoPoint *itemLocation = [_itemObject  objectForKey:DB_FIELD_ITEM_LOCATION];
+    
+    Class mapItemClass = [MKMapItem class];
+    if (mapItemClass && [mapItemClass respondsToSelector:@selector(openMapsWithItems:launchOptions:)])
+    {
+        // Create an MKMapItem to pass to the Maps app
+        CLLocationCoordinate2D coordinate =
+        CLLocationCoordinate2DMake(itemLocation.latitude, itemLocation.longitude);
+        MKPlacemark *placemark = [[MKPlacemark alloc] initWithCoordinate:coordinate addressDictionary:nil];
+        MKMapItem *mapItem = [[MKMapItem alloc] initWithPlacemark:placemark];
+        [mapItem openInMapsWithLaunchOptions:nil];
+    }
+}
 
+
+#pragma mark CLLocationManagerDelegate methods
+
+ - (void)locationManager:(CLLocationManager *)manager didUpdateToLocation:(CLLocation *)newLocation fromLocation:(CLLocation *)oldLocation {
+ 
+     PFGeoPoint *myLocationPoint = [PFGeoPoint geoPointWithLatitude:newLocation.coordinate.latitude longitude:newLocation.coordinate.longitude];
+     [locationManager stopUpdatingLocation];
+
+     PFObject *itemObject = _itemObject;
+     PFGeoPoint *itemLocation = [itemObject  objectForKey:DB_FIELD_ITEM_LOCATION];
+
+     NSLocale *locale = [NSLocale currentLocale];
+     BOOL usesMetric = [[locale objectForKey:NSLocaleUsesMetricSystem] boolValue];
+     NSString *distanceText;
+     
+     float distance = round(usesMetric?[itemLocation distanceInKilometersTo:myLocationPoint]:[itemLocation distanceInMilesTo:myLocationPoint]);
+     NSString *distanceString = [NSString stringWithFormat:@"%.0lf",distance];
+     if(distance>50) {
+            distanceString = @"+50";
+     }
+
+     if(usesMetric) {
+         [locationLabel setText:[NSString stringWithFormat:@"%@ %@", distanceString, @"KMs"]];
+     } else {
+         distanceText = [NSString stringWithFormat:@"%.0lf", [itemLocation distanceInMilesTo:myLocationPoint]];
+         [locationLabel setText:[NSString stringWithFormat:@"%@ %@", distanceString, @"mi"]];
+     }
+     [locationIconImageView setHidden:NO];
+     [locationLabel setHidden:NO];
+}
 
 @end
