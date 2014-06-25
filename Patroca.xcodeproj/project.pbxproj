@@ -15,8 +15,6 @@
 		1919D29A193790F1003D81A7 /* error@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1919D298193790F1003D81A7 /* error@2x.png */; };
 		19241BE716E8215E00E381F7 /* camera_message_background.png in Resources */ = {isa = PBXBuildFile; fileRef = 19241BE516E8215E00E381F7 /* camera_message_background.png */; };
 		19241BE816E8215E00E381F7 /* camera_message_background@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 19241BE616E8215E00E381F7 /* camera_message_background@2x.png */; };
-		19241BEA16E8254400E381F7 /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 19241BE916E8254400E381F7 /* icon.png */; };
-		19241BEC16E8254700E381F7 /* icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 19241BEB16E8254700E381F7 /* icon@2x.png */; };
 		1934ACDD165DB93200C8272F /* Item.m in Sources */ = {isa = PBXBuildFile; fileRef = 1934ACDC165DB93200C8272F /* Item.m */; };
 		1934ACE4165DBC9400C8272F /* DatabaseConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 1934ACE3165DBC9400C8272F /* DatabaseConstants.m */; };
 		1934ACE8165DC59600C8272F /* ItemDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 1934ACE7165DC59600C8272F /* ItemDataSource.m */; };
@@ -77,6 +75,7 @@
 		194A9FCC16E50AFE00091947 /* UIScrollView+SVPullToRefresh.m in Sources */ = {isa = PBXBuildFile; fileRef = 194A9FCA16E50AFE00091947 /* UIScrollView+SVPullToRefresh.m */; };
 		194F7462195A51C50046BE7A /* libGoogleAnalyticsServices.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 194F7461195A51C50046BE7A /* libGoogleAnalyticsServices.a */; };
 		194F7464195A51E50046BE7A /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 194F7463195A51E50046BE7A /* CoreData.framework */; };
+		194F746F195A703A0046BE7A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 194F746E195A703A0046BE7A /* Images.xcassets */; };
 		1950E4F9165F08A200E98488 /* ItemViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1950E4F8165F08A200E98488 /* ItemViewCell.m */; };
 		1950E4FC165F09B700E98488 /* ViewProfileViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1950E4FB165F09B700E98488 /* ViewProfileViewController.xib */; };
 		1950E4FE165F0BAF00E98488 /* ItemViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1950E4FD165F0BAF00E98488 /* ItemViewCell.xib */; };
@@ -185,8 +184,6 @@
 		1919D298193790F1003D81A7 /* error@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "error@2x.png"; sourceTree = "<group>"; };
 		19241BE516E8215E00E381F7 /* camera_message_background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = camera_message_background.png; sourceTree = "<group>"; };
 		19241BE616E8215E00E381F7 /* camera_message_background@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "camera_message_background@2x.png"; sourceTree = "<group>"; };
-		19241BE916E8254400E381F7 /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = icon.png; path = ../icon.png; sourceTree = "<group>"; };
-		19241BEB16E8254700E381F7 /* icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "icon@2x.png"; path = "../icon@2x.png"; sourceTree = "<group>"; };
 		1926372D16C328A1004C1C06 /* ItemDataSourceDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ItemDataSourceDelegate.h; sourceTree = "<group>"; };
 		1934ACDB165DB93200C8272F /* Item.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Item.h; sourceTree = "<group>"; };
 		1934ACDC165DB93200C8272F /* Item.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Item.m; sourceTree = "<group>"; };
@@ -274,6 +271,13 @@
 		194F7460195A51C50046BE7A /* GAITracker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GAITracker.h; path = GoogleAnalyticsServicesiOS_3.07/GAITracker.h; sourceTree = "<group>"; };
 		194F7461195A51C50046BE7A /* libGoogleAnalyticsServices.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libGoogleAnalyticsServices.a; path = GoogleAnalyticsServicesiOS_3.07/libGoogleAnalyticsServices.a; sourceTree = "<group>"; };
 		194F7463195A51E50046BE7A /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		194F7467195A69810046BE7A /* iPhoneApp-57x57.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "iPhoneApp-57x57.png"; path = "../iPhoneApp-57x57.png"; sourceTree = "<group>"; };
+		194F7469195A69EF0046BE7A /* iPhoneApp-57x57@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "iPhoneApp-57x57@2x.png"; path = "../iPhoneApp-57x57@2x.png"; sourceTree = "<group>"; };
+		194F746A195A6A090046BE7A /* iPhoneApp-60x60@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "iPhoneApp-60x60@2x.png"; path = "../iPhoneApp-60x60@2x.png"; sourceTree = "<group>"; };
+		194F746B195A6A240046BE7A /* iPhoneSettings-29x29.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "iPhoneSettings-29x29.png"; path = "../iPhoneSettings-29x29.png"; sourceTree = "<group>"; };
+		194F746C195A6A320046BE7A /* iPhoneSettings-29x29@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "iPhoneSettings-29x29@2x.png"; path = "../iPhoneSettings-29x29@2x.png"; sourceTree = "<group>"; };
+		194F746D195A6A3C0046BE7A /* iPhoneSpotlight-40x40@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "iPhoneSpotlight-40x40@2x.png"; path = "../iPhoneSpotlight-40x40@2x.png"; sourceTree = "<group>"; };
+		194F746E195A703A0046BE7A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		1950E4F7165F08A200E98488 /* ItemViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ItemViewCell.h; sourceTree = "<group>"; };
 		1950E4F8165F08A200E98488 /* ItemViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ItemViewCell.m; sourceTree = "<group>"; };
 		1950E4FB165F09B700E98488 /* ViewProfileViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ViewProfileViewController.xib; sourceTree = "<group>"; };
@@ -563,6 +567,7 @@
 				1971781C16EEBF1A00F0A57F /* i18n */,
 				1939B8B716568F8400435705 /* Images */,
 				1934ACF6165E2B9300C8272F /* Libs */,
+				194F746E195A703A0046BE7A /* Images.xcassets */,
 				1939B88E16568C3300435705 /* Supporting Files */,
 			);
 			path = Patroca;
@@ -585,9 +590,9 @@
 		1939B8AA16568CBB00435705 /* View Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				1939B8B016568D1600435705 /* Base View Controller */,
 				1918E8C519341D060055F401 /* About */,
 				1982299118FE040200DF72CA /* Tutorial */,
-				1939B8B016568D1600435705 /* Base View Controller */,
 				1939CA4F16644A63002C21F6 /* New Item */,
 				1934ACE9165E2AAF00C8272F /* Profile */,
 				1939B8AC16568CD200435705 /* Master */,
@@ -628,8 +633,12 @@
 		1939B8B716568F8400435705 /* Images */ = {
 			isa = PBXGroup;
 			children = (
-				19241BEB16E8254700E381F7 /* icon@2x.png */,
-				19241BE916E8254400E381F7 /* icon.png */,
+				194F746D195A6A3C0046BE7A /* iPhoneSpotlight-40x40@2x.png */,
+				194F746C195A6A320046BE7A /* iPhoneSettings-29x29@2x.png */,
+				194F746B195A6A240046BE7A /* iPhoneSettings-29x29.png */,
+				194F746A195A6A090046BE7A /* iPhoneApp-60x60@2x.png */,
+				194F7469195A69EF0046BE7A /* iPhoneApp-57x57@2x.png */,
+				194F7467195A69810046BE7A /* iPhoneApp-57x57.png */,
 				19C022BC19108A5A008A1817 /* Default.png */,
 				19C022BD19108A5A008A1817 /* Default-568h@2x.png */,
 				19C022BE19108A5A008A1817 /* Default@2x.png */,
@@ -1061,6 +1070,7 @@
 				193EEA4C169BA14B0045DE59 /* done_button@2x.png in Resources */,
 				193EEA54169BAA930045DE59 /* camera_background.png in Resources */,
 				19B8EF6F191B006200FD5B85 /* more_button@2x.png in Resources */,
+				194F746F195A703A0046BE7A /* Images.xcassets in Resources */,
 				193EEA55169BAA930045DE59 /* camera_background@2x.png in Resources */,
 				193EEA5C169BAB9F0045DE59 /* shutter_button.png in Resources */,
 				193EEA5D169BAB9F0045DE59 /* shutter_button@2x.png in Resources */,
@@ -1105,8 +1115,6 @@
 				1977163B16E03C980010FF5D /* yellow_button@2x.png in Resources */,
 				19241BE716E8215E00E381F7 /* camera_message_background.png in Resources */,
 				19241BE816E8215E00E381F7 /* camera_message_background@2x.png in Resources */,
-				19241BEA16E8254400E381F7 /* icon.png in Resources */,
-				19241BEC16E8254700E381F7 /* icon@2x.png in Resources */,
 				1971781F16EEBF5A00F0A57F /* Localizable.strings in Resources */,
 				199E103516F1687400C5B7CA /* FacebookSDKResources.bundle in Resources */,
 			);
@@ -1235,6 +1243,8 @@
 		1939B8A816568C3300435705 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
@@ -1265,6 +1275,8 @@
 		1939B8A916568C3300435705 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
@@ -1286,8 +1298,8 @@
 					"-ObjC",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "DF76A1DA-A2A6-42AA-9530-A5BC1E231A51";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "DF76A1DA-A2A6-42AA-9530-A5BC1E231A51";
+				PROVISIONING_PROFILE = "D04A626A-3D54-41DE-9BC1-1B29CE991E65";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "D04A626A-3D54-41DE-9BC1-1B29CE991E65";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
