@@ -107,7 +107,7 @@
     
     
     //Owner name
-    UILabel *ownerNameLabel = [[UILabel alloc] initWithFrame:CGRectMake(46, 322, 204, 20)];
+    UILabel *ownerNameLabel = [[UILabel alloc] initWithFrame:CGRectMake(46, 322, 195, 20)];
     [ownerNameLabel setBackgroundColor:[UIColor clearColor]];
     [ownerNameLabel setTextColor:[UIColor colorWithRed:51/255.0f green:51/255.0f blue:51/255.0f alpha:1.0f]];
     [ownerNameLabel setFont:[UIFont boldSystemFontOfSize:13.0f]];
@@ -131,7 +131,7 @@
 
     //Location icon image
     locationIconImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"location_icon.png"]];
-    [locationIconImageView setFrame:CGRectMake(self.view.frame.size.width-locationIconImageView.frame.size.width-10, ownerNameLabel.frame.origin.y, locationIconImageView.frame.size.width, locationIconImageView.frame.size.height)];
+    [locationIconImageView setFrame:CGRectMake(self.view.frame.size.width-locationIconImageView.frame.size.width-5, ownerNameLabel.frame.origin.y, locationIconImageView.frame.size.width, locationIconImageView.frame.size.height)];
     [locationIconImageView setHidden:YES];
     [locationIconImageView setUserInteractionEnabled:YES];
     [locationIconImageView addGestureRecognizer:tapLocationImageView];
@@ -142,7 +142,7 @@
     [locationLabel setBackgroundColor:[UIColor clearColor]];
     [locationLabel setTextColor:[UIColor colorWithRed:51/255.0f green:51/255.0f blue:51/255.0f alpha:1.0f]];
     [locationLabel setFont:[UIFont boldSystemFontOfSize:13.0f]];
-    [locationLabel setTextAlignment:NSTextAlignmentCenter];
+    [locationLabel setTextAlignment:NSTextAlignmentRight];
     [locationLabel setHidden:YES];
     [locationLabel setUserInteractionEnabled:YES];
     [locationLabel addGestureRecognizer:tapLocationLabel];
@@ -344,7 +344,7 @@
         
         UITapGestureRecognizer *tapProfileCommenter = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(userTappedOnProfile:)];
         [tapProfileCommenter setNumberOfTapsRequired:1];
-        
+
         PFUser *commentUser = [commentObject objectForKey:DB_FIELD_USER_ID];
         NSString *userId = [commentUser objectId];
         PFUser *commenterUserObject = [[UserCache getInstance] getCachedUserForId:userId];
@@ -355,10 +355,11 @@
         [singleCommentView setTag:commentIndex];
         [singleCommentView addGestureRecognizer:tapProfileCommenter];
         [singleCommentView addSubview:profilePictureImageView];
-        
+
         [commentsView addSubview:singleCommentView];
         commentIndex++;
     }
+
     commentsViewFinalHeight += commentViewYPosition - 45;
     
     //show Write Comment section only if user is logged in
