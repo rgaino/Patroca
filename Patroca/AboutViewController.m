@@ -29,6 +29,11 @@
     [self setupAboutScrollView];
 }
 
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    self.screenName = @"AboutViewController";
+}
+
 - (void)setupAboutScrollView {
     
     aboutScrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 44+headerOffset, 320, self.view.frame.size.height - 44 + headerOffset)]; //44 is the header

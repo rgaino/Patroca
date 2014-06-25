@@ -67,11 +67,14 @@
     
     xSpacing = 24;
     xPosition = 18;
-
     
     [_itemDescriptionTextView.layer setCornerRadius:10.0f];
 }
 
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    self.screenName = @"AddNewItemViewController";
+}
 
 - (void)localizeStrings {
     [_cameraMessageLabel setText:NSLocalizedString(@"camera_message_1", nil)];

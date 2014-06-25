@@ -52,6 +52,11 @@
     }
 }
 
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    self.screenName = @"ItemDetailsViewController";
+}
+
 - (void)keyboardDidShow:(NSNotification*)notification {
     
     NSDictionary* keyboardInfo = [notification userInfo];
@@ -562,7 +567,7 @@
              [_itemObject setObject:[NSNumber numberWithBool:YES] forKey:DB_FIELD_ITEM_TRADED];
              [_itemObject saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
                  [MPNotificationView notifyWithText:NSLocalizedString(@"item_traded", nil) detail:NSLocalizedString(@"thanks_for_trading", nil)
-                                              image:[UIImage imageNamed:@"icon.png"] andDuration:PT_NOTIFICATION_DURATION];
+                                              image:[UIImage imageNamed:@"iPhoneApp-114x114.png"] andDuration:PT_NOTIFICATION_DURATION];
              }];
              [self.navigationController popViewControllerAnimated:YES];
          }
@@ -577,7 +582,7 @@
             [reported saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
             
                 [MPNotificationView notifyWithText:NSLocalizedString(@"item_reported", nil) detail:NSLocalizedString(@"thanks_for_reporting", nil)
-                                    image:[UIImage imageNamed:@"icon.png"] andDuration:PT_NOTIFICATION_DURATION];
+                                    image:[UIImage imageNamed:@"iPhoneApp-114x114.png"] andDuration:PT_NOTIFICATION_DURATION];
 
             }];
              
@@ -592,7 +597,7 @@
              [_itemObject setObject:[NSNumber numberWithBool:YES] forKey:DB_FIELD_ITEM_DELETED];
              [_itemObject saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
                  [MPNotificationView notifyWithText:NSLocalizedString(@"item_deleted", nil) detail:NSLocalizedString(@"item_is_deleted", nil)
-                                              image:[UIImage imageNamed:@"icon.png"] andDuration:PT_NOTIFICATION_DURATION];
+                                              image:[UIImage imageNamed:@"iPhoneApp-114x114.png"] andDuration:PT_NOTIFICATION_DURATION];
              }];
 
              [self.navigationController popViewControllerAnimated:YES];

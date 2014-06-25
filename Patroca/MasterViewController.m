@@ -78,7 +78,11 @@
         HelpView *loginHelpView = [[HelpView alloc] initWithStyle:HelpViewTypeLogin];
         [self.view addSubview:loginHelpView];
     }
+}
 
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    self.screenName = @"MasterViewController";
 }
 
 - (void)localizeStrings {

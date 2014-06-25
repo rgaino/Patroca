@@ -9,8 +9,10 @@
 #import <UIKit/UIKit.h>
 #import "MBProgressHUD.h"
 #import "ItemDataSource.h"
+#import "GAITrackedViewController.h"
 
-@interface BaseViewController : UIViewController <MBProgressHUDDelegate> {
+
+@interface BaseViewController : GAITrackedViewController <MBProgressHUDDelegate> {
     
     ItemDataSource *itemDataSource;
     MBProgressHUD *HUD;

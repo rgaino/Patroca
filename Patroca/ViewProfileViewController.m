@@ -39,6 +39,11 @@
     //TODO: this
 };
 
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    self.screenName = @"ViewProfileViewController";
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
