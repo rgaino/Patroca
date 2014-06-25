@@ -75,6 +75,8 @@
 		1949B33418FF0F5600F82BEF /* HelpView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1949B33318FF0F5600F82BEF /* HelpView.m */; };
 		194A9FCB16E50AFE00091947 /* UIScrollView+SVInfiniteScrolling.m in Sources */ = {isa = PBXBuildFile; fileRef = 194A9FC816E50AFE00091947 /* UIScrollView+SVInfiniteScrolling.m */; };
 		194A9FCC16E50AFE00091947 /* UIScrollView+SVPullToRefresh.m in Sources */ = {isa = PBXBuildFile; fileRef = 194A9FCA16E50AFE00091947 /* UIScrollView+SVPullToRefresh.m */; };
+		194F7462195A51C50046BE7A /* libGoogleAnalyticsServices.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 194F7461195A51C50046BE7A /* libGoogleAnalyticsServices.a */; };
+		194F7464195A51E50046BE7A /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 194F7463195A51E50046BE7A /* CoreData.framework */; };
 		1950E4F9165F08A200E98488 /* ItemViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1950E4F8165F08A200E98488 /* ItemViewCell.m */; };
 		1950E4FC165F09B700E98488 /* ViewProfileViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1950E4FB165F09B700E98488 /* ViewProfileViewController.xib */; };
 		1950E4FE165F0BAF00E98488 /* ItemViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1950E4FD165F0BAF00E98488 /* ItemViewCell.xib */; };
@@ -99,8 +101,6 @@
 		196D7F16192EECD0001DD98C /* login_with_fb.png in Resources */ = {isa = PBXBuildFile; fileRef = 196D7F14192EECD0001DD98C /* login_with_fb.png */; };
 		196E43B6168BC2BE009608E4 /* UILabel+Extensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 196E43B5168BC2BE009608E4 /* UILabel+Extensions.m */; };
 		1971781F16EEBF5A00F0A57F /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 1971782116EEBF5A00F0A57F /* Localizable.strings */; };
-		1977163216E035F70010FF5D /* DoneShareViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1977163016E035F70010FF5D /* DoneShareViewController.m */; };
-		1977163316E035F70010FF5D /* DoneShareViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1977163116E035F70010FF5D /* DoneShareViewController.xib */; };
 		1977163616E03AE10010FF5D /* item_share_message.png in Resources */ = {isa = PBXBuildFile; fileRef = 1977163416E03AE10010FF5D /* item_share_message.png */; };
 		1977163716E03AE10010FF5D /* item_share_message@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1977163516E03AE10010FF5D /* item_share_message@2x.png */; };
 		1977163A16E03C980010FF5D /* yellow_button.png in Resources */ = {isa = PBXBuildFile; fileRef = 1977163816E03C980010FF5D /* yellow_button.png */; };
@@ -266,6 +266,14 @@
 		194A9FC816E50AFE00091947 /* UIScrollView+SVInfiniteScrolling.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIScrollView+SVInfiniteScrolling.m"; sourceTree = "<group>"; };
 		194A9FC916E50AFE00091947 /* UIScrollView+SVPullToRefresh.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIScrollView+SVPullToRefresh.h"; sourceTree = "<group>"; };
 		194A9FCA16E50AFE00091947 /* UIScrollView+SVPullToRefresh.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIScrollView+SVPullToRefresh.m"; sourceTree = "<group>"; };
+		194F745B195A51C50046BE7A /* GAI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GAI.h; path = GoogleAnalyticsServicesiOS_3.07/GAI.h; sourceTree = "<group>"; };
+		194F745C195A51C50046BE7A /* GAIDictionaryBuilder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GAIDictionaryBuilder.h; path = GoogleAnalyticsServicesiOS_3.07/GAIDictionaryBuilder.h; sourceTree = "<group>"; };
+		194F745D195A51C50046BE7A /* GAIFields.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GAIFields.h; path = GoogleAnalyticsServicesiOS_3.07/GAIFields.h; sourceTree = "<group>"; };
+		194F745E195A51C50046BE7A /* GAILogger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GAILogger.h; path = GoogleAnalyticsServicesiOS_3.07/GAILogger.h; sourceTree = "<group>"; };
+		194F745F195A51C50046BE7A /* GAITrackedViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GAITrackedViewController.h; path = GoogleAnalyticsServicesiOS_3.07/GAITrackedViewController.h; sourceTree = "<group>"; };
+		194F7460195A51C50046BE7A /* GAITracker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GAITracker.h; path = GoogleAnalyticsServicesiOS_3.07/GAITracker.h; sourceTree = "<group>"; };
+		194F7461195A51C50046BE7A /* libGoogleAnalyticsServices.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libGoogleAnalyticsServices.a; path = GoogleAnalyticsServicesiOS_3.07/libGoogleAnalyticsServices.a; sourceTree = "<group>"; };
+		194F7463195A51E50046BE7A /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		1950E4F7165F08A200E98488 /* ItemViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ItemViewCell.h; sourceTree = "<group>"; };
 		1950E4F8165F08A200E98488 /* ItemViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ItemViewCell.m; sourceTree = "<group>"; };
 		1950E4FB165F09B700E98488 /* ViewProfileViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ViewProfileViewController.xib; sourceTree = "<group>"; };
@@ -296,9 +304,6 @@
 		1971782016EEBF5A00F0A57F /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		1971782216EEBFD100F0A57F /* pt */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = pt; path = pt.lproj/Localizable.strings; sourceTree = "<group>"; };
 		1971782316EEBFD100F0A57F /* pt */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = pt; path = pt.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		1977162F16E035F70010FF5D /* DoneShareViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DoneShareViewController.h; sourceTree = "<group>"; };
-		1977163016E035F70010FF5D /* DoneShareViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DoneShareViewController.m; sourceTree = "<group>"; };
-		1977163116E035F70010FF5D /* DoneShareViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DoneShareViewController.xib; sourceTree = "<group>"; };
 		1977163416E03AE10010FF5D /* item_share_message.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = item_share_message.png; sourceTree = "<group>"; };
 		1977163516E03AE10010FF5D /* item_share_message@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "item_share_message@2x.png"; sourceTree = "<group>"; };
 		1977163816E03C980010FF5D /* yellow_button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = yellow_button.png; sourceTree = "<group>"; };
@@ -390,21 +395,23 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1939B8F716571C4E00435705 /* SystemConfiguration.framework in Frameworks */,
+				1939B8E51657016D00435705 /* AdSupport.framework in Frameworks */,
+				194F7464195A51E50046BE7A /* CoreData.framework in Frameworks */,
 				19D0740119510CE7000AD88D /* MapKit.framework in Frameworks */,
 				19A9DFF416CFAD36005ED23F /* libz.dylib in Frameworks */,
 				1939B8ED16571C2700435705 /* MobileCoreServices.framework in Frameworks */,
 				1939CA4A1664434E002C21F6 /* ImageIO.framework in Frameworks */,
-				1939B8F716571C4E00435705 /* SystemConfiguration.framework in Frameworks */,
 				1939B8F516571C4100435705 /* StoreKit.framework in Frameworks */,
 				1939B8F316571C3B00435705 /* Social.framework in Frameworks */,
 				1979ED5118EEF323009C00A6 /* Parse.framework in Frameworks */,
 				1939B8F116571C3400435705 /* Security.framework in Frameworks */,
 				1939B8EF16571C2F00435705 /* QuartzCore.framework in Frameworks */,
 				1979ED3B18EEEBCB009C00A6 /* SDWebImage.framework in Frameworks */,
+				194F7462195A51C50046BE7A /* libGoogleAnalyticsServices.a in Frameworks */,
 				1939B8EB1657018500435705 /* libz.1.1.3.dylib in Frameworks */,
 				1939B8E91657017700435705 /* libsqlite3.dylib in Frameworks */,
 				1939B8E41657016D00435705 /* Accounts.framework in Frameworks */,
-				1939B8E51657016D00435705 /* AdSupport.framework in Frameworks */,
 				1979ED4518EEEE68009C00A6 /* libTestFlight.a in Frameworks */,
 				1939B8E61657016D00435705 /* CFNetwork.framework in Frameworks */,
 				1939B8E71657016D00435705 /* CoreLocation.framework in Frameworks */,
@@ -479,6 +486,7 @@
 		1934ACF6165E2B9300C8272F /* Libs */ = {
 			isa = PBXGroup;
 			children = (
+				194F745A195A51B80046BE7A /* Google Analytics */,
 				194A9FC416E509AF00091947 /* Infinite Scroll */,
 				19D910BB16BF0DEF00129E22 /* MPNotificationView */,
 				1934ACF7165E2BAD00C8272F /* MBProgressHUD */,
@@ -519,6 +527,7 @@
 		1939B88616568C3300435705 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				194F7463195A51E50046BE7A /* CoreData.framework */,
 				19D0740019510CE7000AD88D /* MapKit.framework */,
 				1979ED5018EEF323009C00A6 /* Parse.framework */,
 				1979ED4E18EEF2F2009C00A6 /* FacebookSDK.framework */,
@@ -750,7 +759,6 @@
 			isa = PBXGroup;
 			children = (
 				1977162E16E0357D0010FF5D /* Add New Item */,
-				1977162D16E0356A0010FF5D /* Done and Share */,
 			);
 			name = "New Item";
 			sourceTree = "<group>";
@@ -790,6 +798,20 @@
 			path = SVPullToRefresh;
 			sourceTree = "<group>";
 		};
+		194F745A195A51B80046BE7A /* Google Analytics */ = {
+			isa = PBXGroup;
+			children = (
+				194F745B195A51C50046BE7A /* GAI.h */,
+				194F745C195A51C50046BE7A /* GAIDictionaryBuilder.h */,
+				194F745D195A51C50046BE7A /* GAIFields.h */,
+				194F745E195A51C50046BE7A /* GAILogger.h */,
+				194F745F195A51C50046BE7A /* GAITrackedViewController.h */,
+				194F7460195A51C50046BE7A /* GAITracker.h */,
+				194F7461195A51C50046BE7A /* libGoogleAnalyticsServices.a */,
+			);
+			name = "Google Analytics";
+			sourceTree = "<group>";
+		};
 		1950E503165F136A00E98488 /* User Cache */ = {
 			isa = PBXGroup;
 			children = (
@@ -824,16 +846,6 @@
 				1971782116EEBF5A00F0A57F /* Localizable.strings */,
 			);
 			name = i18n;
-			sourceTree = "<group>";
-		};
-		1977162D16E0356A0010FF5D /* Done and Share */ = {
-			isa = PBXGroup;
-			children = (
-				1977162F16E035F70010FF5D /* DoneShareViewController.h */,
-				1977163016E035F70010FF5D /* DoneShareViewController.m */,
-				1977163116E035F70010FF5D /* DoneShareViewController.xib */,
-			);
-			name = "Done and Share";
 			sourceTree = "<group>";
 		};
 		1977162E16E0357D0010FF5D /* Add New Item */ = {
@@ -1085,7 +1097,6 @@
 				198B5BDD16CDC11A00DC2ED2 /* facebook_profile_button.png in Resources */,
 				198B5BDE16CDC11A00DC2ED2 /* facebook_profile_button@2x.png in Resources */,
 				19F88775192AE681006DB5C0 /* help_login.png in Resources */,
-				1977163316E035F70010FF5D /* DoneShareViewController.xib in Resources */,
 				19D073FE194FC170000AD88D /* location_icon.png in Resources */,
 				1977163616E03AE10010FF5D /* item_share_message.png in Resources */,
 				1977163716E03AE10010FF5D /* item_share_message@2x.png in Resources */,
@@ -1130,7 +1141,6 @@
 				196E43B6168BC2BE009608E4 /* UILabel+Extensions.m in Sources */,
 				197AB10D16C1DB360084D3FA /* UIUnderlinedButton.m in Sources */,
 				198B5BD616CDA00E00DC2ED2 /* ProfileHeaderViewCell.m in Sources */,
-				1977163216E035F70010FF5D /* DoneShareViewController.m in Sources */,
 				194A9FCB16E50AFE00091947 /* UIScrollView+SVInfiniteScrolling.m in Sources */,
 				1918E8C919341FCC0055F401 /* AboutViewController.m in Sources */,
 				197EB5C418F718E8005BD047 /* FacebookUtilsCache.m in Sources */,
@@ -1239,6 +1249,7 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/TestFlightSDK3.0.0",
+					"$(PROJECT_DIR)/Patroca/GoogleAnalyticsServicesiOS_3.07",
 				);
 				OTHER_LDFLAGS = (
 					"-lsqlite3.0",
@@ -1268,6 +1279,7 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/TestFlightSDK3.0.0",
+					"$(PROJECT_DIR)/Patroca/GoogleAnalyticsServicesiOS_3.07",
 				);
 				OTHER_LDFLAGS = (
 					"-lsqlite3.0",

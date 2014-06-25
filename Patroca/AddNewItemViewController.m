@@ -13,7 +13,6 @@
 #import "UIImage+Resize.h"
 #import "DatabaseConstants.h"
 #import <MobileCoreServices/UTCoreTypes.h>
-#import "DoneShareViewController.h"
 #import "FacebookUtilsCache.h"
 
 #define thumbnailSize 53
