@@ -407,6 +407,8 @@
     [wholeScreenScrollView addSubview:commentsHeaderImageView];
     [wholeScreenScrollView addSubview:commentsViewTitleLabel];
     [wholeScreenScrollView setContentSize:CGSizeMake(320, contentHeightWithoutCommentsView+commentsViewFinalHeight)];
+    
+    [footerBackgroundView setFrame:CGRectMake(0, wholeScreenScrollView.contentSize.height-44, wholeScreenScrollView.contentSize.width, 44)];
 }
 
 
