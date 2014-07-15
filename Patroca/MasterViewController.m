@@ -119,7 +119,7 @@
             __unsafe_unretained typeof(self) weakSelf = self;
             [currentUser saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
                 
-                NSURL *profilePictureURL = [NSURL URLWithString:[NSString stringWithFormat:@"https://graph.facebook.com/%@/picture?type=square", facebookId]];
+                NSURL *profilePictureURL = [NSURL URLWithString:[NSString stringWithFormat:@"https://graph.facebook.com/%@/picture??width=100&height=100", facebookId]];
                 
                 [_loginProfileButton.imageView setImageWithURL:profilePictureURL placeholderImage:[UIImage imageNamed:@"avatar_default.png"] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType) {
                     //TODO: check for error and do something about it

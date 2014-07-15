@@ -75,6 +75,7 @@
         //the Login/Profile button
         _loginProfileButton = [UIButton buttonWithType:UIButtonTypeCustom];
         [_loginProfileButton setFrame:CGRectMake(0, headerOffset, 51, 44)];
+        [_loginProfileButton.imageView setContentMode:UIViewContentModeScaleAspectFill];
 
         //activity indicator to login
         _loginActivityIndicator = [[UIActivityIndicatorView alloc] initWithFrame:_loginProfileButton.frame];
