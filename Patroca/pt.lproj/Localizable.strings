@@ -42,7 +42,7 @@
 "Skip"= "Pular";
 "login_profile_help" = "Toque para logar com o Facebook e veja o que seus amigos tem para trocar com você.";
 "got it" = "Entendi!";
-"user_liked_item" = "%@ recomendeu seu item %@";
+"user_liked_item" = "%@ recomendou seu item %@";
 "traded" = "Trocado";
 "mark_item_traded" = "Marcar como trocado";
 "sure_mark_item_traded_question" = "Marcar como trocado?";
