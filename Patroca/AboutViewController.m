@@ -178,16 +178,19 @@
     [aboutScrollView setContentSize:CGSizeMake(self.view.frame.size.width, frame.origin.y+400)];
 }
 
-- (void) webViewDidFinishLoad:(UIWebView *)webView {
+- (void)webViewDidFinishLoad:(UIWebView *)webView {
     
     [loadingTermsActivityIndicator stopAnimating];
+    [self performSelector:@selector(fitTermsWebViewContent) withObject:nil afterDelay:1.0f];
+}
 
+
+- (void)fitTermsWebViewContent {
+    
     CGRect frame = termsWebView.frame;
-    CGSize fittingSize = [termsWebView sizeThatFits:CGSizeZero];
-    frame.size = fittingSize;
-    termsWebView.frame = frame;
-    [termsWebView setBackgroundColor:[UIColor redColor]];
-    [aboutScrollView setContentSize:CGSizeMake(self.view.frame.size.width, aboutScrollView.contentSize.height+frame.size.height)];    
+    frame.size.height = termsWebView.scrollView.contentSize.height;
+    [termsWebView setFrame:frame];
+    [aboutScrollView setContentSize:CGSizeMake(self.view.frame.size.width, aboutScrollView.contentSize.height+frame.size.height)];
 }
 
 @end
