@@ -159,7 +159,7 @@
     y = 380;
     
     termsWebView = [[UIWebView alloc] initWithFrame:CGRectMake(0, y, self.view.frame.size.width, 500)];
-    NSURLRequest *termsURLRequest= [NSURLRequest requestWithURL:[NSURL URLWithString:@"http://patroca.com/terms.html"]];
+    NSURLRequest *termsURLRequest= [NSURLRequest requestWithURL:[NSURL URLWithString:@"http://patroca.com/terms"]];
     [termsWebView loadRequest:termsURLRequest];
     [termsWebView.scrollView setScrollEnabled:NO];
     [termsWebView setDelegate:self];
